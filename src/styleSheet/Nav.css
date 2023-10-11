@@ -1,0 +1,16 @@
+.myNav {
+    background-color: #ecf8e5 !important;
+    /* background-color: mintcream !important; */
+    /* background-color: #347571 !important; */
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    font-family: 'Open Sans', sans-serif;
+    color: #346571;
+}
+
+.logoImg {
+    height: 40px;
+}
+
+.navText {
+    color: #347571;
+}

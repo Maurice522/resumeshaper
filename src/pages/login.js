@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 
-const Login=()=>{
+const Login1=()=>{
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const dispatch = useDispatch()
@@ -46,4 +46,4 @@ const Login=()=>{
   )
 }
 
-export default Login;
+export default Login1;

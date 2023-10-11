@@ -6,11 +6,12 @@ import {
 import Login from './pages/login';
 import Signup from './pages/signup';
 import { Authdetails } from './pages/authdetails';
+import Landing from './pages/landing';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div>Hello world!</div>,
+    element: <Landing/>,
   },
   {
     path: "/login",

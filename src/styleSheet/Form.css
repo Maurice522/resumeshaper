@@ -1,0 +1,141 @@
+.formSection{
+  color: #171717;
+  padding-bottom: 0;
+  font-size: 500;
+}
+.scrollable-dropdown {
+    max-height: 100px;
+    overflow-y: auto;
+  }
+.detailsInfoLabel{
+font-size: 16px;
+margin-top: 5%;
+margin-bottom: 3%;
+color: rgb(130, 139, 162);
+font-size: 15px;
+line-height: 18px;
+}
+.detailsInfoInput{
+    border-radius: 3px;
+    padding: 6px 10px;
+    width: 95%;
+    caret-color: rgb(26, 145, 240);
+    background-color: rgb(239, 242, 249);
+    outline: none;
+    border: 0px;
+    color: rgb(30, 37, 50);
+    transition: color 0.1s ease 0s;
+    margin-bottom: 4%;
+}
+.uplouploadPictureBigDiv{
+  /* background-color: #cccccc; */
+  position: relative;
+}
+.uplouploadPictureDiv{
+  width: 20%;
+  background-color: aqua;
+  position: absolute;
+}
+.uploadPictureInput{
+  background-color: none !important;
+  width: 56%;
+  padding-left: 5px;
+  padding-right: 2px;
+  position: absolute;
+  top: 40%;
+  right:8%;
+  font-size: 14px;
+}
+.uplouploadPhotoDivIcon{
+  position: absolute;
+  top: -2%;
+  color: rgb(157, 165, 186);
+  color:#5ec57e;
+  z-index: 1;
+}
+.uploadedPicture{
+  z-index: 21;
+}
+.uplouploadPictureDivLabel{
+  position: absolute;
+  top: -2%;
+  color: black;
+  left: 36%;
+  color: rgb(130, 139, 162);
+font-size: 15px;
+line-height: 18px;
+}
+.Sec1additionalDetails{
+  background-color: white !important;
+  border: white;
+  text-align: left;
+  width: 51%;
+  display: block;
+  color: rgb(26, 145, 240);
+  font-weight: 500;
+  margin-bottom: 3%;
+}
+.detailsTextarea{
+  border: 1px solid  rgb(168, 177, 201);
+  margin-top: 2%;
+  font-size: 14px;
+  padding: 1%;
+  margin-bottom: 5%;
+}
+.detailsSubText{
+  font-size: 14px;
+  color:rgb(130, 139, 162);
+  width: 99%;
+}
+.personalSubSubHeading{
+  color: rgb(26, 145, 240);
+  font-size: 18px;
+  margin-bottom: 3%;
+}
+.employmentHistoryDiv{
+  position: relative;
+}
+.DeleteEmp{
+  background-color: white;
+  border: white;
+  color: red;
+  position: absolute;
+  bottom: -25px;
+  right: 3%;
+}
+.myAccordian{
+  margin-bottom: 8%;
+}
+.DeleteSkill{
+  background-color: white;
+  border: white;
+  color: rgb(148, 38, 38);
+  color: goldenrod;
+}
+.selectedOption{
+  display: inline-block;
+  margin-left: 4%;
+  padding-top: 3%;
+}
+.SkillsadditionalDetails{
+  background-color: white !important;
+  border: white;
+  text-align: left;
+  width: 51%;
+  display: block;
+  color: rgb(26, 145, 240);
+  font-weight: 500;
+  margin-bottom: 0%;
+  margin-top: 2%;
+}
+.customSecMainHeading{
+  margin-top: 10%;
+  margin-bottom: 6%;
+}
+.customSecDiv{
+  margin-top: 15%;
+}
+.courseDescription{
+  margin-bottom: 0;
+  margin-top: 5%;
+}

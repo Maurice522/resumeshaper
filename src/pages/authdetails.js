@@ -4,6 +4,7 @@ import { auth } from '../fireabse'
 import { useDispatch, useSelector } from 'react-redux';
 import { signOutUser } from '../redux/slices/user';
 import UploadPDF from '../components/uploadpdf';
+import Home from './home';
 
 export const Authdetails = () => {
     const [authUser, setAuthUser] = useState(null);
@@ -11,14 +12,7 @@ export const Authdetails = () => {
     const dispatch = useDispatch();
     const user = useSelector(state=> state.user)
 
-    const handler = (e)=>{
-        signOut(auth).then(()=>{
-            dispatch(signOutUser())
-            console.log("signed out successfully")
-        }).catch(err=>{
-            console.log(err)
-        })
-    }
+
 
     useEffect(()=>{
         console.log(user)
@@ -95,9 +89,9 @@ export const Authdetails = () => {
     },[])
   return (
     <>
-    {loading?<div>Loading...</div>:<div>{authUser?<> Logged In! <button onClick={()=>handler()}>Signout</button> 
+    {loading?<div>Loading...</div>:<div>{authUser?<> 
     
-    <UploadPDF/>
+    <Home />
     
     </>:"Signup!"}</div>}
     </>
