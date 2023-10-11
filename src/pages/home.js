@@ -1,5 +1,5 @@
 import UploadPDF from '../components/uploadpdf'
-import React,{useState} from 'react'
+import React, { useState } from 'react'
 import { signOut } from 'firebase/auth'
 import { auth } from '../fireabse'
 import { useDispatch, useSelector } from 'react-redux';
@@ -23,12 +23,12 @@ export default function Home() {
     const [showHomePopup, setShowHomePopup] = useState(true);
     const handleClosePopup = () => {
         setShowHomePopup(false);
-      };
-    
-      const handleUpload = (file) => {
-        // Handle the uploaded file (e.g., save it or process it)
+    };
+
+    const handleUpload = (file) => {
+        // upload file code
         console.log('File uploaded:', file.name);
-      };
+    };
 
     const dispatch = useDispatch();
     const navigate = useNavigate()

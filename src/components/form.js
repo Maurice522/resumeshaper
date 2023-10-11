@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import Skills from './formComponents/skills';
-import { PersonCheck, PersonSquare, CaretDownSquare, JournalBookmarkFill, PenFill, Trash3Fill, PlusLg, JournalCheck , Link45deg} from "react-bootstrap-icons";
+import { PersonCheck, PersonSquare, CaretDownSquare, JournalBookmarkFill, PenFill, Trash3Fill, PlusLg, JournalCheck, Link45deg } from "react-bootstrap-icons";
 import CustomSection from './formComponents/customSection';
 export default function Form() {
-  
+
   const [showAdditionalDetails, setShowAdditionalDetails] = useState(false);
   const [personalData, setPersonalData] = useState({
     jobTitle: '',
@@ -184,7 +184,7 @@ export default function Form() {
       });
 
 
-      // Display the uploaded photo
+      //To  Display the uploaded photo
       if (photoFile) {
         const reader = new FileReader();
         reader.onload = (e) => {
@@ -197,7 +197,6 @@ export default function Form() {
         reader.readAsDataURL(photoFile);
       }
     } else {
-      // Handle regular input fields
       setPersonalData({
         ...personalData,
         [name]: value,
@@ -208,9 +207,11 @@ export default function Form() {
 
   return (
     <div>
+
       <h5 className='formSection'><PersonCheck color="#35b276" size={26} /> &nbsp;Personal Details</h5>
       <form>
         <div className='row'>
+
           <div className='col-md-6'>
             <label className='detailsInfoLabel'>
               Target Position
@@ -288,16 +289,16 @@ export default function Form() {
             <input className='detailsInfoInput' type="text" name="city" value={personalData.city} onChange={handleChange} />
           </div>
 
-          {/* Toggle button for additional details */}
+          {/* Edit additional details */}
           <button type="button" onClick={toggleAdditionalDetails} className="Sec1additionalDetails">
             {showAdditionalDetails ? 'Hide All Additional Details' : 'Edit Additional Details '}
           </button>
         </div>
 
-
         {/* Additional input fields */}
         {showAdditionalDetails && (
           <div className='row'>
+
             <div className='col-md-6'>
               <label className='detailsInfoLabel'>
                 Address:
@@ -373,13 +374,13 @@ export default function Form() {
               </button>
             </h2>
             <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-              <div class="accordion-body">
 
+              <div class="accordion-body">
                 {personalData.employmentHistory.map((employment, index) => (
                   <div key={index} className="employmentHistoryDiv">
                     <h5 className='personalSubSubHeading'>Role {index + 1} :</h5>
-
                     <div className='row'>
+
                       <div className="col-md-6">
                         <label className='detailsInfoLabel'>
                           Job Title
@@ -435,13 +436,11 @@ export default function Form() {
                           City
                         </label>
                         <br />
-
                         <input
                           className='detailsInfoInput' type="text"
                           value={employment.city}
                           onChange={(e) => updateEmploymentField(index, 'city', e.target.value)}
                         />
-
                       </div>
                     </div>
 
@@ -459,15 +458,16 @@ export default function Form() {
                       className='detailsTextarea'
                     />
                     <br />
+
                     <button type="button" onClick={() => removeEmploymentHistory(index)} className="DeleteEmp">
                       <Trash3Fill size={20} />
                     </button>
                   </div>
+
                 ))}
                 <button type="button" onClick={addEmploymentHistory} className="Sec1additionalDetails">
                   <PlusLg size={20} /> Add One More Employment
                 </button>
-
               </div>
             </div>
           </div>
@@ -489,8 +489,8 @@ export default function Form() {
                 {personalData.educationHistory.map((education, index) => (
                   <div key={index} className="employmentHistoryDiv">
                     <h5 className='personalSubSubHeading'>Institute {index + 1} :</h5>
-
                     <div className='row'>
+
                       <div className="col-md-6">
                         <label className='detailsInfoLabel'>
                           School:
@@ -531,12 +531,10 @@ export default function Form() {
                         <label className='detailsInfoLabel'>
                           End Date:
                         </label>
-
                         <input
                           className='detailsInfoInput' type="date"
                           value={education.endDate}
                           style={{ "font-size": "12px", "height": "38px", "marginTop": "10px" }}
-
                           onChange={(e) => updateEducationField(index, 'endDate', e.target.value)}
                         />
                       </div>
@@ -545,22 +543,18 @@ export default function Form() {
                         <label className='detailsInfoLabel'>
                           City:
                         </label>
-
                         <input
                           className='detailsInfoInput' type="text"
                           value={education.city}
                           onChange={(e) => updateEducationField(index, 'city', e.target.value)}
                         />
-
                       </div>
                     </div>
 
                     <label className='detailsInfoLabel'>
                       Description:
                     </label>
-
                     <p className='detailsSubText'>Provide an overview of your job duties and responsibilities in your previous position.This would help us gain a deeper understanding of your professional experience.</p>
-
                     <textarea
                       value={education.description}
                       onChange={(e) => updateEducationField(index, 'description', e.target.value)}
@@ -570,15 +564,16 @@ export default function Form() {
                       className='detailsTextarea'
                     />
                     <br />
+
                     <button type="button" onClick={() => removeEducationHistory(index)} className="DeleteEmp">
                       <Trash3Fill size={20} />
                     </button>
                   </div>
                 ))}
+
                 <button type="button" onClick={addEducationHistory} className="Sec1additionalDetails">
                   <PlusLg size={20} /> Add One More Education
                 </button>
-
               </div>
             </div>
           </div>
@@ -598,33 +593,32 @@ export default function Form() {
             </h2>
             <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample4">
               <div class="accordion-body">
-
-              {personalData.websitesAndLinks.map((websiteOrLink, index) => (
-                <div key={index}>
+                {personalData.websitesAndLinks.map((websiteOrLink, index) => (
+                  <div key={index}>
                     <h5 className='personalSubSubHeading'>Site {index + 1} :</h5>
-
                     <div className='row'>
+
                       <div className="col-md-12">
-                      <label className='detailsInfoLabel'>
-              Name:
-              </label>
-              <input
-                className='detailsInfoInput' type="text"
-                value={websiteOrLink.name}
-                onChange={(e) => updateWebsiteOrLinkField(index, 'name', e.target.value)}
-              />
+                        <label className='detailsInfoLabel'>
+                          Name:
+                        </label>
+                        <input
+                          className='detailsInfoInput' type="text"
+                          value={websiteOrLink.name}
+                          onChange={(e) => updateWebsiteOrLinkField(index, 'name', e.target.value)}
+                        />
                       </div>
 
                       <div className="col-md-12">
-                      <label className='detailsInfoLabel'>
-              URL:
-              </label>
-              <input
-                className='detailsInfoInput' type="url"
-                value={websiteOrLink.url}
-                onChange={(e) => updateWebsiteOrLinkField(index, 'url', e.target.value)}
-              />
-                      </div>                     
+                        <label className='detailsInfoLabel'>
+                          URL:
+                        </label>
+                        <input
+                          className='detailsInfoInput' type="url"
+                          value={websiteOrLink.url}
+                          onChange={(e) => updateWebsiteOrLinkField(index, 'url', e.target.value)}
+                        />
+                      </div>
                     </div>
                     <button type="button" onClick={() => removeWebsiteOrLink(index)} className="DeleteEmp">
                       <Trash3Fill size={20} />

@@ -22,15 +22,17 @@ import vid from '../images/video1.mp4'
 import ReactPlayer from 'react-player'
 import Footer from '../components/footer'
 import LoginPopup from './loginPopup'
-
 import { Check2Circle, BookmarkStarFill } from "react-bootstrap-icons";
 
 
 export default function Landing() {
+
     const [isPopupOpen, setIsPopupOpen] = useState(false);
+
     const togglePopup = () => {
         setIsPopupOpen(!isPopupOpen);
     };
+
     const handleSignup = () => {
         togglePopup();
     };
@@ -40,6 +42,7 @@ export default function Landing() {
             <Nav />
             <button class="loginBtn" onClick={togglePopup}>Login</button>
             {isPopupOpen && <LoginPopup onClose={togglePopup} onSignup={handleSignup} />}
+
             <div class='jumbotron'>
                 <div className='jumboText'>
                     <h1 class='jumboMainText'>Welcome to Your Personalized Resume Solution!</h1>
@@ -54,6 +57,8 @@ export default function Landing() {
                     {/* <img src={img16} className='jumboImg' /> */}
                 </div>
             </div>
+
+
             <div className='introText'>
                 <p>" In the competitive world of Job Hunting, a one-size-fits-all resume dosen't cut it anymore.Your dream job deserves a tailored resume that speaks directly to the Hiring Manager.
                     Welcome to Resume Shaper, where we craft resumes as unique as your career aspirations. "</p>
@@ -79,6 +84,8 @@ export default function Landing() {
                 </div>
             </div>
 
+
+
             <div className='section2'>
                 <h3 className='section1Heading'>How it Works</h3>
                 <div className='row'>
@@ -100,7 +107,11 @@ export default function Landing() {
                 </div>
             </div>
 
+
+
             <button type="button" onClick={togglePopup} class="btn btn-success ctaBtnSec2">Customize your Resume Now</button>
+
+
 
             <div className='section4'>
                 <div className='videoSection row'>
@@ -127,6 +138,8 @@ export default function Landing() {
                     </div>
                 </div>
             </div>
+
+
 
             <div className='section3'>
                 <h3 className='section1Heading'>Rave Reviews Form Our Users</h3>
@@ -216,8 +229,9 @@ export default function Landing() {
                         <span class="visually-hidden">Next</span>
                     </button>
                 </div>
-
             </div>
+
+
 
             <div className='section5'>
                 <img src={img13} className="sec5Img" />

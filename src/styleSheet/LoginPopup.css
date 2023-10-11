@@ -58,7 +58,7 @@
     font-family: 'Open Sans', sans-serif;
     font-weight: 700;
     position: relative;
-    text-align: center!important;
+    text-align: center !important;
     margin-bottom: 4%;
 }
 
@@ -71,7 +71,7 @@
 
 .selectLoginBtn {
     width: 100% !important;
-    background-color:white !important;
+    background-color: white !important;
     border: none !important;
     font-size: 16px !important;
     margin-top: 3%;

@@ -98,7 +98,7 @@ const LoginPopup = ({ onClose, onSignup }) => {
                         <label className='loginLabel'>Email:</label>
                         <input
                             type='email'
-                        className='loginInput'
+                            className='loginInput'
 
                             placeholder='Enter your email'
                             value={email}
@@ -109,7 +109,7 @@ const LoginPopup = ({ onClose, onSignup }) => {
                         <div className="form-group">
                             <label className='loginLabel'>Name:</label>
                             <input
-                        className='loginInput'
+                                className='loginInput'
                                 type='name'
                                 placeholder='Enter your name'
                                 value={name}
@@ -120,7 +120,7 @@ const LoginPopup = ({ onClose, onSignup }) => {
                     <div className="form-group">
                         <label className='loginLabel'>Password:</label>
                         <input
-                        className='loginInput'
+                            className='loginInput'
                             type='password'
                             placeholder='Enter your password'
                             value={password}
