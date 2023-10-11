@@ -16,11 +16,28 @@ import img13 from '../images/19.png'
 import Form from '../components/form';
 import '../styleSheet/Home.css'
 import CreateUploadPopup from '../components/createUploadPopup';
+import EnterPositionPopup from '../components/enterPositionPopup';
 
 import { Power } from "react-bootstrap-icons";
 
 export default function Home() {
     const [showHomePopup, setShowHomePopup] = useState(true);
+    const [showJobPopup, setShowJobPopup] = useState(false);
+    const [jobData, setJobData] = useState(null);
+
+    const openPopup = () => {
+        setShowJobPopup(true);
+    };
+
+    const closeJobPopup = () => {
+        setShowJobPopup(false);
+    };
+
+    const saveJobData = (data) => {
+        setJobData(data);
+        console.log(data);
+    };
+
     const handleClosePopup = () => {
         setShowHomePopup(false);
     };
@@ -54,6 +71,11 @@ export default function Home() {
                         <hr className='hrLine' />
                         <Form />
                     </div>
+                    <button onClick={openPopup}>Add Job</button>
+                    {showJobPopup && (
+                        <EnterPositionPopup onClose={closeJobPopup} onSave={saveJobData} />
+                    )}
+
                 </div>
 
                 <div className='HomeRightDiv col-md-6 col-sm-6'>

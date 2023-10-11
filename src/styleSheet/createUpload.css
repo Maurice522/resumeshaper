@@ -96,3 +96,53 @@
   border: 2px solid #ecf8e5 !important;
 
 }
+
+.jobHomeHeader {
+  color: #35b276;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  position: relative;
+  text-align: center !important;
+  margin-bottom: 4%;
+  font-size: 25px;
+  padding-top: 2%;
+}
+.jobDetailsInfoLabel {
+  font-size: 16px;
+  margin-top: 1%;
+  margin-bottom: 3%;
+  color: rgb(130, 139, 162);
+  font-size: 15px;
+  line-height: 18px;
+}
+
+.detailsInfoInput {
+  border-radius: 3px;
+  padding: 6px 10px;
+  width: 95%;
+  caret-color: rgb(26, 145, 240);
+  background-color: rgb(239, 242, 249);
+  outline: none;
+  border: 0px;
+  color: rgb(30, 37, 50);
+  transition: color 0.1s ease 0s;
+  margin-bottom: 4%;
+}
+.savePositionNow {
+  width: 100%;
+  border: none !important;
+  padding: 1.5%;
+  border-radius: 2px;
+  background-color: #35b276;
+  color: white;
+  height: 40px;
+}
+
+.savePositionNow:hover {
+  width: 100%;
+  padding: 1.5%;
+  border-radius: 2px;
+  background-image: url("../images/bg.png");
+  color: black;
+  border: 2px solid #ecf8e5 !important;
+}
