@@ -80,6 +80,25 @@ export const updateUserInDatabase = async (email,data)=>{
   }
 }
 
+export const updateUserPhotoInDatabase = async (email,data)=>{
+  try{
+    console.log(data, email)
+    const docRef = doc(db, "users", email);
+    await updateDoc(docRef,{uploadedPhotoURL:data})
+  }catch(err){
+    console.log(err)
+  }
+}
+
+export const updateUserProfileInDatabase = async (email,data)=>{
+  try{
+    console.log(data, email)
+    const docRef = doc(db, "users", email);
+    await updateDoc(docRef,{...data})
+  }catch(err){
+    console.log(err)
+  }
+}
 export const getUserDocByRef = async (DocumentReference) => {
   const userDocSnapshot = await getDoc(DocumentReference);
   return userDocSnapshot.data();

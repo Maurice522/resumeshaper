@@ -45,10 +45,21 @@ body {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
-.ctaBtn {
-    width: 30%;
-    margin-top: 2%;
+/* .ctaBtn {
+    width: 15%;
+    left: 3%;
+    margin-top: 5%;
     border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+} */
+.ctaBtn {
+    width: 12%;
+    left: 5%;
+    margin-top: 23%;
+    border-radius: 26px;
+    background-color: #35b276;
+    color: white;
+    height: 37px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
@@ -360,3 +371,16 @@ body {
     top: 3%;
     right: 3%;
 }
+.topDivLanding{
+    position: relative;
+}
+.zoom {
+    transition: transform .2s; /* Animation */
+  }
+  
+  .zoom:hover {
+    transform: scale(1.1); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  }
+
+
+  

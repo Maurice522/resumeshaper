@@ -1,29 +1,8 @@
 import React, { useState } from 'react';
-import { PlusLg, Trash3Fill, ColumnsGap, Book, JournalRichtext, BagFill, GraphUpArrow, MegaphoneFill, Alipay, Bicycle, CheckSquare } from "react-bootstrap-icons";
+import {Check2Circle, PlusLg, Trash3Fill, ColumnsGap, Book, JournalRichtext, BagFill, GraphUpArrow, MegaphoneFill, Alipay, Bicycle, CheckSquare } from "react-bootstrap-icons";
 
 
-export default function CustomSection() {
-
-    const [courses, setCourses] = useState([]);
-    const [activities, setActivities] = useState([]);
-    const [internships, setInternships] = useState([]);
-    const [hobbies, setHobbies] = useState([]);
-    const [languages, setLanguages] = useState([]);
-    const [references, setReferences] = useState([]);
-    const [customSections, setCustomSections] = useState([]);
-
-    const logCustomSectionDetails = () => {
-        const details = {
-            courses,
-            activities,
-            internships,
-            hobbies,
-            languages,
-            references,
-            customSections,
-        };
-        console.log(details);
-    };
+export default function CustomSection({ courses, setCourses, activities, setActivities, internships, setInternships, hobbies, setHobbies, languages, setLanguages, references, setReferences, customSections, setCustomSections }) {
 
     const addCourse = (e) => {
         e.preventDefault();
@@ -80,7 +59,7 @@ export default function CustomSection() {
     };
 
     const addReference = () => {
-        setReferences([...references, { fullName: '', company: '', phone: '', email: '' }]);
+        setReferences([...references, { fullName: '', company: '', phone: '', referenceEmail: '' }]);
     };
 
     const removeReference = (index) => {
@@ -101,16 +80,16 @@ export default function CustomSection() {
 
     return (
 
-    //Add courses if any
-        <div className='customSecDiv'>
+        //Add courses if any
+        <div className='customSecDiv '>
             <div>
                 {courses.map((course, index) => (
                     <div key={index} className="employmentHistoryDiv">
                         <h5 className='personalSubSubHeading'><JournalRichtext color="#35b276" size={26} /> &nbsp;&nbsp;Course {index + 1} :</h5>
 
                         <div className='row'>
-                            <div className="col-md-6">
-                                <label className="detailsInfoLabel">Course:</label>
+                            <div className="col-md-6 ">
+                                <label className="detailsInfoLabel customSecdetailsInfoLabel">Course:</label>
                                 <input
                                     type="text"
                                     value={course.course}
@@ -124,7 +103,7 @@ export default function CustomSection() {
                             </div>
 
                             <div className="col-md-6">
-                                <label className="detailsInfoLabel">Institution:</label>
+                                <label className="detailsInfoLabel customSecdetailsInfoLabel">Institution:</label>
                                 <input
                                     type="text"
                                     value={course.institution}
@@ -138,7 +117,7 @@ export default function CustomSection() {
                             </div>
 
                             <div className="col-md-6">
-                                <label className="detailsInfoLabel">Start Date:</label>
+                                <label className="detailsInfoLabel customSecdetailsInfoLabel">Start Date:</label>
                                 <input
                                     type="date"
                                     value={course.startDate}
@@ -152,7 +131,7 @@ export default function CustomSection() {
                             </div>
 
                             <div className="col-md-6">
-                                <label className="detailsInfoLabel">End Date:</label>
+                                <label className="detailsInfoLabel customSecdetailsInfoLabel">End Date:</label>
                                 <input
                                     type="date"
                                     className='detailsInfoInput'
@@ -166,7 +145,7 @@ export default function CustomSection() {
                             </div>
                         </div>
 
-                        <label className='detailsInfoLabel courseDescription'>
+                        <label className='detailsInfoLabel customSecdetailsInfoLabel courseDescription'>
                             Description:
                         </label>
                         <textarea
@@ -192,14 +171,14 @@ export default function CustomSection() {
             </div>
 
 
-        {/* Add extra curricular activities if any */}
+            {/* Add extra curricular activities if any */}
             <div>
                 {activities.map((activity, index) => (
                     <div key={index} className="employmentHistoryDiv">
                         <h5 className='personalSubSubHeading'><BagFill color="#35b276" size={24} /> &nbsp;&nbsp;Extra Curricular Activity {index + 1} :</h5>
                         <div className='row'>
                             <div className="col-md-6">
-                                <label className="detailsInfoLabel">Function</label>
+                                <label className="detailsInfoLabel customSecdetailsInfoLabel">Function</label>
                                 <input
                                     type="text"
                                     className='detailsInfoInput'
@@ -213,7 +192,7 @@ export default function CustomSection() {
                             </div>
 
                             <div className="col-md-6">
-                                <label className="detailsInfoLabel">Employer</label>
+                                <label className="detailsInfoLabel customSecdetailsInfoLabel">Employer</label>
                                 <input
                                     type="text"
                                     className='detailsInfoInput'
@@ -227,7 +206,7 @@ export default function CustomSection() {
                             </div>
 
                             <div className="col-md-3">
-                                <label className="detailsInfoLabel">Start Date</label>
+                                <label className="detailsInfoLabel customSecdetailsInfoLabel">Start Date</label>
                                 <input
                                     type="date"
                                     style={{ "font-size": "12px", "height": "38px" }}
@@ -242,7 +221,7 @@ export default function CustomSection() {
                             </div>
 
                             <div className="col-md-3">
-                                <label className="detailsInfoLabel">End Date</label>
+                                <label className="detailsInfoLabel customSecdetailsInfoLabel">End Date</label>
                                 <input
                                     type="date"
                                     className='detailsInfoInput'
@@ -258,7 +237,7 @@ export default function CustomSection() {
                             </div>
 
                             <div className="col-md-6">
-                                <label className="detailsInfoLabel">Function:</label>
+                                <label className="detailsInfoLabel customSecdetailsInfoLabel">Function:</label>
                                 <input
                                     type="text"
                                     className='detailsInfoInput'
@@ -272,7 +251,7 @@ export default function CustomSection() {
                             </div>
                         </div>
 
-                        <label className='detailsInfoLabel courseDescription'>
+                        <label className='detailsInfoLabel customSecdetailsInfoLabel courseDescription'>
                             Description:
                         </label>
                         <textarea
@@ -297,14 +276,14 @@ export default function CustomSection() {
             </div>
 
 
-        {/* Add internships if any */}
+            {/* Add internships if any */}
             <div>
                 {internships.map((internship, index) => (
                     <div key={index} className="employmentHistoryDiv">
                         <h5 className='personalSubSubHeading'><GraphUpArrow color="#35b276" size={24} /> &nbsp;&nbsp;Internships {index + 1} :</h5>
                         <div className='row'>
                             <div className="col-md-6">
-                                <label className="detailsInfoLabel">Job Title</label>
+                                <label className="detailsInfoLabel customSecdetailsInfoLabel">Job Title</label>
                                 <input
                                     className='detailsInfoInput'
                                     type="text"
@@ -318,7 +297,7 @@ export default function CustomSection() {
                             </div>
 
                             <div className="col-md-6">
-                                <label className="detailsInfoLabel">Employer</label>
+                                <label className="detailsInfoLabel customSecdetailsInfoLabel">Employer</label>
                                 <input
                                     className='detailsInfoInput'
                                     type="text"
@@ -332,7 +311,7 @@ export default function CustomSection() {
                             </div>
 
                             <div className="col-md-3">
-                                <label className="detailsInfoLabel">Start Date</label>
+                                <label className="detailsInfoLabel customSecdetailsInfoLabel">Start Date</label>
                                 <input
                                     className='detailsInfoInput'
                                     type="date"
@@ -347,7 +326,7 @@ export default function CustomSection() {
                             </div>
 
                             <div className="col-md-3">
-                                <label className="detailsInfoLabel">End Date</label>
+                                <label className="detailsInfoLabel customSecdetailsInfoLabel">End Date</label>
                                 <input
                                     className='detailsInfoInput'
                                     type="date"
@@ -362,7 +341,7 @@ export default function CustomSection() {
                             </div>
 
                             <div className="col-md-6">
-                                <label className="detailsInfoLabel">City</label>
+                                <label className="detailsInfoLabel customSecdetailsInfoLabel">City</label>
                                 <input
                                     className='detailsInfoInput'
                                     type="text"
@@ -376,7 +355,7 @@ export default function CustomSection() {
                             </div>
                         </div>
 
-                        <label className='detailsInfoLabel courseDescription'>
+                        <label className='detailsInfoLabel customSecdetailsInfoLabel courseDescription'>
                             Description:
                         </label>
                         <textarea
@@ -399,7 +378,7 @@ export default function CustomSection() {
                 ))}
             </div>
 
-        {/* Add hobbies if any */}
+            {/* Add hobbies if any */}
             <div>
                 {hobbies.map((hobby, index) => (
                     <div key={index} className="employmentHistoryDiv">
@@ -424,14 +403,14 @@ export default function CustomSection() {
                 ))}
             </div>
 
-        {/* Add Languages if any */}
+            {/* Add Languages if any */}
             <div>
                 {languages.map((language, index) => (
                     <div key={index} className="employmentHistoryDiv">
                         <h5 className='personalSubSubHeading'><Alipay color="#35b276" size={24} /> &nbsp;&nbsp;Languages {index + 1} :</h5>
                         <div className='row'>
                             <div className="col-md-6">
-                                <label className="detailsInfoLabel">Language:</label>
+                                <label className="detailsInfoLabel customSecdetailsInfoLabel">Language:</label>
                                 <input
                                     className='detailsInfoInput'
                                     type="text"
@@ -445,7 +424,7 @@ export default function CustomSection() {
                             </div>
 
                             <div className="col-md-6">
-                                <label className="detailsInfoLabel">Level:</label>
+                                <label className="detailsInfoLabel customSecdetailsInfoLabel">Level:</label>
                                 <select
                                     className='detailsInfoInput'
                                     value={language.level}
@@ -478,14 +457,14 @@ export default function CustomSection() {
                 ))}
             </div>
 
-        {/* Add references if any */}
+            {/* Add references if any */}
             <div>
                 {references.map((reference, index) => (
                     <div key={index} className="employmentHistoryDiv">
                         <h5 className='personalSubSubHeading'><MegaphoneFill color="#35b276" size={24} /> &nbsp;&nbsp;References {index + 1} :</h5>
                         <div className='row'>
                             <div className="col-md-6">
-                                <label className="detailsInfoLabel">Full Name</label>
+                                <label className="detailsInfoLabel customSecdetailsInfoLabel">Full Name</label>
                                 <input
                                     className='detailsInfoInput'
                                     type="text"
@@ -499,7 +478,7 @@ export default function CustomSection() {
                             </div>
 
                             <div className="col-md-6">
-                                <label className="detailsInfoLabel">Company</label>
+                                <label className="detailsInfoLabel customSecdetailsInfoLabel">Company</label>
                                 <input
                                     className='detailsInfoInput'
                                     type="text"
@@ -513,7 +492,7 @@ export default function CustomSection() {
                             </div>
 
                             <div className="col-md-6">
-                                <label className="detailsInfoLabel">Phone</label>
+                                <label className="detailsInfoLabel customSecdetailsInfoLabel">Phone</label>
                                 <input
                                     className='detailsInfoInput'
                                     type="number"
@@ -527,14 +506,14 @@ export default function CustomSection() {
                             </div>
 
                             <div className="col-md-6">
-                                <label className="detailsInfoLabel">Email</label>
+                                <label className="detailsInfoLabel customSecdetailsInfoLabel">Email</label>
                                 <input
                                     className='detailsInfoInput'
                                     type="email"
-                                    value={reference.email}
+                                    value={reference.referenceEmail}
                                     onChange={(e) => {
                                         const updatedReferences = [...references];
-                                        updatedReferences[index].email = e.target.value;
+                                        updatedReferences[index].referenceEmail = e.target.value;
                                         setReferences(updatedReferences);
                                     }}
                                 />
@@ -549,14 +528,14 @@ export default function CustomSection() {
                 ))}
             </div>
 
-        {/* Add custom details if any */}
+            {/* Add custom details if any */}
             <div>
                 {customSections.map((section, index) => (
                     <div key={index} className="employmentHistoryDiv">
                         <h5 className='personalSubSubHeading'><CheckSquare color="#35b276" size={24} /> &nbsp;&nbsp;Custom Section {index + 1} :</h5>
                         <div className='row'>
                             <div className="col-md-6">
-                                <label className="detailsInfoLabel">Title:</label>
+                                <label className="detailsInfoLabel customSecdetailsInfoLabel">Title:</label>
                                 <input
                                     className='detailsInfoInput'
                                     type="text"
@@ -570,7 +549,7 @@ export default function CustomSection() {
                             </div>
 
                             <div className="col-md-6">
-                                <label className="detailsInfoLabel">Sub-Title:</label>
+                                <label className="detailsInfoLabel customSecdetailsInfoLabel">Sub-Title:</label>
                                 <input
                                     className='detailsInfoInput'
                                     type="text"
@@ -584,7 +563,7 @@ export default function CustomSection() {
                             </div>
 
                             <div className="col-md-6">
-                                <label className="detailsInfoLabel">Start Date</label>
+                                <label className="detailsInfoLabel customSecdetailsInfoLabel">Start Date</label>
                                 <input
                                     className='detailsInfoInput'
                                     type="date"
@@ -598,7 +577,7 @@ export default function CustomSection() {
                             </div>
 
                             <div className="col-md-6">
-                                <label className="detailsInfoLabel">End Date</label>
+                                <label className="detailsInfoLabel customSecdetailsInfoLabel">End Date</label>
                                 <input
                                     className='detailsInfoInput'
                                     type="Date"
@@ -614,7 +593,7 @@ export default function CustomSection() {
 
                         </div>
 
-                        <label className='detailsInfoLabel courseDescription'>
+                        <label className='detailsInfoLabel customSecdetailsInfoLabel courseDescription'>
                             Description:
                         </label>
                         <textarea
@@ -638,31 +617,51 @@ export default function CustomSection() {
             </div>
 
 
-            <div className='customHeadingsLowerDiv'>
+            <div className='customHeadingsLowerDiv row'>
                 <h5 className='formSection customSecMainHeading'><ColumnsGap color="#35b276" size={32} /> &nbsp;Add Custom Details</h5>
-                <button type="button" onClick={addCourse} className="Sec1additionalDetails">
-                    <PlusLg size={20} /> &nbsp;&nbsp;<Book size={26} />&nbsp;Courses
+                <div className='col-md-4 checkme zoom'>
+                <button type="button" onClick={addCourse} className="Sec1additionalDetails addExtraBtns">
+                    {/* <Check2Circle size={20} /> &nbsp;&nbsp; */}
+                    <Book size={26} />&nbsp;&nbsp;&nbsp;Add Courses
                 </button>
-                <button type="button" onClick={addActivity} className="Sec1additionalDetails">
-                    <PlusLg size={20} /> &nbsp;&nbsp;<BagFill size={26} />&nbsp;  Extra-Cirricular Activities
+                </div>
+                <div className='col-md-4 checkme zoom'>
+                <button type="button" onClick={addActivity} className="Sec1additionalDetails addExtraBtns">
+                    {/* <Check2Circle size={20} /> &nbsp;&nbsp; */}
+                    <BagFill size={26} />&nbsp;&nbsp;&nbsp;Add  Extra-Cirricular Activities
                 </button>
-                <button type="button" onClick={addInternship} className="Sec1additionalDetails">
-                    <PlusLg size={20} /> &nbsp;&nbsp;<GraphUpArrow size={26} />&nbsp;  Internships
+                </div>
+                <div className='col-md-4 checkme zoom'>
+                <button type="button" onClick={addInternship} className="Sec1additionalDetails addExtraBtns">
+                    {/* <Check2Circle size={20} /> &nbsp;&nbsp; */}
+                    <GraphUpArrow size={26} />&nbsp;&nbsp;&nbsp;Add Internships
                 </button>
-                <button type="button" onClick={addHobby} className="Sec1additionalDetails">
-                    <PlusLg size={20} /> &nbsp;&nbsp;<Bicycle size={26} />&nbsp;  Hobbies
+                </div>
+                <div className='col-md-4 checkme zoom'>
+                <button type="button" onClick={addHobby} className="Sec1additionalDetails addExtraBtns">
+                    {/* <Check2Circle size={20} /> &nbsp;&nbsp; */}
+                    <Bicycle size={26} />&nbsp;&nbsp;&nbsp;Add Hobbies
                 </button>
-                <button type="button" onClick={addLanguage} className="Sec1additionalDetails">
-                    <PlusLg size={20} /> &nbsp;&nbsp;<Alipay size={26} />&nbsp;  Languages
+                </div>
+                <div className='col-md-4 checkme zoom'>
+                <button type="button" onClick={addLanguage} className="Sec1additionalDetails addExtraBtns">
+                    {/* <Check2Circle size={20} /> &nbsp;&nbsp; */}
+                    <Alipay size={26} />&nbsp;&nbsp;&nbsp;Add Languages
                 </button>
-                <button type="button" onClick={addReference} className="Sec1additionalDetails">
-                    <PlusLg size={20} /> &nbsp;&nbsp;<MegaphoneFill size={26} />&nbsp; References
+                </div>
+                <div className='col-md-4 checkme zoom'>
+                <button type="button" onClick={addReference} className="Sec1additionalDetails addExtraBtns">
+                    {/* <Check2Circle size={20} /> &nbsp;&nbsp; */}
+                    <MegaphoneFill size={26} />&nbsp;&nbsp;&nbsp;Add References
                 </button>
-                <button type="button" onClick={addCustomSection} className="Sec1additionalDetails">
-                    <PlusLg size={20} /> &nbsp;&nbsp;<CheckSquare size={26} />&nbsp; Add Custom Section
+                </div>
+                <div className='col-md-4 checkme zoom'>
+                <button type="button" onClick={addCustomSection} className="Sec1additionalDetails addExtraBtns">
+                    {/* <Check2Circle size={20} /> &nbsp;&nbsp; */}
+                    <CheckSquare size={26} />&nbsp;&nbsp;&nbsp;Add Custom Section
                 </button>
+                </div>  
             </div>
-            <button onClick={logCustomSectionDetails}>Log Custom Section Details</button>
         </div>
     );
 };

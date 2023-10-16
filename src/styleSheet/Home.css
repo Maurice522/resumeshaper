@@ -4,12 +4,12 @@ body {
 
 .signoutBtn {
   width: 120px;
-  border-radius: 15px;
+  border-radius: 5px;
   position: absolute;
   right: 1%;
   top: 2.5%;
   background-color: #c2fbd7;
-  border-radius: 100px;
+  border-radius: 25px;
   box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset, rgba(44, 187, 99, .15) 0 1px 2px, rgba(44, 187, 99, .15) 0 2px 4px, rgba(44, 187, 99, .15) 0 4px 8px, rgba(44, 187, 99, .15) 0 8px 16px, rgba(44, 187, 99, .15) 0 16px 32px;
   box-shadow: rgba(44, 187, 99, .35) 0 -25px 18px -14px inset, rgba(44, 187, 99, .25) 0 1px 2px, rgba(44, 187, 99, .25) 0 2px 4px, rgba(44, 187, 99, .25) 0 4px 8px, rgba(44, 187, 99, .25) 0 8px 16px, rgba(44, 187, 99, .25) 0 16px 32px;
   color: green;
@@ -34,10 +34,14 @@ body {
 .homeDiv {
   width: 100%;
   margin: auto;
+  /* background-color: #151e3d; */
+  /* background-image: url("../images/bg.png"); */
+
 }
 
 .HomeLeftDiv {
-  width: 50%;
+  width: 80%;
+  margin: auto;
   display: inline-block;
   height: 100%;
   padding: 2%;
@@ -74,7 +78,8 @@ body {
   color: #151e3d;
   color: #174f5d;
   font-weight: 600;
-  margin-top: 5%;
+  margin-top: 3%;
+  margin-bottom:2% ;
   font-family: 'Open Sans', sans-serif;
 
 }

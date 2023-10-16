@@ -64,23 +64,21 @@ export default function Home() {
             {showHomePopup && <CreateUploadPopup onClose={handleClosePopup} onUpload={handleUpload} />}
             <button onClick={() => handler()} className=" btn btn-success signoutBtn"> <Power color="#35b276" size={22} /> &nbsp;Signout</button>
             <div className='row homeDiv'>
-                <div className='HomeLeftDiv col-md-6 col-sm-6'>
+                <div className='HomeLeftDiv col-md-9 col-sm-9'>
                     <div className='formDetails'>
-                        <h3 className='formTitle'>Personalize your Resume</h3>
+                        <h3 className='formTitle'>Personalize your Profile</h3>
                         <p className='formSubText'>"Tell us more about yourself and the position you're targeting, and we'll create a personlized resume just for you."</p>
                         <hr className='hrLine' />
                         <Form />
                     </div>
-                    <button onClick={openPopup}>Add Job</button>
+                    {/* <button onClick={openPopup}>Add Job</button>
                     {showJobPopup && (
                         <EnterPositionPopup onClose={closeJobPopup} onSave={saveJobData} />
-                    )}
+                    )} */}
 
                 </div>
 
-                <div className='HomeRightDiv col-md-6 col-sm-6'>
-                    <h2></h2>
-                </div>
+               
             </div>
 
 

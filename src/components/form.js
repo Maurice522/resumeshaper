@@ -1,16 +1,45 @@
-import React, { useState } from 'react';
-import Skills from './formComponents/skills';
-import { PersonCheck, PersonSquare, CaretDownSquare, JournalBookmarkFill, PenFill, Trash3Fill, PlusLg, JournalCheck, Link45deg } from "react-bootstrap-icons";
+import React, { useState, useEffect } from 'react';
+import {Check2Circle, Check2All, Check, PersonCheck, PersonSquare, CaretDownSquare, JournalBookmarkFill, PenFill, Trash3Fill, PlusLg, JournalCheck, Link45deg, TrophyFill } from "react-bootstrap-icons";
 import CustomSection from './formComponents/customSection';
+import { updateUserProfileInDatabase, updateUserPhotoInDatabase, uploadMedia } from '../fireabse';
+import { useDispatch, useSelector } from 'react-redux';
+import { updatePhoto, updateProfile } from '../redux/slices/user';
+import skills from '../components/formComponents/skills';
 export default function Form() {
 
   const [showAdditionalDetails, setShowAdditionalDetails] = useState(false);
+  const [courses, setCourses] = useState([]);
+  const [activities, setActivities] = useState([]);
+  const [internships, setInternships] = useState([]);
+  const [hobbies, setHobbies] = useState([]);
+  const [languages, setLanguages] = useState([]);
+  const [references, setReferences] = useState([]);
+  const [customSections, setCustomSections] = useState([]);
+  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [options, setOptions] = useState(generateOptions());
+  const [searchText, setSearchText] = useState('');
+  const [photoLoader, setPhotoLoader] = useState(false);
+  const [customDetails, setCustomDetails] = useState({ 
+    courses: [],
+    activities: [],
+    internships: [],
+    hobbies: [],
+    languages: [],
+    references: [],
+    customSections: [],
+  });
+
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [uploadedPhotoDataURL, setUploadedPhotoDataURL] = useState('');
+  const user = useSelector(state => state.user.user);
+  const dispatch = useDispatch();
+
   const [personalData, setPersonalData] = useState({
     jobTitle: '',
     firstName: '',
     middleName: '',
     lastName: '',
-    email: '',
+    inputEmail: '',
     phone: '',
     dateOfBirth: '',
     city: '',
@@ -20,8 +49,8 @@ export default function Form() {
     nationality: '',
     placeOfBirth: '',
     country: '',
-    photo: null,
     professionalSummary: '',
+    uploadedPhotoURL: '',
     employmentHistory: [
       {
         jobTitle: '',
@@ -48,8 +77,94 @@ export default function Form() {
         url: '',
       },
     ],
-
+   
   });
+
+  useEffect(() => {
+    setShowDropdown(false);
+  }, [selectedOptions]);
+
+  useEffect(() => {
+    setCustomDetails({
+      ...customDetails,
+        courses: courses,
+    });
+  }, [courses]);
+
+  useEffect(() => {
+    setCustomDetails({
+      ...customDetails,
+        activities: activities,
+    });
+  }, [activities]);
+
+  useEffect(() => {
+    setCustomDetails({
+      ...customDetails,
+        internships: internships,
+    });
+  }, [internships]);
+
+  useEffect(() => {
+    setCustomDetails({
+      ...customDetails,
+        references: references,
+    });
+  }, [references]);
+
+  useEffect(() => {
+    setCustomDetails({
+      ...customDetails,
+        languages: languages,
+    });
+  }, [languages]);
+
+  useEffect(() => {
+    setCustomDetails({
+      ...customDetails,
+        hobbies: hobbies,
+    });
+  }, [hobbies]);
+
+  useEffect(() => {
+    setCustomDetails({
+      ...customDetails,
+        customSections: customSections,
+    });
+  }, [customSections]);
+
+
+
+
+  // Function to log the selected skills
+  useEffect(() => {
+    console.log('Selected Skills:', selectedOptions);
+  }, [selectedOptions]);
+
+  const handleSearchTextChange = (e) => {
+    const text = e.target.value;
+    setSearchText(text);
+    setShowDropdown(true);
+  };
+
+  const handleOptionClick = (option) => {
+    if (!selectedOptions.includes(option)) {
+      setSelectedOptions([...selectedOptions, option]);
+      setSearchText('');
+    }
+  };
+
+  const handleRemoveOption = (optionToRemove) => {
+    const updatedSelectedOptions = selectedOptions.filter(
+      (option) => option !== optionToRemove
+    );
+    setSelectedOptions(updatedSelectedOptions);
+  };
+
+  const filteredOptions = options.filter((option) =>
+    option.toLowerCase().includes(searchText.toLowerCase())
+  );
+
 
   const addWebsiteOrLink = () => {
     setPersonalData((prevData) => ({
@@ -164,8 +279,18 @@ export default function Form() {
     });
   };
 
-  const handleLogDetails = () => {
-    console.log('Form Input Details:', personalData);
+  const handleLogDetails = async () => {
+    console.log(personalData)
+    console.log(customDetails)
+    var profile = {
+      ...personalData,
+      skills: selectedOptions,
+      customDetails
+    }
+    console.log("Login email  " + user.email)
+    await updateUserProfileInDatabase(user.email, profile)
+    dispatch(updateProfile(profile));
+    console.log('Form Input Details:', profile);
   };
 
 
@@ -174,27 +299,30 @@ export default function Form() {
   };
 
 
-  const handleChange = (e) => {
+  const handleChange = async (e) => {
     const { name, value, files } = e.target;
     if (name === 'photo') {
+      setPhotoLoader(true);
       const photoFile = files[0];
-      setPersonalData({
-        ...personalData,
-        [name]: photoFile,
-      });
-
 
       //To  Display the uploaded photo
       if (photoFile) {
         const reader = new FileReader();
         reader.onload = (e) => {
+          setUploadedPhotoDataURL()
           const uploadedPhotoDataURL = e.target.result;
-          setPersonalData({
-            ...personalData,
-            uploadedPhotoURL: uploadedPhotoDataURL,
-          });
         };
+        const photoFileLink = await uploadMedia(photoFile, "profilePhoto");
+        console.log(photoFileLink)
+        setPersonalData({
+          ...personalData,
+          uploadedPhotoURL: photoFileLink,
+        })
+        await updateUserPhotoInDatabase(user.email, photoFileLink)
+        dispatch(updatePhoto(photoFileLink))
         reader.readAsDataURL(photoFile);
+        console.log("my phtoo ", photoFileLink)
+        setPhotoLoader(false);
       }
     } else {
       setPersonalData({
@@ -208,11 +336,11 @@ export default function Form() {
   return (
     <div>
 
-      <h5 className='formSection'><PersonCheck color="#35b276" size={26} /> &nbsp;Personal Details</h5>
+      <h5 className='formSection'><PersonCheck color="#35b276" size={40} /> &nbsp;Personal Details</h5>
       <form>
         <div className='row'>
 
-          <div className='col-md-6'>
+          <div className='col-md-4'>
             <label className='detailsInfoLabel'>
               Target Position
             </label>
@@ -220,20 +348,27 @@ export default function Form() {
             <input className='detailsInfoInput' type="text" name="jobTitle" value={personalData.jobTitle} onChange={handleChange} />
           </div>
 
-          <div className='col-md-6 uplouploadPictureBigDiv'>
+          <div className='col-md-8 uplouploadPictureBigDiv'>
+         
             <label className='detailsInfoLabel uplouploadPictureDivLabel'>
               Upload Photo
             </label>
-            <PersonSquare size={80} className="uplouploadPhotoDivIcon" />
-            {personalData.uploadedPhotoURL && (
-              <div className='uplouploadPhotoDiv'>
-                <img src={personalData.uploadedPhotoURL} className="uploadedPicture" alt="Uploaded" width="90" />
+            <input type="file" className='detailsInfoInput uploadPictureInput' name="photo" accept="image/*" onChange={handleChange} />
+
+            {(personalData.uploadedPhotoURL == '' && !photoLoader) &&<div className='dottedDiv' ><PersonSquare size={90} className="uplouploadPhotoDivIcon" /></div> }
+            {!photoLoader && personalData.uploadedPhotoURL && (
+              <div className='uplouploadPhotoDiv'> 
+                <img src={personalData.uploadedPhotoURL} className="uploadedPicture" alt="Uploaded" width="110" />
               </div>
             )}
-            <input type="file" className='detailsInfoInput uploadPictureInput' name="photo" accept="image/*" onChange={handleChange} />
+             {photoLoader && (
+              <div className='uplouploadPhotoDivGif'>
+                <iframe src="https://giphy.com/embed/y1ZBcOGOOtlpC" class="giphy-embed uploadedPicture uplouploadPhotoDivGif" ></iframe><p><a className='uplouploadPhotoDivGif' href="https://giphy.com/gifs/foosball-y1ZBcOGOOtlpC"></a></p>
+              </div>
+            )}
           </div>
 
-          <div className='col-md-6'>
+          <div className='col-md-4 col-sm-6'>
             <label className='detailsInfoLabel'>
               First Name:
             </label>
@@ -241,7 +376,7 @@ export default function Form() {
             <input type="text" className='detailsInfoInput' name="firstName" value={personalData.firstName} onChange={handleChange} />
           </div>
 
-          <div className='col-md-6'>
+          <div className='col-md-4 col-sm-6'>
             <label className='detailsInfoLabel'>
               Middle Name:
             </label>
@@ -249,7 +384,7 @@ export default function Form() {
             <input type="text" className='detailsInfoInput' name="middleName" value={personalData.middleName} onChange={handleChange} />
           </div>
 
-          <div className='col-md-6'>
+          <div className='col-md-4 col-sm-6'>
             <label className='detailsInfoLabel'>
               Last Name:
             </label>
@@ -257,15 +392,15 @@ export default function Form() {
             <input className='detailsInfoInput' type="text" name="lastName" value={personalData.lastName} onChange={handleChange} />
           </div>
 
-          <div className='col-md-6'>
+          <div className='col-md-4 col-sm-6'>
             <label className='detailsInfoLabel'>
               Email:
             </label>
             <br />
-            <input className='detailsInfoInput' type="email" name="email" value={personalData.email} onChange={handleChange} />
+            <input className='detailsInfoInput' type="email" name="inputEmail" value={personalData.inputEmail} onChange={handleChange} />
           </div>
 
-          <div className='col-md-6'>
+          <div className='col-md-4 col-sm-6'>
             <label className='detailsInfoLabel'>
               Phone:
             </label>
@@ -273,7 +408,7 @@ export default function Form() {
             <input className='detailsInfoInput' type="number" name="phone" value={personalData.phone} onChange={handleChange} />
           </div>
 
-          <div className='col-md-6'>
+          <div className='col-md-4 col-sm-6'>
             <label className='detailsInfoLabel'>
               Date of Birth:
             </label>
@@ -281,16 +416,17 @@ export default function Form() {
             <input className='detailsInfoInput' type="date" name="dateOfBirth" value={personalData.dateOfBirth} onChange={handleChange} />
           </div>
 
-          <div className='col-md-6'>
+          <div className='col-md-4 col-sm-6'>
             <label className='detailsInfoLabel'>
               City:
             </label>
             <br />
             <input className='detailsInfoInput' type="text" name="city" value={personalData.city} onChange={handleChange} />
           </div>
+          <br/>
 
           {/* Edit additional details */}
-          <button type="button" onClick={toggleAdditionalDetails} className="Sec1additionalDetails">
+          <button type="button" onClick={toggleAdditionalDetails} className="Sec1additionalDetails shiftedSec1additionalDetails">
             {showAdditionalDetails ? 'Hide All Additional Details' : 'Edit Additional Details '}
           </button>
         </div>
@@ -299,7 +435,7 @@ export default function Form() {
         {showAdditionalDetails && (
           <div className='row'>
 
-            <div className='col-md-6'>
+            <div className='col-md-4 col-sm-6'>
               <label className='detailsInfoLabel'>
                 Address:
               </label>
@@ -307,7 +443,7 @@ export default function Form() {
               <input className='detailsInfoInput' type="text" name="address" value={personalData.address} onChange={handleChange} />
             </div>
 
-            <div className='col-md-6'>
+            <div className='col-md-4 col-sm-6'>
               <label className='detailsInfoLabel'>
                 Postal Code:
               </label>
@@ -315,7 +451,7 @@ export default function Form() {
               <input className='detailsInfoInput' type="number" name="postalCode" value={personalData.postalCode} onChange={handleChange} />
             </div>
 
-            <div className='col-md-6'>
+            <div className='col-md-4 col-sm-6'>
               <label className='detailsInfoLabel'>
                 Driving License:
               </label>
@@ -323,7 +459,7 @@ export default function Form() {
               <input className='detailsInfoInput' type="text" name="drivingLicense" value={personalData.drivingLicense} onChange={handleChange} />
             </div>
 
-            <div className='col-md-6'>
+            <div className='col-md-4 col-sm-6'>
               <label className='detailsInfoLabel'>
                 Nationality:
               </label>
@@ -331,7 +467,7 @@ export default function Form() {
               <input className='detailsInfoInput' type="text" name="nationality" value={personalData.nationality} onChange={handleChange} />
             </div>
 
-            <div className='col-md-6'>
+            <div className='col-md-4 col-sm-6'>
               <label className='detailsInfoLabel'>
                 Place of Birth:
               </label>
@@ -339,7 +475,7 @@ export default function Form() {
               <input className='detailsInfoInput' type="text" name="placeOfBirth" value={personalData.placeOfBirth} onChange={handleChange} />
             </div>
 
-            <div className='col-md-6'>
+            <div className='col-md-4 col-sm-6'>
               <label className='detailsInfoLabel'>
                 Country:
               </label>
@@ -357,7 +493,6 @@ export default function Form() {
           value={personalData.professionalSummary}
           onChange={handleChange}
           rows="6"
-          cols="82"
           placeholder='Eg: Passionate Software Developer with 8+ years of Building High Enterprise Level Applications'
           className='detailsTextarea'
         ></textarea>
@@ -592,13 +727,13 @@ export default function Form() {
               </button>
             </h2>
             <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample4">
-              <div class="accordion-body">
+              <div class="accordion-body ">
                 {personalData.websitesAndLinks.map((websiteOrLink, index) => (
-                  <div key={index}>
+                  <div key={index} className="webisteDiv">
                     <h5 className='personalSubSubHeading'>Site {index + 1} :</h5>
                     <div className='row'>
 
-                      <div className="col-md-12">
+                      <div className="col-md-6">
                         <label className='detailsInfoLabel'>
                           Name:
                         </label>
@@ -609,7 +744,7 @@ export default function Form() {
                         />
                       </div>
 
-                      <div className="col-md-12">
+                      <div className="col-md-6">
                         <label className='detailsInfoLabel'>
                           URL:
                         </label>
@@ -634,15 +769,68 @@ export default function Form() {
           </div>
         </div>
 
-        <Skills />
-        <CustomSection />
 
-        <button type="button" onClick={handleLogDetails}>
-          Log Details
+
+
+        <div className='skillsSection'>
+          <h5 className='formSection'><TrophyFill color="#35b276" size={24} /> &nbsp;Add your Skills</h5>
+          <p className='detailsSubText'> Highlight your core strengths and expertise. Select up to 6 key skills that best suit your the position you want to apply to and represent your capabilities, enhancing your resume.</p>
+          <div>
+            <input
+              className='detailsInfoInput searchDetailsInfoInput'
+              type="text"
+              placeholder="Search..."
+              value={searchText}
+              onChange={handleSearchTextChange}
+            />
+            {showDropdown && (
+              <div className="dropdown">
+                <div className="scrollable-dropdown">
+                  {filteredOptions.map((option, index) => (
+                    <div
+                      key={index}
+                      className="dropdown-option"
+                      onClick={() => handleOptionClick(option)}
+                    >
+                      {option}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+          <div>
+            <h6 className='formSection SkillsadditionalDetails'>Selected Skills:</h6>
+            {selectedOptions.map((option, index) => (
+              <div key={index} className="selected-option selectedOption ">
+                {option}
+                <button onClick={() => handleRemoveOption(option)} className="DeleteSkill"> <Trash3Fill size={16} /></button>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className='saveProfileDiv'>
+        <button type="button" onClick={handleLogDetails} className="saveProfileBtn zoom">
+          <Check2Circle size={26}/>&nbsp;&nbsp;&nbsp;Save My Profile
         </button>
+        </div>
+        <CustomSection courses={courses} setCourses={setCourses} activities={activities} setActivities={setActivities} internships={internships} setInternships={setInternships} hobbies={hobbies} setHobbies={setHobbies} languages={languages} setLanguages={setLanguages} references={references} setReferences={setReferences} customSections={customSections} setCustomSections={setCustomSections} />
+
+       
       </form>
     </div>
   );
 }
+
+
+// Helper function to generate a large list of options for testing
+function generateOptions() {
+  const options = [];
+  for (let i = 1; i <= 200; i++) {
+    options.push(`Option ${i}`);
+  }
+  return options;
+}
+
 
 

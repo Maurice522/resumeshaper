@@ -40,15 +40,15 @@ export default function Landing() {
     return (
         <div>
             <Nav />
-            <button class="loginBtn" onClick={togglePopup}>Login</button>
+            <button class="loginBtn signoutBtn" onClick={togglePopup}>Login</button>
             {isPopupOpen && <LoginPopup onClose={togglePopup} onSignup={handleSignup} />}
 
+            <div className='topDivLanding'>
             <div class='jumbotron'>
                 <div className='jumboText'>
                     <h1 class='jumboMainText'>Welcome to Your Personalized Resume Solution!</h1>
                     <p></p>
                     <h5>Elevate Your Resume for Every Job Application. Tailored Resume for Your Dream Job - Get Noticed, Get Hired!! </h5>
-                    <button type="button" class="btn btn-success ctaBtn" onClick={togglePopup} >Start Now</button>
                 </div>
 
                 <div className='jumboImgDiv'>
@@ -57,7 +57,9 @@ export default function Landing() {
                     {/* <img src={img16} className='jumboImg' /> */}
                 </div>
             </div>
-
+            <button type="button" class="btn btn-success signoutBtn ctaBtn zoom " onClick={togglePopup} >Start Now</button>
+            </div>
+            
 
             <div className='introText'>
                 <p>" In the competitive world of Job Hunting, a one-size-fits-all resume dosen't cut it anymore.Your dream job deserves a tailored resume that speaks directly to the Hiring Manager.
@@ -90,17 +92,17 @@ export default function Landing() {
                 <h3 className='section1Heading'>How it Works</h3>
                 <div className='row'>
                     <div className='col-md-4  sec2Col sec2Col1'>
-                        <img src={img3} className='sec2Img' />
+                        <img src={img3} className='sec2Img zoom' />
                         <h5>Upload your Resume</h5>
                         <p>Start by uploading your current resume,the foundation for your tailored application.</p>
                     </div>
-                    <div className='col-md-4  sec2Col sec2Col2'>
-                        <img src={img4} className='sec2Img' />
+                    <div className='col-md-4  sec2Col sec2Col2 '>
+                        <img src={img4} className='sec2Img zoom' />
                         <h5>Specify Job Title & Company</h5>
                         <p>Tell us the job title and company you're targeting. Critical for effective customization.</p>
                     </div>
-                    <div className='col-md-4  sec2Col sec2Col3'>
-                        <img src={img5} className='sec2Img' />
+                    <div className='col-md-4  sec2Col sec2Col3 '>
+                        <img src={img5} className='sec2Img zoom' />
                         <h5>Tailored for Success</h5>
                         <p>Watch as we transform your resume to align with your desired position and instantly download it for applications.</p>
                     </div>
@@ -109,7 +111,7 @@ export default function Landing() {
 
 
 
-            <button type="button" onClick={togglePopup} class="btn btn-success ctaBtnSec2">Customize your Resume Now</button>
+            <button type="button" onClick={togglePopup} class="btn btn-success ctaBtnSec2 zoom">Customize your Resume Now</button>
 
 
 
@@ -148,9 +150,9 @@ export default function Landing() {
                         <div class="carousel-item active">
                             <div className='row testimonialSlider' >
                                 <div className='col-md-6'>
-                                    <div class="card myCard" >
-                                        <img src={img7} class="card-img-top testimonialImg" alt="..." />
-                                        <div class="card-body">
+                                    <div class="card myCard " >
+                                        <img src={img7} class="card-img-top testimonialImg  " alt="..." />
+                                        <div class="card-body ">
                                             <BookmarkStarFill size={46} className="star" />
                                             <h5 class="card-title">Michal R.</h5>
                                             <p class="card-text"><i>"The ATS optimization was a game changer. I received more interview calls in a month than I had in a year. This service is a life saver."</i></p>

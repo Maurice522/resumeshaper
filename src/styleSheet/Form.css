@@ -44,35 +44,61 @@
 
 .uploadPictureInput {
   background-color: none !important;
-  width: 56% !important;
+  width: 44% !important;
   padding-left: 5px;
   padding-right: 2px;
   position: absolute;
-  top: 40%;
-  right: 8%;
+  /* top: 42%; */
+  bottom:-16%;
+  /* right: 8%; */
+  left: 2%;
   font-size: 14px;
 }
 
 .uplouploadPhotoDivIcon {
   position: absolute;
-  top: -2%;
+  bottom: 10%;
   color: rgb(157, 165, 186);
   color: #5ec57e;
   z-index: 1;
+  right: 35%;
+}
+.uplouploadPhotoDivGif {
+  /* background-color: #171717; */
+  position: absolute;
+  top: -6%;
+  color: rgb(157, 165, 186);
+  color: #5ec57e;
+  z-index: 1;
+  right: 6%;
+  height: 100px;
 }
 
 .uploadedPicture {
   z-index: 21;
+  position: absolute;
+  right: 20%;
+  bottom: 15%;
 }
 
 .uplouploadPictureDivLabel {
   position: absolute;
-  top: -2%;
+  top: -20%;
   color: black;
-  left: 38%;
+  left: 2.2%;
   color: rgb(130, 139, 162);
   font-size: 15px;
   line-height: 18px;
+}
+.dottedDiv{
+  position: absolute;
+  border: 3px dotted #5ec57e; 
+  z-index: 1;
+  right: 4%;
+  top: -55%;
+  height: 130px;
+  width: 44%;
+
 }
 
 .Sec1additionalDetails {
@@ -85,6 +111,9 @@
   font-weight: 500;
   margin-bottom: 3%;
 }
+.shiftedSec1additionalDetails{
+  margin-top: 4.8%;
+}
 
 .detailsTextarea {
   border: 1px solid rgb(168, 177, 201);
@@ -92,6 +121,7 @@
   font-size: 14px;
   padding: 1%;
   margin-bottom: 5%;
+  width: 100%;
 }
 
 .detailsSubText {
@@ -115,24 +145,28 @@
   border: white;
   color: red;
   position: absolute;
-  bottom: -25px;
+  bottom: -18px;
   right: 3%;
 }
 
 .myAccordian {
   margin-bottom: 8%;
 }
+.webisteDiv{
+  position: relative;
+}
 
 .DeleteSkill {
   background-color: white;
   border: white;
   color: rgb(148, 38, 38);
-  color: goldenrod;
+  /* color: goldenrod; */
 }
 
 .selectedOption {
   display: inline-block;
-  margin-left: 4%;
+  margin-left: 0%;
+  margin-right: 4%;
   padding-top: 3%;
 }
 
@@ -149,7 +183,7 @@
 }
 
 .customSecMainHeading {
-  margin-top: 10%;
+  /* margin-top: -8%; */
   margin-bottom: 6%;
 }
 
@@ -161,3 +195,55 @@
   margin-bottom: 0;
   margin-top: 5%;
 }
+.customSecdetailsInfoLabel{
+  margin-top: 0%;
+}
+.searchDetailsInfoInput{
+  width: 100% !important;
+}
+.addExtraBtns{
+  width: 100%;
+  margin: 3%;
+  margin-top: 0%;
+  margin-bottom: 10%;
+  color: #347571; 
+  /* color: #5ec57e; */
+  font-size: 18px;
+}
+.saveProfileDiv{
+  position: relative;
+  align-items: center;
+  text-align: right;
+  margin-bottom: -8%;
+}
+.saveProfileBtn {
+  margin-top: 10%;
+  width: 250px;
+  border-radius: 5px;
+  background-color: #c2fbd7;
+  border-radius: 25px;
+  box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset, rgba(44, 187, 99, .15) 0 1px 2px, rgba(44, 187, 99, .15) 0 2px 4px, rgba(44, 187, 99, .15) 0 4px 8px, rgba(44, 187, 99, .15) 0 8px 16px, rgba(44, 187, 99, .15) 0 16px 32px;
+  box-shadow: rgba(44, 187, 99, .35) 0 -25px 18px -14px inset, rgba(44, 187, 99, .25) 0 1px 2px, rgba(44, 187, 99, .25) 0 2px 4px, rgba(44, 187, 99, .25) 0 4px 8px, rgba(44, 187, 99, .25) 0 8px 16px, rgba(44, 187, 99, .25) 0 16px 32px;
+  color: green;
+  cursor: pointer;
+  display: inline-block;
+  font-family: CerebriSans-Regular, -apple-system, system-ui, Roboto, sans-serif;
+  padding: 7px 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 250ms;
+  border: 0;
+  font-size: 14px;
+  font-weight: 600;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.saveProfileBtn:hover {
+  background-color: #5ec57e;
+  color: white;
+  box-shadow: rgba(44, 187, 99, .35) 0 -25px 18px -14px inset, rgba(44, 187, 99, .25) 0 1px 2px, rgba(44, 187, 99, .25) 0 2px 4px, rgba(44, 187, 99, .25) 0 4px 8px, rgba(44, 187, 99, .25) 0 8px 16px, rgba(44, 187, 99, .25) 0 16px 32px;
+}
+/* .detailsTextarea{
+  margin-bottom: 15%;
+} */
