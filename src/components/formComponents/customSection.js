@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {Check2Circle, PlusLg, Trash3Fill, ColumnsGap, Book, JournalRichtext, BagFill, GraphUpArrow, MegaphoneFill, Alipay, Bicycle, CheckSquare } from "react-bootstrap-icons";
 
 
-export default function CustomSection({ courses, setCourses, activities, setActivities, internships, setInternships, hobbies, setHobbies, languages, setLanguages, references, setReferences, customSections, setCustomSections }) {
+export default function CustomSection({ courses, setCourses, activities, setActivities, internships, setInternships, hobbies, setHobbies, languages, setLanguages, references, setReferences, customSections, setCustomSections ,liveForm}) {
 
     const addCourse = (e) => {
         e.preventDefault();
@@ -616,7 +616,7 @@ export default function CustomSection({ courses, setCourses, activities, setActi
                 ))}
             </div>
 
-
+            {(!liveForm) &&
             <div className='customHeadingsLowerDiv row'>
                 <h5 className='formSection customSecMainHeading'><ColumnsGap color="#35b276" size={32} /> &nbsp;Add Custom Details</h5>
                 <div className='col-md-4 checkme zoom'>
@@ -661,7 +661,57 @@ export default function CustomSection({ courses, setCourses, activities, setActi
                     <CheckSquare size={26} />&nbsp;&nbsp;&nbsp;Add Custom Section
                 </button>
                 </div>  
-            </div>
+            </div>}
+
+
+
+            {/* Custom Sectio For Create Live */}
+            {(liveForm) &&
+            <div className='customHeadingsLowerDiv row'>
+                <h5 className='formSection customSecMainHeading'><ColumnsGap color="#35b276" size={32} /> &nbsp;Add Custom Details</h5>
+                <div className='col-md-5  zoom'>
+                <button type="button" onClick={addCourse} className="Sec1additionalDetails addExtraBtns createCustomAdditons">
+                    {/* <Check2Circle size={20} /> &nbsp;&nbsp; */}
+                    <Book size={25} />&nbsp;&nbsp;&nbsp;Add Courses
+                </button>
+                </div>
+                <div className='col-md-7  zoom'>
+                <button type="button" onClick={addActivity} className="Sec1additionalDetails addExtraBtns createCustomAdditons">
+                    {/* <Check2Circle size={20} /> &nbsp;&nbsp; */}
+                    <BagFill size={25} />&nbsp;&nbsp;&nbsp;Add  Extra-Cirricular Activities
+                </button>
+                </div>
+                <div className='col-md-5  zoom'>
+                <button type="button" onClick={addInternship} className="Sec1additionalDetails addExtraBtns createCustomAdditons">
+                    {/* <Check2Circle size={20} /> &nbsp;&nbsp; */}
+                    <GraphUpArrow size={25} />&nbsp;&nbsp;&nbsp;Add Internships
+                </button>
+                </div>
+                <div className='col-md-7  zoom'>
+                <button type="button" onClick={addHobby} className="Sec1additionalDetails addExtraBtns createCustomAdditons">
+                    {/* <Check2Circle size={20} /> &nbsp;&nbsp; */}
+                    <Bicycle size={25} />&nbsp;&nbsp;&nbsp;Add Hobbies
+                </button>
+                </div>
+                <div className='col-md-5  zoom'>
+                <button type="button" onClick={addLanguage} className="Sec1additionalDetails addExtraBtns createCustomAdditons">
+                    {/* <Check2Circle size={20} /> &nbsp;&nbsp; */}
+                    <Alipay size={25} />&nbsp;&nbsp;&nbsp;Add Languages
+                </button>
+                </div>
+                <div className='col-md-7  zoom'>
+                <button type="button" onClick={addReference} className="Sec1additionalDetails addExtraBtns createCustomAdditons">
+                    {/* <Check2Circle size={20} /> &nbsp;&nbsp; */}
+                    <MegaphoneFill size={25} />&nbsp;&nbsp;&nbsp;Add References
+                </button>
+                </div>
+                <div className='col-md-5  zoom'>
+                <button type="button" onClick={addCustomSection} className="Sec1additionalDetails addExtraBtns createCustomAdditons">
+                    {/* <Check2Circle size={20} /> &nbsp;&nbsp; */}
+                    <CheckSquare size={25} />&nbsp;&nbsp;&nbsp;Add Custom Section
+                </button>
+                </div>  
+            </div>}
         </div>
     );
 };

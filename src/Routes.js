@@ -3,11 +3,10 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-// import Login from './pages/login';
-// import Signup from './pages/signup';
 import { Authdetails } from './pages/authdetails';
 import Landing from './pages/landing';
 import Dashboard from './pages/dashboard';
+import CreateLive from './pages/createLive';
 
 const router = createBrowserRouter([
   {
@@ -18,10 +17,10 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: <Dashboard/>,
   },  
-  // {
-  //   path: "/signup",
-  //   element: <Signup/>,
-  // },
+  {
+    path: "/create",
+    element: <CreateLive/>,
+  },
   {
     path: "/auth",
     element: <Authdetails/>,

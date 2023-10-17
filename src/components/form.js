@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {Check2Circle, Check2All, Check, PersonCheck, PersonSquare, CaretDownSquare, JournalBookmarkFill, PenFill, Trash3Fill, PlusLg, JournalCheck, Link45deg, TrophyFill } from "react-bootstrap-icons";
+import { Check2Circle, Check2All, Check, PersonCheck, PersonSquare, CaretDownSquare, JournalBookmarkFill, PenFill, Trash3Fill, PlusLg, JournalCheck, Link45deg, TrophyFill } from "react-bootstrap-icons";
 import CustomSection from './formComponents/customSection';
 import { updateUserProfileInDatabase, updateUserPhotoInDatabase, uploadMedia } from '../fireabse';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,7 +19,7 @@ export default function Form() {
   const [options, setOptions] = useState(generateOptions());
   const [searchText, setSearchText] = useState('');
   const [photoLoader, setPhotoLoader] = useState(false);
-  const [customDetails, setCustomDetails] = useState({ 
+  const [customDetails, setCustomDetails] = useState({
     courses: [],
     activities: [],
     internships: [],
@@ -77,7 +77,7 @@ export default function Form() {
         url: '',
       },
     ],
-   
+
   });
 
   useEffect(() => {
@@ -87,49 +87,49 @@ export default function Form() {
   useEffect(() => {
     setCustomDetails({
       ...customDetails,
-        courses: courses,
+      courses: courses,
     });
   }, [courses]);
 
   useEffect(() => {
     setCustomDetails({
       ...customDetails,
-        activities: activities,
+      activities: activities,
     });
   }, [activities]);
 
   useEffect(() => {
     setCustomDetails({
       ...customDetails,
-        internships: internships,
+      internships: internships,
     });
   }, [internships]);
 
   useEffect(() => {
     setCustomDetails({
       ...customDetails,
-        references: references,
+      references: references,
     });
   }, [references]);
 
   useEffect(() => {
     setCustomDetails({
       ...customDetails,
-        languages: languages,
+      languages: languages,
     });
   }, [languages]);
 
   useEffect(() => {
     setCustomDetails({
       ...customDetails,
-        hobbies: hobbies,
+      hobbies: hobbies,
     });
   }, [hobbies]);
 
   useEffect(() => {
     setCustomDetails({
       ...customDetails,
-        customSections: customSections,
+      customSections: customSections,
     });
   }, [customSections]);
 
@@ -349,19 +349,19 @@ export default function Form() {
           </div>
 
           <div className='col-md-8 uplouploadPictureBigDiv'>
-         
+
             <label className='detailsInfoLabel uplouploadPictureDivLabel'>
               Upload Photo
             </label>
             <input type="file" className='detailsInfoInput uploadPictureInput' name="photo" accept="image/*" onChange={handleChange} />
 
-            {(personalData.uploadedPhotoURL == '' && !photoLoader) &&<div className='dottedDiv' ><PersonSquare size={90} className="uplouploadPhotoDivIcon" /></div> }
+            {(personalData.uploadedPhotoURL == '' && !photoLoader) && <div className='dottedDiv' ><PersonSquare size={90} className="uplouploadPhotoDivIcon" /></div>}
             {!photoLoader && personalData.uploadedPhotoURL && (
-              <div className='uplouploadPhotoDiv'> 
+              <div className='uplouploadPhotoDiv'>
                 <img src={personalData.uploadedPhotoURL} className="uploadedPicture" alt="Uploaded" width="110" />
               </div>
             )}
-             {photoLoader && (
+            {photoLoader && (
               <div className='uplouploadPhotoDivGif'>
                 <iframe src="https://giphy.com/embed/y1ZBcOGOOtlpC" class="giphy-embed uploadedPicture uplouploadPhotoDivGif" ></iframe><p><a className='uplouploadPhotoDivGif' href="https://giphy.com/gifs/foosball-y1ZBcOGOOtlpC"></a></p>
               </div>
@@ -423,7 +423,7 @@ export default function Form() {
             <br />
             <input className='detailsInfoInput' type="text" name="city" value={personalData.city} onChange={handleChange} />
           </div>
-          <br/>
+          <br />
 
           {/* Edit additional details */}
           <button type="button" onClick={toggleAdditionalDetails} className="Sec1additionalDetails shiftedSec1additionalDetails">
@@ -810,13 +810,13 @@ export default function Form() {
           </div>
         </div>
         <div className='saveProfileDiv'>
-        <button type="button" onClick={handleLogDetails} className="saveProfileBtn zoom">
-          <Check2Circle size={26}/>&nbsp;&nbsp;&nbsp;Save My Profile
-        </button>
+          <button type="button" onClick={handleLogDetails} className="saveProfileBtn zoom">
+            <Check2Circle size={26} />&nbsp;&nbsp;&nbsp;Save My Profile
+          </button>
         </div>
-        <CustomSection courses={courses} setCourses={setCourses} activities={activities} setActivities={setActivities} internships={internships} setInternships={setInternships} hobbies={hobbies} setHobbies={setHobbies} languages={languages} setLanguages={setLanguages} references={references} setReferences={setReferences} customSections={customSections} setCustomSections={setCustomSections} />
+        <CustomSection courses={courses} setCourses={setCourses} activities={activities} setActivities={setActivities} internships={internships} setInternships={setInternships} hobbies={hobbies} setHobbies={setHobbies} languages={languages} setLanguages={setLanguages} references={references} setReferences={setReferences} customSections={customSections} setCustomSections={setCustomSections} liveForm={"false"}/>
 
-       
+
       </form>
     </div>
   );
