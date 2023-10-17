@@ -6,12 +6,13 @@ import { signOutUser } from '../redux/slices/user';
 import Nav from '../components/nav';
 import { useNavigate } from 'react-router-dom';
 import { Power } from "react-bootstrap-icons";
-import PdfDisplay from '../components/pdfDisplay';
+import MyPdfViewer from '../components/pdfDisplay';
 import { Check2Circle, Check2All, Check, PersonCheck, PersonSquare, CaretDownSquare, JournalBookmarkFill, PenFill, Trash3Fill, PlusLg, JournalCheck, Link45deg, TrophyFill } from "react-bootstrap-icons";
 import CustomSection from '../components/formComponents/customSection';
 import { updateUserProfileInDatabase, updateUserPhotoInDatabase, uploadMedia } from '../fireabse';
 import { updatePhoto, updateProfile } from '../redux/slices/user';
 import '../styleSheet/createLive.css'
+import { PDFViewer } from '@react-pdf/renderer';
 // import skills from '../components/formComponents/skills';    
 
 export default function CreateLive() {
@@ -29,6 +30,7 @@ export default function CreateLive() {
     const [searchText, setSearchText] = useState('');
     const [photoLoader, setPhotoLoader] = useState(false);
     const [showDropdown, setShowDropdown] = useState(false);
+    const [downloadPdf, setDownloadPdf] = useState(false);
     const [uploadedPhotoDataURL, setUploadedPhotoDataURL] = useState('');
     const [customDetails, setCustomDetails] = useState({
         courses: [],
@@ -89,6 +91,10 @@ export default function CreateLive() {
     const user = useSelector(state => state.user.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const handleDownload = ()=>{
+        setDownloadPdf(true)
+    }
 
     const handler = (e) => {
         signOut(auth).then(() => {
@@ -349,6 +355,7 @@ export default function CreateLive() {
     return (
     <>
         <Nav />
+        {downloadPdf? <PDFViewer style={{width:"100%", height:"800px"}}><MyPdfViewer personaldata={personalData} /></PDFViewer>:<> 
         <button onClick={() => handler()} className=" btn btn-success signoutBtn"> <Power color="#35b276" size={22} /> &nbsp;Signout</button>
         <div className='row mainCreateLiveDiv'>
             <div className='col-md- 6 createLeftDiv'>
@@ -840,14 +847,12 @@ export default function CreateLive() {
             <div className=' col-md- 6 col-sm-6 createRightDiv'>
                 <div className='pdfDisplayDiv' >
                     
-
+                    <button onClick={handleDownload}>Download</button>                    
+                    <MyPdfViewer personaldata={personalData} />
                 </div>
-                <div className='pdfDisplayDiv' >
-ldcdmf
-</div>
             </div>
         </div>
-        <PdfDisplay />
+        </>}
     </>
     )
 }

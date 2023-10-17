@@ -1,27 +1,37 @@
 import React, { useState } from 'react';
+import { Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
 
-function PdfDisplay() {
-  const [inputText, setInputText] = useState('');
+const styles = StyleSheet.create({
+  page: {
+   
+    padding: 10,
+  },
+  section: {
+    margin: 10,
+    padding: 10,
+    flexGrow: 1,
+  },
+  title: {
+    fontSize: 24,
+    textAlign: 'center',
+    marginBottom: 20,
+  },
+});
 
-  const handleInputChange = (e) => {
-    setInputText(e.target.value);
-  };
-
+export default function MyPdfViewer({ personaldata }) {
   return (
-    <div>
-      <div className="input-container">
-        <input
-          type="text"
-          value={inputText}
-          placeholder="Enter text"
-          onChange={handleInputChange}
-        />
-      </div>
-      <div className="output-container">
-        {inputText && <p>{inputText}</p>}
-      </div>
-    </div>
+    <Document>
+      <Page size="A4" style={styles.page}>
+        <View style={styles.section}>
+          <br/>
+          <Text style={styles.title}>Software Developer Resume</Text>
+          <br/>
+          <Text>Name:{personaldata.firstName}</Text>
+          <br/>
+          
+        </View>
+      </Page>
+    </Document>
   );
 }
 
-export default PdfDisplay;
