@@ -65,7 +65,8 @@ export default function CreateUploadPopup({ onClose}) {
 
         {loading? 
         <>
-        <img width="480" height="320" alt='loading...' src='https://media0.giphy.com/media/daak2Jqk5NZN2G4PKD/giphy.gif?cid=ecf05e47cgp9tyccc55lm02fihptwokn5kx9zvu877ix5b7j&ep=v1_gifs_related&rid=giphy.gif&ct=g' />
+        {/* <img width="480" height="320" alt='loading...' src='https://media0.giphy.com/media/daak2Jqk5NZN2G4PKD/giphy.gif?cid=ecf05e47cgp9tyccc55lm02fihptwokn5kx9zvu877ix5b7j&ep=v1_gifs_related&rid=giphy.gif&ct=g' /> */}
+        <img width="460" height="320" alt='loading...' src='https://media1.giphy.com/media/emHFjFhg9Ha0wQjihU/giphy.gif?cid=ecf05e47hk4qemarhmgqkea2nnod6ccd9puf27jnwfx9l21i&ep=v1_gifs_search&rid=giphy.gif&ct=g' />
         {/* <iframe src="https://giphy.com/embed/daak2Jqk5NZN2G4PKD" width="480" height="320" frameBorder="0" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/daak2Jqk5NZN2G4PKD"></a></p> */}
         </>
         :<>
