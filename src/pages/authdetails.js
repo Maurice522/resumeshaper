@@ -12,7 +12,6 @@ export const Authdetails = () => {
     const dispatch = useDispatch();
     const user = useSelector(state=> state.user)
 
-
     useEffect(()=>{
         console.log(user)
     }, [user])

@@ -21,6 +21,7 @@ const UploadPDF = () => {
     dispatch(updateResume(fileLink))
     setLoading(false)
     //update resume
+    
   }
   return (
     <>
