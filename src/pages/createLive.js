@@ -13,6 +13,8 @@ import { updateUserProfileInDatabase, updateUserPhotoInDatabase, uploadMedia } f
 import { updatePhoto, updateProfile } from '../redux/slices/user';
 import '../styleSheet/createLive.css'
 import { PDFViewer } from '@react-pdf/renderer';
+import PdfDisplay from '../components/pdfDisplay';
+import PdfDisplayBE from '../components/pdfDisplayBE';
 // import skills from '../components/formComponents/skills';    
 
 export default function CreateLive() {
@@ -357,7 +359,7 @@ export default function CreateLive() {
     return (
     <>
         <Nav />
-        {downloadPdf? <PDFViewer style={{width:"100%", height:"800px"}}><MyPdfViewer personaldata={personalData} live={false}/></PDFViewer>:<> 
+        {downloadPdf? <PdfDisplayBE personalData={personalData} />:<> 
         <button onClick={() => handler()} className=" btn btn-success signoutBtn"> <Power color="#35b276" size={22} /> &nbsp;Signout</button>
         <div className='row mainCreateLiveDiv'>
             <div className='col-md- 6 createLeftDiv'>
@@ -846,17 +848,18 @@ export default function CreateLive() {
                     </div>
                 </div>
             </div>
-            {/* <div className=' col-md- 6 col-sm-6 createRightDiv'> */}
-            {/* <div className='rightHeadDiv'> */}
             <p onClick={()=>handleDownload()}>Download</p>             
-                    {/* </div> */}
+
+            <div className=' col-md- 6 col-sm-6 createRightDiv'>
+            <div className='rightHeadDiv'>
+                    </div>
                 <div className='pdfDisplayDiv' > 
               
                     <MyPdfViewer personaldata={personalData} live={true} />
                 </div>
-            {/* </div> */}
+            </div>
         </div>
-        </>}
+                </>}
     </>
     )
 }

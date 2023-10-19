@@ -24,14 +24,6 @@ export default function MyPdfViewer({ personaldata,live }) {
   return (
     <Document>
 <Page size="A4" style={styles.page}>
-  {/* <View style={styles.section}>
-    <br/>
-    <Text style={styles.title}>Software Developer Resume</Text>
-    <br/>
-    <Text>Name:{personaldata.firstName}</Text>
-    <br/>
-    
-  </View> */}
    <View>
     <div className='imageDiv'>
       {live?<img src={img1} className="displayImage" />:<Image src={img1} className="displayImage" />}
@@ -42,7 +34,7 @@ export default function MyPdfViewer({ personaldata,live }) {
     </div>
   </View>
 
-  {/* <View >
+  <View >
     <div className='row liveProfileDiv'>
       <div className='col-md-8 liveProfileDivLeft'>
         <p className='profileName'>< PersonFill size={8} className="profileIcon" /> &nbsp;Profile</p>
@@ -132,10 +124,9 @@ export default function MyPdfViewer({ personaldata,live }) {
 
     </div>
     <hr></hr>
-  </View>  */}
+  </View>  
 </Page>
 
 </Document>
   );
 }
-
