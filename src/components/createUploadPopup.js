@@ -36,7 +36,7 @@ export default function CreateUploadPopup({ onClose}) {
       const fileLink = await uploadMedia(file, "resume");
       await updateUserInDatabase(user.email, fileLink)
       dispatch(updateResume(fileLink))
-      const res = fetch('https://resumegeneratorbackend.onrender.com/extract-text', {
+      const res = await fetch('https://resumeparser-10px.onrender.com/extract-text', {
         method: 'POST',
         body: JSON.stringify({
         pdf_url:fileLink

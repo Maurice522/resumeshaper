@@ -1,0 +1,41 @@
+{
+  "files": {
+    "main.css": "/static/css/main.5838dbc8.css",
+    "main.js": "/static/js/main.75aee7f8.js",
+    "static/js/787.4da98c85.chunk.js": "/static/js/787.4da98c85.chunk.js",
+    "static/media/video1.mp4": "/static/media/video1.82da01da3a75affbf253.mp4",
+    "static/media/13.png": "/static/media/13.d9a377e030d462920932.png",
+    "static/media/resume.png": "/static/media/resume.f6c98418482945bd157e.png",
+    "static/media/16.png": "/static/media/16.b0e1811a8b866fd2c9fb.png",
+    "static/media/12.png": "/static/media/12.982c98213c2a100a2972.png",
+    "static/media/15.png": "/static/media/15.e1ca16284a1c3e6385c8.png",
+    "static/media/21.png": "/static/media/21.b12ec2c8d2f33d731ff7.png",
+    "static/media/18.png": "/static/media/18.cabdf925a8bb2c7bd872.png",
+    "static/media/14.png": "/static/media/14.470305be91b60cf796a3.png",
+    "static/media/17.png": "/static/media/17.059fab39eaf6eeebf69b.png",
+    "static/media/22.png": "/static/media/22.5c0e3ae3f502b6aa5c03.png",
+    "static/media/24.png": "/static/media/24.34c6da97ae05ad451b70.png",
+    "static/media/23.png": "/static/media/23.5c05470fe3a9c2849bd9.png",
+    "static/media/resumeTemplate.png": "/static/media/resumeTemplate.f4d872846d95e9d29353.png",
+    "static/media/bg.png": "/static/media/bg.0debc77dd7c94165eb19.png",
+    "static/media/27.png": "/static/media/27.74479bf6f097f866e46c.png",
+    "static/media/19.png": "/static/media/19.c0bc115251e56abed55e.png",
+    "static/media/7.png": "/static/media/7.1799887e0228894a36a3.png",
+    "static/media/8.png": "/static/media/8.cdac8c284ad089bdbdd3.png",
+    "static/media/28.png": "/static/media/28.c021e68586542b6fe649.png",
+    "static/media/25.png": "/static/media/25.69dd7ac53880f168f4ea.png",
+    "static/media/26.png": "/static/media/26.5224cf312884d4784b55.png",
+    "static/media/3.png": "/static/media/3.f057815e7e789b6de531.png",
+    "static/media/sec2.jpg": "/static/media/sec2.d2cc513e9af326ee0b47.jpg",
+    "static/media/6.png": "/static/media/6.33ca9bfe4c43b2d5d8f9.png",
+    "static/media/jumbotron.png": "/static/media/jumbotron.24e9f749413e9042b591.png",
+    "index.html": "/index.html",
+    "main.5838dbc8.css.map": "/static/css/main.5838dbc8.css.map",
+    "main.75aee7f8.js.map": "/static/js/main.75aee7f8.js.map",
+    "787.4da98c85.chunk.js.map": "/static/js/787.4da98c85.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5838dbc8.css",
+    "static/js/main.75aee7f8.js"
+  ]
+}
