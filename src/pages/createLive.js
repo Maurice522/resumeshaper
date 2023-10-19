@@ -93,7 +93,9 @@ export default function CreateLive() {
     const navigate = useNavigate();
 
     const handleDownload = ()=>{
+        console.log("berfore",downloadPdf)
         setDownloadPdf(true)
+        console.log(downloadPdf)
     }
 
     const handler = (e) => {
@@ -355,7 +357,7 @@ export default function CreateLive() {
     return (
     <>
         <Nav />
-        {downloadPdf? <PDFViewer style={{width:"100%", height:"800px"}}><MyPdfViewer personaldata={personalData} /></PDFViewer>:<> 
+        {downloadPdf? <PDFViewer style={{width:"100%", height:"800px"}}><MyPdfViewer personaldata={personalData} live={false}/></PDFViewer>:<> 
         <button onClick={() => handler()} className=" btn btn-success signoutBtn"> <Power color="#35b276" size={22} /> &nbsp;Signout</button>
         <div className='row mainCreateLiveDiv'>
             <div className='col-md- 6 createLeftDiv'>
@@ -844,13 +846,15 @@ export default function CreateLive() {
                     </div>
                 </div>
             </div>
-            <div className=' col-md- 6 col-sm-6 createRightDiv'>
-                <div className='pdfDisplayDiv' >
-                    
-                    <button onClick={handleDownload}>Download</button>                    
-                    <MyPdfViewer personaldata={personalData} />
+            {/* <div className=' col-md- 6 col-sm-6 createRightDiv'> */}
+            {/* <div className='rightHeadDiv'> */}
+            <p onClick={()=>handleDownload()}>Download</p>             
+                    {/* </div> */}
+                <div className='pdfDisplayDiv' > 
+              
+                    <MyPdfViewer personaldata={personalData} live={true} />
                 </div>
-            </div>
+            {/* </div> */}
         </div>
         </>}
     </>
