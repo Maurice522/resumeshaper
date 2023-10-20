@@ -7,7 +7,7 @@ import Nav from '../components/nav';
 import { useNavigate } from 'react-router-dom';
 import { Power } from "react-bootstrap-icons";
 import MyPdfViewer from '../components/pdfDisplay';
-import { Check2Circle, Check2All, Check, PersonCheck, PersonSquare, CaretDownSquare, JournalBookmarkFill, PenFill, Trash3Fill, PlusLg, JournalCheck, Link45deg, TrophyFill } from "react-bootstrap-icons";
+import {FileEarmarkArrowDownFill, Check2Circle, Check2All, Check, PersonCheck, PersonSquare, CaretDownSquare, JournalBookmarkFill, PenFill, Trash3Fill, PlusLg, JournalCheck, Link45deg, TrophyFill } from "react-bootstrap-icons";
 import CustomSection from '../components/formComponents/customSection';
 import { updateUserProfileInDatabase, updateUserPhotoInDatabase, uploadMedia } from '../fireabse';
 import { updatePhoto, updateProfile } from '../redux/slices/user';
@@ -15,6 +15,7 @@ import '../styleSheet/createLive.css'
 import { PDFViewer } from '@react-pdf/renderer';
 import PdfDisplay from '../components/pdfDisplay';
 import PdfDisplayBE from '../components/pdfDisplayBE';
+
 // import skills from '../components/formComponents/skills';    
 
 export default function CreateLive() {
@@ -94,8 +95,8 @@ export default function CreateLive() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const handleDownload = ()=>{
-        console.log("berfore",downloadPdf)
+    const handleDownload = () => {
+        console.log("berfore", downloadPdf)
         setDownloadPdf(true)
         console.log(downloadPdf)
     }
@@ -357,510 +358,506 @@ export default function CreateLive() {
     };
 
     return (
-    <>
-        <Nav />
-        {downloadPdf? <PdfDisplayBE personalData={personalData} />:<> 
-        <button onClick={() => handler()} className=" btn btn-success signoutBtn"> <Power color="#35b276" size={22} /> &nbsp;Signout</button>
-        <div className='row mainCreateLiveDiv'>
-            <div className='col-md- 6 createLeftDiv'>
-                <div className='createLeftFormDiv'>
-                <h3 className='formTitle'>Personalize your Profile</h3>
-                        <p className='formSubText'>"Tell us more about yourself and the position you're targeting, and we'll create a personlized resume just for you."</p>
-                        <hr className='hrLine' />
-                    <div>
-                        <h5 className='formSection createFormSection'><PersonCheck color="#35b276" size={29} /> &nbsp;Personal Details</h5>
-                        <form>
-                            <div className='row'>
+        <>
+            <Nav />
+            {downloadPdf ? <PdfDisplayBE personalData={personalData} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={selectedOptions} /> : <>
+                <button onClick={() => handler()} className=" btn btn-success signoutBtn"> <Power color="#35b276" size={22} /> &nbsp;Signout</button>
+                <div className='row mainCreateLiveDiv'>
+                    <div className='col-md- 6 createLeftDiv'>
+                        <div className='createLeftFormDiv'>
+                            <h3 className='formTitle'>Personalize your Profile</h3>
+                            <p className='formSubText'>"Tell us more about yourself and the position you're targeting, and we'll create a personlized resume just for you."</p>
+                            <hr className='hrLine' />
+                            <div>
+                                <h5 className='formSection createFormSection'><PersonCheck color="#35b276" size={29} /> &nbsp;Personal Details</h5>
+                                <form>
+                                    <div className='row'>
 
-                                <div className='col-md-6'>
-                                    <label className='detailsInfoLabel'>
-                                        Target Position
-                                    </label>
-                                    <br />
-                                    <input className='detailsInfoInput' type="text" name="jobTitle" value={personalData.jobTitle} onChange={handleChange} />
-                                </div>
-
-                                <div className='col-md-6 uplouploadPictureBigDiv'>
-
-                                    <label className='detailsInfoLabel uplouploadPictureDivLabel createUplouploadPictureDivLabel'>
-                                        Upload Photo
-                                    </label>
-                                    <input type="file" className='detailsInfoInput uploadPictureInput createUploadPictureInput' name="photo" accept="image/*" onChange={handleChange} />
-
-                                    {(personalData.uploadedPhotoURL == '' && !photoLoader) && <PersonSquare size={70} className="uplouploadPhotoDivIcon createUplouploadPhotoDivIcon" />}
-                                    {!photoLoader && personalData.uploadedPhotoURL && (
-                                        <div className='uplouploadPhotoDiv'>
-                                            <img src={personalData.uploadedPhotoURL} className="uploadedPicture createUploadedPicture" alt="Uploaded" width="70" />
+                                        <div className='col-md-6'>
+                                            <label className='detailsInfoLabel'>
+                                                Target Position
+                                            </label>
+                                            <br />
+                                            <input className='detailsInfoInput' type="text" name="jobTitle" value={personalData.jobTitle} onChange={handleChange} />
                                         </div>
-                                    )}
-                                    {photoLoader && (
-                                        <div className='uplouploadPhotoDivGif createUplouploadPhotoDivGif'>
-                                            <iframe src="https://giphy.com/embed/3oEjI6SIIHBdRxXI40" class="giphy-embed uploadedPicture uplouploadPhotoDivGif createUplouploadPhotoDivGif"></iframe><p><a  className='uplouploadPhotoDivGif' href="https://giphy.com/gifs/mashable-3oEjI6SIIHBdRxXI40"></a></p>
-                                        </div>
-                                    )}
-                                </div>
 
-                                <div className='col-md-6 col-sm-6'>
-                                    <label className='detailsInfoLabel'>
-                                        First Name:
-                                    </label>
-                                    <br />
-                                    <input type="text" className='detailsInfoInput' name="firstName" value={personalData.firstName} onChange={handleChange} />
-                                </div>
+                                        <div className='col-md-6 uplouploadPictureBigDiv'>
 
-                                <div className='col-md-6 col-sm-6'>
-                                    <label className='detailsInfoLabel'>
-                                        Middle Name:
-                                    </label>
-                                    <br />
-                                    <input type="text" className='detailsInfoInput' name="middleName" value={personalData.middleName} onChange={handleChange} />
-                                </div>
+                                            <label className='detailsInfoLabel uplouploadPictureDivLabel createUplouploadPictureDivLabel'>
+                                                Upload Photo
+                                            </label>
+                                            <input type="file" className='detailsInfoInput uploadPictureInput createUploadPictureInput' name="photo" accept="image/*" onChange={handleChange} />
 
-                                <div className='col-md-6 col-sm-6'>
-                                    <label className='detailsInfoLabel'>
-                                        Last Name:
-                                    </label>
-                                    <br />
-                                    <input className='detailsInfoInput' type="text" name="lastName" value={personalData.lastName} onChange={handleChange} />
-                                </div>
-
-                                <div className='col-md-6 col-sm-6'>
-                                    <label className='detailsInfoLabel'>
-                                        Email:
-                                    </label>
-                                    <br />
-                                    <input className='detailsInfoInput' type="email" name="inputEmail" value={personalData.inputEmail} onChange={handleChange} />
-                                </div>
-
-                                <div className='col-md-6 col-sm-6'>
-                                    <label className='detailsInfoLabel'>
-                                        Phone:
-                                    </label>
-                                    <br />
-                                    <input className='detailsInfoInput' type="number" name="phone" value={personalData.phone} onChange={handleChange} />
-                                </div>
-
-                                <div className='col-md-6 col-sm-6'>
-                                    <label className='detailsInfoLabel'>
-                                        Date of Birth:
-                                    </label>
-                                    <br />
-                                    <input className='detailsInfoInput' type="date" name="dateOfBirth" value={personalData.dateOfBirth} onChange={handleChange} />
-                                </div>
-
-                                <div className='col-md-6 col-sm-6'>
-                                    <label className='detailsInfoLabel'>
-                                        City:
-                                    </label>
-                                    <br />
-                                    <input className='detailsInfoInput' type="text" name="city" value={personalData.city} onChange={handleChange} />
-                                </div>
-                                <br />
-
-                                {/* Edit additional details */}
-                                <button type="button" onClick={toggleAdditionalDetails} className="Sec1additionalDetails shiftedSec1additionalDetails">
-                                    {showAdditionalDetails ? 'Hide All Additional Details' : 'Edit Additional Details '}
-                                </button>
-                            </div>
-
-                            {/* Additional input fields */}
-                            {showAdditionalDetails && (
-                                <div className='row'>
-
-                                    <div className='col-md-6 col-sm-6'>
-                                        <label className='detailsInfoLabel'>
-                                            Address:
-                                        </label>
-                                        <br />
-                                        <input className='detailsInfoInput' type="text" name="address" value={personalData.address} onChange={handleChange} />
-                                    </div>
-
-                                    <div className='col-md-6 col-sm-6'>
-                                        <label className='detailsInfoLabel'>
-                                            Postal Code:
-                                        </label>
-                                        <br />
-                                        <input className='detailsInfoInput' type="number" name="postalCode" value={personalData.postalCode} onChange={handleChange} />
-                                    </div>
-
-                                    <div className='col-md-6 col-sm-6'>
-                                        <label className='detailsInfoLabel'>
-                                            Driving License:
-                                        </label>
-                                        <br />
-                                        <input className='detailsInfoInput' type="text" name="drivingLicense" value={personalData.drivingLicense} onChange={handleChange} />
-                                    </div>
-
-                                    <div className='col-md-6 col-sm-6'>
-                                        <label className='detailsInfoLabel'>
-                                            Nationality:
-                                        </label>
-                                        <br />
-                                        <input className='detailsInfoInput' type="text" name="nationality" value={personalData.nationality} onChange={handleChange} />
-                                    </div>
-
-                                    <div className='col-md-6 col-sm-6'>
-                                        <label className='detailsInfoLabel'>
-                                            Place of Birth:
-                                        </label>
-                                        <br />
-                                        <input className='detailsInfoInput' type="text" name="placeOfBirth" value={personalData.placeOfBirth} onChange={handleChange} />
-                                    </div>
-
-                                    <div className='col-md-6 col-sm-6'>
-                                        <label className='detailsInfoLabel'>
-                                            Country:
-                                        </label>
-                                        <br />
-                                        <input className='detailsInfoInput' type="text" name="country" value={personalData.country} onChange={handleChange} />
-                                    </div>
-                                </div>
-                            )}
-                            <br />
-
-                            <h5 className='formSection'><PenFill color="#35b276" size={24} /> &nbsp;Professional Summary</h5>
-                            <p className='detailsSubText'>Compose a professional summary to showcase your expertise. For instance: 'Results driven marketing professional with 8 years of experience,excelling in digital strategy and campaign optimization.'</p>
-                            <textarea
-                                name="professionalSummary"
-                                value={personalData.professionalSummary}
-                                onChange={handleChange}
-                                rows="6"
-                                placeholder='Eg: Passionate Software Developer with 8+ years of Building High Enterprise Level Applications'
-                                className='detailsTextarea'
-                            ></textarea>
-
-
-                            <h5 className='formSection'><JournalBookmarkFill color="#35b276" size={26} /> &nbsp;Employment History</h5>
-                            <p className='detailsSubText'>Let's capture your last 10 years of work experience, ensuring your resume reflects your growth,skills and accomplishments effectively.</p>
-
-                            <div class="accordion myAccordian" id="accordionExample">
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                            Add Employment
-                                        </button>
-                                    </h2>
-                                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-
-                                        <div class="accordion-body">
-                                            {personalData.employmentHistory.map((employment, index) => (
-                                                <div key={index} className="employmentHistoryDiv">
-                                                    <h5 className='personalSubSubHeading'>Role {index + 1} :</h5>
-                                                    <div className='row'>
-
-                                                        <div className="col-md-6">
-                                                            <label className='detailsInfoLabel'>
-                                                                Job Title
-                                                            </label>
-                                                            <br />
-                                                            <input
-                                                                className='detailsInfoInput' type="text"
-                                                                value={employment.jobTitle}
-                                                                onChange={(e) => updateEmploymentField(index, 'jobTitle', e.target.value)}
-                                                            />
-                                                        </div>
-
-                                                        <div className="col-md-6">
-                                                            <label className='detailsInfoLabel'>
-                                                                Employer
-                                                            </label>
-                                                            <br />
-                                                            <input
-                                                                className='detailsInfoInput' type="text"
-                                                                value={employment.employer}
-                                                                onChange={(e) => updateEmploymentField(index, 'employer', e.target.value)}
-                                                            />
-                                                        </div>
-
-                                                        <div className="col-md-3">
-                                                            <label className='detailsInfoLabel'>
-                                                                Start Date
-                                                            </label>
-                                                            <br />
-                                                            <input
-                                                                className='detailsInfoInput' type="date"
-                                                                value={employment.startDate}
-                                                                style={{ "font-size": "12px", "height": "38px", "marginTop": "10px" }}
-                                                                onChange={(e) => updateEmploymentField(index, 'startDate', e.target.value)}
-                                                            />
-                                                        </div>
-
-                                                        <div className="col-md-3">
-                                                            <label className='detailsInfoLabel'>
-                                                                End Date
-                                                            </label>
-                                                            <br />
-                                                            <input
-                                                                className='detailsInfoInput' type="date"
-                                                                style={{ "font-size": "12px", "height": "38px", "marginTop": "10px" }}
-                                                                value={employment.endDate}
-                                                                onChange={(e) => updateEmploymentField(index, 'endDate', e.target.value)}
-                                                            />
-                                                        </div>
-
-                                                        <div className="col-md-6">
-                                                            <label className='detailsInfoLabel'>
-                                                                City
-                                                            </label>
-                                                            <br />
-                                                            <input
-                                                                className='detailsInfoInput' type="text"
-                                                                value={employment.city}
-                                                                onChange={(e) => updateEmploymentField(index, 'city', e.target.value)}
-                                                            />
-                                                        </div>
-                                                    </div>
-
-                                                    <label className='detailsInfoLabel'>
-                                                        Description:
-                                                    </label>
-
-                                                    <p className='detailsSubText'>Provide an overview of your job duties and responsibilities in your previous position.This would help us gain a deeper understanding of your professional experience.</p>
-                                                    <textarea
-                                                        value={employment.description}
-                                                        onChange={(e) => updateEmploymentField(index, 'description', e.target.value)}
-                                                        rows="6 "
-                                                        cols="76"
-                                                        placeholder='Eg: I was provided with a range of responsibilities to levarage the digital landscape for brand promotion and lead generation.'
-                                                        className='detailsTextarea'
-                                                    />
-                                                    <br />
-
-                                                    <button type="button" onClick={() => removeEmploymentHistory(index)} className="DeleteEmp">
-                                                        <Trash3Fill size={20} />
-                                                    </button>
+                                            {(personalData.uploadedPhotoURL == '' && !photoLoader) && <PersonSquare size={70} className="uplouploadPhotoDivIcon createUplouploadPhotoDivIcon" />}
+                                            {!photoLoader && personalData.uploadedPhotoURL && (
+                                                <div className='uplouploadPhotoDiv'>
+                                                    <img src={personalData.uploadedPhotoURL} className="uploadedPicture createUploadedPicture" alt="Uploaded" width="70" />
                                                 </div>
-
-                                            ))}
-                                            <button type="button" onClick={addEmploymentHistory} className="Sec1additionalDetails">
-                                                <PlusLg size={20} /> Add One More Employment
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <h5 className='formSection'><JournalCheck color="#35b276" size={26} /> &nbsp;Education</h5>
-                            <p className='detailsSubText'>Share your educational journey,spanning your academic achievements and qualifications, making you an appealing candidate to potential employers. </p>
-
-                            <div class="accordion myAccordian" id="accordionExample3">
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                            Add Education
-                                        </button>
-                                    </h2>
-                                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample3">
-                                        <div class="accordion-body">
-
-                                            {personalData.educationHistory.map((education, index) => (
-                                                <div key={index} className="employmentHistoryDiv">
-                                                    <h5 className='personalSubSubHeading'>Institute {index + 1} :</h5>
-                                                    <div className='row'>
-
-                                                        <div className="col-md-6">
-                                                            <label className='detailsInfoLabel'>
-                                                                School:
-                                                            </label>
-                                                            <br />
-                                                            <input
-                                                                className='detailsInfoInput' type="text"
-                                                                value={education.school}
-                                                                onChange={(e) => updateEducationField(index, 'school', e.target.value)}
-                                                            />
-                                                        </div>
-
-                                                        <div className="col-md-6">
-                                                            <label className='detailsInfoLabel'>
-                                                                Degree:
-                                                            </label>
-                                                            <br />
-                                                            <input
-                                                                className='detailsInfoInput' type="text"
-                                                                value={education.degree}
-                                                                onChange={(e) => updateEducationField(index, 'degree', e.target.value)}
-                                                            />
-                                                        </div>
-
-                                                        <div className="col-md-3">
-                                                            <label className='detailsInfoLabel'>
-                                                                Start Date:
-                                                            </label>
-                                                            <input
-                                                                className='detailsInfoInput' type="date"
-                                                                value={education.startDate}
-                                                                style={{ "font-size": "12px", "height": "38px", "marginTop": "10px" }}
-                                                                onChange={(e) => updateEducationField(index, 'startDate', e.target.value)}
-                                                            />
-                                                        </div>
-
-                                                        <div className="col-md-3">
-                                                            <label className='detailsInfoLabel'>
-                                                                End Date:
-                                                            </label>
-                                                            <input
-                                                                className='detailsInfoInput' type="date"
-                                                                value={education.endDate}
-                                                                style={{ "font-size": "12px", "height": "38px", "marginTop": "10px" }}
-                                                                onChange={(e) => updateEducationField(index, 'endDate', e.target.value)}
-                                                            />
-                                                        </div>
-
-                                                        <div className="col-md-6">
-                                                            <label className='detailsInfoLabel'>
-                                                                City:
-                                                            </label>
-                                                            <input
-                                                                className='detailsInfoInput' type="text"
-                                                                value={education.city}
-                                                                onChange={(e) => updateEducationField(index, 'city', e.target.value)}
-                                                            />
-                                                        </div>
-                                                    </div>
-
-                                                    <label className='detailsInfoLabel'>
-                                                        Description:
-                                                    </label>
-                                                    <p className='detailsSubText'>Provide an overview of your job duties and responsibilities in your previous position.This would help us gain a deeper understanding of your professional experience.</p>
-                                                    <textarea
-                                                        value={education.description}
-                                                        onChange={(e) => updateEducationField(index, 'description', e.target.value)}
-                                                        rows="6 "
-                                                        cols="76"
-                                                        placeholder='Eg: I was provided with a range of responsibilities to levarage the digital landscape for brand promotion and lead generation.'
-                                                        className='detailsTextarea'
-                                                    />
-                                                    <br />
-
-                                                    <button type="button" onClick={() => removeEducationHistory(index)} className="DeleteEmp">
-                                                        <Trash3Fill size={20} />
-                                                    </button>
+                                            )}
+                                            {photoLoader && (
+                                                <div className='uplouploadPhotoDivGif createUplouploadPhotoDivGif'>
+                                                    <iframe src="https://giphy.com/embed/3oEjI6SIIHBdRxXI40" class="giphy-embed uploadedPicture uplouploadPhotoDivGif createUplouploadPhotoDivGif"></iframe><p><a className='uplouploadPhotoDivGif' href="https://giphy.com/gifs/mashable-3oEjI6SIIHBdRxXI40"></a></p>
                                                 </div>
-                                            ))}
-
-                                            <button type="button" onClick={addEducationHistory} className="Sec1additionalDetails">
-                                                <PlusLg size={20} /> Add One More Education
-                                            </button>
+                                            )}
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
 
+                                        <div className='col-md-6 col-sm-6'>
+                                            <label className='detailsInfoLabel'>
+                                                First Name:
+                                            </label>
+                                            <br />
+                                            <input type="text" className='detailsInfoInput' name="firstName" value={personalData.firstName} onChange={handleChange} />
+                                        </div>
 
+                                        <div className='col-md-6 col-sm-6'>
+                                            <label className='detailsInfoLabel'>
+                                                Middle Name:
+                                            </label>
+                                            <br />
+                                            <input type="text" className='detailsInfoInput' name="middleName" value={personalData.middleName} onChange={handleChange} />
+                                        </div>
 
-                            <h5 className='formSection'><Link45deg color="#35b276" size={26} /> &nbsp;Websites and Links</h5>
-                            <p className='detailsSubText'>Elevate your resume with real-world examples of your work. You can include Personal-websites, portfolios,and project repositories to demonstrate your skills and experience.  </p>
+                                        <div className='col-md-6 col-sm-6'>
+                                            <label className='detailsInfoLabel'>
+                                                Last Name:
+                                            </label>
+                                            <br />
+                                            <input className='detailsInfoInput' type="text" name="lastName" value={personalData.lastName} onChange={handleChange} />
+                                        </div>
 
-                            <div class="accordion myAccordian" id="accordionExample4">
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                            Add Your Links
+                                        <div className='col-md-6 col-sm-6'>
+                                            <label className='detailsInfoLabel'>
+                                                Email:
+                                            </label>
+                                            <br />
+                                            <input className='detailsInfoInput' type="email" name="inputEmail" value={personalData.inputEmail} onChange={handleChange} />
+                                        </div>
+
+                                        <div className='col-md-6 col-sm-6'>
+                                            <label className='detailsInfoLabel'>
+                                                Phone:
+                                            </label>
+                                            <br />
+                                            <input className='detailsInfoInput' type="number" name="phone" value={personalData.phone} onChange={handleChange} />
+                                        </div>
+
+                                        <div className='col-md-6 col-sm-6'>
+                                            <label className='detailsInfoLabel'>
+                                                Date of Birth:
+                                            </label>
+                                            <br />
+                                            <input className='detailsInfoInput' type="date" name="dateOfBirth" value={personalData.dateOfBirth} onChange={handleChange} />
+                                        </div>
+
+                                        <div className='col-md-6 col-sm-6'>
+                                            <label className='detailsInfoLabel'>
+                                                City:
+                                            </label>
+                                            <br />
+                                            <input className='detailsInfoInput' type="text" name="city" value={personalData.city} onChange={handleChange} />
+                                        </div>
+                                        <br />
+
+                                        {/* Edit additional details */}
+                                        <button type="button" onClick={toggleAdditionalDetails} className="Sec1additionalDetails shiftedSec1additionalDetails">
+                                            {showAdditionalDetails ? 'Hide All Additional Details' : 'Edit Additional Details '}
                                         </button>
-                                    </h2>
-                                    <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample4">
-                                        <div class="accordion-body ">
-                                            {personalData.websitesAndLinks.map((websiteOrLink, index) => (
-                                                <div key={index} className="webisteDiv">
-                                                    <h5 className='personalSubSubHeading'>Site {index + 1} :</h5>
-                                                    <div className='row'>
-
-                                                        <div className="col-md-6">
-                                                            <label className='detailsInfoLabel'>
-                                                                Name:
-                                                            </label>
-                                                            <input
-                                                                className='detailsInfoInput' type="text"
-                                                                value={websiteOrLink.name}
-                                                                onChange={(e) => updateWebsiteOrLinkField(index, 'name', e.target.value)}
-                                                            />
-                                                        </div>
-
-                                                        <div className="col-md-6">
-                                                            <label className='detailsInfoLabel'>
-                                                                URL:
-                                                            </label>
-                                                            <input
-                                                                className='detailsInfoInput' type="url"
-                                                                value={websiteOrLink.url}
-                                                                onChange={(e) => updateWebsiteOrLinkField(index, 'url', e.target.value)}
-                                                            />
-                                                        </div>
-                                                    </div>
-                                                    <button type="button" onClick={() => removeWebsiteOrLink(index)} className="DeleteEmp">
-                                                        <Trash3Fill size={20} />
-                                                    </button>
-                                                </div>
-                                            ))}
-                                            <button type="button" onClick={addWebsiteOrLink} className="Sec1additionalDetails">
-                                                <PlusLg size={20} /> Add One More Link
-                                            </button>
-
-                                        </div>
                                     </div>
-                                </div>
-                            </div>
 
-                            <div className='skillsSection'>
-                                <h5 className='formSection'><TrophyFill color="#35b276" size={24} /> &nbsp;Add your Skills</h5>
-                                <p className='detailsSubText'> Highlight your core strengths and expertise. Select up to 6 key skills that best suit your the position you want to apply to and represent your capabilities, enhancing your resume.</p>
-                                <div>
-                                    <input
-                                        className='detailsInfoInput searchDetailsInfoInput'
-                                        type="text"
-                                        placeholder="Search..."
-                                        value={searchText}
-                                        onChange={handleSearchTextChange}
-                                    />
-                                    {showDropdown && (
-                                        <div className="dropdown">
-                                            <div className="scrollable-dropdown">
-                                                {filteredOptions.map((option, index) => (
-                                                    <div
-                                                        key={index}
-                                                        className="dropdown-option"
-                                                        onClick={() => handleOptionClick(option)}
-                                                    >
-                                                        {option}
-                                                    </div>
-                                                ))}
+                                    {/* Additional input fields */}
+                                    {showAdditionalDetails && (
+                                        <div className='row'>
+
+                                            <div className='col-md-6 col-sm-6'>
+                                                <label className='detailsInfoLabel'>
+                                                    Address:
+                                                </label>
+                                                <br />
+                                                <input className='detailsInfoInput' type="text" name="address" value={personalData.address} onChange={handleChange} />
+                                            </div>
+
+                                            <div className='col-md-6 col-sm-6'>
+                                                <label className='detailsInfoLabel'>
+                                                    Postal Code:
+                                                </label>
+                                                <br />
+                                                <input className='detailsInfoInput' type="number" name="postalCode" value={personalData.postalCode} onChange={handleChange} />
+                                            </div>
+
+                                            <div className='col-md-6 col-sm-6'>
+                                                <label className='detailsInfoLabel'>
+                                                    Driving License:
+                                                </label>
+                                                <br />
+                                                <input className='detailsInfoInput' type="text" name="drivingLicense" value={personalData.drivingLicense} onChange={handleChange} />
+                                            </div>
+
+                                            <div className='col-md-6 col-sm-6'>
+                                                <label className='detailsInfoLabel'>
+                                                    Nationality:
+                                                </label>
+                                                <br />
+                                                <input className='detailsInfoInput' type="text" name="nationality" value={personalData.nationality} onChange={handleChange} />
+                                            </div>
+
+                                            <div className='col-md-6 col-sm-6'>
+                                                <label className='detailsInfoLabel'>
+                                                    Place of Birth:
+                                                </label>
+                                                <br />
+                                                <input className='detailsInfoInput' type="text" name="placeOfBirth" value={personalData.placeOfBirth} onChange={handleChange} />
+                                            </div>
+
+                                            <div className='col-md-6 col-sm-6'>
+                                                <label className='detailsInfoLabel'>
+                                                    Country:
+                                                </label>
+                                                <br />
+                                                <input className='detailsInfoInput' type="text" name="country" value={personalData.country} onChange={handleChange} />
                                             </div>
                                         </div>
                                     )}
-                                </div>
-                                <div>
-                                    <h6 className='formSection SkillsadditionalDetails'>Selected Skills:</h6>
-                                    {selectedOptions.map((option, index) => (
-                                        <div key={index} className="selected-option selectedOption ">
-                                            {option}
-                                            <button onClick={() => handleRemoveOption(option)} className="DeleteSkill"> <Trash3Fill size={16} /></button>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                            <CustomSection courses={courses} setCourses={setCourses} activities={activities} setActivities={setActivities} internships={internships} setInternships={setInternships} hobbies={hobbies} setHobbies={setHobbies} languages={languages} setLanguages={setLanguages} references={references} setReferences={setReferences} customSections={customSections} setCustomSections={setCustomSections} liveForm={"true"} />
-                            <div className='createSaveProfileDiv'>
-                                <button type="button" onClick={handleLogDetails} className="saveProfileBtn createLiveSaveProfileBtn">
-                                    <Check2Circle size={26} />&nbsp;&nbsp;&nbsp;Save My Profile
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <p onClick={()=>handleDownload()}>Download</p>             
+                                    <br />
 
-            <div className=' col-md- 6 col-sm-6 createRightDiv'>
-            <div className='rightHeadDiv'>
+                                    <h5 className='formSection'><PenFill color="#35b276" size={24} /> &nbsp;Professional Summary</h5>
+                                    <p className='detailsSubText'>Compose a professional summary to showcase your expertise. For instance: 'Results driven marketing professional with 8 years of experience,excelling in digital strategy and campaign optimization.'</p>
+                                    <textarea
+                                        name="professionalSummary"
+                                        value={personalData.professionalSummary}
+                                        onChange={handleChange}
+                                        rows="6"
+                                        placeholder='Eg: Passionate Software Developer with 8+ years of Building High Enterprise Level Applications'
+                                        className='detailsTextarea'
+                                    ></textarea>
+
+
+                                    <h5 className='formSection'><JournalBookmarkFill color="#35b276" size={26} /> &nbsp;Employment History</h5>
+                                    <p className='detailsSubText'>Let's capture your last 10 years of work experience, ensuring your resume reflects your growth,skills and accomplishments effectively.</p>
+
+                                    <div class="accordion myAccordian" id="accordionExample">
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                    Add Employment
+                                                </button>
+                                            </h2>
+                                            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+
+                                                <div class="accordion-body">
+                                                    {personalData.employmentHistory.map((employment, index) => (
+                                                        <div key={index} className="employmentHistoryDiv">
+                                                            <h5 className='personalSubSubHeading'>Role {index + 1} :</h5>
+                                                            <div className='row'>
+
+                                                                <div className="col-md-6">
+                                                                    <label className='detailsInfoLabel'>
+                                                                        Job Title
+                                                                    </label>
+                                                                    <br />
+                                                                    <input
+                                                                        className='detailsInfoInput' type="text"
+                                                                        value={employment.jobTitle}
+                                                                        onChange={(e) => updateEmploymentField(index, 'jobTitle', e.target.value)}
+                                                                    />
+                                                                </div>
+
+                                                                <div className="col-md-6">
+                                                                    <label className='detailsInfoLabel'>
+                                                                        Employer
+                                                                    </label>
+                                                                    <br />
+                                                                    <input
+                                                                        className='detailsInfoInput' type="text"
+                                                                        value={employment.employer}
+                                                                        onChange={(e) => updateEmploymentField(index, 'employer', e.target.value)}
+                                                                    />
+                                                                </div>
+
+                                                                <div className="col-md-3">
+                                                                    <label className='detailsInfoLabel'>
+                                                                        Start Date
+                                                                    </label>
+                                                                    <br />
+                                                                    <input
+                                                                        className='detailsInfoInput' type="date"
+                                                                        value={employment.startDate}
+                                                                        style={{ "font-size": "12px", "height": "38px", "marginTop": "10px" }}
+                                                                        onChange={(e) => updateEmploymentField(index, 'startDate', e.target.value)}
+                                                                    />
+                                                                </div>
+
+                                                                <div className="col-md-3">
+                                                                    <label className='detailsInfoLabel'>
+                                                                        End Date
+                                                                    </label>
+                                                                    <br />
+                                                                    <input
+                                                                        className='detailsInfoInput' type="date"
+                                                                        style={{ "font-size": "12px", "height": "38px", "marginTop": "10px" }}
+                                                                        value={employment.endDate}
+                                                                        onChange={(e) => updateEmploymentField(index, 'endDate', e.target.value)}
+                                                                    />
+                                                                </div>
+
+                                                                <div className="col-md-6">
+                                                                    <label className='detailsInfoLabel'>
+                                                                        City
+                                                                    </label>
+                                                                    <br />
+                                                                    <input
+                                                                        className='detailsInfoInput' type="text"
+                                                                        value={employment.city}
+                                                                        onChange={(e) => updateEmploymentField(index, 'city', e.target.value)}
+                                                                    />
+                                                                </div>
+                                                            </div>
+
+                                                            <label className='detailsInfoLabel'>
+                                                                Description:
+                                                            </label>
+
+                                                            <p className='detailsSubText'>Provide an overview of your job duties and responsibilities in your previous position.This would help us gain a deeper understanding of your professional experience.</p>
+                                                            <textarea
+                                                                value={employment.description}
+                                                                onChange={(e) => updateEmploymentField(index, 'description', e.target.value)}
+                                                                rows="6 "
+                                                                cols="76"
+                                                                placeholder='Eg: I was provided with a range of responsibilities to levarage the digital landscape for brand promotion and lead generation.'
+                                                                className='detailsTextarea'
+                                                            />
+                                                            <br />
+
+                                                            <button type="button" onClick={() => removeEmploymentHistory(index)} className="DeleteEmp">
+                                                                <Trash3Fill size={20} />
+                                                            </button>
+                                                        </div>
+
+                                                    ))}
+                                                    <button type="button" onClick={addEmploymentHistory} className="Sec1additionalDetails">
+                                                        <PlusLg size={20} /> Add One More Employment
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <h5 className='formSection'><JournalCheck color="#35b276" size={26} /> &nbsp;Education</h5>
+                                    <p className='detailsSubText'>Share your educational journey,spanning your academic achievements and qualifications, making you an appealing candidate to potential employers. </p>
+
+                                    <div class="accordion myAccordian" id="accordionExample3">
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                    Add Education
+                                                </button>
+                                            </h2>
+                                            <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample3">
+                                                <div class="accordion-body">
+
+                                                    {personalData.educationHistory.map((education, index) => (
+                                                        <div key={index} className="employmentHistoryDiv">
+                                                            <h5 className='personalSubSubHeading'>Institute {index + 1} :</h5>
+                                                            <div className='row'>
+
+                                                                <div className="col-md-6">
+                                                                    <label className='detailsInfoLabel'>
+                                                                        School:
+                                                                    </label>
+                                                                    <br />
+                                                                    <input
+                                                                        className='detailsInfoInput' type="text"
+                                                                        value={education.school}
+                                                                        onChange={(e) => updateEducationField(index, 'school', e.target.value)}
+                                                                    />
+                                                                </div>
+
+                                                                <div className="col-md-6">
+                                                                    <label className='detailsInfoLabel'>
+                                                                        Degree:
+                                                                    </label>
+                                                                    <br />
+                                                                    <input
+                                                                        className='detailsInfoInput' type="text"
+                                                                        value={education.degree}
+                                                                        onChange={(e) => updateEducationField(index, 'degree', e.target.value)}
+                                                                    />
+                                                                </div>
+
+                                                                <div className="col-md-3">
+                                                                    <label className='detailsInfoLabel'>
+                                                                        Start Date:
+                                                                    </label>
+                                                                    <input
+                                                                        className='detailsInfoInput' type="date"
+                                                                        value={education.startDate}
+                                                                        style={{ "font-size": "12px", "height": "38px", "marginTop": "10px" }}
+                                                                        onChange={(e) => updateEducationField(index, 'startDate', e.target.value)}
+                                                                    />
+                                                                </div>
+
+                                                                <div className="col-md-3">
+                                                                    <label className='detailsInfoLabel'>
+                                                                        End Date:
+                                                                    </label>
+                                                                    <input
+                                                                        className='detailsInfoInput' type="date"
+                                                                        value={education.endDate}
+                                                                        style={{ "font-size": "12px", "height": "38px", "marginTop": "10px" }}
+                                                                        onChange={(e) => updateEducationField(index, 'endDate', e.target.value)}
+                                                                    />
+                                                                </div>
+
+                                                                <div className="col-md-6">
+                                                                    <label className='detailsInfoLabel'>
+                                                                        City:
+                                                                    </label>
+                                                                    <input
+                                                                        className='detailsInfoInput' type="text"
+                                                                        value={education.city}
+                                                                        onChange={(e) => updateEducationField(index, 'city', e.target.value)}
+                                                                    />
+                                                                </div>
+                                                            </div>
+
+                                                            <label className='detailsInfoLabel'>
+                                                                Description:
+                                                            </label>
+                                                            <p className='detailsSubText'>Provide an overview of your job duties and responsibilities in your previous position.This would help us gain a deeper understanding of your professional experience.</p>
+                                                            <textarea
+                                                                value={education.description}
+                                                                onChange={(e) => updateEducationField(index, 'description', e.target.value)}
+                                                                rows="6 "
+                                                                cols="76"
+                                                                placeholder='Eg: I was provided with a range of responsibilities to levarage the digital landscape for brand promotion and lead generation.'
+                                                                className='detailsTextarea'
+                                                            />
+                                                            <br />
+
+                                                            <button type="button" onClick={() => removeEducationHistory(index)} className="DeleteEmp">
+                                                                <Trash3Fill size={20} />
+                                                            </button>
+                                                        </div>
+                                                    ))}
+
+                                                    <button type="button" onClick={addEducationHistory} className="Sec1additionalDetails">
+                                                        <PlusLg size={20} /> Add One More Education
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <h5 className='formSection'><Link45deg color="#35b276" size={26} /> &nbsp;Websites and Links</h5>
+                                    <p className='detailsSubText'>Elevate your resume with real-world examples of your work. You can include Personal-websites, portfolios,and project repositories to demonstrate your skills and experience.  </p>
+
+                                    <div class="accordion myAccordian" id="accordionExample4">
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                                    Add Your Links
+                                                </button>
+                                            </h2>
+                                            <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample4">
+                                                <div class="accordion-body ">
+                                                    {personalData.websitesAndLinks.map((websiteOrLink, index) => (
+                                                        <div key={index} className="webisteDiv">
+                                                            <h5 className='personalSubSubHeading'>Site {index + 1} :</h5>
+                                                            <div className='row'>
+
+                                                                <div className="col-md-6">
+                                                                    <label className='detailsInfoLabel'>
+                                                                        Name:
+                                                                    </label>
+                                                                    <input
+                                                                        className='detailsInfoInput' type="text"
+                                                                        value={websiteOrLink.name}
+                                                                        onChange={(e) => updateWebsiteOrLinkField(index, 'name', e.target.value)}
+                                                                    />
+                                                                </div>
+
+                                                                <div className="col-md-6">
+                                                                    <label className='detailsInfoLabel'>
+                                                                        URL:
+                                                                    </label>
+                                                                    <input
+                                                                        className='detailsInfoInput' type="url"
+                                                                        value={websiteOrLink.url}
+                                                                        onChange={(e) => updateWebsiteOrLinkField(index, 'url', e.target.value)}
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                            <button type="button" onClick={() => removeWebsiteOrLink(index)} className="DeleteEmp">
+                                                                <Trash3Fill size={20} />
+                                                            </button>
+                                                        </div>
+                                                    ))}
+                                                    <button type="button" onClick={addWebsiteOrLink} className="Sec1additionalDetails">
+                                                        <PlusLg size={20} /> Add One More Link
+                                                    </button>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className='skillsSection'>
+                                        <h5 className='formSection'><TrophyFill color="#35b276" size={24} /> &nbsp;Add your Skills</h5>
+                                        <p className='detailsSubText'> Highlight your core strengths and expertise. Select up to 6 key skills that best suit your the position you want to apply to and represent your capabilities, enhancing your resume.</p>
+                                        <div>
+                                            <input
+                                                className='detailsInfoInput searchDetailsInfoInput'
+                                                type="text"
+                                                placeholder="Search..."
+                                                value={searchText}
+                                                onChange={handleSearchTextChange}
+                                            />
+                                            {showDropdown && (
+                                                <div className="dropdown">
+                                                    <div className="scrollable-dropdown">
+                                                        {filteredOptions.map((option, index) => (
+                                                            <div
+                                                                key={index}
+                                                                className="dropdown-option"
+                                                                onClick={() => handleOptionClick(option)}
+                                                            >
+                                                                {option}
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </div>
+                                        <div>
+                                            <h6 className='formSection SkillsadditionalDetails'>Selected Skills:</h6>
+                                            {selectedOptions.map((option, index) => (
+                                                <div key={index} className="selected-option selectedOption ">
+                                                    {option}
+                                                    <button onClick={() => handleRemoveOption(option)} className="DeleteSkill"> <Trash3Fill size={16} /></button>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                    <CustomSection courses={courses} setCourses={setCourses} activities={activities} setActivities={setActivities} internships={internships} setInternships={setInternships} hobbies={hobbies} setHobbies={setHobbies} languages={languages} setLanguages={setLanguages} references={references} setReferences={setReferences} customSections={customSections} setCustomSections={setCustomSections} liveForm={"true"} />
+                                    <div className='createSaveProfileDiv'>
+                                        <button type="button" onClick={handleLogDetails} className="saveProfileBtn createLiveSaveProfileBtn">
+                                            <Check2Circle size={26} />&nbsp;&nbsp;&nbsp;Save My Profile
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                <div className='pdfDisplayDiv' > 
-              
-                    <MyPdfViewer personaldata={personalData} live={true} />
+                    <button onClick={() => handleDownload()} className="downloadPdfBtn zoom"><FileEarmarkArrowDownFill className="downloadPDFIcon" size={26}/>Download PDF</button>
+                    <div className=' col-md- 6 col-sm-6 createRightDiv'>
+                        <div className='pdfDisplayDiv' >
+                            <MyPdfViewer personaldata={personalData} live={true} />
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-                </>}
-    </>
+            </>}
+        </>
     )
 }
 // Helper function to generate a large list of options for testing

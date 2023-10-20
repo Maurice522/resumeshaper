@@ -39,176 +39,23 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
   },
+  pDFViewerStyle:{
+    backgroundColor:"#ffffff" ,
+  }
 });
 
-// const MyDocument = ({personalData}) => (
-//   <Document>
-//     <Page size="A4" style={styles.page}>
-//       <View style={styles.leftColumn}>
-//         <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
-//           <Image style={styles.image} src={img1} />
-//           <View style={{ marginLeft: 10 }}>
-//             <Text style={styles.name}>Your Name</Text>
-//             <Text style={styles.designation}>Your Designation</Text>
-//           </View>
-//         </View>
-
-//         <Text style={styles.sectionTitle}>Profile</Text>
-//         <Text style={styles.paragraph}>{personalData.firstName}</Text>
-
-//         <Text style={styles.sectionTitle}>Skills</Text>
-//         <Text style={styles.paragraph}>Your skills go here.</Text>
-
-//         <Text style={styles.sectionTitle}>Profile</Text>
-//         <Text style={styles.paragraph}>Your profile text goes here.</Text>
-
-//         <Text style={styles.sectionTitle}>Skills</Text>
-//         <Text style={styles.paragraph}>Your skills go here.</Text>
-
-//         <Text style={styles.sectionTitle}>Profile</Text>
-//         <Text style={styles.paragraph}>Your profile text goes here.</Text>
-
-//         <Text style={styles.sectionTitle}>Skills</Text>
-//         <Text style={styles.paragraph}>Your skills go here.</Text>
-
-//         <Text style={styles.sectionTitle}>Profile</Text>
-//         <Text style={styles.paragraph}>Your profile text goes here.</Text>
-
-//         <Text style={styles.sectionTitle}>Skills</Text>
-//         <Text style={styles.paragraph}>Your skills go here.</Text>
-
-//         <Text style={styles.sectionTitle}>Profile</Text>
-//         <Text style={styles.paragraph}>Your profile text goes here.</Text>
-
-//         <Text style={styles.sectionTitle}>Skills</Text>
-//         <Text style={styles.paragraph}>Your skills go here.</Text>
-
-//         <Text style={styles.sectionTitle}>Profile</Text>
-//         <Text style={styles.paragraph}>Your profile text goes here.</Text>
-
-//         <Text style={styles.sectionTitle}>Skills</Text>
-//         <Text style={styles.paragraph}>Your skills go here.</Text>
-
-//         <Text style={styles.sectionTitle}>Profile</Text>
-//         <Text style={styles.paragraph}>Your profile text goes here.</Text>
-
-//         <Text style={styles.sectionTitle}>Skills</Text>
-//         <Text style={styles.paragraph}>Your skills go here.</Text>
-
-//         <Text style={styles.sectionTitle}>Profile</Text>
-//         <Text style={styles.paragraph}>Your profile text goes here.</Text>
-
-//         <Text style={styles.sectionTitle}>Skills</Text>
-//         <Text style={styles.paragraph}>Your skills go here.</Text>
-
-//         <Text style={styles.sectionTitle}>Profile</Text>
-//         <Text style={styles.paragraph}>Your profile text goes here.</Text>
-
-//         <Text style={styles.sectionTitle}>Skills</Text>
-//         <Text style={styles.paragraph}>Your skills go here.</Text>
-
-//         <Text style={styles.sectionTitle}>Profile</Text>
-//         <Text style={styles.paragraph}>Your profile text goes here.</Text>
-
-//         <Text style={styles.sectionTitle}>Skills</Text>
-//         <Text style={styles.paragraph}>Your skills go here.</Text>
-
-//         <Text style={styles.sectionTitle}>Profile</Text>
-//         <Text style={styles.paragraph}>Your profile text goes here.</Text>
-
-//         <Text style={styles.sectionTitle}>Skills</Text>
-//         <Text style={styles.paragraph}>Your skills go here.</Text>
-
-//         <Text style={styles.sectionTitle}>Profile</Text>
-//         <Text style={styles.paragraph}>Your profile text goes here.</Text>
-
-//         <Text style={styles.sectionTitle}>Skills</Text>
-//         <Text style={styles.paragraph}>Your skills go here.</Text>
-
-//         <Text style={styles.sectionTitle}>Profile</Text>
-//         <Text style={styles.paragraph}>Your profile text goes here.</Text>
-
-//         <Text style={styles.sectionTitle}>Skills</Text>
-//         <Text style={styles.paragraph}>Your skills go here.</Text>
-
-//         <Text style={styles.sectionTitle}>Profile</Text>
-//         <Text style={styles.paragraph}>Your profile text goes here.</Text>
-
-//         <Text style={styles.sectionTitle}>Skills</Text>
-//         <Text style={styles.paragraph}>Your skills go here.</Text>
-
-//         <Text style={styles.sectionTitle}>Profile</Text>
-//         <Text style={styles.paragraph}>Your profile text goes here.</Text>
-
-//         <Text style={styles.sectionTitle}>Skills</Text>
-//         <Text style={styles.paragraph}>Your skills go here.</Text>
 
 
-//         <Text style={styles.sectionTitle}>Profile</Text>
-//         <Text style={styles.paragraph}>Your profile text goes here.</Text>
-
-//         <Text style={styles.sectionTitle}>Skills</Text>
-//         <Text style={styles.paragraph}>Your skills go here.</Text>
-
-
-//         <Text style={styles.sectionTitle}>Profile</Text>
-//         <Text style={styles.paragraph}>Your profile text goes here.</Text>
-
-//         <Text style={styles.sectionTitle}>Skills</Text>
-//         <Text style={styles.paragraph}>Your skills go here.</Text>
-
-
-//         <Text style={styles.sectionTitle}>Profile</Text>
-//         <Text style={styles.paragraph}>Your profile text goes here.</Text>
-
-//         <Text style={styles.sectionTitle}>Skills</Text>
-//         <Text style={styles.paragraph}>Your skills go here.</Text>
-
-
-//         <Text style={styles.sectionTitle}>Profile</Text>
-//         <Text style={styles.paragraph}>Your profile text goes here.</Text>
-
-//         <Text style={styles.sectionTitle}>Skills</Text>
-//         <Text style={styles.paragraph}>Your skills go here.</Text>
-
-
-//         <Text style={styles.sectionTitle}>Profile</Text>
-//         <Text style={styles.paragraph}>Your profile text goes here.</Text>
-
-//         <Text style={styles.sectionTitle}>Skills</Text>
-//         <Text style={styles.paragraph}>Your skills go here.</Text>
-//       </View>
-
-//       <View style={styles.rightColumn}>
-//         <Text style={styles.sectionTitle}>Education</Text>
-//         <Text style={styles.paragraph}>Your education details go here.</Text>
-
-//         <Text style={styles.sectionTitle}>Internships</Text>
-//         <Text style={styles.paragraph}>Your internship details go here.</Text>
-
-//         <Text style={styles.sectionTitle}>Hobbies</Text>
-//         <Text style={styles.paragraph}>Your hobbies go here.</Text>
-
-//         <Text style={styles.sectionTitle}>Languages</Text>
-//         <Text style={styles.paragraph}>Your languages go here.</Text>
-//       </View>
-//     </Page>
-//   </Document>
-// );
-
-
-export default function PdfDisplayBE({ personalData }) {
+export default function PdfDisplayBE({ personalData,courses, activities,internships,hobbies,languages,references ,customSections ,skills }) {
   console.log(personalData)
   return (
     <div>
-      <div style={{ margin: '20px' }}>
-        <PDFViewer width={600} height={400}>
-          {/* <MyDocument  personalData={personalData}/> */}
-          <BEDoc personalData={personalData}/>
+      <div className='downloadPdfMainDiv'>
+        <PDFViewer width={530} height={565} style={styles.pDFViewerStyle}>
+          <BEDoc personalData={personalData} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={skills}/>
         </PDFViewer>
       </div>
     </div>
   );
 }
-
 
