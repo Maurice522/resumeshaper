@@ -144,8 +144,9 @@
   background-color: white;
   border: white;
   color: red;
-  position: absolute;
-  bottom: -18px;
+  /* position: absolute; */
+  /* bottom: -18px; */
+  top:0;
   right: 3%;
 }
 

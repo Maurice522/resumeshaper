@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function MyPdfViewer({ personaldata,live }) {
+export default function MyPdfViewer({ personalData,live,courses, activities,internships,hobbies,languages,references ,customSections ,skills }) {
   return (
     <Document>
 <Page size="A4" style={styles.page}>
@@ -29,8 +29,8 @@ export default function MyPdfViewer({ personaldata,live }) {
       {live?<img src={img1} className="displayImage" />:<Image src={img1} className="displayImage" />}
     </div>
     <div className='nameDiv'>
-      <h6 className='resumeName'>Sneha Sah</h6>
-      <p className='resumeTtile'>Software Developer</p>
+      <h6 className='resumeName'>{personalData.firstName} {personalData.middleName} {personalData.lastName}</h6>
+      <p className='resumeTtile'>{personalData.jobTitle}</p>
     </div>
   </View>
 
@@ -38,92 +38,190 @@ export default function MyPdfViewer({ personaldata,live }) {
     <div className='row liveProfileDiv'>
       <div className='col-md-8 liveProfileDivLeft'>
         <p className='profileName'>< PersonFill size={8} className="profileIcon" /> &nbsp;Profile</p>
-        <p className='profileText'>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book. It usually begins with:
-          “Lorem ipsum dolor sit </p>
+        <p className='profileText'>{personalData.professionalSummary}</p>
 
+        {personalData.employmentHistory && personalData.employmentHistory.length >0 && personalData.employmentHistory[0].jobTitle!=='' && <>
           <div className='liveEmployment'>
           <p className='profileName employmentHistName'>< BagDashFill size={8} className="profileIcon" /> &nbsp;Employment History</p>
-          <p className='profileEmploymentName'>Lorem ipsum, or lipsum as it is sometimes</p>
-          <p className='employmentTime DOBProfileDetailsText'>2023 April- 2025 May</p>
-        <p className='profileText employmetnProfileText'>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book. It usually begins with:
-          “Lorem ipsum dolor sit </p>
-          </div>
+          { personalData.employmentHistory.map((item,index)=>{
+          return (<>
+          <p className='profileEmploymentName'>{item.jobTitle} at {item.employer} , {item.city}</p>
+          <p className='employmentTime DOBProfileDetailsText'> {item.startDate} - {item.endDate}</p>
+        <p className='profileText employmetnProfileText'>{item.description}</p>
+          </>)
+          })
+           }
+          </div>  
+    </>}
 
+    {personalData.educationHistory && personalData.educationHistory.length >0 && personalData.educationHistory[0].school!=='' && <>
           <div className='liveEducation'>
           <p className='profileName employmentHistName'>< AwardFill size={8} className="profileIcon" /> &nbsp;Education</p>
-          <p className='profileEmploymentName'>Lorem ipsum, or lipsum as it is sometimes</p>
-          <p className='employmentTime DOBProfileDetailsText'>2023 April- 2025 May</p>
-        <p className='profileText employmetnProfileText'>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book. It usually begins with:
-          “Lorem ipsum dolor sit </p>
+          { personalData.educationHistory.map((item,index)=>{
+          return (<>
+          <p className='profileEmploymentName'>{item.school}, {item.city}</p>
+          <p className='employmentTime DOBProfileDetailsText'>{item.degree}, {item.startDate} - {item.endDate}</p>
+        <p className='profileText employmetnProfileText'>{item.description}</p>
+          </>)
+        })
+         }
           </div>
+          </>}
 
+          {internships && internships.length >0 && internships[0].jobTitle!=='' && <>
           <div className='liveEducation'>
           <p className='profileName employmentHistName'>< PeopleFill size={8} className="profileIcon" /> &nbsp;Internships</p>
-          <p className='profileEmploymentName'>Lorem ipsum, or lipsum as it is sometimes</p>
-          <p className='employmentTime DOBProfileDetailsText'>2023 April- 2025 May</p>
-        <p className='profileText employmetnProfileText'>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book. It usually begins with:
-          “Lorem ipsum dolor sit </p>
+          { internships.map((item,index)=>{
+          return (<>
+          <p className='profileEmploymentName'>{item.jobTitle} at {item.employer}, {item.city} </p>
+          <p className='employmentTime DOBProfileDetailsText'>{item.startDate} - {item.endDate}</p>
+        <p className='profileText employmetnProfileText'>{item.description} </p>
+          </>)
+        })
+         }
           </div>
+          </>}
 
+          {references && references.length >0 && references[0].fullName!=='' && <>
           <div className='liveEducation'>
           <p className='profileName employmentHistName'>< MegaphoneFill size={8} className="profileIcon" /> &nbsp;References</p>
-          <p className='profileEmploymentName'>Lorem ipsum, or lipsum as it is sometimes</p>
-          <p className='employmentTime DOBProfileDetailsText'>2023 April- 2025 May</p>
-        <p className='profileText employmetnProfileText'>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book. It usually begins with:
-          “Lorem ipsum dolor sit </p>
+          { references.map((item,index)=>{
+          return (<>
+          <p className='profileEmploymentName'>{item.fullName}, {item.company}</p>
+          <p className='employmentTime DOBProfileDetailsText'>{item.phone}</p>
+        <p className='profileText employmetnProfileText'> {item.referenceEmail}</p>
+          </>)
+        })
+         }
           </div>
+          </>}
 
+
+          {courses && courses.length >0 && courses[0].course!=='' && <>
           <div className='liveEducation'>
           <p className='profileName employmentHistName'>< JournalBookmarkFill size={8} className="profileIcon" /> &nbsp;Courses</p>
-          <p className='profileEmploymentName'>Lorem ipsum, or lipsum as it is sometimes</p>
-          <p className='employmentTime DOBProfileDetailsText'>2023 April- 2025 May</p>
-        <p className='profileText employmetnProfileText'>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book. It usually begins with:
-          “Lorem ipsum dolor sit </p>
+          { courses.map((item,index)=>{
+          return (<>
+          <p className='profileEmploymentName'>{item.course},{item.institution}</p>
+          <p className='employmentTime DOBProfileDetailsText'>{item.startDate} - {item.endDate}</p>
+        <p className='profileText employmetnProfileText'>{item.description} </p>
+          </>)
+        })
+         }
           </div>
+</>}
 
+
+{activities && activities.length >0 && activities[0].function!=='' && <>
           <div className='liveEducation'>
           <p className='profileName employmentHistName'>< TrophyFill size={8} className="profileIcon" /> &nbsp;Extra-Curricular Activities</p>
-          <p className='profileEmploymentName'>Lorem ipsum, or lipsum as it is sometimes</p>
-          <p className='employmentTime DOBProfileDetailsText'>2023 April- 2025 May</p>
-        <p className='profileText employmetnProfileText'>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book. It usually begins with:
-          “Lorem ipsum dolor sit </p>
+          { activities.map((item,index)=>{
+          return (<>
+          <p className='profileEmploymentName'>{item.function}, {item.employer} , {item.city}</p>
+          <p className='employmentTime DOBProfileDetailsText'>{item.startDate} - {item.endDate}</p>
+        <p className='profileText employmetnProfileText'>{item.description}</p>
+          </>)
+        })
+         }
           </div>
+</>}
 
+{customSections && customSections.length >0 && customSections[0].subTitle!=='' && <>
+{ customSections.map((item,index)=>{
+   return (<>
           <div className='liveEducation'>
-          <p className='profileName employmentHistName'>< TropicalStorm size={8} className="profileIcon" /> &nbsp;Custom</p>
-          <p className='profileEmploymentName'>Lorem ipsum, or lipsum as it is sometimes</p>
-          <p className='employmentTime DOBProfileDetailsText'>2023 April- 2025 May</p>
-        <p className='profileText employmetnProfileText'>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book. It usually begins with:
-          “Lorem ipsum dolor sit </p>
+          <p className='profileName employmentHistName'>< TropicalStorm size={8} className="profileIcon" /> &nbsp;{item.title}</p>
+          <p className='profileEmploymentName'>{item.subTitle}</p>
+          <p className='employmentTime DOBProfileDetailsText'>{item.startDate} - {item.endDate}</p>
+        <p className='profileText employmetnProfileText'>{item.description} </p>
           </div>
+          </>)
+      })
+       }
+</>}
 
       </div>
       <div className='col-md-4 liveProfileDivRight'>
       <p className='profileDetails'>Personal Details</p>
-        <p className='profileDetailsText'>Address 2123 bag blue dress hello nice seeing</p>
-        <p className='profileDetailsText'>Place Pincode</p>
-        <p className='profileDetailsText'>Country</p>
-        <p className='profileDetailsText'>Phone Number</p>
-        <p className='profileDetailsText emailProfileDetailsText'>Email</p>
-        <p className='profileDetailsText DOBProfileDetailsText profileDetailSubHeading'>DOB/Place</p>
-        <p className='profileDetailsText'>DOB</p>
-        <p className='profileDetailsText'>Place of Birth</p>
-        <p className='profileDetailsText profileDetailSubHeading DOBProfileDetailsText'>Nationality</p>
-        <p className='profileDetailsText'>Indian</p>
-        <p className='profileDetailsText profileDetailSubHeading DOBProfileDetailsText'>Driving Liscence</p>
-        <p className='profileDetailsText'>liscence</p>
+      {personalData.address && personalData.address.length >0 && <>
+        <p className='profileDetailsText'>{personalData.address}</p>
+          </>}
+
+          {personalData.city && personalData.city.length >0 && <>
+            <p className='profileDetailsText'>{personalData.city} {personalData.pincode}</p>
+          </>}
+
+          {personalData.country && personalData.country.length >0 && <>
+        <p className='profileDetailsText'>{personalData.country}</p>
+          </>}
+
+          {personalData.phone && personalData.phone.length >0 && <>
+        <p className='profileDetailsText'>{personalData.phone}</p>
+          </>}
+
+          {personalData.inputEmail && personalData.inputEmail.length >0 && <>
+        <p className='profileDetailsText emailProfileDetailsText'>{personalData.inputEmail}</p>
+          </>}
+       
+          {personalData.dateOfBirth && personalData.dateOfBirth.length >0 && personalData.placeOfBirth && personalData.placeOfBirth.length >0 && <>
+            <p className='profileDetailsText DOBProfileDetailsText profileDetailSubHeading'>DOB/Place</p>
+        <p className='profileDetailsText'>{personalData.dateOfBirth}</p>
+        </>}
+        {personalData.placeOfBirth && personalData.placeOfBirth.length >0 && <>
+        <p className='profileDetailsText'>{personalData.placeOfBirth}</p>
+         </>}
+         
+
+          {personalData.nationality && personalData.nationality.length >0 &&  <>
+            <p className='profileDetailsText profileDetailSubHeading DOBProfileDetailsText'>Nationality</p>
+        <p className='profileDetailsText'>{personalData.nationality}</p>
+          </>}
+
+          {personalData.drivingLicense && personalData.drivingLicense.length >0 && <>
+            <p className='profileDetailsText profileDetailSubHeading DOBProfileDetailsText'>Driving Liscence</p>
+        <p className='profileDetailsText'>{personalData.drivingLicense}</p>
+          </>}
+
+        {personalData.websitesAndLinks && personalData.websitesAndLinks.length >0 && personalData.websitesAndLinks[0].name!=='' && <>
         <p className='profileDetails otherProfileDetails'>Links</p>
-        <p className='profileDetailsText emailProfileDetailsText'>www.google.com</p>
+          { personalData.websitesAndLinks.map((item,index)=>{
+          return (<>
+            {/* <p className='profileDetailsText emailProfileDetailsText'>{item.name}</p> */}
+            <p className='profileDetailsText emailProfileDetailsText'>{item.url}</p>
+          <Text style={[styles.rightOtherHeading,styles.colorThisBlack]}>Links</Text>
+          </>)
+        })
+         }
+</>}
+        
+{skills && skills.length>0 && <> 
         <p className='profileDetails otherProfileDetails'>Skills</p>
-        <p className='profileDetailsText liveSkills'>Skill 1</p>
+        {skills.map((item,index)=>{
+          return (
+            <p className='profileDetailsText liveSkills'>{item}</p>)
+          })
+          }</>}
+        
+
+        {languages && languages.length>0 && <>
         <p className='profileDetails otherProfileDetails'>Languages</p>
-        <p className='profileDetailsText liveSkills'>Language 1</p>
-        <p className='profileDetails otherProfileDetails'>Hobbies</p>
-        <p className='profileDetailsText liveSkills'> Swimming, Dancing</p>
+          {languages.map((item,index)=>{
+            return(<>
+        <p className='profileDetailsText liveSkills'>{item.language}</p>
+        <p className='profileDetailsText liveSkills'>({item.level})</p>
+            </> )
+          })
+        }</>}
+      
+        {hobbies && hobbies.length>0 && <>     
+          <p className='profileDetails otherProfileDetails'>Hobbies</p>
+        <p className='profileDetailsText liveSkills'> {hobbies}</p>
+          </>}
+
       </div>
 
     </div>
-    <hr></hr>
+    {/* <hr></hr> */}
   </View>  
 </Page>
 

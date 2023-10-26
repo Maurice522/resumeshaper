@@ -100,11 +100,11 @@ font-weight: 500;
     background-color: white;
     /* height: 84vh; *********************************************************** */
     width: 57%;
+    min-height: 84vh;
     margin: auto;
     margin-top: 2%;
     margin-bottom: 5%;
     padding: 2%;
-
 
 }
 .rightHeadDiv{

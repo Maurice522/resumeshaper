@@ -288,6 +288,7 @@ export default function CreateLive() {
         setPersonalData((prevData) => {
             const updatedEmploymentHistory = [...prevData.employmentHistory];
             updatedEmploymentHistory.splice(index, 1);
+            console.log(updatedEmploymentHistory)
             return {
                 ...prevData,
                 employmentHistory: updatedEmploymentHistory,
@@ -336,15 +337,16 @@ export default function CreateLive() {
                 reader.onload = (e) => {
                     setUploadedPhotoDataURL()
                     const uploadedPhotoDataURL = e.target.result;
+                    console.log("local1",uploadedPhotoDataURL)
                 };
                 const photoFileLink = await uploadMedia(photoFile, "profilePhoto");
-                console.log(photoFileLink)
+                console.log("local2",photoFileLink)
                 setPersonalData({
                     ...personalData,
                     uploadedPhotoURL: photoFileLink,
                 })
-                await updateUserPhotoInDatabase(user.email, photoFileLink)
-                dispatch(updatePhoto(photoFileLink))
+                // await updateUserPhotoInDatabase(user.email, photoFileLink)
+                // dispatch(updatePhoto(photoFileLink))
                 reader.readAsDataURL(photoFile);
                 console.log("my phtoo ", photoFileLink)
                 setPhotoLoader(false);
@@ -849,10 +851,10 @@ export default function CreateLive() {
                             </div>
                         </div>
                     </div>
-                    <button onClick={() => handleDownload()} className="downloadPdfBtn zoom"><FileEarmarkArrowDownFill className="downloadPDFIcon" size={26}/>Download PDF</button>
+                    <button onClick={() => handleDownload()} className="downloadPdfBtn zoom" disabled={photoLoader}><FileEarmarkArrowDownFill className="downloadPDFIcon" size={26}/>Download PDF</button>
                     <div className=' col-md- 6 col-sm-6 createRightDiv'>
                         <div className='pdfDisplayDiv' >
-                            <MyPdfViewer personaldata={personalData} live={true} />
+                            <MyPdfViewer personalData={personalData} live={true} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={selectedOptions} />
                         </div>
                     </div>
                 </div>

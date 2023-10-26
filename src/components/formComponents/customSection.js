@@ -237,7 +237,7 @@ export default function CustomSection({ courses, setCourses, activities, setActi
                             </div>
 
                             <div className="col-md-6">
-                                <label className="detailsInfoLabel customSecdetailsInfoLabel">Function:</label>
+                                <label className="detailsInfoLabel customSecdetailsInfoLabel">City:</label>
                                 <input
                                     type="text"
                                     className='detailsInfoInput'
