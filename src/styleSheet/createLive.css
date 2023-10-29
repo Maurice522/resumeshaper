@@ -1,49 +1,74 @@
-.mainCreateLiveDiv{
+.createLiveNav {
+    position: fixed;
     width: 100%;
+    top: 0%;
 }
-.createLeftDiv{
-    /* background-color: red;   */
+
+.createLiveSignOut {
+    top: 18%;
+    right: 3%;
+}
+
+.createLeftDiv {
     width: 50%;
     display: inline-block;
 }
-.createLeftFormDiv{
+.rightDivCreateLive{
+/* background-color: #346571; */
+  background-image: url("../images/bg.png");
+}
+.createLeftFormDiv {
     padding: 4%;
     padding-top: 7%;
     padding-left: 8%;
 }
-.createRightDiv{
-    background-color: aquamarine;
+
+.createRightDiv {
+    /* background-color: aquamarine; */
     padding: 0%;
     padding-top: 0%;
-    /* position: fixed; ********************************/
-    right: 0;
-    top: 0;
     z-index: -1;
+    right: 0%;
+    flex: 1;
 }
-.downloadPdfBtn
-{
-position: absolute;
-right: 13%;
-width: 13%;
-top: 3.6%;
-background-color: #ecf8e5;
-border: none;
-color: #346571;
-color: green;
-color: #5ec57e;
-font-weight: 500;
+
+.downloadPdfBtn {
+    position: absolute;
+    z-index: 20;
+    background-color: #ecf8e5;
+    right: 15%;
+    border: none;
+    color: #346571;
+    color: green;
+    color: #5ec57e;
+    font-weight: 550;
 }
-.downloadPDFIcon{
+
+.downloadPDFIcon {
     padding-bottom: 3%;
 }
-.createFormSection{
+
+.createFormSection {
     margin-bottom: 4%;
 }
-.createUplouploadPictureDivLabel{
+
+.createUplouploadPictureDivLabel {
     top: 1%;
     left: 33%;
 }
-.uploadPictureInput {
+
+/* .uploadPictureInput {
+   
+} */
+
+.createUploadedPicture {
+    left: 5%;
+    bottom: 8%;
+}
+
+
+.createUploadPictureInput {
+    bottom: -5%;
     background-color: none !important;
     width: 60% !important;
     padding-left: 5px;
@@ -52,22 +77,16 @@ font-weight: 500;
     /* top: 42%; */
     bottom: -16%;
     /* right: 8%; */
-    left: 33%;
+    left: 33% !important;
     font-size: 14px;
-}
-.createUploadedPicture{
-    left: 5%;
-    bottom: 8%;
+
 }
 
-
-.createUploadPictureInput{
-    bottom: -5%;
-}
-.createUplouploadPhotoDivIcon{
+.createUplouploadPhotoDivIcon {
     left: 4%;
 }
-.createUplouploadPhotoDivGif{
+
+.createUplouploadPhotoDivGif {
     /* background-color: red; */
     position: relative;
     align-items: center;
@@ -77,12 +96,14 @@ font-weight: 500;
     left: 1%;
 
 }
-.createLiveSaveProfileBtn{
+
+.createLiveSaveProfileBtn {
     width: 100%;
     background-color: #5ec57e;
     color: white;
 }
-.createLiveSaveProfileBtn:hover{
+
+.createLiveSaveProfileBtn:hover {
     width: 100%;
     background-color: #c2fbd7;
     border-radius: 25px;
@@ -90,31 +111,42 @@ font-weight: 500;
     box-shadow: rgba(44, 187, 99, .35) 0 -25px 18px -14px inset, rgba(44, 187, 99, .25) 0 1px 2px, rgba(44, 187, 99, .25) 0 2px 4px, rgba(44, 187, 99, .25) 0 4px 8px, rgba(44, 187, 99, .25) 0 8px 16px, rgba(44, 187, 99, .25) 0 16px 32px;
     color: green;
 }
-.createSaveProfileDiv{
+
+.createSaveProfileDiv {
     position: relative;
     align-items: center;
     text-align: center;
     margin-bottom: 8%;
-  }
-.pdfDisplayDiv{
+}
+
+.pdfDisplayDiv {
     background-color: white;
-    /* height: 84vh; *********************************************************** */
     width: 57%;
     min-height: 84vh;
     margin: auto;
     margin-top: 2%;
     margin-bottom: 5%;
     padding: 2%;
-
+    overflow: auto;
+    max-height: 84vh;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 5px;
 }
-.rightHeadDiv{
+
+.mainCreateLiveDiv1 {
+    display: flex;
+    flex-direction: row;
+}
+
+.rightHeadDiv {
     position: relative;
     top: 0;
     background-color: bisque;
     width: 100%;
     height: 65px;
 }
-.imageDiv{
+
+.imageDiv {
     display: inline-block;
     /* background-color: aqua; */
     margin: 0;
@@ -123,12 +155,14 @@ font-weight: 500;
     position: relative;
     height: 40px;
 }
-.displayImage{
+
+.displayImage {
     width: 45px;
     position: absolute;
     top: 5%;
 }
-.nameDiv{
+
+.nameDiv {
     margin: 0;
     padding: 0;
     display: inline-block;
@@ -136,22 +170,25 @@ font-weight: 500;
     /* background-color: #5ec57e; */
     margin-top: 1%;
 }
-.resumeName{
+
+.resumeName {
     margin: 0;
     padding: 0;
-margin-left: 3%;
-font-size: 14px;
-padding-top: 3%;
+    margin-left: 3%;
+    font-size: 14px;
+    padding-top: 3%;
 
 
 }
-.resumeTtile{
+
+.resumeTtile {
     font-size: 8px;
     margin: 0;
     padding: 0;
     margin-left: 3%;
 }
-.liveProfileDiv{
+
+.liveProfileDiv {
     /* background-color: bisque; */
     font-size: 10px;
     width: 95%;
@@ -159,116 +196,138 @@ padding-top: 3%;
     margin-top: 4%;
     padding: 0;
 }
-.liveProfileDivLeft{
+
+.liveProfileDivLeft {
     padding: 0;
 }
-.liveProfileDivRight{
+
+.liveProfileDivRight {
     padding: 0;
+    text-align: justify;
+    text-align: left !important;
+
 }
-.profileIcon{
+
+.profileIcon {
     position: absolute;
     bottom: 23%;
     left: 0;
 }
-.profileName{
- padding: 0;
- margin: 0;
- padding-left: 4%;
- position: relative;
- font-weight: 520;
- color:  rgb(30, 37, 50);
- color:  rgb(22, 89, 143);
 
- /* font-family: 'Poppins', sans-serif;
+.profileName {
+    padding: 0;
+    margin: 0;
+    padding-left: 4%;
+    position: relative;
+    font-weight: 520;
+    color: rgb(30, 37, 50);
+    color: rgb(22, 89, 143);
+
+    /* font-family: 'Poppins', sans-serif;
 font-family: 'Open Sans', sans-serif; */
 }
-.profileText{
+
+.profileText {
     font-size: 7px;
     text-align: justify;
     padding-left: 5.6%;
-    color:rgb(62, 63, 78); ;
+    color: rgb(62, 63, 78);
+    ;
     /* font-family: 'Open Sans', sans-serif;
 font-family: 'Poppins', sans-serif;
 font-family: 'Roboto', sans-serif;  */
-/* font-family: 'Open Sans', sans-serif;
+    /* font-family: 'Open Sans', sans-serif;
 font-family: 'Poppins', sans-serif;
 font-family: 'Roboto', sans-serif; */
 }
-.employmentHistName{
+
+.employmentHistName {
     margin-top: -3%;
 }
-.profileEmploymentName{
+
+.profileEmploymentName {
     font-size: 7px;
     font-weight: 500;
     padding: 0;
     margin: 0;
     padding-left: 5.6%;
     margin-top: 1.8%;
- color:  rgb(30, 37, 50);
+    color: rgb(30, 37, 50);
 }
-.employmentTime{
+
+.employmentTime {
     font-size: 6px;
     padding-left: 5.6%;
     padding-bottom: 0;
     margin-bottom: 0;
 }
-.employmetnProfileText{
+
+.employmetnProfileText {
     padding-left: 5.6%;
     margin-top: 2%;
 }
-.liveProfileDivRight{
-padding-left: 20px;
-padding-top: 0.5%;
+
+.liveProfileDivRight {
+    padding-left: 20px;
+    padding-top: 0.5%;
 }
 
-.profileDetails{
+.profileDetails {
     font-size: 8px;
     font-weight: 500;
     margin-bottom: 1.6%;
 
 }
-.profileDetailsText{
+
+.profileDetailsText {
     font-size: 7px;
     text-align: justify;
     padding: 0;
     margin: 0;
     padding-top: 1%;
 }
-.profileDetailSubHeading{
+
+.profileDetailSubHeading {
     margin-top: 7%;
 }
-.otherProfileDetails{
+
+.otherProfileDetails {
     margin-top: 6%;
     margin-bottom: 0;
 }
-.liveSkills{
+
+.liveSkills {
     font-weight: 400;
     font-size: 8px;
 }
-.emailProfileDetailsText{
-    color:  rgb(26, 145, 240);
+
+.emailProfileDetailsText {
+    color: rgb(26, 145, 240);
     font-weight: 500;
 }
-.DOBProfileDetailsText{
-    color:rgb(130, 139, 162);
+
+.DOBProfileDetailsText {
+    color: rgb(130, 139, 162);
     font-weight: 600;
     font-size: 7px;
 }
 
 
 /* **************************Template 2 ****************************************** */
-.outerTempDiv{
+.outerTempDiv {
     margin-top: -3%;
     padding-left: 3%;
     margin-bottom: 8%;
 }
-.temp2RightDiv{
+
+.temp2RightDiv {
     background-color: #5ec57e;
     height: 100%;
     color: white;
 
 }
-.temp2ImageDiv{
+
+.temp2ImageDiv {
     display: inline-block;
     /* background-color: aqua; */
     margin: 0;
@@ -277,13 +336,15 @@ padding-top: 0.5%;
     position: relative;
     height: 40px;
 }
-.temp2DisplayImage{
+
+.temp2DisplayImage {
     width: 50px;
     position: absolute;
     top: 4%;
     border-radius: 100%;
 }
-.temp2NameDiv{
+
+.temp2NameDiv {
     margin: 0;
     padding: 0;
     display: inline-block;
@@ -291,24 +352,27 @@ padding-top: 0.5%;
     /* background-color: #5ec57e; */
     margin-top: 1%;
 }
-.temp2ResumeName{
+
+.temp2ResumeName {
     margin: 0;
     padding: 0;
-margin-left: 3%;
-font-size: 14px;
-padding-top: 3%;
-padding-left: 2%;
+    margin-left: 3%;
+    font-size: 14px;
+    padding-top: 3%;
+    padding-left: 2%;
 
 }
-.temp2ResumeTtile{
+
+.temp2ResumeTtile {
     font-size: 8px;
     margin: 0;
     padding: 0;
     margin-left: 3%;
-padding-left: 2%;
+    padding-left: 2%;
 
 }
-.temp2LiveProfileDiv{
+
+.temp2LiveProfileDiv {
     /* background-color: bisque; */
     font-size: 10px;
     width: 95%;
@@ -316,107 +380,168 @@ padding-left: 2%;
     margin-top: 4%;
     padding: 0;
 }
-.temp2LiveProfileDivLeft{
+
+.temp2LiveProfileDivLeft {
     padding: 0;
 }
-.temp2LiveProfileDivRight{
+
+.temp2LiveProfileDivRight {
     padding: 0;
 }
-.temp2ProfileIcon{
+
+.temp2ProfileIcon {
     position: absolute;
     bottom: 23%;
     left: 0;
 }
-.temp2ProfileName{
- padding: 0;
- margin: 0;
- padding-left: 4%;
- position: relative;
- font-weight: 520;
- color:  rgb(30, 37, 50);
- color:  rgb(22, 89, 143);
 
- /* font-family: 'Poppins', sans-serif;
+.temp2ProfileName {
+    padding: 0;
+    margin: 0;
+    padding-left: 4%;
+    position: relative;
+    font-weight: 520;
+    color: rgb(30, 37, 50);
+    color: rgb(22, 89, 143);
+
+    /* font-family: 'Poppins', sans-serif;
 font-family: 'Open Sans', sans-serif; */
 }
-.temp2ProfileText{
+
+.temp2ProfileText {
     font-size: 7px;
     text-align: justify;
     padding-left: 5.6%;
-    color:rgb(62, 63, 78); ;
+    color: rgb(62, 63, 78);
+    ;
     /* font-family: 'Open Sans', sans-serif;
 font-family: 'Poppins', sans-serif;
 font-family: 'Roboto', sans-serif;  */
-/* font-family: 'Open Sans', sans-serif;
+    /* font-family: 'Open Sans', sans-serif;
 font-family: 'Poppins', sans-serif;
 font-family: 'Roboto', sans-serif; */
 }
-.temp2EmploymentHistName{
+
+.temp2EmploymentHistName {
     margin-top: -3%;
 }
-.temp2ProfileEmploymentName{
+
+.temp2ProfileEmploymentName {
     font-size: 7px;
     font-weight: 500;
     padding: 0;
     margin: 0;
     padding-left: 5.6%;
     margin-top: 1.8%;
- color:  rgb(30, 37, 50);
+    color: rgb(30, 37, 50);
 }
-.temp2EmploymentTime{
+
+.temp2EmploymentTime {
     font-size: 6px;
     padding-left: 5.6%;
     padding-bottom: 0;
     margin-bottom: 0;
 }
-.temp2EmploymetnProfileText{
+
+.temp2EmploymetnProfileText {
     padding-left: 5.6%;
     margin-top: 2%;
 }
-.temp2LiveProfileDivRight{
-padding-left: 20px;
-padding-top: 0.5%;
+
+.temp2LiveProfileDivRight {
+    padding-left: 20px;
+    padding-top: 0.5%;
 }
 
-.temp2ProfileDetails{
+.temp2ProfileDetails {
     font-size: 8px;
     font-weight: 500;
     margin-bottom: 1.6%;
 
 }
-.temp2ProfileDetailsText{
+
+.temp2ProfileDetailsText {
     font-size: 7px;
     text-align: justify;
     padding: 0;
     margin: 0;
     padding-top: 1%;
 }
-.temp2ProfileDetailSubHeading{
+
+.temp2ProfileDetailSubHeading {
     margin-top: 7%;
 }
-.temp2OtherProfileDetails{
+
+.temp2OtherProfileDetails {
     margin-top: 6%;
     margin-bottom: 0;
 }
-.temp2LiveSkills{
+
+.temp2LiveSkills {
     font-weight: 400;
     font-size: 8px;
 }
-.temp2EmailProfileDetailsText{
-    color:  rgb(26, 145, 240);
+
+.temp2EmailProfileDetailsText {
+    color: rgb(26, 145, 240);
     font-weight: 500;
 }
-.temp2DOBProfileDetailsText{
-    color:rgb(130, 139, 162);
+
+.temp2DOBProfileDetailsText {
+    color: rgb(130, 139, 162);
     font-weight: 600;
     font-size: 7px;
 }
 
-.downloadPdfMainDiv{
-    background-color: #346571;
+.downloadPdfMainDiv {
+    /* background-color: #346571; */
+  background-image: url("../images/bg.png");
+  /* background-image: url('https://media1.giphy.com/media/xTiTniuHdUjpOlNo1q/200w.webp?cid=ecf05e47oyp7v59c7cncnujecgmxgtdygfh3dyenydkegtuz&ep=v1_gifs_search&rid=200w.webp&ct=g'); */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
     width: 100%;
     align-items: center;
     text-align: center;
     position: absolute;
     top: 0%;
 }
+.realBdfGoBackBtn{
+    width: 120px;
+    border: none;
+    color: #346571;
+    color: green;
+    color: #5ec57e;
+    font-weight: 550; 
+    width: 120px;
+    border-radius: 5px;
+    position: absolute;
+    right: 3%;
+    top: 2.5%;
+    background-color: #c2fbd7;
+    border-radius: 25px;
+    box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset, rgba(44, 187, 99, .15) 0 1px 2px, rgba(44, 187, 99, .15) 0 2px 4px, rgba(44, 187, 99, .15) 0 4px 8px, rgba(44, 187, 99, .15) 0 8px 16px, rgba(44, 187, 99, .15) 0 16px 32px;
+    box-shadow: rgba(44, 187, 99, .35) 0 -25px 18px -14px inset, rgba(44, 187, 99, .25) 0 1px 2px, rgba(44, 187, 99, .25) 0 2px 4px, rgba(44, 187, 99, .25) 0 4px 8px, rgba(44, 187, 99, .25) 0 8px 16px, rgba(44, 187, 99, .25) 0 16px 32px;
+    color: green;
+    cursor: pointer;
+    display: inline-block;
+    font-family: CerebriSans-Regular, -apple-system, system-ui, Roboto, sans-serif;
+    padding: 7px 20px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 250ms;
+    border: 0;
+    font-size: 14px;
+    font-weight: 600;
+    user-select: none;
+    -webkit-user-select: none;
+    z-index: 15;
+}
+.realBdfGoBackBtn:hover {
+    background-color: #5ec57e   ;
+    color: #ecf8e5;
+    box-shadow: rgba(44, 187, 99, .35) 0 -25px 18px -14px inset, rgba(44, 187, 99, .25) 0 1px 2px, rgba(44, 187, 99, .25) 0 2px 4px, rgba(44, 187, 99, .25) 0 4px 8px, rgba(44, 187, 99, .25) 0 8px 16px, rgba(44, 187, 99, .25) 0 16px 32px;
+  }
+  .languageLevel{
+    font-size: 7px !important;
+  }

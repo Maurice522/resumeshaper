@@ -353,7 +353,7 @@ export default function Form() {
             <label className='detailsInfoLabel uplouploadPictureDivLabel'>
               Upload Photo
             </label>
-            <input type="file" className='detailsInfoInput uploadPictureInput' name="photo" accept="image/*" onChange={handleChange} />
+            <input type="file" className='detailsInfoInput uploadPictureInput formUploadPictureInput' name="photo" accept="image/*" onChange={handleChange} />
 
             {(personalData.uploadedPhotoURL == '' && !photoLoader) && <div className='dottedDiv' ><PersonSquare size={90} className="uplouploadPhotoDivIcon" /></div>}
             {!photoLoader && personalData.uploadedPhotoURL && (

@@ -7,6 +7,7 @@ import { Authdetails } from './pages/authdetails';
 import Landing from './pages/landing';
 import Dashboard from './pages/dashboard';
 import CreateLive from './pages/createLive';
+import Test from './pages/test';
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
   {
     path: "/auth",
     element: <Authdetails/>,
+  },
+  {
+    path: "/test",
+    element: <Test/>,
   },
 ]);
 

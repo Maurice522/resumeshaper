@@ -1,6 +1,6 @@
 .formSection {
   color: #171717;
-  padding-bottom: 0;
+  padding-bottom: 15px;
   font-size: 500;
 }
 
@@ -11,8 +11,8 @@
 
 .detailsInfoLabel {
   font-size: 16px;
-  margin-top: 5%;
-  margin-bottom: 3%;
+  margin-top: 2%;
+  margin-bottom: 1%;
   color: rgb(130, 139, 162);
   font-size: 15px;
   line-height: 18px;
@@ -49,9 +49,9 @@
   padding-right: 2px;
   position: absolute;
   /* top: 42%; */
-  bottom:-16%;
+  bottom: -21%;
   /* right: 8%; */
-  left: 2%;
+  left: 2% !important;
   font-size: 14px;
 }
 
@@ -95,7 +95,7 @@
   border: 3px dotted #5ec57e; 
   z-index: 1;
   right: 4%;
-  top: -55%;
+  top: -87%;
   height: 130px;
   width: 44%;
 
@@ -112,7 +112,7 @@
   margin-bottom: 3%;
 }
 .shiftedSec1additionalDetails{
-  margin-top: 4.8%;
+  margin-top: 3.2%;
 }
 
 .detailsTextarea {
@@ -120,7 +120,7 @@
   margin-top: 2%;
   font-size: 14px;
   padding: 1%;
-  margin-bottom: 5%;
+  margin-bottom: 3%;
   width: 100%;
 }
 
@@ -133,7 +133,8 @@
 .personalSubSubHeading {
   color: rgb(26, 145, 240);
   font-size: 18px;
-  margin-bottom: 3%;
+  margin-bottom: 1.5%;
+  margin-top: 2%;
 }
 
 .employmentHistoryDiv {
@@ -146,8 +147,11 @@
   color: red;
   /* position: absolute; */
   /* bottom: -18px; */
-  top:0;
-  right: 3%;
+  /* top:5%; */
+  /* right: 3%; */
+  margin-top: 0.5%;
+  margin-bottom: 4%;
+  margin-left: 95%;
 }
 
 .myAccordian {

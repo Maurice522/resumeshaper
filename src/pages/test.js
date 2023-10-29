@@ -16,9 +16,6 @@ import { PDFViewer } from '@react-pdf/renderer';
 import PdfDisplay from '../components/pdfDisplay';
 import PdfDisplayBE from '../components/pdfDisplayBE';
 import Test from './test';
-import '../styleSheet/Nav.css'
-import img3 from '../images/26.png'
-
 
 // import skills from '../components/formComponents/skills';    
 
@@ -86,12 +83,13 @@ export default function CreateLive() {
                 description: '',
             },
         ],
-        websitesLinks: [
+        websitesAndLinks: [
             {
                 name: '',
                 url: '',
             },
         ],
+
     });
 
     const user = useSelector(state => state.user.user);
@@ -196,11 +194,11 @@ export default function CreateLive() {
         option.toLowerCase().includes(searchText.toLowerCase())
     );
 
-    const addWebsiteLink = () => {
+    const addWebsiteOrLink = () => {
         setPersonalData((prevData) => ({
             ...prevData,
-            websitesLinks: [
-                ...prevData.websitesLinks,
+            websitesAndLinks: [
+                ...prevData.websitesAndLinks,
                 {
                     name: '',
                     url: '',
@@ -209,30 +207,27 @@ export default function CreateLive() {
         }));
     };
 
-    const removeWebsiteLink = (index) => {
+    const removeWebsiteOrLink = (index) => {
         setPersonalData((prevData) => {
-            const updatedWebsitesLinks = [...prevData.websitesLinks];
-            updatedWebsitesLinks.splice(index, 1);
+            const updatedWebsitesAndLinks = [...prevData.websitesAndLinks];
+            updatedWebsitesAndLinks.splice(index, 1);
             return {
                 ...prevData,
-                websitesLinks: updatedWebsitesLinks,
+                websitesAndLinks: updatedWebsitesAndLinks,
             };
         });
     };
 
-    const updateWebsiteLinkField = (index, field, value) => {
+    const updateWebsiteOrLinkField = (index, field, value) => {
         setPersonalData((prevData) => {
-            const updatedWebsitesLinks = [...prevData.websitesLinks];
-            updatedWebsitesLinks[index][field] = value;
+            const updatedWebsitesAndLinks = [...prevData.websitesAndLinks];
+            updatedWebsitesAndLinks[index][field] = value;
             return {
                 ...prevData,
-                websitesLinks: updatedWebsitesLinks,
+                websitesAndLinks: updatedWebsitesAndLinks,
             };
         });
     };
-
-
-
 
     const addEducationHistory = () => {
         setPersonalData((prevData) => ({
@@ -364,30 +359,12 @@ export default function CreateLive() {
             });
         }
     };
-
-    const redirectHome = () => {
-        navigate("/")
-    };
-
     return (
         <>
-            {/* <Nav /> */}
-            {downloadPdf ? <PdfDisplayBE personalData={personalData} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={selectedOptions} downloadPdf={downloadPdf} setDownloadPdf={setDownloadPdf} /> : <>
-                <div>
-                    <nav class="navbar bg-body-tertiary myNav createLiveNav">
-                        <div class="container-fluid">
-                            <a class="navbar-brand mb-0 h1 navText" href="#">
-                                &nbsp; &nbsp;
-                                <img src={img3} class="logoImg" />
-                                &nbsp; &nbsp;
-                                <strong onClick={redirectHome}>RESUME SHAPER</strong>
-                            </a>
-                        </div>
-                        <button onClick={() => handleDownload()} className=" downloadPdfBtn zoom" disabled={photoLoader}><FileEarmarkArrowDownFill className="downloadPDFIcon" size={26} />Download PDF</button>
-                        <button onClick={() => handler()} className=" btn btn-success signoutBtn createLiveSignOut"> <Power color="#35b276" size={22} /> &nbsp;Signout</button>
-                    </nav>
-                </div>
-                <div style={{ display: "flex", flexDirection: "row", width: "50%", left: "0%", marginTop: "5%" }}>
+            <Nav />
+            {downloadPdf ? <PdfDisplayBE personalData={personalData} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={selectedOptions} /> : <>
+                <button onClick={() => handler()} className=" btn btn-success signoutBtn"> <Power color="#35b276" size={22} /> &nbsp;Signout</button>
+                <div style={{ display: "flex", flexDirection: "row",width:"50%" ,left:"0%" }}>
                     <div style={{ flex: 1 }}>
                         <div className='createLeftFormDiv'>
                             <h3 className='formTitle'>Personalize your Profile</h3>
@@ -771,7 +748,8 @@ export default function CreateLive() {
                                             </div>
                                         </div>
                                     </div>
-                                    {/* ************************************************************** */}
+
+
 
                                     <h5 className='formSection'><Link45deg color="#35b276" size={26} /> &nbsp;Websites and Links</h5>
                                     <p className='detailsSubText'>Elevate your resume with real-world examples of your work. You can include Personal-websites, portfolios,and project repositories to demonstrate your skills and experience.  </p>
@@ -780,26 +758,24 @@ export default function CreateLive() {
                                         <div class="accordion-item">
                                             <h2 class="accordion-header">
                                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                                    Add Website or Link
+                                                    Add Your Links
                                                 </button>
                                             </h2>
                                             <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample4">
-                                                <div class="accordion-body">
-
-                                                    {personalData.websitesLinks.map((websiteLink, index) => (
-                                                        <div key={index} className="websitesLinksDiv">
-                                                            <h5 className='personalSubSubHeading'>Link {index + 1} :</h5>
+                                                <div class="accordion-body ">
+                                                    {personalData.websitesAndLinks.map((websiteOrLink, index) => (
+                                                        <div className="webisteDiv">
+                                                            <h5 className='personalSubSubHeading'>Site {index + 1} :</h5>
                                                             <div className='row'>
+
                                                                 <div className="col-md-6">
                                                                     <label className='detailsInfoLabel'>
                                                                         Name:
                                                                     </label>
-                                                                    <br />
                                                                     <input
-                                                                        className='detailsInfoInput'
-                                                                        type="text"
-                                                                        value={websiteLink.name}
-                                                                        onChange={(e) => updateWebsiteLinkField(index, 'name', e.target.value)}
+                                                                        className='detailsInfoInput' type="text"
+                                                                        value={websiteOrLink.name}
+                                                                        onChange={(e) => updateWebsiteOrLinkField(index, 'name', e.target.value)}
                                                                     />
                                                                 </div>
 
@@ -807,33 +783,22 @@ export default function CreateLive() {
                                                                     <label className='detailsInfoLabel'>
                                                                         URL:
                                                                     </label>
-                                                                    <br />
                                                                     <input
-                                                                        className='detailsInfoInput'
-                                                                        type="text"
-                                                                        value={websiteLink.url}
-                                                                        onChange={(e) => updateWebsiteLinkField(index, 'url', e.target.value)}
+                                                                        className='detailsInfoInput' type="url"
+                                                                        value={websiteOrLink.url}
+                                                                        onChange={(e) => updateWebsiteOrLinkField(index, 'url', e.target.value)}
                                                                     />
                                                                 </div>
                                                             </div>
-
-                                                            <button
-                                                                type="button"
-                                                                onClick={() => removeWebsiteLink(index)}
-                                                                className="DeleteEmp"
-                                                            >
+                                                            <button type="button" onClick={() => removeWebsiteOrLink(index)} className="DeleteEmp">
                                                                 <Trash3Fill size={20} />
                                                             </button>
                                                         </div>
                                                     ))}
-
-                                                    <button
-                                                        type="button"
-                                                        onClick={addWebsiteLink}
-                                                        className="Sec1additionalDetails"
-                                                    >
-                                                        <PlusLg size={20} /> Add One More Website/Link
+                                                    <button type="button" onClick={addWebsiteOrLink} className="Sec1additionalDetails">
+                                                        <PlusLg size={20} /> Add One More Link
                                                     </button>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -887,25 +852,24 @@ export default function CreateLive() {
                         </div>
 
                     </div>
-                    <div className='rightDivCreateLive' style={{ flex: 1, position: "fixed", width: "50%", right: "0%", top: "0%", paddingTop: "5%" }}>
+                     <button onClick={() => handleDownload()} className="downloadPdfBtn zoom" disabled={photoLoader}><FileEarmarkArrowDownFill className="downloadPDFIcon" size={26}/>Download PDF</button>
+                    <div style={{ flex: 1, position:"fixed",width:"50%" ,right:"0%",top:"0%",paddingTop:"5%"}}>
                         <div className='  createRightDiv'>
                             <div className='pdfDisplayDiv' >
                                 <MyPdfViewer personalData={personalData} live={true} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={selectedOptions} />
                             </div>
                         </div>
                     </div>
-                    {/* <button onClick={() => handleDownload()} className="downloadPdfBtn zoom" disabled={photoLoader}><FileEarmarkArrowDownFill className="downloadPDFIcon" size={26} style={{zIndex:18}}/>Download PDF</button> */}
                 </div>
             </>}
         </>
     )
 }
-
 // Helper function to generate a large list of options for testing
 function generateOptions() {
     const options = [];
     for (let i = 1; i <= 200; i++) {
-        options.push(`Skill ${i}`);
+        options.push(`Option ${i}`);
     }
     return options;
 }

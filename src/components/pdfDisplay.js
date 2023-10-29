@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
 
 export default function MyPdfViewer({ personalData,live,courses, activities,internships,hobbies,languages,references ,customSections ,skills }) {
   return (
+    <div className='scrollableDiv'>
     <Document>
 <Page size="A4" style={styles.page}>
    <View>
@@ -182,13 +183,11 @@ export default function MyPdfViewer({ personalData,live,courses, activities,inte
         <p className='profileDetailsText'>{personalData.drivingLicense}</p>
           </>}
 
-        {personalData.websitesAndLinks && personalData.websitesAndLinks.length >0 && personalData.websitesAndLinks[0].name!=='' && <>
+        {personalData.websitesLinks && personalData.websitesLinks.length >0  && <>
         <p className='profileDetails otherProfileDetails'>Links</p>
-          { personalData.websitesAndLinks.map((item,index)=>{
+          { personalData.websitesLinks.map((item,index)=>{
           return (<>
-            {/* <p className='profileDetailsText emailProfileDetailsText'>{item.name}</p> */}
             <p className='profileDetailsText emailProfileDetailsText'>{item.url}</p>
-          <Text style={[styles.rightOtherHeading,styles.colorThisBlack]}>Links</Text>
           </>)
         })
          }
@@ -208,7 +207,7 @@ export default function MyPdfViewer({ personalData,live,courses, activities,inte
           {languages.map((item,index)=>{
             return(<>
         <p className='profileDetailsText liveSkills'>{item.language}</p>
-        <p className='profileDetailsText liveSkills'>({item.level})</p>
+        <p className='profileDetailsText liveSkills languageLevel'>({item.level})</p>
             </> )
           })
         }</>}
@@ -226,5 +225,6 @@ export default function MyPdfViewer({ personalData,live,courses, activities,inte
 </Page>
 
 </Document>
+</div>
   );
 }

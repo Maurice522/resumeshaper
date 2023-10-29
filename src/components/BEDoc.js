@@ -115,6 +115,10 @@ const styles = StyleSheet.create({
   },
   makeFontSmaller:{
     fontSize:10,
+  },
+  extraSideHeadingStyle:{
+    fontSize:18,
+    // marginTop:15
   }
 });
 
@@ -313,26 +317,26 @@ export default function BEDoc({ personalData,courses, activities,internships,hob
           <Text style={styles.rightParagraph}>{personalData.drivingLicense}</Text>
           </>}
 
-        {personalData.websitesAndLinks && personalData.websitesAndLinks.length >0 && personalData.websitesAndLinks[0].name!=='' && <>
+        {personalData.websitesLinks && personalData.websitesLinks.length >0 && personalData.websitesLinks[0].name!=='' && <>
           <Text style={[styles.rightOtherHeading,styles.colorThisBlack]}>Links</Text>
-          { personalData.websitesAndLinks.map((item,index)=>{
+          { personalData.websitesLinks.map((item,index)=>{
           return (<>
           {/* <Text style={styles.rightParagraph}>{item.name}</Text> */}
-          <Text style={styles.rightParagraph}>{item.url}</Text>
+          <Text style={[styles.rightParagraph,styles.colorThisBlue]}>{item.url}</Text>
           </>)
         })
          }
 </>}
 
 {skills && skills.length>0 && <>
-          <Text style={[styles.rightOtherHeading,styles.colorThisBlack]}>Skills</Text>
+          <Text style={[styles.rightOtherHeading,styles.colorThisBlack,styles.extraSideHeadingStyle]}>Skills</Text>
           {skills.map((item,index)=>{
-          return (<Text style={[styles.rightParagraph,styles.colorThisBlue]}>{item}</Text>)
+          return (<Text style={[styles.rightParagraph]}>{item}</Text>)
           })
           }</>}
 
 {languages && languages.length>0 && <>
-          <Text style={[styles.rightOtherHeading,styles.colorThisBlack]}>Languages</Text>
+          <Text style={[styles.rightOtherHeading,styles.colorThisBlack,styles.extraSideHeadingStyle]}>Languages</Text>
           {languages.map((item,index)=>{
             return(<>
               <Text style={styles.rightParagraph}>{item.language}</Text>
@@ -342,7 +346,7 @@ export default function BEDoc({ personalData,courses, activities,internships,hob
         }</>}
       
         {hobbies && hobbies.length>0 && <>      
-          <Text style={[styles.rightOtherHeading,styles.colorThisBlack]}>Hobbies</Text>
+          <Text style={[styles.rightOtherHeading,styles.colorThisBlack,styles.extraSideHeadingStyle]}>Hobbies</Text>
           <Text style={styles.rightParagraph}>{hobbies}</Text>
           </>}
 

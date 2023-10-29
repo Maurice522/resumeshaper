@@ -25,6 +25,7 @@ body {
   font-weight: 600;
   user-select: none;
   -webkit-user-select: none;
+  z-index: 15;
 }
 
 .signoutBtn:hover {
