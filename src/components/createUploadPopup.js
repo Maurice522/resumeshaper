@@ -4,6 +4,7 @@ import img3 from '../images/28.png'
 import { updateUserInDatabase, uploadMedia } from '../fireabse';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateResume } from '../redux/slices/user';
+import json5 from 'json5';
 
 export default function CreateUploadPopup({ onClose}) {
 
@@ -36,7 +37,7 @@ export default function CreateUploadPopup({ onClose}) {
       const fileLink = await uploadMedia(file, "resume");
       await updateUserInDatabase(user.email, fileLink)
       dispatch(updateResume(fileLink))
-      const res = fetch('https://resumegeneratorbackend.onrender.com/extract-text', {
+      const res = await fetch('https://resumegeneratorbackend.onrender.com/extract-text', {
         method: 'POST',
         body: JSON.stringify({
         pdf_url:fileLink
@@ -50,6 +51,22 @@ export default function CreateUploadPopup({ onClose}) {
         console.log(responseJson)
         return responseJson;
       })
+      // const tempdata = res.extracted_text
+      // const jsonObject = json5.parse(tempdata)
+      // console.log(jsonObject)
+      // if (jsonObject && jsonObject.PROJECTS) {
+      //   const projects = jsonObject.PROJECTS;
+      //   console.log(projects);
+      // } else {
+      //   console.error("Unable to access the PROJECTS key in the JSON object.");
+      // }
+      // console.log(tempdata)
+      // console.log(tempdata.PROJECTS)
+
+      // // const {PROJECTS} = jsonObject;
+      // const unquoted = jsonObject.replace(/"([^"]+)":/g, '$1:');
+
+      // console.log(unquoted.PROJECTS)
 
       console.log(res)
 
