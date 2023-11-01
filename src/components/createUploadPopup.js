@@ -37,20 +37,23 @@ export default function CreateUploadPopup({ onClose}) {
       const fileLink = await uploadMedia(file, "resume");
       await updateUserInDatabase(user.email, fileLink)
       dispatch(updateResume(fileLink))
-      const res = await fetch('https://resumegeneratorbackend.onrender.com/extract-text', {
-        method: 'POST',
-        body: JSON.stringify({
-        pdf_url:fileLink
-        }),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8"
-        }
-      })
-      .then((response) => response.json())
-      .then((responseJson) => {
-        console.log(responseJson)
-        return responseJson;
-      })
+
+      // <---- SEND RESUME TO API TO PARSE ---->
+
+      // const res = await fetch('https://resumegeneratorbackend.onrender.com/extract-text', {
+      //   method: 'POST',
+      //   body: JSON.stringify({
+      //   pdf_url:fileLink
+      //   }),
+      //   headers: {
+      //     "Content-type": "application/json; charset=UTF-8"
+      //   }
+      // })
+      // .then((response) => response.json())
+      // .then((responseJson) => {
+      //   console.log(responseJson)
+      //   return responseJson;
+      // })
       // const tempdata = res.extracted_text
       // const jsonObject = json5.parse(tempdata)
       // console.log(jsonObject)
@@ -68,7 +71,10 @@ export default function CreateUploadPopup({ onClose}) {
 
       // console.log(unquoted.PROJECTS)
 
-      console.log(res)
+      // console.log(JSON.parse(res.extracted_text))
+      // console.log((JSON.parse(res.extracted_text)).PROJECTS)
+
+      // console.log(res)
 
       setLoading(false)
       
