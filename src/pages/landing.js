@@ -1,4 +1,4 @@
-import react, { useState } from 'react'
+import react, { useEffect, useState } from 'react'
 import Nav from '../components/nav'
 import '../styleSheet/Landing.css'
 import img1 from '../images/resume.png'
@@ -23,6 +23,9 @@ import ReactPlayer from 'react-player'
 import Footer from '../components/footer'
 import LoginPopup from './loginPopup'
 import { Check2Circle, BookmarkStarFill } from "react-bootstrap-icons";
+import { onAuthStateChanged } from 'firebase/auth'
+import { auth } from '../fireabse'
+import { useNavigate } from 'react-router-dom'
 
 
 export default function Landing() {
@@ -36,6 +39,15 @@ export default function Landing() {
     const handleSignup = () => {
         togglePopup();
     };
+    const navigate = useNavigate()
+    useEffect(()=>{
+       
+        const listen = onAuthStateChanged(auth, (user)=>{
+            if (user) {
+                navigate("/dashboard")
+            }
+        })
+    },[])
 
     return (
         <div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { signOut } from 'firebase/auth'
+import { onAuthStateChanged, signOut } from 'firebase/auth'
 import { auth } from '../fireabse'
 import { useDispatch, useSelector } from 'react-redux';
 import { signOutUser } from '../redux/slices/user';
@@ -17,6 +17,7 @@ import PdfDisplayBE from '../components/pdfDisplayBE';
 import Test from './test';
 import '../styleSheet/Nav.css'
 import img3 from '../images/26.png'
+
 
 
 // import skills from '../components/formComponents/skills';    
@@ -96,6 +97,17 @@ export default function CreateLive() {
     const user = useSelector(state => state.user.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    useEffect(()=>{
+       
+        const listen = onAuthStateChanged(auth, (user)=>{
+            if (user) {
+               console.log(user)
+            }else{
+                navigate("/")
+               
+            }
+        })
+    },[])
 
     const handleDownload = () => {
         console.log("berfore", downloadPdf)
@@ -342,7 +354,7 @@ export default function CreateLive() {
                 reader.onload = (e) => {
                     setUploadedPhotoDataURL()
                     const uploadedPhotoDataURL = e.target.result;
-                    console.log("local1", uploadedPhotoDataURL)
+                    // console.log("local1", uploadedPhotoDataURL)
                 };
                 const photoFileLink = await uploadMedia(photoFile, "profilePhoto");
                 console.log("local2", photoFileLink)

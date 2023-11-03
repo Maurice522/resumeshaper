@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { signOut } from 'firebase/auth'
+import { onAuthStateChanged, signOut } from 'firebase/auth'
 import { auth } from '../fireabse'
 import { useDispatch, useSelector } from 'react-redux';
 import { signOutUser } from '../redux/slices/user';
@@ -95,6 +95,17 @@ export default function CreateLive() {
     const user = useSelector(state => state.user.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    useEffect(()=>{
+       
+        const listen = onAuthStateChanged(auth, (user)=>{
+            if (user) {
+               console.log(user)
+            }else{
+                navigate("/")
+               
+            }
+        })
+    },[])
 
     const handleDownload = () => {
         console.log("berfore", downloadPdf)

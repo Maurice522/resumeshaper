@@ -1,12 +1,24 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {Check2Circle, PlusLg, Trash3Fill, ColumnsGap, Book, JournalRichtext, BagFill, GraphUpArrow, MegaphoneFill, Alipay, Bicycle, CheckSquare } from "react-bootstrap-icons";
 
 
 export default function CustomSection({ courses, setCourses, activities, setActivities, internships, setInternships, hobbies, setHobbies, languages, setLanguages, references, setReferences, customSections, setCustomSections ,liveForm}) {
 
+    const courseRef = useRef(null)
+    const activityRef = useRef(null)
+    const intershipRef = useRef(null)
+    const hobbyRef = useRef(null)
+    const referenceRef = useRef(null)
+    const languageRef = useRef(null)
+    const customRef = useRef(null)
+
     const addCourse = (e) => {
         e.preventDefault();
         setCourses([...courses, { course: '', institution: '', startDate: '', endDate: '', description: '' }]);
+        courseRef.current?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
     };
 
     const removeCourse = (index, e) => {
@@ -19,6 +31,10 @@ export default function CustomSection({ courses, setCourses, activities, setActi
     const addActivity = (e) => {
         e.preventDefault();
         setActivities([...activities, { function: '', employer: '', startDate: '', endDate: '', city: '', description: '' }]);
+        activityRef.current?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
     };
 
     const removeActivity = (index, e) => {
@@ -30,6 +46,10 @@ export default function CustomSection({ courses, setCourses, activities, setActi
 
     const addInternship = () => {
         setInternships([...internships, { jobTitle: '', employer: '', startDate: '', endDate: '', city: '', description: '' }]);
+        intershipRef.current?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
     };
 
     const removeInternship = (index) => {
@@ -40,16 +60,25 @@ export default function CustomSection({ courses, setCourses, activities, setActi
 
     const addHobby = () => {
         setHobbies([...hobbies, '']);
+        hobbyRef.current?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
     };
 
     const removeHobby = (index) => {
         const updatedHobbies = [...hobbies];
         updatedHobbies.splice(index, 1);
         setHobbies(updatedHobbies);
+        
     };
 
     const addLanguage = () => {
         setLanguages([...languages, { language: '', level: '' }]);
+        languageRef.current?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
     };
 
     const removeLanguage = (index) => {
@@ -60,6 +89,10 @@ export default function CustomSection({ courses, setCourses, activities, setActi
 
     const addReference = () => {
         setReferences([...references, { fullName: '', company: '', phone: '', referenceEmail: '' }]);
+        referenceRef.current?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
     };
 
     const removeReference = (index) => {
@@ -70,19 +103,24 @@ export default function CustomSection({ courses, setCourses, activities, setActi
 
     const addCustomSection = () => {
         setCustomSections([...customSections, { title: '', subTitle: '', startDate: '', endDate: '', description: '' }]);
+        // customRef.current?.scrollIntoView({
+        //     behavior: "smooth",
+        //     block: "start",
+        //   });
     };
 
     const removeCustomSection = (index) => {
         const updatedCustomSections = [...customSections];
         updatedCustomSections.splice(index, 1);
         setCustomSections(updatedCustomSections);
+        
     };
 
     return (
 
         //Add courses if any
-        <div className='customSecDiv '>
-            <div>
+        <div className='customSecDiv ' >
+            <div ref={courseRef}>
                 {courses.map((course, index) => (
                     <div key={index} className="employmentHistoryDiv">
                         <h5 className='personalSubSubHeading'><JournalRichtext color="#35b276" size={26} /> &nbsp;&nbsp;Course {index + 1} :</h5>
@@ -172,7 +210,7 @@ export default function CustomSection({ courses, setCourses, activities, setActi
 
 
             {/* Add extra curricular activities if any */}
-            <div>
+            <div ref={activityRef}>
                 {activities.map((activity, index) => (
                     <div key={index} className="employmentHistoryDiv">
                         <h5 className='personalSubSubHeading'><BagFill color="#35b276" size={24} /> &nbsp;&nbsp;Extra Curricular Activity {index + 1} :</h5>
@@ -277,7 +315,7 @@ export default function CustomSection({ courses, setCourses, activities, setActi
 
 
             {/* Add internships if any */}
-            <div>
+            <div ref={intershipRef}>
                 {internships.map((internship, index) => (
                     <div key={index} className="employmentHistoryDiv">
                         <h5 className='personalSubSubHeading'><GraphUpArrow color="#35b276" size={24} /> &nbsp;&nbsp;Internships {index + 1} :</h5>
@@ -379,7 +417,7 @@ export default function CustomSection({ courses, setCourses, activities, setActi
             </div>
 
             {/* Add hobbies if any */}
-            <div>
+            <div ref={hobbyRef}>
                 {hobbies.map((hobby, index) => (
                     <div key={index} className="employmentHistoryDiv">
                         <h5 className='personalSubSubHeading'><Bicycle color="#35b276" size={24} /> &nbsp;&nbsp;Hobbies</h5>
@@ -404,7 +442,7 @@ export default function CustomSection({ courses, setCourses, activities, setActi
             </div>
 
             {/* Add Languages if any */}
-            <div>
+            <div ref={languageRef}>
                 {languages.map((language, index) => (
                     <div key={index} className="employmentHistoryDiv">
                         <h5 className='personalSubSubHeading'><Alipay color="#35b276" size={24} /> &nbsp;&nbsp;Languages {index + 1} :</h5>
@@ -458,7 +496,7 @@ export default function CustomSection({ courses, setCourses, activities, setActi
             </div>
 
             {/* Add references if any */}
-            <div>
+            <div ref={referenceRef}>
                 {references.map((reference, index) => (
                     <div key={index} className="employmentHistoryDiv">
                         <h5 className='personalSubSubHeading'><MegaphoneFill color="#35b276" size={24} /> &nbsp;&nbsp;References {index + 1} :</h5>
@@ -529,7 +567,7 @@ export default function CustomSection({ courses, setCourses, activities, setActi
             </div>
 
             {/* Add custom details if any */}
-            <div>
+            <div ref={customRef}>
                 {customSections.map((section, index) => (
                     <div key={index} className="employmentHistoryDiv">
                         <h5 className='personalSubSubHeading'><CheckSquare color="#35b276" size={24} /> &nbsp;&nbsp;Custom Section {index + 1} :</h5>

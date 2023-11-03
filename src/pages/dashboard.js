@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Nav from '../components/nav';
 import { Power } from "react-bootstrap-icons";
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { signOut } from 'firebase/auth'
+import { onAuthStateChanged, signOut } from 'firebase/auth'
 import { auth } from '../fireabse'
 import { signOutUser } from '../redux/slices/user';
 import '../styleSheet/Dashboard.css'
@@ -11,9 +11,20 @@ import { Share, ThreeDots, Check2Circle, PencilSquare, FileEarmarkArrowDownFill,
 import img1 from '../images/resumeTemplate.png'
 
 export default function Dashboard() {
+    const navigate =useNavigate()
+    useEffect(()=>{
+       
+        const listen = onAuthStateChanged(auth, (user)=>{
+            if (user) {
+               console.log(user)
+            }else{
+                navigate("/")
+               
+            }
+        })
+    },[])
 
     const dispatch = useDispatch();
-    const navigate = useNavigate()
     const handler = (e) => {
         signOut(auth).then(() => {
             dispatch(signOutUser())

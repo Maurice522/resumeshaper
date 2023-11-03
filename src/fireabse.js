@@ -52,6 +52,8 @@ const auth = getAuth();
 const db = getFirestore(app);
 const storage = getStorage(app);
 
+export const isUserLoggedIn = auth.currentUser!=null?true:false;
+
 export { app, auth, db, analytics, storage };
 
 export const addUserInDatabase = async (user)=>{
