@@ -177,8 +177,6 @@
     margin-left: 3%;
     font-size: 14px;
     padding-top: 3%;
-
-
 }
 
 .resumeTtile {
@@ -311,188 +309,6 @@ font-family: 'Roboto', sans-serif; */
     font-weight: 600;
     font-size: 7px;
 }
-
-
-/* **************************Template 2 ****************************************** */
-.outerTempDiv {
-    margin-top: -3%;
-    padding-left: 3%;
-    margin-bottom: 8%;
-}
-
-.temp2RightDiv {
-    background-color: #5ec57e;
-    height: 100%;
-    color: white;
-
-}
-
-.temp2ImageDiv {
-    display: inline-block;
-    /* background-color: aqua; */
-    margin: 0;
-    padding: 0;
-    width: 15%;
-    position: relative;
-    height: 40px;
-}
-
-.temp2DisplayImage {
-    width: 50px;
-    position: absolute;
-    top: 4%;
-    border-radius: 100%;
-}
-
-.temp2NameDiv {
-    margin: 0;
-    padding: 0;
-    display: inline-block;
-    width: 70%;
-    /* background-color: #5ec57e; */
-    margin-top: 1%;
-}
-
-.temp2ResumeName {
-    margin: 0;
-    padding: 0;
-    margin-left: 3%;
-    font-size: 14px;
-    padding-top: 3%;
-    padding-left: 2%;
-
-}
-
-.temp2ResumeTtile {
-    font-size: 8px;
-    margin: 0;
-    padding: 0;
-    margin-left: 3%;
-    padding-left: 2%;
-
-}
-
-.temp2LiveProfileDiv {
-    /* background-color: bisque; */
-    font-size: 10px;
-    width: 95%;
-    margin: auto;
-    margin-top: 4%;
-    padding: 0;
-}
-
-.temp2LiveProfileDivLeft {
-    padding: 0;
-}
-
-.temp2LiveProfileDivRight {
-    padding: 0;
-}
-
-.temp2ProfileIcon {
-    position: absolute;
-    bottom: 23%;
-    left: 0;
-}
-
-.temp2ProfileName {
-    padding: 0;
-    margin: 0;
-    padding-left: 4%;
-    position: relative;
-    font-weight: 520;
-    color: rgb(30, 37, 50);
-    color: rgb(22, 89, 143);
-
-    /* font-family: 'Poppins', sans-serif;
-font-family: 'Open Sans', sans-serif; */
-}
-
-.temp2ProfileText {
-    font-size: 7px;
-    text-align: justify;
-    padding-left: 5.6%;
-    color: rgb(62, 63, 78);
-    ;
-    /* font-family: 'Open Sans', sans-serif;
-font-family: 'Poppins', sans-serif;
-font-family: 'Roboto', sans-serif;  */
-    /* font-family: 'Open Sans', sans-serif;
-font-family: 'Poppins', sans-serif;
-font-family: 'Roboto', sans-serif; */
-}
-
-.temp2EmploymentHistName {
-    margin-top: -3%;
-}
-
-.temp2ProfileEmploymentName {
-    font-size: 7px;
-    font-weight: 500;
-    padding: 0;
-    margin: 0;
-    padding-left: 5.6%;
-    margin-top: 1.8%;
-    color: rgb(30, 37, 50);
-}
-
-.temp2EmploymentTime {
-    font-size: 6px;
-    padding-left: 5.6%;
-    padding-bottom: 0;
-    margin-bottom: 0;
-}
-
-.temp2EmploymetnProfileText {
-    padding-left: 5.6%;
-    margin-top: 2%;
-}
-
-.temp2LiveProfileDivRight {
-    padding-left: 20px;
-    padding-top: 0.5%;
-}
-
-.temp2ProfileDetails {
-    font-size: 8px;
-    font-weight: 500;
-    margin-bottom: 1.6%;
-
-}
-
-.temp2ProfileDetailsText {
-    font-size: 7px;
-    text-align: justify;
-    padding: 0;
-    margin: 0;
-    padding-top: 1%;
-}
-
-.temp2ProfileDetailSubHeading {
-    margin-top: 7%;
-}
-
-.temp2OtherProfileDetails {
-    margin-top: 6%;
-    margin-bottom: 0;
-}
-
-.temp2LiveSkills {
-    font-weight: 400;
-    font-size: 8px;
-}
-
-.temp2EmailProfileDetailsText {
-    color: rgb(26, 145, 240);
-    font-weight: 500;
-}
-
-.temp2DOBProfileDetailsText {
-    color: rgb(130, 139, 162);
-    font-weight: 600;
-    font-size: 7px;
-}
-
 .downloadPdfMainDiv {
     /* background-color: #346571; */
   background-image: url("../images/bg.png");
@@ -545,3 +361,18 @@ font-family: 'Roboto', sans-serif; */
   .languageLevel{
     font-size: 7px !important;
   }
+
+
+/* **************************Template 2 ****************************************** */
+/* **************************Template 2 ****************************************** */
+/* **************************Template 2 ****************************************** */
+/* **************************Template 2 ****************************************** */
+/* **************************Template 2 ****************************************** */
+/* **************************Template 2 ****************************************** */
+/* **************************Template 2 ****************************************** */
+/* **************************Template 2 ****************************************** */
+/* **************************Template 2 ****************************************** */
+/* **************************Template 2 ****************************************** */
+/* **************************Template 2 ****************************************** */
+/* **************************Template 2 ****************************************** */
+/* **************************Template 2 ****************************************** */

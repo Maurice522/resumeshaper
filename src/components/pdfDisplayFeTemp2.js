@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Document, Page, Text, View, StyleSheet, Image } from '@react-pdf/renderer';
 import img1 from '../images/14.png'
+import '../styleSheet/temp2.css'
 import { PersonFill, BagDashFill, AwardFill, PeopleFill, MegaphoneFill, JournalBookmarkFill, TrophyFill, TropicalStorm } from "react-bootstrap-icons";
 
 
@@ -22,22 +23,23 @@ const styles = StyleSheet.create({
 
 export default function MyPdfViewer({ personalData,live,courses, activities,internships,hobbies,languages,references ,customSections ,skills }) {
   return (
-    <div className='scrollableDiv'>
-    <Document>
+    <>
+    <div className='row temp2MainDiv'>
+      <div className='col-md-8 tep2LeftCol'>
+      <Document>
 <Page size="A4" style={styles.page}>
    <View>
     <div className='imageDiv'>
-      {live?<img src={img1} className="displayImage" />:<Image src={img1} className="displayImage" />}
+      {live?<img src={img1} className="displayImage temp2DisplayImage" />:<Image src={img1} className="displayImage" />}
     </div>
-    <div className='nameDiv'>
-      <h6 className='resumeName'>{personalData.firstName} {personalData.middleName} {personalData.lastName}</h6>
-      <p className='resumeTtile'>{personalData.jobTitle}</p>
+    <div className='nameDiv temp2NameDiv'>
+      <h6 className='resumeName '>{personalData.firstName} {personalData.middleName} {personalData.lastName}</h6>
+      <p className='resumeTtile '>{personalData.jobTitle}</p>
     </div>
   </View>
 
   <View >
-    <div className='row liveProfileDiv'>
-      <div className='col-md-8 liveProfileDivLeft'>
+<div className='temp2CLeftContent'>
         <p className='profileName'>< PersonFill size={8} className="profileIcon" /> &nbsp;Profile</p>
         <p className='profileText'>{personalData.professionalSummary}</p>
 
@@ -139,11 +141,15 @@ export default function MyPdfViewer({ personalData,live,courses, activities,inte
           </>)
       })
        }
-</>}
+</>}  
+</div> 
+  </View>  
+</Page>
 
+</Document>
       </div>
-      <div className='col-md-4 liveProfileDivRight'>
-      <p className='profileDetails'>Personal Details</p>
+      <div className='col-md-4 tep2RightCol'>
+      <p className='profileDetails temp2PersonalDetails'>Personal Details</p>
       {personalData.address && personalData.address.length >0 && <>
         <p className='profileDetailsText'>{personalData.address}</p>
           </>}
@@ -203,7 +209,7 @@ export default function MyPdfViewer({ personalData,live,courses, activities,inte
         
 
         {languages && languages.length>0 && <>
-        <p className='profileDetails otherProfileDetails'>Languages</p>
+        <p className='profileDetails otherProfileDetails temp2GreyFont'>Languages</p>
           {languages.map((item,index)=>{
             return(<>
         <p className='profileDetailsText liveSkills'>{item.language}</p>
@@ -213,18 +219,13 @@ export default function MyPdfViewer({ personalData,live,courses, activities,inte
         }</>}
       
         {hobbies && hobbies.length>0 && <>     
-          <p className='profileDetails otherProfileDetails'>Hobbies</p>
+          <p className='profileDetails otherProfileDetails temp2GreyFont'>Hobbies</p>
         <p className='profileDetailsText liveSkills'> {hobbies}</p>
           </>}
 
+      
       </div>
-
     </div>
-    {/* <hr></hr> */}
-  </View>  
-</Page>
-
-</Document>
-</div>
-  );
+    </>
+      );
 }

@@ -10,6 +10,7 @@ import img6 from '../images/icon55.png'
 import img7 from '../images/icon66.png'
 import img8 from '../images/icon77.png'
 import img9 from '../images/icon88.png'
+import { Bluetooth } from 'react-bootstrap-icons';
 
 Font.register({ family: 'Roboto', src: 'https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@300&family=Roboto:wght@300&display=swap' });
 
@@ -18,19 +19,35 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: 30, // Add padding here
     color:'#3E3F4E',
-    
+    paddingTop:30 ,
+    paddingBottom:0 ,
+    paddingRight:0,
+    position:'relative'
   },
   leftColumn: {
     width: '70%',
     padding: 10,
+    // paddingTop:30
   },
   rightColumn: {
     width: '30%',
-    padding: 10,
+    paddingLeft: 10,
+    backgroundColor:'#082d4d',
+    position:'absolute',
+    top:0,
+    bottom:0,
+    right:0,
+    color:'white'
+  },
+  innerRightColumn:{
+    paddingTop:38,
+    paddingRight:20,
+    // backgroundColor:'blue'
   },
   header: {
     fontSize: 20,
     marginBottom: 10,
+  
   },
   name: {
     fontSize: 18,
@@ -106,15 +123,15 @@ const styles = StyleSheet.create({
     color:'#828BA2'
   },
   colorThisBlack:{
-    color:'#171717',
-    fontWeight: 'bold',
+    color:'white',
+    textShadow: '8px 8px black'
   }
 
 });
 
 
-export default function BEDoc({ personalData,courses, activities,internships,hobbies,languages,references ,customSections ,skills }) {
-  console.log(personalData,"Courses",courses,"Courses", activities,"Courses",internships,"Courses",hobbies,"Courses",languages,"Courses",references ,"Courses",customSections ,"Courses",skills)
+export default function BEDocTemp2({ personalData,courses, activities,internships,hobbies,languages,references ,customSections ,skills }) {
+  console.log(personalData)
   return (
     <Document>
     <Page size="A4" style={styles.page}>
@@ -123,7 +140,7 @@ export default function BEDoc({ personalData,courses, activities,internships,hob
           <Image style={styles.image} src={img1} />
           <View style={{ marginLeft: 10 }}>
             <Text style={styles.name}>{personalData.firstName} {personalData.middleName} {personalData.lastName}</Text>
-            <Text style={styles.designation}>{personalData.jobTitle}</Text>
+            <Text style={styles.designation}>Senior Software Developer</Text>
           </View>
         </View>
 
@@ -133,7 +150,7 @@ export default function BEDoc({ personalData,courses, activities,internships,hob
             <Text style={styles.sectionTitle}>Profile</Text>
           </View>
         </View>
-        <Text style={styles.paragraph}>{personalData.professionalSummary}</Text>
+        <Text style={styles.paragraph}>Your profile go here of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary </Text>
 
         <View style={{ flexDirection: 'row', alignItems: 'center', marginTop:'10'}}>
           <Image style={styles.icon1} src={img3} />
@@ -141,9 +158,9 @@ export default function BEDoc({ personalData,courses, activities,internships,hob
             <Text style={styles.sectionTitle}>Employment History</Text>
           </View>
         </View>
-        <Text style={styles.subTitle}>{personalData.employmentHistory.jobTitle} at {personalData.employmentHistory.employer} , {personalData.employmentHistory.city}</Text>
-        <Text style={[styles.subSubTitle,styles.colorThisGrey]}> {personalData.employmentHistory.startDate} - {personalData.employmentHistory.endDate}</Text>
-        <Text style={styles.paragraph}>{personalData.employmentHistory.description} </Text>
+        <Text style={styles.subTitle}>Your profile goes here variations of passages </Text>
+        <Text style={[styles.subSubTitle,styles.colorThisGrey]}>Your profile goes here variations of passages </Text>
+        <Text style={styles.paragraph}>Your profile go here.here are many variations of phe Internet. It uses a dictionary </Text>
       
         <View style={{ flexDirection: 'row', alignItems: 'center', marginTop:'10'}}>
           <Image style={styles.icon1} src={img4} />
@@ -151,11 +168,9 @@ export default function BEDoc({ personalData,courses, activities,internships,hob
             <Text style={styles.sectionTitle}>Education</Text>
           </View>
         </View>
-        
-        <Text style={styles.subTitle}>{personalData.educationHistory.school} , {personalData.educationHistory.city}</Text>
-        <Text style={styles.colorThisBlack}>{personalData.educationHistory.degree}</Text>
-        <Text style={[styles.subSubTitle,styles.colorThisGrey]}>{personalData.educationHistory.startDate} - {personalData.educationHistory.endDate} </Text>
-        <Text style={styles.paragraph}>{personalData.educationHistory.description} </Text>
+        <Text style={styles.subTitle}>Your profile goes here variations of passages </Text>
+        <Text style={[styles.subSubTitle,styles.colorThisGrey]}>Your profile goes here variations of passages </Text>
+        <Text style={styles.paragraph}>Your profile go here.here are many variations of phe Internet. It uses a dictionary </Text>
       
 
         <View style={{ flexDirection: 'row', alignItems: 'center', marginTop:'10'}}>
@@ -164,20 +179,22 @@ export default function BEDoc({ personalData,courses, activities,internships,hob
             <Text style={styles.sectionTitle}>Internships</Text>
           </View>
         </View>
-        <Text style={styles.subTitle}>{internships.jobTitle} at {internships.employer}, {internships.city} </Text>
-        <Text style={[styles.subSubTitle,styles.colorThisGrey]}>{internships.startDate} - {internships.endDate} </Text>
-        <Text style={styles.paragraph}>{internships.description}</Text>
+        <Text style={styles.subTitle}>Your profile goes here variations of passages </Text>
+        <Text style={[styles.subSubTitle,styles.colorThisGrey]}>Your profile goes here variations of passages </Text>
+        <Text style={styles.paragraph}>Your profile go here.here are many variations of phe Internet. It uses a dictionary </Text>
       
+      
+
         <View style={{ flexDirection: 'row', alignItems: 'center', marginTop:'10'}}>
           <Image style={styles.icon1} src={img6} />
           <View style={{ marginLeft: 8 }}>
             <Text style={styles.sectionTitle}>References</Text>
           </View>
         </View>
-        <Text style={styles.subTitle}>{references.fullName}, {references.company} </Text>
-        <Text style={styles.paragraph}>{references.phone}</Text>
-        <Text style={[styles.paragraph,styles.colorThisBlue]}>{references.email}</Text>
-   
+        <Text style={styles.subTitle}>Your profile goes here variations of passages </Text>
+        <Text style={[styles.subSubTitle,styles.colorThisGrey]}>Your profile goes here variations of passages </Text>
+        <Text style={styles.paragraph}>Your profile go here.here are many variations of phe Internet. It uses a dictionary </Text>
+      
 
         <View style={{ flexDirection: 'row', alignItems: 'center', marginTop:'10'}}>
           <Image style={styles.icon1} src={img7} />
@@ -185,10 +202,9 @@ export default function BEDoc({ personalData,courses, activities,internships,hob
             <Text style={styles.sectionTitle}>Courses</Text>
           </View>
         </View>
-        <Text style={styles.subTitle}>{courses.course}</Text>
-        <Text style={styles.paragraph}>{courses.institution} </Text>
-        <Text style={[styles.subSubTitle,styles.colorThisGrey]}>{courses.startDate} - {courses.endDate}</Text>
-        <Text style={styles.paragraph}>{courses.description} </Text>
+        <Text style={styles.subTitle}>Your profile goes here variations of passages </Text>
+        <Text style={[styles.subSubTitle,styles.colorThisGrey]}>Your profile goes here variations of passages </Text>
+        <Text style={styles.paragraph}>Your profile go here.here are many variations of phe Internet. It uses a dictionary </Text>
       
 
         <View style={{ flexDirection: 'row', alignItems: 'center', marginTop:'10'}}>
@@ -197,66 +213,63 @@ export default function BEDoc({ personalData,courses, activities,internships,hob
             <Text style={styles.sectionTitle}>Extra-Curriculum Activities</Text>
           </View>
         </View>
-        <Text style={styles.subTitle}>{activities.funtion}, {activities.employer} </Text>
-        <Text style={[styles.subSubTitle,styles.colorThisGrey]}>{activities.startDate} - {activities.endDate} </Text>
-        <Text style={styles.paragraph}>{activities.description} </Text>
+        <Text style={styles.subTitle}>Your profile goes here variations of passages </Text>
+        <Text style={[styles.subSubTitle,styles.colorThisGrey]}>Your profile goes here variations of passages </Text>
+        <Text style={styles.paragraph}>Your profile go here.here are many variations of phe Internet. It uses a dictionary </Text>
       
 
         <View style={{ flexDirection: 'row', alignItems: 'center', marginTop:'10'}}>
           <Image style={styles.icon1} src={img9} />
           <View style={{ marginLeft: 8 }}>
-            <Text style={styles.sectionTitle}>{customSections.title}</Text>
+            <Text style={styles.sectionTitle}>Custom</Text>
           </View>
         </View>
-        <Text style={styles.subTitle}>{customSections.subTitle} </Text>
-        <Text style={[styles.subSubTitle,styles.colorThisGrey]}>{customSections.startDate} - {customSections.endDate} </Text>
-        <Text style={styles.paragraph}>{customSections.description} </Text>
+        <Text style={styles.subTitle}>Your profile goes here variations of passages </Text>
+        <Text style={[styles.subSubTitle,styles.colorThisGrey]}>Your profile goes here variations of passages </Text>
+        <Text style={styles.paragraph}>Your profile go here.here are many variations of phe Internet. It uses a dictionary </Text>
       
       </View>
 
       <View style={styles.rightColumn}>
-
+      <View style={styles.innerRightColumn}>
       <Text style={[styles.rightHeading,styles.colorThisBlack]}>Personal Details</Text>
-          <Text style={styles.rightParagraph}>{personalData.address}</Text>
-          <Text style={styles.rightParagraph}>{personalData.city},{personalData.pincode}</Text>
-          <Text style={styles.rightParagraph}>{personalData.country}</Text>
-          <Text style={styles.rightParagraph}>{personalData.phone}</Text>
-          <Text style={[styles.rightParagraph,styles.colorThisBlue]}>{personalData.inputEmail}</Text>
+          <Text style={styles.rightParagraph}>Your address goes here and gere and here and here.</Text>
+          <Text style={styles.rightParagraph}>Place of Birth, 455039</Text>
+          <Text style={styles.rightParagraph}>Country</Text>
+          <Text style={styles.rightParagraph}>8394593959</Text>
+          <Text style={[styles.rightParagraph,styles.colorThisBlue]}>email@gmail.com</Text>
 
           <Text style={[styles.rightSubHeading,styles.colorThisGrey]}>DOB/Place of Birth</Text>
-          <Text style={styles.rightParagraph}>{personalData.dateOfBirth}</Text>
-          <Text style={styles.rightParagraph}>{personalData.placeOfBirth}</Text>
+          <Text style={styles.rightParagraph}>Your DOB</Text>
+          <Text style={styles.rightParagraph}>PlaceOfBirth</Text>
 
           <Text style={[styles.rightSubHeading,styles.colorThisGrey]}>Nationality</Text>
-          <Text style={styles.rightParagraph}>{personalData.nationality}</Text>
+          <Text style={styles.rightParagraph}>Your Nationality</Text>
  
           <Text style={[styles.rightSubHeading,styles.colorThisGrey]}>Driving Liscence</Text>
-          <Text style={styles.rightParagraph}>{personalData.drivingLicense}</Text>
+          <Text style={styles.rightParagraph}>DSJFDtionality</Text>
 
           <Text style={[styles.rightOtherHeading,styles.colorThisBlack]}>Links</Text>
-          <Text style={styles.rightParagraph}>{personalData.websitesAndLinks.name}</Text>
-          <Text style={styles.rightParagraph}>{personalData.websitesAndLinks.link}</Text>
-
+          <Text style={[styles.rightParagraph,styles.colorThisBlue]}>www.google.com</Text>
+          <Text style={[styles.rightParagraph,styles.colorThisBlue]}>www.yahoo.com</Text>
 
           <Text style={[styles.rightOtherHeading,styles.colorThisBlack]}>Skills</Text>
-          <Text style={[styles.rightParagraph,styles.colorThisBlue]}>Skill 1</Text>
+          <Text style={[styles.rightParagraph]}>Skill 1</Text>
+          <Text style={[styles.rightParagraph]}>Skill 2</Text>
+          <Text style={[styles.rightParagraph]}>Skill 3</Text>
+          <Text style={[styles.rightParagraph]}>Skill 4</Text>
+          <Text style={[styles.rightParagraph]}>Skill 5</Text>
 
           <Text style={[styles.rightOtherHeading,styles.colorThisBlack]}>Languages</Text>
-          <Text style={styles.rightParagraph}>{languages.language}</Text>
-          <Text style={styles.rightParagraph}>{languages.level}</Text>
+          <Text style={styles.rightParagraph}>languages 1</Text>
+          <Text style={styles.rightParagraph}>languages 2</Text>
 
           
           <Text style={[styles.rightOtherHeading,styles.colorThisBlack]}>Hobbies</Text>
-          <Text style={styles.rightParagraph}>{hobbies}</Text>
+          <Text style={styles.rightParagraph}>Hobby 1 , Hobby 2 , Hobby 3</Text>
+          </View>
       </View>
     </Page>
   </Document>
   );
 }
-
-
-
-
-
-
-

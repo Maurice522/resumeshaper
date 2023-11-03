@@ -10,6 +10,7 @@ import img6 from '../images/icon55.png'
 import img7 from '../images/icon66.png'
 import img8 from '../images/icon77.png'
 import img9 from '../images/icon88.png'
+import { Bluetooth } from 'react-bootstrap-icons';
 
 Font.register({ family: 'Roboto', src: 'https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@300&family=Roboto:wght@300&display=swap' });
 
@@ -18,19 +19,35 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: 30, // Add padding here
     color:'#3E3F4E',
-    
+    paddingTop:30 ,
+    paddingBottom:0 ,
+    paddingRight:0,
+    position:'relative'
   },
   leftColumn: {
     width: '70%',
     padding: 10,
+    // paddingTop:30
   },
   rightColumn: {
     width: '30%',
-    padding: 10,
+    paddingLeft: 10,
+    backgroundColor:'#082d4d',
+    position:'absolute',
+    top:0,
+    bottom:0,
+    right:0,
+    color:'white'
+  },
+  innerRightColumn:{
+    paddingTop:38,
+    paddingRight:20,
+    // backgroundColor:'blue'
   },
   header: {
     fontSize: 20,
     marginBottom: 10,
+  
   },
   name: {
     fontSize: 18,
@@ -55,7 +72,7 @@ const styles = StyleSheet.create({
   subTitle:{
     fontSize: 13,
     paddingLeft: 18,
-    paddingTop:10,
+    paddingTop:7,
     textAlign:'left',
   },
   subSubTitle:{
@@ -106,33 +123,21 @@ const styles = StyleSheet.create({
     color:'#828BA2'
   },
   colorThisBlack:{
-    color:'#171717',
-    fontWeight: 'bold',
-  },
-  degreeName:{
-    paddingLeft: 18,
-    fontSize:12,
-  },
-  makeFontSmaller:{
-    fontSize:10,
-  },
-  extraSideHeadingStyle:{
-    fontSize:18,
-    // marginTop:15
+    color:'white',
+    textShadow: '8px 8px black'
   }
+
 });
 
 
-export default function BEDocTemp1({ personalData,courses, activities,internships,hobbies,languages,references ,customSections ,skills }) {
-  console.log(personalData,"Courses",courses,"Courses", activities,"Courses",internships,"Courses",hobbies,"Courses",languages,"Courses",references ,"Courses",customSections ,"Skills",skills)
-  console.log("picturerw",personalData.uploadedPhotoURL)
-  
+export default function BEDocTemp2({ personalData,courses, activities,internships,hobbies,languages,references ,customSections ,skills }) {
+  console.log(personalData)
   return (
     <Document>
     <Page size="A4" style={styles.page}>
       <View style={styles.leftColumn}>
         <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 30 }}>
-         <Image style={styles.image} src={img1}/>
+          <Image style={styles.image} src={img1} />
           <View style={{ marginLeft: 10 }}>
             <Text style={styles.name}>{personalData.firstName} {personalData.middleName} {personalData.lastName}</Text>
             <Text style={styles.designation}>{personalData.jobTitle}</Text>
@@ -147,7 +152,7 @@ export default function BEDocTemp1({ personalData,courses, activities,internship
           </View>
         </View>
         <Text style={styles.paragraph}>{personalData.professionalSummary}</Text>
-</>}
+        </>}
 
         {personalData.employmentHistory && personalData.employmentHistory.length >0 && personalData.employmentHistory[0].jobTitle!=='' && <>
         <View style={{ flexDirection: 'row', alignItems: 'center', marginTop:'10'}}>
@@ -159,14 +164,14 @@ export default function BEDocTemp1({ personalData,courses, activities,internship
         { personalData.employmentHistory.map((item,index)=>{
           return (<>
         <Text style={styles.subTitle}>{item.jobTitle} at {item.employer} , {item.city}</Text>
-        <Text style={[styles.subSubTitle,styles.colorThisGrey]}> {item.startDate} - {item.endDate}</Text>
+        <Text style={[styles.subSubTitle,styles.colorThisGrey]}>{item.startDate} - {item.endDate}</Text>
         <Text style={styles.paragraph}>{item.description} </Text>
         </>)
       })
        }
-</>}
+        </>}
 
-      {personalData.educationHistory && personalData.educationHistory.length >0 && personalData.educationHistory[0].school!=='' && <>
+ {personalData.educationHistory && personalData.educationHistory.length >0 && personalData.educationHistory[0].school!=='' && <>
         <View style={{ flexDirection: 'row', alignItems: 'center', marginTop:'10'}}>
           <Image style={styles.icon1} src={img4} />
           <View style={{ marginLeft: 8 }}>
@@ -175,11 +180,10 @@ export default function BEDocTemp1({ personalData,courses, activities,internship
         </View>
         { personalData.educationHistory.map((item,index)=>{
           return (<>
-        {/* <Text style={[styles.colorThisBlack,styles.degreeName]}>{item.degree}</Text> */}
-           <Text style={styles.subTitle}>{item.school}, {item.city}</Text>
-        <Text style={[styles.subSubTitle,styles.colorThisGrey]}>{item.degree}, {item.startDate} - {item.endDate} </Text>
+        <Text style={styles.subTitle}>{item.school}, {item.city} </Text>
+        <Text style={[styles.subSubTitle,styles.colorThisGrey]}>{item.degree}, {item.startDate} - {item.endDate}  </Text>
         <Text style={styles.paragraph}>{item.description} </Text>
-          </>)
+        </>)
         })
          }
 </>}
@@ -195,11 +199,11 @@ export default function BEDocTemp1({ personalData,courses, activities,internship
           return (<>
         <Text style={styles.subTitle}>{item.jobTitle} at {item.employer}, {item.city} </Text>
         <Text style={[styles.subSubTitle,styles.colorThisGrey]}>{item.startDate} - {item.endDate} </Text>
-        <Text style={styles.paragraph}>{item.description}</Text>
+        <Text style={styles.paragraph}>{item.description} </Text>
         </>)
-        })
-         }
-</>}
+      })
+       }
+</>} 
       
 {references && references.length >0 && references[0].fullName!=='' && <>
         <View style={{ flexDirection: 'row', alignItems: 'center', marginTop:'10'}}>
@@ -211,12 +215,13 @@ export default function BEDocTemp1({ personalData,courses, activities,internship
         { references.map((item,index)=>{
           return (<>
         <Text style={styles.subTitle}>{item.fullName}, {item.company} </Text>
-        <Text style={styles.paragraph}>{item.phone}</Text>
-        <Text style={[styles.paragraph,styles.colorThisBlue]}>{item.referenceEmail}</Text>
+        <Text style={[styles.subSubTitle,styles.colorThisGrey]}>{item.phone} </Text>
+        <Text style={styles.paragraph}>{item.referenceEmail} </Text>
         </>)
         })
          }
-</>}
+</>} 
+
 
 {courses && courses.length >0 && courses[0].course!=='' && <>
         <View style={{ flexDirection: 'row', alignItems: 'center', marginTop:'10'}}>
@@ -229,11 +234,12 @@ export default function BEDocTemp1({ personalData,courses, activities,internship
           return (<>
         <Text style={styles.subTitle}>{item.course}, {item.institution} </Text>
         <Text style={[styles.subSubTitle,styles.colorThisGrey]}>{item.startDate} - {item.endDate}</Text>
-        <Text style={styles.paragraph}>{item.description} </Text>
+        <Text style={styles.paragraph}>{item.description}</Text>
         </>)
         })
          }
 </>}
+
 
 {activities && activities.length >0 && activities[0].function!=='' && <>
         <View style={{ flexDirection: 'row', alignItems: 'center', marginTop:'10'}}>
@@ -244,7 +250,7 @@ export default function BEDocTemp1({ personalData,courses, activities,internship
         </View>
         { activities.map((item,index)=>{
           return (<>
-        <Text style={styles.subTitle}>{item.function}, {item.employer} , {item.city} </Text>
+        <Text style={styles.subTitle}>{item.function}, {item.employer} , {item.city}</Text>
         <Text style={[styles.subSubTitle,styles.colorThisGrey]}>{item.startDate} - {item.endDate} </Text>
         <Text style={styles.paragraph}>{item.description} </Text>
         </>)
@@ -259,6 +265,7 @@ export default function BEDocTemp1({ personalData,courses, activities,internship
           <Image style={styles.icon1} src={img9} />
           <View style={{ marginLeft: 8 }}>
             <Text style={styles.sectionTitle}>{item.title}</Text>
+
           </View>
         </View>
         <Text style={styles.subTitle}>{item.subTitle} </Text>
@@ -269,20 +276,19 @@ export default function BEDocTemp1({ personalData,courses, activities,internship
        }
 </>}
       </View>
-     
 
       <View style={styles.rightColumn}>
-
+      <View style={styles.innerRightColumn}>
       <Text style={[styles.rightHeading,styles.colorThisBlack]}>Personal Details</Text>
-      
+     
       {personalData.address && personalData.address.length >0 && <>
           <Text style={styles.rightParagraph}>{personalData.address}</Text>
           </>}
 
           {personalData.city && personalData.city.length >0 && <>
           <Text style={styles.rightParagraph}>{personalData.city} {personalData.pincode}</Text>
-          </>}
-
+          </>}      
+      
           {personalData.country && personalData.country.length >0 && <>
           <Text style={styles.rightParagraph}>{personalData.country}</Text>
           </>}
@@ -291,30 +297,30 @@ export default function BEDocTemp1({ personalData,courses, activities,internship
           <Text style={styles.rightParagraph}>{personalData.phone}</Text>
           </>}
 
+      
           {personalData.inputEmail && personalData.inputEmail.length >0 && <>
-          <Text style={[styles.rightParagraph,styles.colorThisBlue,styles.makeFontSmaller]}>{personalData.inputEmail}</Text>
+          <Text style={[styles.rightParagraph,styles.colorThisBlue]}>{personalData.inputEmail}</Text>
           </>}
 
           {personalData.dateOfBirth && personalData.dateOfBirth.length >0 && <>
           <Text style={[styles.rightSubHeading,styles.colorThisGrey]}>DOB/Place of Birth</Text>
           <Text style={styles.rightParagraph}>{personalData.dateOfBirth}</Text>
           </>}
-          
+
           {personalData.placeOfBirth && personalData.placeOfBirth.length >0 &&  <>
           <Text style={styles.rightParagraph}>{personalData.placeOfBirth}</Text>
           </>}
-
           {personalData.nationality && personalData.nationality.length >0 &&  <>
           <Text style={[styles.rightSubHeading,styles.colorThisGrey]}>Nationality</Text>
           <Text style={styles.rightParagraph}>{personalData.nationality}</Text>
           </>}
-
+         
           {personalData.drivingLicense && personalData.drivingLicense.length >0 && <>
           <Text style={[styles.rightSubHeading,styles.colorThisGrey]}>Driving Liscence</Text>
           <Text style={styles.rightParagraph}>{personalData.drivingLicense}</Text>
           </>}
 
-        {personalData.websitesLinks && personalData.websitesLinks.length >0 && personalData.websitesLinks[0].name!=='' && <>
+          {personalData.websitesLinks && personalData.websitesLinks.length >0 && personalData.websitesLinks[0].name!=='' && <>
           <Text style={[styles.rightOtherHeading,styles.colorThisBlack]}>Links</Text>
           { personalData.websitesLinks.map((item,index)=>{
           return (<>
@@ -326,27 +332,29 @@ export default function BEDocTemp1({ personalData,courses, activities,internship
 </>}
 
 {skills && skills.length>0 && <>
-          <Text style={[styles.rightOtherHeading,styles.colorThisBlack,styles.extraSideHeadingStyle]}>Skills</Text>
+          <Text style={[styles.rightOtherHeading,styles.colorThisBlack]}>Skills</Text>
           {skills.map((item,index)=>{
           return (<Text style={[styles.rightParagraph]}>{item}</Text>)
           })
           }</>}
+    
 
-{languages && languages.length>0 && <>
-          <Text style={[styles.rightOtherHeading,styles.colorThisBlack,styles.extraSideHeadingStyle]}>Languages</Text>
+    {languages && languages.length>0 && <>
+          <Text style={[styles.rightOtherHeading,styles.colorThisBlack]}>Languages</Text>
           {languages.map((item,index)=>{
             return(<>
               <Text style={styles.rightParagraph}>{item.language}</Text>
-          <Text style={[styles.rightParagraph,styles.makeFontSmaller]}>({item.level})</Text>
+          <Text style={[styles.rightParagraph]}>({item.level})</Text>
             </> )
           })
         }</>}
-      
-        {hobbies && hobbies.length>0 && <>      
-          <Text style={[styles.rightOtherHeading,styles.colorThisBlack,styles.extraSideHeadingStyle]}>Hobbies</Text>
+
+{hobbies && hobbies.length>0 && <>      
+          <Text style={[styles.rightOtherHeading,styles.colorThisBlack]}>Hobbies</Text>
           <Text style={styles.rightParagraph}>{hobbies}</Text>
           </>}
-
+      
+          </View>
       </View>
     </Page>
   </Document>

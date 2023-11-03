@@ -6,14 +6,13 @@ import { signOutUser } from '../redux/slices/user';
 import Nav from '../components/nav';
 import { useNavigate } from 'react-router-dom';
 import { Power } from "react-bootstrap-icons";
-import MyPdfViewer from '../components/pdfDisplay';
+import MyPdfViewer from '../components/pdfDisplayFeTemp4';
 import { FileEarmarkArrowDownFill, Check2Circle, Check2All, Check, PersonCheck, PersonSquare, CaretDownSquare, JournalBookmarkFill, PenFill, Trash3Fill, PlusLg, JournalCheck, Link45deg, TrophyFill } from "react-bootstrap-icons";
 import CustomSection from '../components/formComponents/customSection';
 import { updateUserProfileInDatabase, updateUserPhotoInDatabase, uploadMedia } from '../fireabse';
 import { updatePhoto, updateProfile } from '../redux/slices/user';
 import '../styleSheet/createLive.css'
 import { PDFViewer } from '@react-pdf/renderer';
-import PdfDisplay from '../components/pdfDisplay';
 import PdfDisplayBE from '../components/pdfDisplayBE';
 import Test from './test';
 import '../styleSheet/Nav.css'
