@@ -5,7 +5,7 @@ import { updateUserProfileInDatabase, updateUserPhotoInDatabase, uploadMedia } f
 import { useDispatch, useSelector } from 'react-redux';
 import { updatePhoto, updateProfile } from '../redux/slices/user';
 import skills from '../components/formComponents/skills';
-export default function Form() {
+export default function Form({personalData, setPersonalData}) {
 
   const [showAdditionalDetails, setShowAdditionalDetails] = useState(false);
   const [courses, setCourses] = useState([]);
@@ -34,51 +34,51 @@ export default function Form() {
   const user = useSelector(state => state.user.user);
   const dispatch = useDispatch();
 
-  const [personalData, setPersonalData] = useState({
-    jobTitle: '',
-    firstName: '',
-    middleName: '',
-    lastName: '',
-    inputEmail: '',
-    phone: '',
-    dateOfBirth: '',
-    city: '',
-    address: '',
-    postalCode: '',
-    drivingLicense: '',
-    nationality: '',
-    placeOfBirth: '',
-    country: '',
-    professionalSummary: '',
-    uploadedPhotoURL: '',
-    employmentHistory: [
-      {
-        jobTitle: '',
-        employer: '',
-        startDate: '',
-        endDate: '',
-        city: '',
-        description: '',
-      },
-    ],
-    educationHistory: [
-      {
-        school: '',
-        degree: '',
-        startDate: '',
-        endDate: '',
-        city: '',
-        description: '',
-      },
-    ],
-    websitesAndLinks: [
-      {
-        name: '',
-        url: '',
-      },
-    ],
+  // const [personalData, setPersonalData] = useState({
+  //   jobTitle: '',
+  //   firstName: '',
+  //   middleName: '',
+  //   lastName: '',
+  //   inputEmail: '',
+  //   phone: '',
+  //   dateOfBirth: '',
+  //   city: '',
+  //   address: '',
+  //   postalCode: '',
+  //   drivingLicense: '',
+  //   nationality: '',
+  //   placeOfBirth: '',
+  //   country: '',
+  //   professionalSummary: '',
+  //   uploadedPhotoURL: '',
+  //   employmentHistory: [
+  //     {
+  //       jobTitle: '',
+  //       employer: '',
+  //       startDate: '',
+  //       endDate: '',
+  //       city: '',
+  //       description: '',
+  //     },
+  //   ],
+  //   educationHistory: [
+  //     {
+  //       school: '',
+  //       degree: '',
+  //       startDate: '',
+  //       endDate: '',
+  //       city: '',
+  //       description: '',
+  //     },
+  //   ],
+  //   websitesAndLinks: [
+  //     {
+  //       name: '',
+  //       url: '',
+  //     },
+  //   ],
 
-  });
+  // });
 
   useEffect(() => {
     setShowDropdown(false);
@@ -335,7 +335,6 @@ export default function Form() {
 
   return (
     <div>
-
       <h5 className='formSection'><PersonCheck color="#35b276" size={40} /> &nbsp;Personal Details</h5>
       <form>
         <div className='row'>

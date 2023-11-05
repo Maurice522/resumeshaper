@@ -1,70 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styleSheet/createUpload.css'
 import img3 from '../images/28.png'
 import { updateUserInDatabase, uploadMedia } from '../fireabse';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateResume } from '../redux/slices/user';
-// import pdf from 'pdf-parse';
-// import OpenAI from 'openai';
 
-
-// async function extractTextFromPDF(pdfUrl) {
-//   try {
-//     // Make an HTTP request to the PDF URL and get the response as a buffer.
-//     const pdfBuffer = await fetch({ url: pdfUrl, encoding: null });
-
-//     // Parse the PDF data.
-//     const pdfData = await pdf(pdfBuffer);
-
-//     // Extract the text content.
-//     const textContent = pdfData.text;
-
-//     return textContent;
-//   } catch (error) {
-//     console.error('Error extracting text from PDF:', error);
-//     return null;
-//   }
-// }
-// async function responsecreate(openai,pdfText) {
-//   const completion = await openai.chat.completions.create({
-//     messages: [
-//       { 
-//           role: "system", 
-//           content: "You are an AI resume extractor." 
-//       },
-//       {
-//           role: 'user',
-//       content: `
-//       Consider the following raw resume text extracted from a user's resume PDF delimited between ### ###:
-//       ###${pdfText}###
-//       --------------------------------------------------------------
-//       Generate a valid JSON response with the extracted resume text. 
-//       Note:
-//       - Generate JSON with section names as keys and text extracted from the resume as values.
-//       - Provide a single-line JSON response. 
-//       - Respond only with the generated JSON response.
-//       - Do not add new lines; keep the text as in the resume.
-//       - If the PDF does not seem to be a resume, return an error message.
-//       -use lower case only
-//       `,
-    
-//       }
-//   ],
-//     model: "gpt-3.5-turbo",
-//   });
-
-//   console.log(completion.choices[0].message.content);
-//   var temp = JSON.parse(completion.choices[0].message.content)
-//   console.log(temp)
-//   console.log(temp.objective)
-//   return temp;
-// }
-
-export default function CreateUploadPopup({ onClose}) {
-
-  // const openai = new OpenAI({
-  //   apiKey: ,
-  // });
+export default function CreateUploadPopup({ onClose, personalData, setPersonalData}) {
+ 
+  const [numPages, setNumPages] = useState(null);
+  const [pdfText, setPdfText] = useState('');
 
   const [file, setFile] = useState(null);
   const [upload, setUpload] = useState(false);
@@ -89,33 +33,36 @@ export default function CreateUploadPopup({ onClose}) {
     setUpload(false)
 
   };
+
   const handleUploadResume = async() => {
     if (file) {
       setLoading(true)
       const fileLink = await uploadMedia(file, "resume");
       await updateUserInDatabase(user.email, fileLink)
       dispatch(updateResume(fileLink))
-      // const res = fetch('https://resumegeneratorbackend.onrender.com/extract-text', {
-      //   method: 'POST',
-      //   body: JSON.stringify({
-      //   pdf_url:fileLink
-      //   }),
-      //   headers: {
-      //     "Content-type": "application/json; charset=UTF-8"
-      //   }
-      // })
-      // .then((response) => response.json())
-      // .then((responseJson) => {
-      //   console.log(responseJson)
-      //   return responseJson;
-      // })
-
-      // console.log(res)
-
-      // const pdfText = await extractTextFromPDF(fileLink);
-      // const openAIResponse = await responsecreate(openai,pdfText);
-
-      // console.log(openAIResponse)
+      var res = await fetch('https://server.reverr.io/extract', {
+        method: 'POST',
+        body: JSON.stringify({
+        pdf_url:fileLink
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8"
+        }
+      })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        console.log(responseJson)
+        return responseJson;
+      })
+      delete res.websitesAndLinks;
+      res.websitesAndLinks = [
+        {
+          name: '',
+          url: '',
+        },
+      ];
+      setPersonalData(res)
+      console.log(res)
       setLoading(false)
       
       onClose();

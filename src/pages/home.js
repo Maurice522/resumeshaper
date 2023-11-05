@@ -24,6 +24,51 @@ export default function Home() {
     const [showHomePopup, setShowHomePopup] = useState(true);
     const [showJobPopup, setShowJobPopup] = useState(false);
     const [jobData, setJobData] = useState(null);
+    const [personalData, setPersonalData] = useState({
+        jobTitle: '',
+        firstName: '',
+        middleName: '',
+        lastName: '',
+        inputEmail: '',
+        phone: '',
+        dateOfBirth: '',
+        city: '',
+        address: '',
+        postalCode: '',
+        drivingLicense: '',
+        nationality: '',
+        placeOfBirth: '',
+        country: '',
+        professionalSummary: '',
+        uploadedPhotoURL: '',
+        employmentHistory: [
+          {
+            jobTitle: '',
+            employer: '',
+            startDate: '',
+            endDate: '',
+            city: '',
+            description: '',
+          },
+        ],
+        educationHistory: [
+          {
+            school: '',
+            degree: '',
+            startDate: '',
+            endDate: '',
+            city: '',
+            description: '',
+          },
+        ],
+        websitesAndLinks: [
+          {
+            name: '',
+            url: '',
+          },
+        ],
+    
+      });
 
     const openPopup = () => {
         setShowJobPopup(true);
@@ -61,7 +106,7 @@ export default function Home() {
     return (
         <>
             <Nav />
-            {showHomePopup && <CreateUploadPopup onClose={handleClosePopup} onUpload={handleUpload} />}
+            {showHomePopup && <CreateUploadPopup personalData={personalData} setPersonalData={setPersonalData} onClose={handleClosePopup} onUpload={handleUpload} />}
             <button onClick={() => handler()} className=" btn btn-success signoutBtn"> <Power color="#35b276" size={22} /> &nbsp;Signout</button>
             <div className='row homeDiv'>
                 <div className='HomeLeftDiv col-md-9 col-sm-9'>
@@ -69,7 +114,7 @@ export default function Home() {
                         <h3 className='formTitle'>Personalize your Profile</h3>
                         <p className='formSubText'>"Tell us more about yourself and the position you're targeting, and we'll create a personlized resume just for you."</p>
                         <hr className='hrLine' />
-                        <Form />
+                        <Form personalData={personalData} setPersonalData={setPersonalData}/>
                     </div>
                     {/* <button onClick={openPopup}>Add Job</button>
                     {showJobPopup && (
