@@ -928,7 +928,6 @@ const updateWebsiteLinkField = (index, field, value) => {
                         <button type="button" onClick={() => handleRemoveSkill(skill)} className="DeleteSkill">
                         <Trash3Fill size={16} />
                         </button>
-
                     </div>
                 ))}
             </div>
@@ -976,14 +975,12 @@ const updateWebsiteLinkField = (index, field, value) => {
         </div> */}
 {/* ********************************OLD SKILLS SECTION**************************************** */}
 
-
+<CustomSection courses={courses} setCourses={setCourses} activities={activities} setActivities={setActivities} internships={internships} setInternships={setInternships} hobbies={hobbies} setHobbies={setHobbies} languages={languages} setLanguages={setLanguages} references={references} setReferences={setReferences} customSections={customSections} setCustomSections={setCustomSections} liveForm={"false"}/>
         <div className='saveProfileDiv'>
           <button type="submit"  className="saveProfileBtn zoom">
             <Check2Circle size={26} />&nbsp;&nbsp;&nbsp;Save My Profile
           </button>
         </div>
-        <CustomSection courses={courses} setCourses={setCourses} activities={activities} setActivities={setActivities} internships={internships} setInternships={setInternships} hobbies={hobbies} setHobbies={setHobbies} languages={languages} setLanguages={setLanguages} references={references} setReferences={setReferences} customSections={customSections} setCustomSections={setCustomSections} liveForm={"false"}/>
-
 
       </form>
     </div>

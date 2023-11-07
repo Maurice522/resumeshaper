@@ -10,7 +10,9 @@ import img3 from '../images/28.png'
 import '../styleSheet/LoginPopup.css';
 import { limitToLast } from 'firebase/firestore';
 
+
 const LoginPopup = ({ onClose, onSignup }) => {
+    const [showSuccessToast, setShowSuccessToast] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [name, setName] = useState("");
@@ -50,6 +52,7 @@ const LoginPopup = ({ onClose, onSignup }) => {
                 const user = await getUserFromDatabase(email)
                 dispatch(updateUser(user))
                 if(user.profile === true){
+                   
                     navigate("/dashboard")
                 }else{
 
@@ -68,12 +71,12 @@ const LoginPopup = ({ onClose, onSignup }) => {
         if (isLogin) {
             signInWithEmailAndPassword(auth, email, password)
                 .then(async (userCredential) => {
+
                     const user = await getUserFromDatabase(email)
                     dispatch(updateUser(user))
                     if(user.profile === true){
                         navigate("/dashboard")
                     }else{
-    
                         navigate("/auth")
                     }
                     console.log(userCredential);
@@ -151,7 +154,6 @@ const LoginPopup = ({ onClose, onSignup }) => {
                     </div>
                 </form>
             </div>
-           
         </div>
     );
 };

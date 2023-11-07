@@ -26,6 +26,7 @@ import { Check2Circle, BookmarkStarFill } from "react-bootstrap-icons";
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '../fireabse'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify';
 
 
 export default function Landing() {
@@ -57,7 +58,7 @@ export default function Landing() {
             {isLoggedIn==true?
             <button class=" continueToDahboardBtn signoutBtn zoom" onClick={()=>navigate('/dashboard')}>Dashboard</button>:
             <button class="loginBtn signoutBtn" onClick={togglePopup}>Login</button>}
-            {isPopupOpen && <LoginPopup onClose={togglePopup} onSignup={handleSignup} />}
+            {isPopupOpen && <LoginPopup onClose={togglePopup} onSignup={handleSignup}/>}
 
             <div className='topDivLanding'>
             <div class='jumbotron'>
@@ -247,13 +248,6 @@ export default function Landing() {
                         <span class="visually-hidden">Next</span>
                     </button>
                 </div>
-            </div>
-
-
-
-            <div className='section5'>
-                <img src={img13} className="sec5Img" />
-                <h1>Expertise, commitment, and value. It's our mission to consistently provide these to our clients.</h1>
             </div>
             <Footer />
         </div>

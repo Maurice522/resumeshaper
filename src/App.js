@@ -6,7 +6,8 @@ import { auth } from './fireabse'
 import { getUserFromDatabase } from './fireabse';
 import { useDispatch } from 'react-redux';
 import { loginUser } from './redux/slices/user';
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
@@ -26,7 +27,11 @@ function App() {
     })
 },[])
   return (
-    <Routes/>
+    <>
+      <Routes/>
+      <ToastContainer />
+  </>
+
   );
 }
 
