@@ -58,7 +58,7 @@ export { app, auth, db, analytics, storage };
 
 export const addUserInDatabase = async (user)=>{
   try{
-    await setDoc(doc(db, "users", user.email),user)
+    await setDoc(doc(db, "users", user.email),{...user, profile:false})
   }catch(err){
     console.log(err)
   }
