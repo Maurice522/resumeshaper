@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { auth, getUserFromDatabase } from '../fireabse';
-import { loginUser } from '../redux/slices/user';
+import { loginUser, updateUser } from '../redux/slices/user';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { ToastContainer, toast } from 'react-toastify';
 import { addUserInDatabase } from '../fireabse';
 import img3 from '../images/28.png'
 import '../styleSheet/LoginPopup.css';
@@ -44,12 +43,10 @@ const LoginPopup = ({ onClose, onSignup }) => {
     };
 
     const signInUser = (auth, email, password) => {
-        toast.info('Verifying User')
         signInWithEmailAndPassword(auth, email, password)
             .then(async (userCredential) => {
                 const user = await getUserFromDatabase(email)
-                dispatch(loginUser(user))
-                toast.success('Logging in User')
+                dispatch(updateUser(user))
                 navigate("/auth")
                 console.log(userCredential);
             }).catch(err => {
@@ -65,7 +62,7 @@ const LoginPopup = ({ onClose, onSignup }) => {
             signInWithEmailAndPassword(auth, email, password)
                 .then(async (userCredential) => {
                     const user = await getUserFromDatabase(email)
-                    dispatch(loginUser(user))
+                    dispatch(updateUser(user))
                     navigate("/auth")
                     console.log(userCredential);
                     onClose();
@@ -79,6 +76,7 @@ const LoginPopup = ({ onClose, onSignup }) => {
                 .then((userCredential) => {
                     addUserInDatabase({ email, password, name })
                     signInUser(auth, email, password)
+                    dispatch(loginUser({ email, password, name }))
                     console.log(userCredential);
                     onClose();
                 }).catch(err => {
