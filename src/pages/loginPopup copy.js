@@ -10,7 +10,7 @@ import img3 from '../images/28.png'
 import '../styleSheet/LoginPopup.css';
 import { limitToLast } from 'firebase/firestore';
 
-const LoginPopup = ({ onClose, onSignup }) => {
+const LoginPopup1 = ({ onClose, onSignup }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [name, setName] = useState("");
@@ -144,4 +144,4 @@ const LoginPopup = ({ onClose, onSignup }) => {
     );
 };
 
-export default LoginPopup;
+export default LoginPopup1

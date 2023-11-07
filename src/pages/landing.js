@@ -26,7 +26,6 @@ import { Check2Circle, BookmarkStarFill } from "react-bootstrap-icons";
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '../fireabse'
 import { useNavigate } from 'react-router-dom'
-import { ToastContainer, toast } from 'react-toastify';
 
 
 export default function Landing() {
@@ -256,7 +255,6 @@ export default function Landing() {
                 <img src={img13} className="sec5Img" />
                 <h1>Expertise, commitment, and value. It's our mission to consistently provide these to our clients.</h1>
             </div>
-            <ToastContainer />
             <Footer />
         </div>
     )
