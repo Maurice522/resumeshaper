@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { onAuthStateChanged, signOut } from 'firebase/auth'
-import { auth } from '../fireabse'
+import { auth, getUserFromDatabase } from '../fireabse'
 import { useDispatch, useSelector } from 'react-redux';
-import { signOutUser } from '../redux/slices/user';
+import { signOutUser, updateUser } from '../redux/slices/user';
 import Nav from '../components/nav';
 import { useNavigate } from 'react-router-dom';
 import { Power } from "react-bootstrap-icons";
@@ -49,6 +49,8 @@ export default function CreateLive() {
         customSections: [],
     });
 
+    
+
     const [personalData, setPersonalData] = useState({
         jobTitle: '',
         firstName: '',
@@ -94,20 +96,84 @@ export default function CreateLive() {
         ],
     });
 
+    const [gettingUser, SetGettingUser] = useState(false);
+
     const user = useSelector(state => state.user.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     useEffect(()=>{
        
-        const listen = onAuthStateChanged(auth, (user)=>{
-            if (user) {
-               console.log(user)
+        const listen = onAuthStateChanged(auth, async (userAuth)=>{
+            if (userAuth) {
+                if(user.email === null){
+                    SetGettingUser(true)
+                    const userFirebase = await getUserFromDatabase(userAuth.email)
+                    await dispatch(updateUser(userFirebase))
+                    SetGettingUser(false)
+                }
             }else{
                 navigate("/")
                
             }
         })
     },[])
+
+    useEffect(()=>{
+        if(user.email!==null){
+
+        
+            var temp={
+                jobTitle: '',
+                firstName: '',
+                middleName: '',
+                lastName: '',
+                inputEmail: '',
+                phone: '',
+                dateOfBirth: '',
+                city: '',
+                address: '',
+                postalCode: '',
+                drivingLicense: '',
+                nationality: '',
+                placeOfBirth: '',
+                country: '',
+                professionalSummary: '',
+                uploadedPhotoURL: '',
+                employmentHistory: [
+                    {
+                        jobTitle: '',
+                        employer: '',
+                        startDate: '',
+                        endDate: '',
+                        city: '',
+                        description: '',
+                    },
+                ],
+                educationHistory: [
+                    {
+                        school: '',
+                        degree: '',
+                        startDate: '',
+                        endDate: '',
+                        city: '',
+                        description: '',
+                    },
+                ],
+                websitesLinks: [
+                    {
+                        name: '',
+                        url: '',
+                    },
+                ],
+            };
+            Object.entries(temp).map(([key, value]) => {
+                temp[key] =user[key]
+              }
+              );
+              
+            setPersonalData(temp)  
+        }
+    },[user])
 
     const handleDownload = () => {
         console.log("berfore", downloadPdf)
@@ -407,6 +473,8 @@ export default function CreateLive() {
     };
 
     return (
+        <>
+        {gettingUser? <img style={{ position: "absolute",top: "50%",left: "50%",transform: "translate(-50%, -50%)"}} width="240" height="240" alt='loading...' src='https://media2.giphy.com/media/MDrmyLuEV8XFOe7lU6/200w.webp?cid=ecf05e47k6onrtqddz8d98s4j5lhtutlnnegeus1pwcdwkxt&ep=v1_gifs_search&rid=200w.webp&ct=g' /> :
         <>
             {/* <Nav /> */}
             {downloadPdf ? <PdfDisplayBE personalData={personalData} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={selectedOptions} downloadPdf={downloadPdf} setDownloadPdf={setDownloadPdf} /> : <>
@@ -975,6 +1043,8 @@ export default function CreateLive() {
                     {/* <button onClick={() => handleDownload()} className="downloadPdfBtn zoom" disabled={photoLoader}><FileEarmarkArrowDownFill className="downloadPDFIcon" size={26} style={{zIndex:18}}/>Download PDF</button> */}
                 </div>
             </>}
+        </>
+        }
         </>
     )
 }

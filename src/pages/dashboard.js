@@ -4,19 +4,23 @@ import { Power } from "react-bootstrap-icons";
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { onAuthStateChanged, signOut } from 'firebase/auth'
-import { auth } from '../fireabse'
-import { signOutUser } from '../redux/slices/user';
+import { auth, getUserFromDatabase } from '../fireabse'
+import { signOutUser, updateUser } from '../redux/slices/user';
 import '../styleSheet/Dashboard.css'
 import { Share, ThreeDots, Check2Circle, PencilSquare, FileEarmarkArrowDownFill, Bullseye, PlusLg, PencilFill, Trash3Fill, ColumnsGap, Book, JournalRichtext, BagFill, GraphUpArrow, MegaphoneFill, Alipay, Bicycle, CheckSquare } from "react-bootstrap-icons";
 import img1 from '../images/resumeTemplate.png'
 
 export default function Dashboard() {
     const navigate =useNavigate()
+    const [gettingUser, SetGettingUser] = useState(false);
     useEffect(()=>{
        
-        const listen = onAuthStateChanged(auth, (user)=>{
+        const listen = onAuthStateChanged(auth, async(user)=>{
             if (user) {
-               console.log(user)
+                SetGettingUser(true)
+                const userFirebase = await getUserFromDatabase(user.email)
+                dispatch(updateUser(userFirebase))
+                SetGettingUser(false)
             }else{
                 navigate("/")
                
@@ -68,6 +72,8 @@ export default function Dashboard() {
 
     return (
         <>
+        {gettingUser? <img style={{ position: "absolute",top: "50%",left: "50%",transform: "translate(-50%, -50%)"}} width="240" height="240" alt='loading...' src='https://media2.giphy.com/media/MDrmyLuEV8XFOe7lU6/200w.webp?cid=ecf05e47k6onrtqddz8d98s4j5lhtutlnnegeus1pwcdwkxt&ep=v1_gifs_search&rid=200w.webp&ct=g' /> :
+        <>
             <Nav />
             <button onClick={() => handler()} className=" btn btn-success signoutBtn"> <Power color="#35b276" size={22} /> &nbsp;Signout</button>
             <div className='dashboardDiv'>
@@ -106,6 +112,8 @@ export default function Dashboard() {
 
                 </div>
             </div>
+        </>
+        }
         </>
     )
 }

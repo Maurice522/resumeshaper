@@ -102,6 +102,7 @@ export const userSlice = createSlice({
               }
           }
           );
+          console.log("updatedUser")
         }
     }
 })
