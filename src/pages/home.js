@@ -62,11 +62,11 @@ export default function Home() {
             description: '',
           },
         ],
-        websitesAndLinks: [
-          {
-            name: '',
-            url: '',
-          },
+        websitesLinks: [
+            {
+                name: '',
+                url: '',
+            },
         ],
     
       });

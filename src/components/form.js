@@ -194,40 +194,75 @@ export default function Form({personalData, setPersonalData}) {
   );
 
 
-  const addWebsiteOrLink = () => {
+  // const addWebsiteOrLink = () => {
+  //   setPersonalData((prevData) => ({
+  //     ...prevData,
+  //     websitesAndLinks: [
+  //       ...prevData.websitesAndLinks,
+  //       {
+  //         name: '',
+  //         url: '',
+  //       },
+  //     ],
+  //   }));
+  // };
+
+  // const removeWebsiteOrLink = (index) => {
+  //   setPersonalData((prevData) => {
+  //     const updatedWebsitesAndLinks = [...prevData.websitesAndLinks];
+  //     updatedWebsitesAndLinks.splice(index, 1);
+  //     return {
+  //       ...prevData,
+  //       websitesAndLinks: updatedWebsitesAndLinks,
+  //     };
+  //   });
+  // };
+
+  // const updateWebsiteOrLinkField = (index, field, value) => {
+  //   setPersonalData((prevData) => {
+  //     const updatedWebsitesAndLinks = [...prevData.websitesAndLinks];
+  //     updatedWebsitesAndLinks[index][field] = value;
+  //     return {
+  //       ...prevData,
+  //       websitesAndLinks: updatedWebsitesAndLinks,
+  //     };
+  //   });
+  // };
+
+  const addWebsiteLink = () => {
     setPersonalData((prevData) => ({
-      ...prevData,
-      websitesAndLinks: [
-        ...prevData.websitesAndLinks,
-        {
-          name: '',
-          url: '',
-        },
-      ],
+        ...prevData,
+        websitesLinks: [
+            ...prevData.websitesLinks,
+            {
+                name: '',
+                url: '',
+            },
+        ],
     }));
-  };
+};
 
-  const removeWebsiteOrLink = (index) => {
+const removeWebsiteLink = (index) => {
     setPersonalData((prevData) => {
-      const updatedWebsitesAndLinks = [...prevData.websitesAndLinks];
-      updatedWebsitesAndLinks.splice(index, 1);
-      return {
-        ...prevData,
-        websitesAndLinks: updatedWebsitesAndLinks,
-      };
+        const updatedWebsitesLinks = [...prevData.websitesLinks];
+        updatedWebsitesLinks.splice(index, 1);
+        return {
+            ...prevData,
+            websitesLinks: updatedWebsitesLinks,
+        };
     });
-  };
+};
 
-  const updateWebsiteOrLinkField = (index, field, value) => {
+const updateWebsiteLinkField = (index, field, value) => {
     setPersonalData((prevData) => {
-      const updatedWebsitesAndLinks = [...prevData.websitesAndLinks];
-      updatedWebsitesAndLinks[index][field] = value;
-      return {
-        ...prevData,
-        websitesAndLinks: updatedWebsitesAndLinks,
-      };
+        const updatedWebsitesLinks = [...prevData.websitesLinks];
+        updatedWebsitesLinks[index][field] = value;
+        return {
+            ...prevData,
+            websitesLinks: updatedWebsitesLinks,
+        };
     });
-  };
+};
 
   const addEducationHistory = () => {
     setPersonalData((prevData) => ({
@@ -749,8 +784,70 @@ export default function Form({personalData, setPersonalData}) {
 
         <h5 className='formSection'><Link45deg color="#35b276" size={26} /> &nbsp;Websites and Links</h5>
         <p className='detailsSubText'>Elevate your resume with real-world examples of your work. You can include Personal-websites, portfolios,and project repositories to demonstrate your skills and experience.  </p>
+                                    <div class="accordion myAccordian" id="accordionExample4">
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                                    Add Website or Link
+                                                </button>
+                                            </h2>
+                                            <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample4">
+                                                <div class="accordion-body">
 
-        <div class="accordion myAccordian" id="accordionExample4">
+                                                    {personalData.websitesLinks.map((websiteLink, index) => (
+                                                        <div key={index} className="websitesLinksDiv">
+                                                            <h5 className='personalSubSubHeading'>Link {index + 1} :</h5>
+                                                            <div className='row'>
+                                                                <div className="col-md-6">
+                                                                    <label className='detailsInfoLabel'>
+                                                                        Name:
+                                                                    </label>
+                                                                    <br />
+                                                                    <input
+                                                                        className='detailsInfoInput'
+                                                                        type="text"
+                                                                        value={websiteLink.name}
+                                                                        onChange={(e) => updateWebsiteLinkField(index, 'name', e.target.value)}
+                                                                    />
+                                                                </div>
+
+                                                                <div className="col-md-6">
+                                                                    <label className='detailsInfoLabel'>
+                                                                        URL:
+                                                                    </label>
+                                                                    <br />
+                                                                    <input
+                                                                        className='detailsInfoInput'
+                                                                        type="text"
+                                                                        value={websiteLink.url}
+                                                                        onChange={(e) => updateWebsiteLinkField(index, 'url', e.target.value)}
+                                                                    />
+                                                                </div>
+                                                            </div>
+
+                                                            <button
+                                                                type="button"
+                                                                onClick={() => removeWebsiteLink(index)}
+                                                                className="DeleteEmp"
+                                                            >
+                                                                <Trash3Fill size={20} />
+                                                            </button>
+                                                        </div>
+                                                    ))}
+
+                                                    <button
+                                                        type="button"
+                                                        onClick={addWebsiteLink}
+                                                        className="Sec1additionalDetails"
+                                                    >
+                                                        <PlusLg size={20} /> Add One More Website/Link
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+        {/* <div class="accordion myAccordian" id="accordionExample4">
           <div class="accordion-item">
             <h2 class="accordion-header">
               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
@@ -768,11 +865,13 @@ export default function Form({personalData, setPersonalData}) {
                         <label className='detailsInfoLabel'>
                           Name:
                         </label>
+                    
                         <input
                           className='detailsInfoInput' type="text"
                           value={websiteOrLink.name}
-                          onChange={(e) => updateWebsiteOrLinkField(index, 'name', e.target.value)}
-                        />
+                          onChange={(e) => (index, 'name', e.target.value)}
+                        />updateWebsiteOrLinkField
+
                       </div>
 
                       <div className="col-md-6">
@@ -798,7 +897,7 @@ export default function Form({personalData, setPersonalData}) {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div className='skillsSection'>
             <h5 className='formSection'>
