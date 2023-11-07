@@ -59,7 +59,8 @@ export const userSlice = createSlice({
           references:[],
           customSections:[],
         },
-        skills:[]
+        skills:[],
+        profile:false
        }
     },
     reducers:{
@@ -68,9 +69,9 @@ export const userSlice = createSlice({
             state.user.name = action.payload.name;
             state.user.email = action.payload.email;
             state.user.password = action.payload.password;
-            console.log("state", state.user.name,
-            state.user.email,
-            state.user.password)
+            // console.log("state", state.user.name,
+            // state.user.email,
+            // state.user.password)
         },
         signOutUser: (state, action)=>{
             state.user.email = null;
@@ -84,15 +85,26 @@ export const userSlice = createSlice({
         },
         updatePhoto: (state, action)=>{
             state.user.uploadedPhotoURL= action.payload; 
-            console.log("REDUX Object for updatePhoto",state.user.uploadedPhotoURL);  
         },
         updateProfile: (state, action)=>{          
             state.user={...state.user,...action.payload}
-            console.log("My Redux values for Profile" ,state.user);
+        },
+        updateUser:(state, action)=>{
+          Object.entries(action.payload).map(([key, value]) => {
+            if(value !== "" && value !==null )
+              if(Array.isArray(value)){
+                if(value.length !== 0){
+                  state.user[key] = value;
+                }
 
+              }else{
+                state.user[key] = value;
+              }
+          }
+          );
         }
     }
 })
 
-export const {loginUser, signOutUser, updateResume,updatePhoto,updateProfile} = userSlice.actions; 
+export const {loginUser, signOutUser, updateResume,updatePhoto,updateProfile,updateUser} = userSlice.actions; 
 export default userSlice.reducer;

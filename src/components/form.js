@@ -3,7 +3,7 @@ import { Check2Circle, Check2All, Check, PersonCheck, PersonSquare, CaretDownSqu
 import CustomSection from './formComponents/customSection';
 import { updateUserProfileInDatabase, updateUserPhotoInDatabase, uploadMedia } from '../fireabse';
 import { useDispatch, useSelector } from 'react-redux';
-import { updatePhoto, updateProfile } from '../redux/slices/user';
+import { updatePhoto, updateProfile, updateUser } from '../redux/slices/user';
 import skills from '../components/formComponents/skills';
 import { useNavigate } from 'react-router-dom'
 import SkillsForm from './skillsForm';
@@ -353,9 +353,12 @@ const updateWebsiteLinkField = (index, field, value) => {
     }
     console.log("Login email  " + user.email)
     await updateUserProfileInDatabase(user.email, profile)
-    dispatch(updateProfile(profile));
+    // dispatch(updateProfile(profile));
+    console.log('Form Input Details:', user);
+    dispatch(updateUser(profile));
     console.log('Form Input Details:', profile);
-    navigate("/dashboard")
+    console.log('Form Input Details:', user);
+    // navigate("/dashboard")
 
   };
 
