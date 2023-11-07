@@ -101,6 +101,16 @@ export const updateUserProfileInDatabase = async (email,data)=>{
     console.log(err)
   }
 }
+
+export const addUserResume = async (email,data)=>{
+  try{
+    console.log(data, email)
+    const docRef = doc(db, "users", email);
+    await updateDoc(docRef,{resumes:data})
+  }catch(err){
+    console.log(err)
+  }
+}
 export const getUserDocByRef = async (DocumentReference) => {
   const userDocSnapshot = await getDoc(DocumentReference);
   return userDocSnapshot.data();

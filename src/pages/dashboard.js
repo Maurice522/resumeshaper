@@ -2,13 +2,17 @@ import React, { useEffect, useState } from 'react'
 import Nav from '../components/nav';
 import { Power } from "react-bootstrap-icons";
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { onAuthStateChanged, signOut } from 'firebase/auth'
 import { auth, getUserFromDatabase } from '../fireabse'
 import { signOutUser, updateUser } from '../redux/slices/user';
-import '../styleSheet/Dashboard.css'
+import '../styleSheet/Dashboard.css';
 import { Share, ThreeDots, Check2Circle, PencilSquare, FileEarmarkArrowDownFill, Bullseye, PlusLg, PencilFill, Trash3Fill, ColumnsGap, Book, JournalRichtext, BagFill, GraphUpArrow, MegaphoneFill, Alipay, Bicycle, CheckSquare } from "react-bootstrap-icons";
-import img1 from '../images/resumeTemplate.png'
+import img1 from '../images/template1.PNG'
+import img2 from '../images/template2.PNG'
+import img3 from '../images/template3.PNG'
+import img4 from '../images/template4.PNG'
+import Templates from '../components/templates';
 
 export default function Dashboard() {
     const navigate =useNavigate()
@@ -20,6 +24,7 @@ export default function Dashboard() {
                 SetGettingUser(true)
                 const userFirebase = await getUserFromDatabase(user.email)
                 dispatch(updateUser(userFirebase))
+                initializeSavedResumes(userFirebase)
                 SetGettingUser(false)
             }else{
                 navigate("/")
@@ -27,8 +32,19 @@ export default function Dashboard() {
             }
         })
     },[])
-
+    
+    const [savedResumes, setSavedResumes] = useState([
+        {
+            resumeId: 1,
+            img: img1,
+            title: 'My Profile',
+            description: 'Description',
+            id:"id46876548",
+            idx:0
+        },
+    ]);
     const dispatch = useDispatch();
+    const user = useSelector(state => state.user.user);
     const handler = (e) => {
         signOut(auth).then(() => {
             dispatch(signOutUser())
@@ -38,22 +54,47 @@ export default function Dashboard() {
             console.log(err)
         })
     }
-
-    const [savedResumes, setSavedResumes] = useState([
-        {
-            id: 1,
+    const initializeSavedResumes = (user)=>{
+        var temp = [];
+        var srem={
+            resumeId: 1,
             img: img1,
             title: 'My Profile',
             description: 'Description',
-        },
-    ]);
+            id:"id46876548",
+            idx:0
+        };
+
+        user.resumes.map((resume,index)=>{
+            var tempimg = img1;
+
+            if(resume.resumeId === 2){
+                tempimg = img2;
+            }else if(resume.resumeId === 3){
+                tempimg = img3;
+            }else if(resume.resumeId === 4){
+                tempimg = img4;
+            }
+
+            srem.resumeId = resume.resumeId;
+            srem.img = tempimg;
+            srem.title = resume.jobTitle;
+            srem.description = resume.professionalSummary.substring(0, 20);
+            srem.id = resume.id;
+            srem.idx = index;
+
+            temp.push(srem);
+        })
+        setSavedResumes(temp)
+    }
 
     const addSavedResume = () => {
         const newDiv = {
-            id: savedResumes.length + 1,
+            resumeId: 1,
             img: img1,
             title: 'My Profile',
             description: new Date().toLocaleString(),
+            id:"id4687654848"
         };
         setSavedResumes([...savedResumes, newDiv]);
         
@@ -66,14 +107,15 @@ export default function Dashboard() {
         setSavedResumes(updatedResumes);
     };
 
-    const openSelectedResume = () => {
-       navigate('/create')
+    const openSelectedResume = (remid,idx) => {
+       navigate('/create', {state:{currRemId:remid,idx:idx}})
     };
 
     return (
         <>
         {gettingUser? <img style={{ position: "absolute",top: "50%",left: "50%",transform: "translate(-50%, -50%)"}} width="240" height="240" alt='loading...' src='https://media2.giphy.com/media/MDrmyLuEV8XFOe7lU6/200w.webp?cid=ecf05e47k6onrtqddz8d98s4j5lhtutlnnegeus1pwcdwkxt&ep=v1_gifs_search&rid=200w.webp&ct=g' /> :
         <>
+        {console.log(savedResumes)}
             <Nav />
             <button onClick={() => handler()} className=" btn btn-success signoutBtn"> <Power color="#35b276" size={22} /> &nbsp;Signout</button>
             <div className='dashboardDiv'>
@@ -88,7 +130,7 @@ export default function Dashboard() {
                     {savedResumes.map((savedResume) => (
                         <div key={savedResume.id} className='resume1Div col-md-6'>
                             <div className='row'>
-                                <div className='col-md-4' onClick={openSelectedResume}>
+                                <div className='col-md-4' onClick={()=>openSelectedResume(savedResume.resumeId,savedResume.idx)}>
                                     <img src={savedResume.img} className="resumeImg zoom" alt="Profile Image" />
                                     <h6 className='resumeTitle'>{savedResume.title}</h6>
                                 </div>

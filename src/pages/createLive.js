@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { onAuthStateChanged, signOut } from 'firebase/auth'
-import { auth, getUserFromDatabase } from '../fireabse'
+import { addUserResume, auth, getUserFromDatabase } from '../fireabse'
 import { useDispatch, useSelector } from 'react-redux';
-import { signOutUser, updateUser } from '../redux/slices/user';
+import { saveResume, signOutUser, updateUser } from '../redux/slices/user';
 import Nav from '../components/nav';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Power } from "react-bootstrap-icons";
 import MyPdfViewer1 from '../components/pdfDisplayFeTemp1';
 import MyPdfViewer2 from '../components/pdfDisplayFeTemp2';
@@ -30,6 +30,8 @@ import img7 from '../images/template4.PNG'
 // import skills from '../components/formComponents/skills';    
 
 export default function CreateLive() {
+
+    const {state} = useLocation()
 
     const [showAdditionalDetails, setShowAdditionalDetails] = useState(false);
     const [courses, setCourses] = useState([]);
@@ -176,13 +178,38 @@ export default function CreateLive() {
                 ],
             };
             Object.entries(temp).map(([key, value]) => {
-                temp[key] =user[key]
+                temp[key] =user.resumes[state.idx][key]
               }
               );
-              
+            console.log(state.currRemId)
+            setSelectedTemplateId(state.currRemId)
             setPersonalData(temp)  
         }
     },[user])
+
+    // const saveResume= async(e)=>{
+        
+    //         e.preventDefault();
+         
+    //         var resume = {
+    //           ...personalData,
+    //           skills: selectedOptions,
+    //           customDetails,
+    //           resumeId:selectedTemplateId
+    //         }
+    //         console.log(resume)
+    //         var resumes = [...user.resume, resume]
+    //         console.log("Login email  " + user.email)
+    //         await addUserResume(user.email, resumes);
+    //         console.log(user)
+    //         dispatch(saveResume(resume));
+    //         console.log(user)
+
+    //         // dispatch(updateUser(resume));
+    //         // navigate("/dashboard")
+        
+        
+    // }
 
     const handleDownload = () => {
         console.log("berfore", downloadPdf)
@@ -424,19 +451,39 @@ export default function CreateLive() {
 
     const handleLogDetails = async (e) => {
         e.preventDefault();
-        console.log(personalData)
-        console.log(customDetails)
-        var profile = {
-            ...personalData,
-            skills: selectedOptions,
-            customDetails
-        }
-        console.log("Login email  " + user.email)
-        await updateUserProfileInDatabase(user.email, profile)
-        dispatch(updateProfile(profile));
-        console.log('Form Input Details:', profile);
-        setDownloadPdf(true)
-        navigate("/dashboard")
+         
+            var resume = {
+              ...personalData,
+              skills: selectedOptions,
+              customDetails,
+              resumeId:selectedTemplateId,
+              id:'id' + (new Date()).getTime()
+            }
+            console.log(resume)
+            console.log(user.resumes)
+            var resumes = [...user.resumes, resume]
+            console.log("Login email  " + user.email)
+            await addUserResume(user.email, resumes);
+            console.log(user)
+            dispatch(saveResume(resume));
+            console.log(user)
+
+            // dispatch(updateUser(resume));
+            // navigate("/dashboard")
+
+        // console.log(personalData)
+        // console.log(customDetails)
+        // var profile = {
+        //     ...personalData,
+        //     skills: selectedOptions,
+        //     customDetails
+        // }
+        // console.log("Login email  " + user.email)
+        // await updateUserProfileInDatabase(user.email, profile)
+        // dispatch(updateProfile(profile));
+        // console.log('Form Input Details:', profile);
+        // setDownloadPdf(true)
+        // navigate("/dashboard")
     };
 
     const toggleAdditionalDetails = () => {
@@ -1043,7 +1090,7 @@ export default function CreateLive() {
                                     <CustomSection courses={courses} setCourses={setCourses} activities={activities} setActivities={setActivities} internships={internships} setInternships={setInternships} hobbies={hobbies} setHobbies={setHobbies} languages={languages} setLanguages={setLanguages} references={references} setReferences={setReferences} customSections={customSections} setCustomSections={setCustomSections} liveForm={"true"} />
                                     <div className='createSaveProfileDiv'>
                                         <button type="submit"  className="saveProfileBtn createLiveSaveProfileBtn">
-                                            <Check2Circle size={26} />&nbsp;&nbsp;&nbsp;Create My Resume
+                                            <Check2Circle size={26}  />&nbsp;&nbsp;&nbsp;Create My Resume
                                         </button>
                                     </div>
                                 </form>
