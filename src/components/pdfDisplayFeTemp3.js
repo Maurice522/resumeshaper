@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function MyPdfViewer({ personalData, live, courses, activities, internships, hobbies, languages, references, customSections, skills }) {
+export default function MyPdfViewer3({ personalData, live, courses, activities, internships, hobbies, languages, references, customSections, skills }) {
   return (
     <>
       <div className='row temp3MainDiv'>

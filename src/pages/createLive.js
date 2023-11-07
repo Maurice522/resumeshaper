@@ -6,7 +6,10 @@ import { signOutUser, updateUser } from '../redux/slices/user';
 import Nav from '../components/nav';
 import { useNavigate } from 'react-router-dom';
 import { Power } from "react-bootstrap-icons";
-import MyPdfViewer from '../components/pdfDisplayFeTemp1';
+import MyPdfViewer1 from '../components/pdfDisplayFeTemp1';
+import MyPdfViewer2 from '../components/pdfDisplayFeTemp2';
+import MyPdfViewer3 from '../components/pdfDisplayFeTemp3';
+import MyPdfViewer4 from '../components/pdfDisplayFeTemp4';
 import {PlusCircleFill, FileEarmarkArrowDownFill, Check2Circle, Check2All, Check, PersonCheck, PersonSquare, CaretDownSquare, JournalBookmarkFill, PenFill, Trash3Fill, PlusLg, JournalCheck, Link45deg, TrophyFill } from "react-bootstrap-icons";
 import CustomSection from '../components/formComponents/customSection';
 import { updateUserProfileInDatabase, updateUserPhotoInDatabase, uploadMedia } from '../fireabse';
@@ -17,6 +20,10 @@ import PdfDisplayBE from '../components/pdfDisplayBE';
 import Test from './test';
 import '../styleSheet/Nav.css'
 import img3 from '../images/26.png'
+import img4 from '../images/template1.PNG'
+import img5 from '../images/template2.PNG'
+import img6 from '../images/template3.PNG'
+import img7 from '../images/template4.PNG'
 
 
 
@@ -48,6 +55,8 @@ export default function CreateLive() {
         references: [],
         customSections: [],
     });
+    const [selectedTemplateId, setSelectedTemplateId] = useState(1);
+
 
     
 
@@ -500,6 +509,15 @@ export default function CreateLive() {
                             <p className='formSubText'>"Tell us more about yourself and the position you're targeting, and we'll create a personlized resume just for you."</p>
                             <hr className='hrLine' />
                             <div>
+                            <h5 className='formSection createFormSection'><PersonCheck color="#35b276" size={29} /> &nbsp;Select Template</h5>
+                            <div className=' templateDiv'>
+                                <div  onClick={()=>setSelectedTemplateId(1)}><img className='templateImg' src={img4}   /></div>
+                                <div  onClick={()=>setSelectedTemplateId(2)} ><img className='templateImg' src={img5} /></div>
+                                <div  onClick={()=>setSelectedTemplateId(3)}><img className='templateImg' src={img6} /></div>
+                                <div  onClick={()=>setSelectedTemplateId(4)}><img className='templateImg' src={img7} /></div>
+
+                            </div>
+
                                 <h5 className='formSection createFormSection'><PersonCheck color="#35b276" size={29} /> &nbsp;Personal Details</h5>
                                 <form onSubmit={handleLogDetails}>
                                     <div className='row'>
@@ -1036,7 +1054,11 @@ export default function CreateLive() {
                     <div className='rightDivCreateLive' style={{ flex: 1, position: "fixed", width: "50%", right: "0%", top: "0%", paddingTop: "5%" }}>
                         <div className='  createRightDiv'>
                             <div className='pdfDisplayDiv' >
-                                <MyPdfViewer personalData={personalData} live={true} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={selectedOptions} />
+                            {selectedTemplateId==1 && <MyPdfViewer1 personalData={personalData} live={true} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={selectedOptions} />}
+                            {selectedTemplateId==2 && <MyPdfViewer2 personalData={personalData} live={true} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={selectedOptions} />}
+                            {selectedTemplateId==3 && <MyPdfViewer3 personalData={personalData} live={true} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={selectedOptions} />}
+                            {selectedTemplateId==4 && <MyPdfViewer4 personalData={personalData} live={true} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={selectedOptions} />}
+                            
                             </div>
                         </div>
                     </div>
