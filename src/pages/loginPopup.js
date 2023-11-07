@@ -5,9 +5,11 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { ToastContainer, toast } from 'react-toastify';
 import { addUserInDatabase } from '../fireabse';
 import img3 from '../images/28.png'
 import '../styleSheet/LoginPopup.css';
+import { limitToLast } from 'firebase/firestore';
 
 const LoginPopup = ({ onClose, onSignup }) => {
     const [email, setEmail] = useState("");
@@ -42,10 +44,12 @@ const LoginPopup = ({ onClose, onSignup }) => {
     };
 
     const signInUser = (auth, email, password) => {
+        toast.info('Verifying User')
         signInWithEmailAndPassword(auth, email, password)
             .then(async (userCredential) => {
                 const user = await getUserFromDatabase(email)
                 dispatch(loginUser(user))
+                toast.success('Logging in User')
                 navigate("/auth")
                 console.log(userCredential);
             }).catch(err => {
@@ -137,6 +141,7 @@ const LoginPopup = ({ onClose, onSignup }) => {
                     </div>
                 </form>
             </div>
+           
         </div>
     );
 };

@@ -4,7 +4,7 @@ import { saveAs } from 'file-saver';
 import img1 from '../images/22.png'
 import BEDocTemp2 from './BEDocTemp2';
 import Nav from './nav';
-import BEDocTemp4 from './BEDocTemp4';
+import BEDocTemp4 from './BEDocTemp1';
 
 const styles = StyleSheet.create({
   page: {

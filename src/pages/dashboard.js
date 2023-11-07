@@ -52,11 +52,18 @@ export default function Dashboard() {
             description: new Date().toLocaleString(),
         };
         setSavedResumes([...savedResumes, newDiv]);
+        
     };
+
+
 
     const delSavedResume = (id) => {
         const updatedResumes = savedResumes.filter((resumes) => resumes.id !== id);
         setSavedResumes(updatedResumes);
+    };
+
+    const openSelectedResume = () => {
+       navigate('/create')
     };
 
     return (
@@ -75,7 +82,7 @@ export default function Dashboard() {
                     {savedResumes.map((savedResume) => (
                         <div key={savedResume.id} className='resume1Div col-md-6'>
                             <div className='row'>
-                                <div className='col-md-4'>
+                                <div className='col-md-4' onClick={openSelectedResume}>
                                     <img src={savedResume.img} className="resumeImg zoom" alt="Profile Image" />
                                     <h6 className='resumeTitle'>{savedResume.title}</h6>
                                 </div>
@@ -92,7 +99,7 @@ export default function Dashboard() {
                     ))}
                     <div className='resume1Div col-md-6  '>
                         <div className='addNewResumeDiv zoom' onClick={addSavedResume}>
-                            <button className="editResumeBtns addResumePlusBtn"><PlusLg size={35} /><br /></button>
+                            <button className="editResumeBtns addResumePlusBtn" ><PlusLg size={35} /><br /></button>
                             <p>Add New</p>
                         </div>
                     </div>

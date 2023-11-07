@@ -381,6 +381,29 @@ body {
   .zoom:hover {
     transform: scale(1.1); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
   }
+  .continueToDahboardBtn{
+    background-color: #174f5d !important;
+    background-image: url("../images/bg.png") !important;
+    color: #174f5d !important;
+    width: 12%;
+    padding: 4px;
+    font-weight: 500;
+    font-size: 14px;
+    position: absolute;
+    top: 3.5%;
+    right: 3%;
+    border: none !important;
+  }
+  .continueToDahboardBtn:hover {
+    background-image: none;
+    background-color: #35b276;
+    color: white;
+    padding: 4px;
+    font-weight: 500;
+    position: absolute;
+    top: 3.5%;
+    right: 3%;
+}
 
 
   

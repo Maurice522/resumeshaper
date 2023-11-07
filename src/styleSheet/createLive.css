@@ -361,6 +361,27 @@ font-family: 'Roboto', sans-serif; */
   .languageLevel{
     font-size: 7px !important;
   }
+  .dashboardBtn{
+    position: absolute;
+    z-index: 20;
+    background-color: #ecf8e5;
+    right: 16%;
+    border: none;
+    color: #346571;
+    top: 34%;
+    font-weight: 800;
+  }
+  .dashboardBtn:hover{
+
+    position: absolute;
+    z-index: 20;
+    background-color: #ecf8e5;
+    right: 16%;
+    border: none;
+    color: #5ec57e;
+    top: 34%;
+    font-weight: 900;
+  }
 
 
 /* **************************Template 2 ****************************************** */

@@ -204,7 +204,17 @@
   margin-top: 0%;
 }
 .searchDetailsInfoInput{
-  width: 100% !important;
+  width: 80% !important;
+}
+.createLiveSearchDetailsInfoInput{
+  width: 75%!important;
+}
+.addSkillBtn{
+  background-color: white;
+  border: none;
+  margin-left: 2%;
+  color: #347571;
+  font-weight: 600;
 }
 .addExtraBtns{
   width: 100%;

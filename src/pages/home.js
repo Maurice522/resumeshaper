@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import { Check2Circle } from "react-bootstrap-icons";
 import img13 from '../images/19.png'
 import Form from '../components/form';
+// import Form from '../components/formcopy';
 import '../styleSheet/Home.css'
 import CreateUploadPopup from '../components/createUploadPopup';
 import EnterPositionPopup from '../components/enterPositionPopup';

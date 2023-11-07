@@ -6,9 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updatePhoto, updateProfile } from '../redux/slices/user';
 import skills from '../components/formComponents/skills';
 import { useNavigate } from 'react-router-dom'
-import SkillsForm from './skillsForm';
-import { PlusCircleFill } from "react-bootstrap-icons";
-
 
 export default function Form({personalData, setPersonalData}) {
 
@@ -21,7 +18,7 @@ export default function Form({personalData, setPersonalData}) {
   const [references, setReferences] = useState([]);
   const [customSections, setCustomSections] = useState([]);
   const [selectedOptions, setSelectedOptions] = useState([]);
-  const [options, setOptions] = useState('');
+  const [options, setOptions] = useState(generateOptions());
   const [searchText, setSearchText] = useState('');
   const [photoLoader, setPhotoLoader] = useState(false);
   const [customDetails, setCustomDetails] = useState({
@@ -39,7 +36,6 @@ export default function Form({personalData, setPersonalData}) {
   const user = useSelector(state => state.user.user);
   const dispatch = useDispatch();
   const navigate = useNavigate()
-
 
   // const [personalData, setPersonalData] = useState({
   //   jobTitle: '',
@@ -140,56 +136,35 @@ export default function Form({personalData, setPersonalData}) {
     });
   }, [customSections]);
 
+
+
+
   // Function to log the selected skills
   useEffect(() => {
     console.log('Selected Skills:', selectedOptions);
   }, [selectedOptions]);
 
+  const handleSearchTextChange = (e) => {
+    const text = e.target.value;
+    setSearchText(text);
+    setShowDropdown(true);
+  };
 
-    const handleSearchTextChange = (e) => {
-        setSearchText(e.target.value);
-    };
+  const handleOptionClick = (option) => {
+    if (!selectedOptions.includes(option)) {
+      setSelectedOptions([...selectedOptions, option]);
+      setSearchText('');
+    }
+  };
 
-    const handleAddSkill = () => {
-        if (options.trim() !== '') {
-            setSelectedOptions([...selectedOptions, options]);
-            setOptions('');
-        }
-    };
+  const handleRemoveOption = (optionToRemove) => {
+    const updatedSelectedOptions = selectedOptions.filter(
+      (option) => option !== optionToRemove
+    );
+    setSelectedOptions(updatedSelectedOptions);
+  };
 
-    const handleRemoveSkill = (skillToRemove) => {
-        const updatedSkills = selectedOptions.filter((skill) => skill !== skillToRemove);
-        setSelectedOptions(updatedSkills);
-    };
-
-
-
-{/* ********************************OLD SKILLS SECTION**************************************** */}
-
-  // const handleSearchTextChange = (e) => {
-  //   const text = e.target.value;
-  //   setSearchText(text);
-  //   setShowDropdown(true);
-  // };
-  
-  // const handleOptionClick = (option) => {
-  //   if (!selectedOptions.includes(option)) {
-  //     setSelectedOptions([...selectedOptions, option]);
-  //     setSearchText('');
-  //   }
-  // };
-
-  // const handleRemoveOption = (optionToRemove) => {
-  //   const updatedSelectedOptions = selectedOptions.filter(
-  //     (option) => option !== optionToRemove
-  //   );
-  //   setSelectedOptions(updatedSelectedOptions);
-  // };
-
-{/* ********************************OLD SKILLS SECTION**************************************** */}
-
-
-  const filteredOptions = selectedOptions.filter((option) =>
+  const filteredOptions = options.filter((option) =>
     option.toLowerCase().includes(searchText.toLowerCase())
   );
 
@@ -307,8 +282,8 @@ export default function Form({personalData, setPersonalData}) {
     });
   };
 
-  const handleLogDetails = async (e) => {
-    e.preventDefault();
+  const handleLogDetails = async () => {
+    console.log('form submitted');
     console.log(personalData)
     console.log(customDetails)
     var profile = {
@@ -321,7 +296,6 @@ export default function Form({personalData, setPersonalData}) {
     dispatch(updateProfile(profile));
     console.log('Form Input Details:', profile);
     navigate("/dashboard")
-
   };
 
 
@@ -367,15 +341,15 @@ export default function Form({personalData, setPersonalData}) {
   return (
     <div>
       <h5 className='formSection'><PersonCheck color="#35b276" size={40} /> &nbsp;Personal Details</h5>
-      <form onSubmit={handleLogDetails}>
+      <form onSubmit={handleLogDetails} >
         <div className='row'>
 
           <div className='col-md-4'>
             <label className='detailsInfoLabel'>
-              Target Position <span style={{color:'red'}}>*</span>
+              Target Position
             </label>
             <br />
-            <input className='detailsInfoInput'  type="text" name="jobTitle" value={personalData.jobTitle} onChange={handleChange} required='true'  />
+            <input className='detailsInfoInput' type="text" name="jobTitle" value={personalData.jobTitle} onChange={handleChange} required='true'/>
           </div>
 
           <div className='col-md-8 uplouploadPictureBigDiv'>
@@ -400,10 +374,10 @@ export default function Form({personalData, setPersonalData}) {
 
           <div className='col-md-4 col-sm-6'>
             <label className='detailsInfoLabel'>
-              First Name: <span style={{color:'red'}}>*</span>
+              First Name:
             </label>
             <br />
-            <input type="text" className='detailsInfoInput' name="firstName" value={personalData.firstName} onChange={handleChange} required='true' />
+            <input type="text" className='detailsInfoInput' name="firstName" value={personalData.firstName} onChange={handleChange}  required='true'/>
           </div>
 
           <div className='col-md-4 col-sm-6'>
@@ -424,7 +398,7 @@ export default function Form({personalData, setPersonalData}) {
 
           <div className='col-md-4 col-sm-6'>
             <label className='detailsInfoLabel'>
-              Email: <span style={{color:'red'}}>*</span>
+              Email:
             </label>
             <br />
             <input className='detailsInfoInput' type="email" name="inputEmail" value={personalData.inputEmail} onChange={handleChange} required='true'/>
@@ -432,15 +406,15 @@ export default function Form({personalData, setPersonalData}) {
 
           <div className='col-md-4 col-sm-6'>
             <label className='detailsInfoLabel'>
-              Phone: <span style={{color:'red'}}>*</span>
+              Phone:
             </label>
             <br />
-            <input className='detailsInfoInput' type="number" name="phone" value={personalData.phone} onChange={handleChange} required='true' />
+            <input className='detailsInfoInput' type="number" name="phone" value={personalData.phone} onChange={handleChange} required='true'/>
           </div>
 
           <div className='col-md-4 col-sm-6'>
             <label className='detailsInfoLabel'>
-              Date of Birth: <span style={{color:'red'}}>*</span>
+              Date of Birth:
             </label>
             <br />
             <input className='detailsInfoInput' type="date" name="dateOfBirth" value={personalData.dateOfBirth} onChange={handleChange} required='true'/>
@@ -448,7 +422,7 @@ export default function Form({personalData, setPersonalData}) {
 
           <div className='col-md-4 col-sm-6'>
             <label className='detailsInfoLabel'>
-              City: <span style={{color:'red'}}>*</span>
+              City:
             </label>
             <br />
             <input className='detailsInfoInput' type="text" name="city" value={personalData.city} onChange={handleChange} required='true'/>
@@ -516,7 +490,7 @@ export default function Form({personalData, setPersonalData}) {
         )}
         <br />
 
-        <h5 className='formSection'><PenFill color="#35b276" size={24} /> &nbsp;Professional Summary <span style={{color:'red'}}>*</span></h5>
+        <h5 className='formSection'><PenFill color="#35b276" size={24} /> &nbsp;Professional Summary</h5>
         <p className='detailsSubText'>Compose a professional summary to showcase your expertise. For instance: 'Results driven marketing professional with 8 years of experience,excelling in digital strategy and campaign optimization.'</p>
         <textarea
           name="professionalSummary"
@@ -800,44 +774,10 @@ export default function Form({personalData, setPersonalData}) {
           </div>
         </div>
 
+
+
+
         <div className='skillsSection'>
-            <h5 className='formSection'>
-            <TrophyFill color="#35b276" size={24} /> &nbsp;
-                Add your Skills
-            </h5>
-            <p className='detailsSubText'>
-                Highlight your core strengths and expertise. Create and add skills that best suit your position and represent your capabilities, enhancing your resume.
-            </p>
-            <div>
-                <input
-                    className='detailsInfoInput searchDetailsInfoInput'
-                    type="text"
-                    placeholder="Add a skill..."
-                    value={options}
-                    onChange={(e) => setOptions(e.target.value)}
-                />
-                <button type="button" onClick={handleAddSkill} className='addSkillBtn zoom'><PlusCircleFill/> &nbsp;Add Skill</button>
-
-            </div>
-            <div>
-                <h6 className='formSection SkillsadditionalDetails'>
-                    Selected Skills:
-                </h6>
-                {selectedOptions.map((skill, index) => (
-                    <div key={index} className="selected-option selectedOption">
-                        {skill}
-                        <button type="button" onClick={() => handleRemoveSkill(skill)} className="DeleteSkill">
-                        <Trash3Fill size={16} />
-                        </button>
-
-                    </div>
-                ))}
-            </div>
-        </div>
-
-
-{/* ********************************OLD SKILLS SECTION**************************************** */}
-        {/* <div className='skillsSection'>
           <h5 className='formSection'><TrophyFill color="#35b276" size={24} /> &nbsp;Add your Skills</h5>
           <p className='detailsSubText'> Highlight your core strengths and expertise. Select up to 6 key skills that best suit your the position you want to apply to and represent your capabilities, enhancing your resume.</p>
           <div>
@@ -847,7 +787,6 @@ export default function Form({personalData, setPersonalData}) {
               placeholder="Search..."
               value={searchText}
               onChange={handleSearchTextChange}
-             
             />
             {showDropdown && (
               <div className="dropdown">
@@ -874,10 +813,7 @@ export default function Form({personalData, setPersonalData}) {
               </div>
             ))}
           </div>
-        </div> */}
-{/* ********************************OLD SKILLS SECTION**************************************** */}
-
-
+        </div>
         <div className='saveProfileDiv'>
           <button type="submit"  className="saveProfileBtn zoom">
             <Check2Circle size={26} />&nbsp;&nbsp;&nbsp;Save My Profile

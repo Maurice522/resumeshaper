@@ -26,11 +26,14 @@ import { Check2Circle, BookmarkStarFill } from "react-bootstrap-icons";
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '../fireabse'
 import { useNavigate } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
 
 
 export default function Landing() {
 
     const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
 
     const togglePopup = () => {
         setIsPopupOpen(!isPopupOpen);
@@ -40,11 +43,11 @@ export default function Landing() {
         togglePopup();
     };
     const navigate = useNavigate()
+    
     useEffect(()=>{
-       
         const listen = onAuthStateChanged(auth, (user)=>{
             if (user) {
-                navigate("/dashboard")
+                setIsLoggedIn(true);
             }
         })
     },[])
@@ -52,7 +55,9 @@ export default function Landing() {
     return (
         <div>
             <Nav />
-            <button class="loginBtn signoutBtn" onClick={togglePopup}>Login</button>
+            {isLoggedIn==true?
+            <button class=" continueToDahboardBtn signoutBtn zoom" onClick={()=>navigate('/dashboard')}>Dashboard</button>:
+            <button class="loginBtn signoutBtn" onClick={togglePopup}>Login</button>}
             {isPopupOpen && <LoginPopup onClose={togglePopup} onSignup={handleSignup} />}
 
             <div className='topDivLanding'>
@@ -251,6 +256,7 @@ export default function Landing() {
                 <img src={img13} className="sec5Img" />
                 <h1>Expertise, commitment, and value. It's our mission to consistently provide these to our clients.</h1>
             </div>
+            <ToastContainer />
             <Footer />
         </div>
     )

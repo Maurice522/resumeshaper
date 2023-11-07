@@ -7,7 +7,7 @@ import Nav from '../components/nav';
 import { useNavigate } from 'react-router-dom';
 import { Power } from "react-bootstrap-icons";
 import MyPdfViewer from '../components/pdfDisplayFeTemp1';
-import {PlusCircleFill, FileEarmarkArrowDownFill, Check2Circle, Check2All, Check, PersonCheck, PersonSquare, CaretDownSquare, JournalBookmarkFill, PenFill, Trash3Fill, PlusLg, JournalCheck, Link45deg, TrophyFill } from "react-bootstrap-icons";
+import { FileEarmarkArrowDownFill, Check2Circle, Check2All, Check, PersonCheck, PersonSquare, CaretDownSquare, JournalBookmarkFill, PenFill, Trash3Fill, PlusLg, JournalCheck, Link45deg, TrophyFill } from "react-bootstrap-icons";
 import CustomSection from '../components/formComponents/customSection';
 import { updateUserProfileInDatabase, updateUserPhotoInDatabase, uploadMedia } from '../fireabse';
 import { updatePhoto, updateProfile } from '../redux/slices/user';
@@ -33,7 +33,7 @@ export default function CreateLive() {
     const [references, setReferences] = useState([]);
     const [customSections, setCustomSections] = useState([]);
     const [selectedOptions, setSelectedOptions] = useState([]);
-    const [options, setOptions] = useState('');
+    const [options, setOptions] = useState(generateOptions());
     const [searchText, setSearchText] = useState('');
     const [photoLoader, setPhotoLoader] = useState(false);
     const [showDropdown, setShowDropdown] = useState(false);
@@ -115,9 +115,6 @@ export default function CreateLive() {
         console.log(downloadPdf)
     }
 
-    const handleDashboard= () => {
-       navigate('/dashboard')
-    }
     const handler = (e) => {
         signOut(auth).then(() => {
             dispatch(signOutUser())
@@ -186,47 +183,27 @@ export default function CreateLive() {
         console.log('Selected Skills:', selectedOptions);
     }, [selectedOptions]);
 
-
     const handleSearchTextChange = (e) => {
-        setSearchText(e.target.value);
+        const text = e.target.value;
+        setSearchText(text);
+        setShowDropdown(true);
     };
 
-    const handleAddSkill = () => {
-        if (options.trim() !== '') {
-            setSelectedOptions([...selectedOptions, options]);
-            setOptions('');
+    const handleOptionClick = (option) => {
+        if (!selectedOptions.includes(option)) {
+            setSelectedOptions([...selectedOptions, option]);
+            setSearchText('');
         }
     };
 
-    const handleRemoveSkill = (skillToRemove) => {
-        const updatedSkills = selectedOptions.filter((skill) => skill !== skillToRemove);
-        setSelectedOptions(updatedSkills);
+    const handleRemoveOption = (optionToRemove) => {
+        const updatedSelectedOptions = selectedOptions.filter(
+            (option) => option !== optionToRemove
+        );
+        setSelectedOptions(updatedSelectedOptions);
     };
 
-{/* ********************************OLD SKILLS SECTION**************************************** */}
-    // const handleSearchTextChange = (e) => {
-    //     const text = e.target.value;
-    //     setSearchText(text);
-    //     setShowDropdown(true);
-    // };
-
-    // const handleOptionClick = (option) => {
-    //     if (!selectedOptions.includes(option)) {
-    //         setSelectedOptions([...selectedOptions, option]);
-    //         setSearchText('');
-    //     }
-    // };
-
-    // const handleRemoveOption = (optionToRemove) => {
-    //     const updatedSelectedOptions = selectedOptions.filter(
-    //         (option) => option !== optionToRemove
-    //     );
-    //     setSelectedOptions(updatedSelectedOptions);
-    // };
-{/* ********************************OLD SKILLS SECTION**************************************** */}
-
-
-    const filteredOptions = selectedOptions.filter((option) =>
+    const filteredOptions = options.filter((option) =>
         option.toLowerCase().includes(searchText.toLowerCase())
     );
 
@@ -347,8 +324,7 @@ export default function CreateLive() {
         });
     };
 
-    const handleLogDetails = async (e) => {
-        e.preventDefault();
+    const handleLogDetails = async () => {
         console.log(personalData)
         console.log(customDetails)
         var profile = {
@@ -360,8 +336,6 @@ export default function CreateLive() {
         await updateUserProfileInDatabase(user.email, profile)
         dispatch(updateProfile(profile));
         console.log('Form Input Details:', profile);
-        setDownloadPdf(true)
-        navigate("/dashboard")
     };
 
     const toggleAdditionalDetails = () => {
@@ -420,8 +394,7 @@ export default function CreateLive() {
                                 <strong onClick={redirectHome}>RESUME SHAPER</strong>
                             </a>
                         </div>
-                        {/* <button onClick={() => handleDownload()} className=" downloadPdfBtn zoom" disabled={photoLoader}><FileEarmarkArrowDownFill className="downloadPDFIcon" size={26} />Download PDF</button> */}
-                        <button onClick={() => handleDashboard()} className=" dashboardBtn zoom" disabled={photoLoader}><h6>Dashboard</h6></button>
+                        <button onClick={() => handleDownload()} className=" downloadPdfBtn zoom" disabled={photoLoader}><FileEarmarkArrowDownFill className="downloadPDFIcon" size={26} />Download PDF</button>
                         <button onClick={() => handler()} className=" btn btn-success signoutBtn createLiveSignOut"> <Power color="#35b276" size={22} /> &nbsp;Signout</button>
                     </nav>
                 </div>
@@ -433,15 +406,15 @@ export default function CreateLive() {
                             <hr className='hrLine' />
                             <div>
                                 <h5 className='formSection createFormSection'><PersonCheck color="#35b276" size={29} /> &nbsp;Personal Details</h5>
-                                <form onSubmit={handleLogDetails}>
+                                <form>
                                     <div className='row'>
 
                                         <div className='col-md-6'>
                                             <label className='detailsInfoLabel'>
-                                                Target Position <span style={{color:'red'}}>*</span>
+                                                Target Position
                                             </label>
                                             <br />
-                                            <input className='detailsInfoInput' type="text" name="jobTitle" value={personalData.jobTitle} onChange={handleChange} required='true' />
+                                            <input className='detailsInfoInput' type="text" name="jobTitle" value={personalData.jobTitle} onChange={handleChange} />
                                         </div>
 
                                         <div className='col-md-6 uplouploadPictureBigDiv'>
@@ -466,10 +439,10 @@ export default function CreateLive() {
 
                                         <div className='col-md-6 col-sm-6'>
                                             <label className='detailsInfoLabel'>
-                                                First Name: <span style={{color:'red'}}>*</span>
+                                                First Name:
                                             </label>
                                             <br />
-                                            <input type="text" className='detailsInfoInput' name="firstName" value={personalData.firstName} onChange={handleChange} required='true'/>
+                                            <input type="text" className='detailsInfoInput' name="firstName" value={personalData.firstName} onChange={handleChange} />
                                         </div>
 
                                         <div className='col-md-6 col-sm-6'>
@@ -490,34 +463,34 @@ export default function CreateLive() {
 
                                         <div className='col-md-6 col-sm-6'>
                                             <label className='detailsInfoLabel'>
-                                                Email: <span style={{color:'red'}}>*</span>
+                                                Email:
                                             </label>
                                             <br />
-                                            <input className='detailsInfoInput' type="email" name="inputEmail" value={personalData.inputEmail} onChange={handleChange} required='true' />
+                                            <input className='detailsInfoInput' type="email" name="inputEmail" value={personalData.inputEmail} onChange={handleChange} />
                                         </div>
 
                                         <div className='col-md-6 col-sm-6'>
                                             <label className='detailsInfoLabel'>
-                                                Phone: <span style={{color:'red'}}>*</span>
+                                                Phone:
                                             </label>
                                             <br />
-                                            <input className='detailsInfoInput' type="number" name="phone" value={personalData.phone} onChange={handleChange} required='true' />
+                                            <input className='detailsInfoInput' type="number" name="phone" value={personalData.phone} onChange={handleChange} />
                                         </div>
 
                                         <div className='col-md-6 col-sm-6'>
                                             <label className='detailsInfoLabel'>
-                                                Date of Birth: <span style={{color:'red'}}>*</span>
+                                                Date of Birth:
                                             </label>
                                             <br />
-                                            <input className='detailsInfoInput' type="date" name="dateOfBirth" value={personalData.dateOfBirth} onChange={handleChange} required='true'/>
+                                            <input className='detailsInfoInput' type="date" name="dateOfBirth" value={personalData.dateOfBirth} onChange={handleChange} />
                                         </div>
 
                                         <div className='col-md-6 col-sm-6'>
                                             <label className='detailsInfoLabel'>
-                                                City: <span style={{color:'red'}}>*</span>
+                                                City:
                                             </label>
                                             <br />
-                                            <input className='detailsInfoInput' type="text" name="city" value={personalData.city} onChange={handleChange} required='true'/>
+                                            <input className='detailsInfoInput' type="text" name="city" value={personalData.city} onChange={handleChange} />
                                         </div>
                                         <br />
 
@@ -582,7 +555,7 @@ export default function CreateLive() {
                                     )}
                                     <br />
 
-                                    <h5 className='formSection'><PenFill color="#35b276" size={24} /> &nbsp;Professional Summary<span style={{color:'red'}}>*</span></h5>
+                                    <h5 className='formSection'><PenFill color="#35b276" size={24} /> &nbsp;Professional Summary</h5>
                                     <p className='detailsSubText'>Compose a professional summary to showcase your expertise. For instance: 'Results driven marketing professional with 8 years of experience,excelling in digital strategy and campaign optimization.'</p>
                                     <textarea
                                         name="professionalSummary"
@@ -591,7 +564,6 @@ export default function CreateLive() {
                                         rows="6"
                                         placeholder='Eg: Passionate Software Developer with 8+ years of Building High Enterprise Level Applications'
                                         className='detailsTextarea'
-                                        required='true'
                                     ></textarea>
 
 
@@ -878,43 +850,7 @@ export default function CreateLive() {
                                         </div>
                                     </div>
 
-
                                     <div className='skillsSection'>
-            <h5 className='formSection'>
-            <TrophyFill color="#35b276" size={24} /> &nbsp;
-                Add your Skills
-            </h5>
-            <p className='detailsSubText'>
-                Highlight your core strengths and expertise. Create and add skills that best suit your position and represent your capabilities, enhancing your resume.
-            </p>
-            <div>
-                <input
-                    className='detailsInfoInput createLiveSearchDetailsInfoInput'
-                    type="text"
-                    placeholder="Add a skill..."
-                    value={options}
-                    onChange={(e) => setOptions(e.target.value)}
-                />
-                <button type="button" onClick={handleAddSkill} className='addSkillBtn zoom'><PlusCircleFill/> &nbsp;Add Skill</button>
-
-            </div>
-            <div>
-                <h6 className='formSection SkillsadditionalDetails'>
-                    Selected Skills:
-                </h6>
-                {selectedOptions.map((skill, index) => (
-                    <div key={index} className="selected-option selectedOption">
-                        {skill}
-                        <button type="button" onClick={() => handleRemoveSkill(skill)} className="DeleteSkill">
-                        <Trash3Fill size={16} />
-                        </button>
-
-                    </div>
-                ))}
-            </div>
-        </div>
-
-                                    {/* <div className='skillsSection'>
                                         <h5 className='formSection'><TrophyFill color="#35b276" size={24} /> &nbsp;Add your Skills</h5>
                                         <p className='detailsSubText'> Highlight your core strengths and expertise. Select up to 6 key skills that best suit your the position you want to apply to and represent your capabilities, enhancing your resume.</p>
                                         <div>
@@ -950,13 +886,10 @@ export default function CreateLive() {
                                                 </div>
                                             ))}
                                         </div>
-                                    </div> */}
-
-
-                                    
+                                    </div>
                                     <CustomSection courses={courses} setCourses={setCourses} activities={activities} setActivities={setActivities} internships={internships} setInternships={setInternships} hobbies={hobbies} setHobbies={setHobbies} languages={languages} setLanguages={setLanguages} references={references} setReferences={setReferences} customSections={customSections} setCustomSections={setCustomSections} liveForm={"true"} />
                                     <div className='createSaveProfileDiv'>
-                                        <button type="submit"  className="saveProfileBtn createLiveSaveProfileBtn">
+                                        <button type="button" onClick={handleLogDetails} className="saveProfileBtn createLiveSaveProfileBtn">
                                             <Check2Circle size={26} />&nbsp;&nbsp;&nbsp;Create My Resume
                                         </button>
                                     </div>
