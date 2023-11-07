@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { auth, getUserFromDatabase } from '../fireabse';
 import { loginUser, updateUser } from '../redux/slices/user';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
@@ -16,6 +16,8 @@ const LoginPopup = ({ onClose, onSignup }) => {
     const [name, setName] = useState("");
     const [errorr, setErrorr] = useState("");
     const [isLogin, setIsLogin] = useState(true);
+    const localuser = useSelector(state=> state.user)
+
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -47,7 +49,12 @@ const LoginPopup = ({ onClose, onSignup }) => {
             .then(async (userCredential) => {
                 const user = await getUserFromDatabase(email)
                 dispatch(updateUser(user))
-                navigate("/auth")
+                if(user.profile === true){
+                    navigate("/dashboard")
+                }else{
+
+                    navigate("/auth")
+                }
                 console.log(userCredential);
             }).catch(err => {
                 console.log(err);
@@ -63,7 +70,12 @@ const LoginPopup = ({ onClose, onSignup }) => {
                 .then(async (userCredential) => {
                     const user = await getUserFromDatabase(email)
                     dispatch(updateUser(user))
-                    navigate("/auth")
+                    if(user.profile === true){
+                        navigate("/dashboard")
+                    }else{
+    
+                        navigate("/auth")
+                    }
                     console.log(userCredential);
                     onClose();
                 }).catch(err => {

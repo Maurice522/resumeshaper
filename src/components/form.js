@@ -349,15 +349,12 @@ const updateWebsiteLinkField = (index, field, value) => {
     var profile = {
       ...personalData,
       skills: selectedOptions,
-      customDetails
+      customDetails,
+      profile:true
     }
     console.log("Login email  " + user.email)
     await updateUserProfileInDatabase(user.email, profile)
-    // dispatch(updateProfile(profile));
-    console.log('Form Input Details:', user);
     dispatch(updateUser(profile));
-    console.log('Form Input Details:', profile);
-    console.log('Form Input Details:', user);
     // navigate("/dashboard")
 
   };
