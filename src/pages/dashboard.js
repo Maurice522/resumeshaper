@@ -40,7 +40,7 @@ export default function Dashboard() {
             title: 'My Profile',
             description: 'Description',
             id:"id46876548",
-            idx:0
+            idx:-1
         },
     ]);
     const dispatch = useDispatch();
@@ -55,6 +55,8 @@ export default function Dashboard() {
         })
     }
     const initializeSavedResumes = (user)=>{
+        console.log(user)
+        if(user.resumes){  
         var temp = [];
         var srem={
             resumeId: 1,
@@ -64,7 +66,7 @@ export default function Dashboard() {
             id:"id46876548",
             idx:0
         };
-
+        
         user.resumes.map((resume,index)=>{
             var tempimg = img1;
 
@@ -87,6 +89,7 @@ export default function Dashboard() {
         })
         setSavedResumes(temp)
     }
+    }
 
     const addSavedResume = () => {
         const newDiv = {
@@ -108,7 +111,12 @@ export default function Dashboard() {
     };
 
     const openSelectedResume = (remid,idx) => {
-       navigate('/create', {state:{currRemId:remid,idx:idx}})
+        if(idx == -1){
+            navigate("/create")
+        }else{
+
+            navigate('/createcontinue', {state:{currRemId:remid,idx:idx}})
+        }
     };
 
     return (
@@ -123,7 +131,7 @@ export default function Dashboard() {
                 <p className='formSubText'>"Welcome to your hub for organized resumes.Access, edit, or create new resumes for tailored job application."</p>
                 <div className='dashHeader'>
                     <h4>Documents</h4>
-                    <button className='createDoc zoom' onClick={addSavedResume}><PlusLg size={20} /> &nbsp;Create New</button>
+                    <button className='createDoc zoom' onClick={()=>navigate("/create")}><PlusLg size={20} /> &nbsp;Create New</button>
                 </div>
                 <hr className='dashHrLine' />
                 <div className='dashContent row'>

@@ -355,7 +355,7 @@ const updateWebsiteLinkField = (index, field, value) => {
     console.log("Login email  " + user.email)
     await updateUserProfileInDatabase(user.email, profile)
     dispatch(updateUser(profile));
-    // navigate("/dashboard")
+    navigate("/dashboard")
 
   };
 

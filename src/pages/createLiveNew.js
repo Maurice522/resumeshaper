@@ -29,9 +29,7 @@ import img7 from '../images/template4.PNG'
 
 // import skills from '../components/formComponents/skills';    
 
-export default function CreateLiveContinue() {
-
-    const {state} = useLocation()
+export default function CreateLive() {
 
     const [showAdditionalDetails, setShowAdditionalDetails] = useState(false);
     const [courses, setCourses] = useState([]);
@@ -131,7 +129,7 @@ export default function CreateLiveContinue() {
 
     useEffect(()=>{
         if(user.email!==null){
-
+            console.log(user)
         
             var temp={
                 jobTitle: '',
@@ -178,11 +176,9 @@ export default function CreateLiveContinue() {
                 ],
             };
             Object.entries(temp).map(([key, value]) => {
-                temp[key] =user.resumes[state.idx][key]
+                temp[key] =user[key]
               }
               );
-            console.log(state.currRemId)
-            setSelectedTemplateId(state.currRemId)
             setPersonalData(temp)  
         }
     },[user])
@@ -469,7 +465,7 @@ export default function CreateLiveContinue() {
             console.log(user)
 
             // dispatch(updateUser(resume));
-            // navigate("/dashboard")
+            navigate("/dashboard")
 
         // console.log(personalData)
         // console.log(customDetails)
