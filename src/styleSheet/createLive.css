@@ -36,12 +36,11 @@
     position: absolute;
     z-index: 20;
     background-color: #ecf8e5;
-    right: 15%;
+    right: 16%;
     border: none;
+    font-weight: 550; 
     color: #346571;
-    color: green;
-    color: #5ec57e;
-    font-weight: 550;
+    top: 30%;
 }
 
 .downloadPDFIcon {
@@ -144,6 +143,10 @@
     background-color: bisque;
     width: 100%;
     height: 65px;
+}
+.topDivTemplate1{
+    margin-left: 3.2%;
+    margin-bottom: 2%;
 }
 
 .imageDiv {
@@ -365,7 +368,7 @@ font-family: 'Roboto', sans-serif; */
     position: absolute;
     z-index: 20;
     background-color: #ecf8e5;
-    right: 16%;
+    right: 28%;
     border: none;
     color: #346571;
     top: 34%;
@@ -404,18 +407,41 @@ font-family: 'Roboto', sans-serif; */
     box-shadow: rgba(12, 192, 72, 0.1) 0px 4px 12px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
+.templateDiv{
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+.tempalteImage{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.tempalteImage{
+width: 90%;
+}
+.templateDiv {
+margin-bottom: 5%;
+margin-top: 2%;
+}
+.carousel-item {
+    height: 198px;
+    background-color: white;
+}
+.carousel-control-next {
+    right: -47px;
+}
+.carousel-control-next {
+    background-color: #5ec57e;
+    right: -27px;
+    height: 34px;
+    top: 72px;
+    width: 26px;
+}
+.carousel-control-prev {
+    left: -47px;
+    height: 34px;
+    top: 72px;
+    width: 26px;
+    background-color:#5ec57e;
+}
 
 
-/* **************************Template 2 ****************************************** */
-/* **************************Template 2 ****************************************** */
-/* **************************Template 2 ****************************************** */
-/* **************************Template 2 ****************************************** */
-/* **************************Template 2 ****************************************** */
-/* **************************Template 2 ****************************************** */
-/* **************************Template 2 ****************************************** */
-/* **************************Template 2 ****************************************** */
-/* **************************Template 2 ****************************************** */
-/* **************************Template 2 ****************************************** */
-/* **************************Template 2 ****************************************** */
-/* **************************Template 2 ****************************************** */
-/* **************************Template 2 ****************************************** */

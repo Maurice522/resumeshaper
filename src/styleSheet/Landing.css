@@ -275,6 +275,8 @@ body {
     height: 100vh;
     background-image: url("../images/20.png");
     position: relative;
+    background-position: center;
+    background-size: cover;
 
 }
 
@@ -403,6 +405,9 @@ body {
     position: absolute;
     top: 3.5%;
     right: 3%;
+}
+.landingCaraousel{
+    height: 627px !important;
 }
 
 

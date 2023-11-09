@@ -11,7 +11,6 @@ import { PlusCircleFill } from "react-bootstrap-icons";
 
 
 export default function Form({personalData, setPersonalData}) {
-
   const [showAdditionalDetails, setShowAdditionalDetails] = useState(false);
   const [courses, setCourses] = useState([]);
   const [activities, setActivities] = useState([]);

@@ -164,7 +164,7 @@ export default function Landing() {
                 <h3 className='section1Heading'>Rave Reviews Form Our Users</h3>
                 <div id="carouselExampleRide" class="carousel slide" data-bs-ride="true">
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
+                        <div class="carousel-item landingCaraousel active">
                             <div className='row testimonialSlider' >
                                 <div className='col-md-6'>
                                     <div class="card myCard " >
@@ -190,7 +190,7 @@ export default function Landing() {
 
                             </div>
                         </div>
-                        <div class="carousel-item">
+                        <div class="carousel-item landingCaraousel">
                             <div className='row testimonialSlider' >
                                 <div className='col-md-6'>
                                     <div class="card myCard" >
@@ -214,7 +214,7 @@ export default function Landing() {
                                 </div>
                             </div>
                         </div>
-                        <div class="carousel-item">
+                        <div class="carousel-item landingCaraousel">
                             <div className='row testimonialSlider' >
                                 <div className='col-md-6'>
                                     <div class="card myCard" >

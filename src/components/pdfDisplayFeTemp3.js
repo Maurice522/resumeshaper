@@ -124,7 +124,7 @@ export default function MyPdfViewer3({ personalData, live, courses, activities, 
 <Page size="A4" style={styles.page}>
   <View >
 <div className='temp2CLeftContent'>
-        <p className='profileName temp3ProfileName'>< PersonFill size={8} className="profileIcon temp3Headings" /> &nbsp;Profile</p>
+        <p className='profileName temp3ProfileName template3HeadingProfile'>< PersonFill size={8} className="profileIcon temp3Headings" /> &nbsp;Profile</p>
         <p className='profileText'>{personalData.professionalSummary}</p>
 
         {personalData.employmentHistory && personalData.employmentHistory.length >0 && personalData.employmentHistory[0].jobTitle!=='' && <>

@@ -6,10 +6,10 @@ import { saveResume, signOutUser, updateUser } from '../redux/slices/user';
 import Nav from '../components/nav';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Power } from "react-bootstrap-icons";
-import MyPdfViewer1 from '../components/pdfDisplayFeTemp1';
 import MyPdfViewer2 from '../components/pdfDisplayFeTemp2';
 import MyPdfViewer3 from '../components/pdfDisplayFeTemp3';
 import MyPdfViewer4 from '../components/pdfDisplayFeTemp4';
+import MyPdfViewer1 from '../components/pdfDisplayFeTemp1';
 import {PlusCircleFill, FileEarmarkArrowDownFill, Check2Circle, Check2All, Check, PersonCheck, PersonSquare, CaretDownSquare, JournalBookmarkFill, PenFill, Trash3Fill, PlusLg, JournalCheck, Link45deg, TrophyFill } from "react-bootstrap-icons";
 import CustomSection from '../components/formComponents/customSection';
 import { updateUserProfileInDatabase, updateUserPhotoInDatabase, uploadMedia } from '../fireabse';
@@ -533,7 +533,7 @@ export default function CreateLiveContinue() {
         {gettingUser? <img style={{ position: "absolute",top: "50%",left: "50%",transform: "translate(-50%, -50%)"}} width="240" height="240" alt='loading...' src='https://media2.giphy.com/media/MDrmyLuEV8XFOe7lU6/200w.webp?cid=ecf05e47k6onrtqddz8d98s4j5lhtutlnnegeus1pwcdwkxt&ep=v1_gifs_search&rid=200w.webp&ct=g' /> :
         <>
             {/* <Nav /> */}
-            {downloadPdf ? <PdfDisplayBE personalData={personalData} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={selectedOptions} downloadPdf={downloadPdf} setDownloadPdf={setDownloadPdf} /> : <>
+            {downloadPdf ? <PdfDisplayBE personalData={personalData} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={selectedOptions} downloadPdf={downloadPdf} setDownloadPdf={setDownloadPdf} selectedTemplateId={selectedTemplateId} /> : <>
                 <div>
                     <nav class="navbar bg-body-tertiary myNav createLiveNav">
                         <div class="container-fluid">
@@ -544,7 +544,7 @@ export default function CreateLiveContinue() {
                                 <strong onClick={redirectHome}>RESUME SHAPER</strong>
                             </a>
                         </div>
-                        {/* <button onClick={() => handleDownload()} className=" downloadPdfBtn zoom" disabled={photoLoader}><FileEarmarkArrowDownFill className="downloadPDFIcon" size={26} />Download PDF</button> */}
+                        <button onClick={() => handleDownload()} className=" downloadPdfBtn zoom" disabled={photoLoader}>Download PDF</button>
                         <button onClick={() => handleDashboard()} className=" dashboardBtn zoom" disabled={photoLoader}><h6>Dashboard</h6></button>
                         <button onClick={() => handler()} className=" btn btn-success signoutBtn createLiveSignOut"> <Power color="#35b276" size={22} /> &nbsp;Signout</button>
                     </nav>
@@ -555,17 +555,51 @@ export default function CreateLiveContinue() {
                             <h3 className='formTitle'>Personalize your Profile</h3>
                             <p className='formSubText'>"Tell us more about yourself and the position you're targeting, and we'll create a personlized resume just for you."</p>
                             <hr className='hrLine' />
-                            <div>
                             <h5 className='formSection createFormSection'><PersonCheck color="#35b276" size={29} /> &nbsp;Select Template</h5>
-                            <div className=' templateDiv'>
-                                <div  onClick={()=>setSelectedTemplateId(1)}><img className='templateImg' src={img4}   /></div>
-                                <div  onClick={()=>setSelectedTemplateId(2)} ><img className='templateImg' src={img5} /></div>
-                                <div  onClick={()=>setSelectedTemplateId(3)}><img className='templateImg' src={img6} /></div>
-                                <div  onClick={()=>setSelectedTemplateId(4)}><img className='templateImg' src={img7} /></div>
+                                    <div className='templateDiv'>
+                                    <div id="carouselExampleIndicators" className="carousel slide">
+                                        <div className="carousel-inner">
+                                            <div className="carousel-item active">
+                                                
+                                                <div className='row'>
+                                                    <div className='col-md-4 zoom' onClick={()=>setSelectedTemplateId(1)}>
+                                                        <img src={img4} className='tempalteImage '/>
+                                                    </div>
+                                                    <div className='col-md-4 zoom' onClick={()=>setSelectedTemplateId(2)}>
+                                                        <img src={img5} className='tempalteImage '/>
+                                                    </div>  
+                                                    <div className='col-md-4 zoom' onClick={()=>setSelectedTemplateId(3)}>
+                                                        <img src={img6} className='tempalteImage '/>
+                                                    </div> 
+                                                </div>
 
-                            </div>
-
-                                <h5 className='formSection createFormSection'><PersonCheck color="#35b276" size={29} /> &nbsp;Personal Details</h5>
+                                            </div>
+                                            <div className="carousel-item">
+                                            <div className='row'>
+                                                    <div className='col-md-4 zoom' onClick={()=>setSelectedTemplateId(4)}>
+                                                        <img src={img7} className='tempalteImage '/>
+                                                    </div>
+                                                    <div className='col-md-4 zoom' onClick={()=>setSelectedTemplateId(1)}>
+                                                        <img src={img4} className='tempalteImage '/>
+                                                    </div>  
+                                                    <div className='col-md-4 zoom'>
+                                                        <img src={img5} className='tempalteImage ' onClick={()=>setSelectedTemplateId(1)}/>
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span className="visually-hidden">Previous</span>
+                                        </button>
+                                        <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                            <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span className="visually-hidden">Next</span>
+                                        </button>
+                                    </div>
+                                    </div>
+                            <div>
+                          <h5 className='formSection createFormSection'><PersonCheck color="#35b276" size={29} /> &nbsp;Personal Details</h5>
                                 <form onSubmit={handleLogDetails}>
                                     <div className='row'>
 
@@ -1099,16 +1133,16 @@ export default function CreateLiveContinue() {
 
                     </div>
                     <div className='rightDivCreateLive' style={{ flex: 1, position: "fixed", width: "50%", right: "0%", top: "0%", paddingTop: "5%" }}>
-                        <div className='  createRightDiv'>
-                            <div className='pdfDisplayDiv' >
-                            {selectedTemplateId==1 && <MyPdfViewer1 personalData={personalData} live={true} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={selectedOptions} />}
-                            {selectedTemplateId==2 && <MyPdfViewer2 personalData={personalData} live={true} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={selectedOptions} />}
-                            {selectedTemplateId==3 && <MyPdfViewer3 personalData={personalData} live={true} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={selectedOptions} />}
-                            {selectedTemplateId==4 && <MyPdfViewer4 personalData={personalData} live={true} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={selectedOptions} />}
-                            
+                                <div className='  createRightDiv'>
+                                    <div className='pdfDisplayDiv' >
+                                        {selectedTemplateId == 1 && <MyPdfViewer1 personalData={personalData} live={true} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={selectedOptions} />}
+                                        {selectedTemplateId == 2 && <MyPdfViewer2 personalData={personalData} live={true} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={selectedOptions} />}
+                                        {selectedTemplateId == 3 && <MyPdfViewer3 personalData={personalData} live={true} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={selectedOptions} />}
+                                        {selectedTemplateId == 4 && <MyPdfViewer4 personalData={personalData} live={true} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={selectedOptions} />}
+
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
                     {/* <button onClick={() => handleDownload()} className="downloadPdfBtn zoom" disabled={photoLoader}><FileEarmarkArrowDownFill className="downloadPDFIcon" size={26} style={{zIndex:18}}/>Download PDF</button> */}
                 </div>
             </>}

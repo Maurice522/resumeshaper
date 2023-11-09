@@ -155,8 +155,14 @@
 
 
 }
-.profileDetails{
-    font-weight: 800 !important;
+.temp4BlueFont{
+    font-weight: 750 !important;
+    letter-spacing: 2px;
+    margin-top: 29% !important;
+}
+.template4RightHeadings{
+    margin-top: 10% !important;
+    font-weight: 700 !important;
     letter-spacing: 2px;
 }
 .temp4GreyBigDiv{

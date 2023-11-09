@@ -26,12 +26,14 @@ export default function MyPdfViewer1({ personalData,live,courses, activities,int
     <Document>
 <Page size="A4" style={styles.page}>
    <View>
+    <div className='topDivTemplate1' >
     <div className='imageDiv'>
       {live?<img src={img1} className="displayImage" />:<Image src={img1} className="displayImage" />}
     </div>
     <div className='nameDiv'>
       <h6 className='resumeName'>{personalData.firstName} {personalData.middleName} {personalData.lastName}</h6>
       <p className='resumeTtile'>{personalData.jobTitle}</p>
+    </div>
     </div>
   </View>
 

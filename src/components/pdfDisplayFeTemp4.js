@@ -144,7 +144,7 @@ export default function MyPdfViewer4({ personalData, live, courses, activities, 
 
                   {personalData.employmentHistory && personalData.employmentHistory.length > 0 && personalData.employmentHistory[0].jobTitle !== '' && <>
                     <div className='liveEmployment'>
-                      <p className='profileName employmentHistName'>EXPERIENCE</p>
+                      <p className='profileName employmentHistName template4RightHeadings'>EXPERIENCE</p>
                       <hr className='temp3Hr3'></hr>
                       {personalData.employmentHistory.map((item, index) => {
                         return (<>
@@ -159,7 +159,7 @@ export default function MyPdfViewer4({ personalData, live, courses, activities, 
 
                   {personalData.educationHistory && personalData.educationHistory.length > 0 && personalData.educationHistory[0].school !== '' && <>
                     <div className='liveEducation'>
-                      <p className='profileName employmentHistName'>EDUCATION</p>
+                      <p className='profileName employmentHistName template4RightHeadings'>EDUCATION</p>
                       <hr className='temp3Hr3'></hr>
                       {personalData.educationHistory.map((item, index) => {
                         return (<>
@@ -174,7 +174,7 @@ export default function MyPdfViewer4({ personalData, live, courses, activities, 
 
                   {internships && internships.length > 0 && internships[0].jobTitle !== '' && <>
                     <div className='liveEducation'>
-                      <p className='profileName employmentHistName'>INTERNSHIPS</p>
+                      <p className='profileName employmentHistName template4RightHeadings'>INTERNSHIPS</p>
                       <hr className='temp3Hr3'></hr>
 
                       {internships.map((item, index) => {
@@ -190,7 +190,7 @@ export default function MyPdfViewer4({ personalData, live, courses, activities, 
 
                   {references && references.length > 0 && references[0].fullName !== '' && <>
                     <div className='liveEducation'>
-                      <p className='profileName employmentHistName'>REFERENCES</p>
+                      <p className='profileName employmentHistName template4RightHeadings'>REFERENCES</p>
                       <hr className='temp3Hr3'></hr>
 
                       {references.map((item, index) => {
@@ -207,7 +207,7 @@ export default function MyPdfViewer4({ personalData, live, courses, activities, 
 
                   {courses && courses.length > 0 && courses[0].course !== '' && <>
                     <div className='liveEducation'>
-                      <p className='profileName employmentHistName'>COURSES</p>
+                      <p className='profileName employmentHistName template4RightHeadings'>COURSES</p>
                       <hr className='temp3Hr3'></hr>
 
                       {courses.map((item, index) => {
@@ -224,7 +224,7 @@ export default function MyPdfViewer4({ personalData, live, courses, activities, 
 
                   {activities && activities.length > 0 && activities[0].function !== '' && <>
                     <div className='liveEducation'>
-                      <p className='profileName employmentHistName'>EXTRA-CURRICULAR ACTIVITES</p>
+                      <p className='profileName employmentHistName template4RightHeadings'>EXTRA-CURRICULAR ACTIVITES</p>
                       <hr className='temp3Hr3'></hr>
                       {activities.map((item, index) => {
                         return (<>
@@ -241,7 +241,7 @@ export default function MyPdfViewer4({ personalData, live, courses, activities, 
                     {customSections.map((item, index) => {
                       return (<>
                         <div className='liveEducation'>
-                        <p className='profileName employmentHistName'>{item.title}</p>
+                        <p className='profileName employmentHistName template4RightHeadings'>{item.title}</p>
                       <hr className='temp3Hr3'></hr>
                           <p className='profileName temp4CustomTitle'>{item.subTitle}</p>
                           <p className='employmentTime DOBProfileDetailsText'>{item.startDate} - {item.endDate}</p>

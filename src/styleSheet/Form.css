@@ -75,7 +75,7 @@
 }
 
 .uploadedPicture {
-  z-index: 21;
+  z-index: 2;
   position: absolute;
   right: 20%;
   bottom: 15%;

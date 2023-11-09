@@ -4,7 +4,10 @@ import { saveAs } from 'file-saver';
 import img1 from '../images/22.png'
 import BEDocTemp2 from './BEDocTemp2';
 import Nav from './nav';
-import BEDocTemp4 from './BEDocTemp1';
+import BEDocTemp1 from './BEDocTemp1';
+import BEDocTemp3 from './BEDocTemp3';
+import BEDocTemp4 from './BEDocTemp3';
+
 
 const styles = StyleSheet.create({
   page: {
@@ -48,14 +51,17 @@ const styles = StyleSheet.create({
 
 
 
-export default function PdfDisplayBE({ personalData,courses, activities,internships,hobbies,languages,references ,customSections ,skills,downloadPdf,setDownloadPdf }) {
+export default function PdfDisplayBE({ personalData,courses, activities,internships,hobbies,languages,references ,customSections ,skills,downloadPdf,setDownloadPdf,selectedTemplateId }) {
   console.log(personalData)
   return (
     <>
       <div className='downloadPdfMainDiv'>
         <button className='realBdfGoBackBtn zoom' onClick={()=>setDownloadPdf(false)}>Edit Pdf</button>
         <PDFViewer width={530} height={550} style={styles.pDFViewerStyle}>
-          <BEDocTemp4 personalData={personalData} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={skills}/>
+        {selectedTemplateId == 1 &&  <BEDocTemp1 personalData={personalData} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={skills}/>}
+        {selectedTemplateId == 2 &&  <BEDocTemp2 personalData={personalData} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={skills}/>}
+        {selectedTemplateId == 3 &&  <BEDocTemp3 personalData={personalData} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={skills}/>}
+        {selectedTemplateId == 4 &&  <BEDocTemp4 personalData={personalData} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={skills}/>}         
         </PDFViewer>
       </div>
     </>
