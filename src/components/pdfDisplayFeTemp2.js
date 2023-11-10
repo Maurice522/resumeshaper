@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
 });
 
 export default function MyPdfViewer2({ personalData,live,courses, activities,internships,hobbies,languages,references ,customSections ,skills }) {
+  const firebaseImageUrl = personalData.uploadedPhotoURL;
   return (
     <>
     <div className='row temp2MainDiv'>
@@ -30,7 +31,7 @@ export default function MyPdfViewer2({ personalData,live,courses, activities,int
 <Page size="A4" style={styles.page}>
    <View>
     <div className='imageDiv'>
-      {live?<img src={img1} className="displayImage temp2DisplayImage" />:<Image src={img1} className="displayImage" />}
+      <img src={firebaseImageUrl} className="displayImage temp2DisplayImage" />
     </div>
     <div className='nameDiv temp2NameDiv'>
       <h6 className='resumeName '>{personalData.firstName} {personalData.middleName} {personalData.lastName}</h6>

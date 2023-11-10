@@ -21,14 +21,17 @@ const styles = StyleSheet.create({
 });
 
 export default function MyPdfViewer1({ personalData,live,courses, activities,internships,hobbies,languages,references ,customSections ,skills }) {
+  const firebaseImageUrl = personalData.uploadedPhotoURL;
   return (
+    
     <div className='scrollableDiv'>
     <Document>
 <Page size="A4" style={styles.page}>
    <View>
     <div className='topDivTemplate1' >
     <div className='imageDiv'>
-      {live?<img src={img1} className="displayImage" />:<Image src={img1} className="displayImage" />}
+      {console.log('uploaded url ',personalData.uploadedPhotoURL)}
+      <img src={firebaseImageUrl} className="displayImage" />
     </div>
     <div className='nameDiv'>
       <h6 className='resumeName'>{personalData.firstName} {personalData.middleName} {personalData.lastName}</h6>
