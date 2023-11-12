@@ -24,7 +24,7 @@ const router = createBrowserRouter([
     element: <CreateLive/>,
   },
   {
-    path:"/createcontinue",
+    path:"/createcontinue/:idx",
     element: <CreateLiveContinue/>
   },
   {

@@ -4,7 +4,7 @@ import { addUserResume, auth, getUserFromDatabase } from '../fireabse'
 import { useDispatch, useSelector } from 'react-redux';
 import { saveResume, signOutUser, updateUser } from '../redux/slices/user';
 import Nav from '../components/nav';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Power } from "react-bootstrap-icons";
 import MyPdfViewer2 from '../components/pdfDisplayFeTemp2';
 import MyPdfViewer3 from '../components/pdfDisplayFeTemp3';
@@ -30,8 +30,7 @@ import img7 from '../images/template4.PNG'
 // import skills from '../components/formComponents/skills';    
 
 export default function CreateLiveContinue() {
-
-    const {state} = useLocation()
+    const {idx} = useParams()
 
     const [showAdditionalDetails, setShowAdditionalDetails] = useState(false);
     const [courses, setCourses] = useState([]);
@@ -58,9 +57,6 @@ export default function CreateLiveContinue() {
         customSections: [],
     });
     const [selectedTemplateId, setSelectedTemplateId] = useState(1);
-
-
-    
 
     const [personalData, setPersonalData] = useState({
         jobTitle: '',
@@ -178,11 +174,11 @@ export default function CreateLiveContinue() {
                 ],
             };
             Object.entries(temp).map(([key, value]) => {
-                temp[key] =user.resumes[state.idx][key]
+                temp[key] =user.resumes[idx][key]
               }
               );
-            console.log(state.currRemId)
-            setSelectedTemplateId(state.currRemId)
+            console.log(user.resumes[idx])
+            setSelectedTemplateId(user.resumes[idx].resumeId)
             setPersonalData(temp)  
         }
     },[user])

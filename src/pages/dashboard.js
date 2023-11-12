@@ -4,8 +4,8 @@ import { Power } from "react-bootstrap-icons";
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { onAuthStateChanged, signOut } from 'firebase/auth'
-import { auth, getUserFromDatabase } from '../fireabse'
-import { signOutUser, updateUser } from '../redux/slices/user';
+import { addUserResume, auth, getUserFromDatabase, updateUserResumes } from '../fireabse'
+import { saveResume, signOutUser, updateUser } from '../redux/slices/user';
 import '../styleSheet/Dashboard.css';
 import { Share, ThreeDots, Check2Circle, PencilSquare, FileEarmarkArrowDownFill, Bullseye, PlusLg, PencilFill, Trash3Fill, ColumnsGap, Book, JournalRichtext, BagFill, GraphUpArrow, MegaphoneFill, Alipay, Bicycle, CheckSquare } from "react-bootstrap-icons";
 import img1 from '../images/template1.PNG'
@@ -59,15 +59,12 @@ export default function Dashboard() {
         if(user.resumes){  
         var temp = [];
         var srem={
-            resumeId: 1,
-            img: img1,
-            title: 'My Profile',
-            description: 'Description',
-            id:"id46876548",
-            idx:0
+            
         };
-        
-        user.resumes.map((resume,index)=>{
+        var arr =[];
+        console.log(user.resumes.length)
+        for(var i = 0; i<user.resumes.length ; i++){
+            var resume = user.resumes[i]
             var tempimg = img1;
 
             if(resume.resumeId === 2){
@@ -77,27 +74,122 @@ export default function Dashboard() {
             }else if(resume.resumeId === 4){
                 tempimg = img4;
             }
-
             srem.resumeId = resume.resumeId;
             srem.img = tempimg;
             srem.title = resume.jobTitle;
-            srem.description = resume.professionalSummary.substring(0, 20);
+            srem.description =  resume.professionalSummary.substring(0, 20);
             srem.id = resume.id;
-            srem.idx = index;
+            srem.idx = i;
+            arr = [...arr, srem]
+            srem = {};
+            // console.log(arr)
+        }
+        setSavedResumes(arr)
+        // user.resumes.map((resume,index)=>{
+        //     console.log(resume.resumeId)
+        //     var tempimg = img1;
 
-            temp.push(srem);
-        })
-        setSavedResumes(temp)
+        //     if(resume.resumeId === 2){
+        //         tempimg = img2;
+        //     }else if(resume.resumeId === 3){
+        //         tempimg = img3;
+        //     }else if(resume.resumeId === 4){
+        //         tempimg = img4;
+        //     }
+        //     console.log(resume.resumeId)
+        //     srem.resumeId = resume.resumeId;
+        //     console.log(srem.resumeId)
+        //     srem.img = tempimg;
+        //     srem.title = resume.jobTitle;
+        //     srem.description = resume.professionalSummary.substring(0, 20);
+        //     srem.id = resume.id;
+        //     srem.idx = index;
+        //     console.log(srem)
+        //     temp.push(srem);
+        //     console.log(temp)
+        //     console.log(arr)
+        // })
+        // console.log(temp)
+        // setSavedResumes(temp)
     }
     }
 
     const addSavedResume = () => {
+
+        var temp = {
+            jobTitle: '',
+            firstName: '',
+            middleName: '',
+            lastName: '',
+            inputEmail: '',
+            phone: '',
+            dateOfBirth: '',
+            city: '',
+            address: '',
+            postalCode: '',
+            drivingLicense: '',
+            nationality: '',
+            placeOfBirth: '',
+            country: '',
+            professionalSummary: '',
+            uploadedPhotoURL: '',
+            employmentHistory: [
+                {
+                    jobTitle: '',
+                    employer: '',
+                    startDate: '',
+                    endDate: '',
+                    city: '',
+                    description: '',
+                },
+            ],
+            educationHistory: [
+                {
+                    school: '',
+                    degree: '',
+                    startDate: '',
+                    endDate: '',
+                    city: '',
+                    description: '',
+                },
+            ],
+            websitesLinks: [
+                {
+                    name: '',
+                    url: '',
+                },
+            ],
+        };
+        Object.entries(temp).map(([key, value]) => {
+            temp[key] = user[key]
+        })
+        var resume = {
+            ...temp,
+            skills: [],
+            customDetails:{
+                courses: [],
+                activities: [],
+                internships: [],
+                hobbies: [],
+                languages: [],
+                references: [],
+                customSections: [],
+            },
+            resumeId: 0,
+            id: 'id' + (new Date()).getTime()
+        }
+
+        var resumes = [...user.resumes, resume]
+
+        addUserResume(user.email, resumes);
+        dispatch(saveResume(resume));
         const newDiv = {
-            resumeId: 1,
-            img: img1,
-            title: 'My Profile',
-            description: new Date().toLocaleString(),
-            id:"id4687654848"
+            resumeId : resume.resumeId,
+            img : img1,
+            title : resume.jobTitle,
+            description :  resume.professionalSummary.substring(0, 20),
+            id : resume.id,
+            idx : user.resumes.length,
         };
         setSavedResumes([...savedResumes, newDiv]);
         
@@ -107,15 +199,17 @@ export default function Dashboard() {
 
     const delSavedResume = (id) => {
         const updatedResumes = savedResumes.filter((resumes) => resumes.id !== id);
+        const updatedUserResumes = user.resumes.filter((resumes) => resumes.id !== id);
+        updateUserResumes(user.email,updatedUserResumes)
         setSavedResumes(updatedResumes);
     };
 
-    const openSelectedResume = (remid,idx) => {
+    const openSelectedResume = (idx) => {
         if(idx == -1){
             navigate("/create")
         }else{
 
-            navigate('/createcontinue', {state:{currRemId:remid,idx:idx}})
+            navigate(`/createcontinue/${idx}`, )
         }
     };
 
@@ -138,18 +232,18 @@ export default function Dashboard() {
                     {savedResumes.map((savedResume) => (
                         <div key={savedResume.id} className='resume1Div col-md-6'>
                             <div className='row'>
-                                <div className='col-md-4' onClick={()=>openSelectedResume(savedResume.resumeId,savedResume.idx)}>
+                                <div className='col-md-4' onClick={()=>openSelectedResume(savedResume.idx)}>
                                     <img src={savedResume.img} className="resumeImg zoom" alt="Profile Image" />
                                     <h6 className='resumeTitle'>{savedResume.title}</h6>
                                 </div>
                                 <div className='col-md-8 editResumeOptions'>
-                                    <button className='editResumeBtns ' onClick={() => delSavedResume(savedResume.id)}><Bullseye size={23} />&nbsp;&nbsp;&nbsp;&nbsp;Tailor To Your Job Listing</button><br />
-                                    <button className='editResumeBtns ' onClick={() => delSavedResume(savedResume.id)}><PencilFill size={23} />&nbsp;&nbsp;&nbsp;&nbsp;Edit</button><br />
-                                    <button className='editResumeBtns ' onClick={() => delSavedResume(savedResume.id)}><FileEarmarkArrowDownFill size={23} />&nbsp;&nbsp;&nbsp;&nbsp;Download</button><br />
+                                    <button className='editResumeBtns ' onClick={() => console.log("tailor")}><Bullseye size={23} />&nbsp;&nbsp;&nbsp;&nbsp;Tailor To Your Job</button><br />
+                                    <button className='editResumeBtns ' onClick={() => openSelectedResume(savedResume.idx)}><PencilFill size={23} />&nbsp;&nbsp;&nbsp;&nbsp;Edit</button><br />
+                                    <button className='editResumeBtns ' onClick={() => console.log("download")}><FileEarmarkArrowDownFill size={23} />&nbsp;&nbsp;&nbsp;&nbsp;Download</button><br />
                                     <button className='editResumeBtns ' onClick={() => delSavedResume(savedResume.id)}><Trash3Fill size={23} />&nbsp;&nbsp;&nbsp;&nbsp;Delete</button><br />
-                                    <button className='editResumeBtns ' onClick={() => delSavedResume(savedResume.id)}><ThreeDots size={23} />&nbsp;&nbsp;&nbsp;&nbsp;More</button><br />
+                                    <button className='editResumeBtns ' onClick={() => console.log("more")}><ThreeDots size={23} />&nbsp;&nbsp;&nbsp;&nbsp;More</button><br />
                                 </div>
-                                <p className='resumeDesc'><strong>Created At: </strong>{savedResume.description}</p>
+                                <p className='resumeDesc'><strong>Description: </strong>{savedResume.description}</p>
                             </div>
                         </div>
                     ))}
