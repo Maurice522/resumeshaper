@@ -82,7 +82,8 @@ export const userSlice = createSlice({
 
         },
         updateResume: (state, action)=>{
-            state.user.resume = action.payload;   
+            state.user.resumes = action.payload;
+            // console.log("updatedUser")   
         },
         updatePhoto: (state, action)=>{
             state.user.uploadedPhotoURL= action.payload; 
@@ -107,7 +108,7 @@ export const userSlice = createSlice({
         },
         saveResume:(state, action)=>{
           state.user.resumes = [...state.user.resumes, action.payload]
-        }
+        },
     }
 })
 

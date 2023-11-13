@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { onAuthStateChanged, signOut } from 'firebase/auth'
 import { addUserResume, auth, getUserFromDatabase, updateUserResumes } from '../fireabse'
-import { saveResume, signOutUser, updateUser } from '../redux/slices/user';
+import { saveResume, signOutUser, updateResume, updateUser } from '../redux/slices/user';
 import '../styleSheet/Dashboard.css';
 import { Share, ThreeDots, Check2Circle, PencilSquare, FileEarmarkArrowDownFill, Bullseye, PlusLg, PencilFill, Trash3Fill, ColumnsGap, Book, JournalRichtext, BagFill, GraphUpArrow, MegaphoneFill, Alipay, Bicycle, CheckSquare } from "react-bootstrap-icons";
 import img1 from '../images/template1.PNG'
@@ -17,6 +17,7 @@ import Templates from '../components/templates';
 export default function Dashboard() {
     const navigate =useNavigate()
     const [gettingUser, SetGettingUser] = useState(false);
+    const [deleting, setDeleting] = useState(false);
     useEffect(()=>{
        
         const listen = onAuthStateChanged(auth, async(user)=>{
@@ -175,7 +176,7 @@ export default function Dashboard() {
                 references: [],
                 customSections: [],
             },
-            resumeId: 0,
+            resumeId: 1,
             id: 'id' + (new Date()).getTime()
         }
 
@@ -197,10 +198,14 @@ export default function Dashboard() {
 
 
 
-    const delSavedResume = (id) => {
+    const delSavedResume = async(id) => {
+        setDeleting(true)
         const updatedResumes = savedResumes.filter((resumes) => resumes.id !== id);
         const updatedUserResumes = user.resumes.filter((resumes) => resumes.id !== id);
-        updateUserResumes(user.email,updatedUserResumes)
+
+        dispatch(updateResume(updatedUserResumes))
+        await updateUserResumes(user.email,updatedUserResumes);
+        setDeleting(false)
         setSavedResumes(updatedResumes);
     };
 
@@ -240,7 +245,7 @@ export default function Dashboard() {
                                     <button className='editResumeBtns ' onClick={() => console.log("tailor")}><Bullseye size={23} />&nbsp;&nbsp;&nbsp;&nbsp;Tailor To Your Job</button><br />
                                     <button className='editResumeBtns ' onClick={() => openSelectedResume(savedResume.idx)}><PencilFill size={23} />&nbsp;&nbsp;&nbsp;&nbsp;Edit</button><br />
                                     <button className='editResumeBtns ' onClick={() => console.log("download")}><FileEarmarkArrowDownFill size={23} />&nbsp;&nbsp;&nbsp;&nbsp;Download</button><br />
-                                    <button className='editResumeBtns ' onClick={() => delSavedResume(savedResume.id)}><Trash3Fill size={23} />&nbsp;&nbsp;&nbsp;&nbsp;Delete</button><br />
+                                    <button className='editResumeBtns ' onClick={() => delSavedResume(savedResume.id)}><Trash3Fill size={23} />{deleting?<>&nbsp;&nbsp;&nbsp;&nbsp;Deleting ...</>:<>&nbsp;&nbsp;&nbsp;&nbsp;Delete</>}</button><br />
                                     <button className='editResumeBtns ' onClick={() => console.log("more")}><ThreeDots size={23} />&nbsp;&nbsp;&nbsp;&nbsp;More</button><br />
                                 </div>
                                 <p className='resumeDesc'><strong>Description: </strong>{savedResume.description}</p>

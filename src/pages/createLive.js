@@ -173,6 +173,7 @@ export default function CreateLiveContinue() {
                     },
                 ],
             };
+            console.log("started")
             Object.entries(temp).map(([key, value]) => {
                 temp[key] =user.resumes[idx][key]
               }
@@ -579,9 +580,39 @@ export default function CreateLiveContinue() {
                                                         <img src={img4} className='tempalteImage '/>
                                                     </div>  
                                                     <div className='col-md-4 zoom'>
-                                                        <img src={img5} className='tempalteImage ' onClick={()=>setSelectedTemplateId(1)}/>
+                                                        <img src={img5} className='tempalteImage ' onClick={()=>setSelectedTemplateId(2)}/>
                                                     </div> 
                                                 </div>
+                                            </div>
+                                            <div className="carousel-item ">
+                                                
+                                                <div className='row'>
+                                                    <div className='col-md-4 zoom' onClick={()=>setSelectedTemplateId(3)}>
+                                                        <img src={img6} className='tempalteImage '/>
+                                                    </div>
+                                                    <div className='col-md-4 zoom' onClick={()=>setSelectedTemplateId(4)}>
+                                                        <img src={img7} className='tempalteImage '/>
+                                                    </div>  
+                                                    <div className='col-md-4 zoom' onClick={()=>setSelectedTemplateId(1)}>
+                                                        <img src={img4} className='tempalteImage '/>
+                                                    </div> 
+                                                </div>
+
+                                            </div>
+                                            <div className="carousel-item ">
+                                                
+                                                <div className='row'>
+                                                    <div className='col-md-4 zoom' onClick={()=>setSelectedTemplateId(2)}>
+                                                        <img src={img5} className='tempalteImage '/>
+                                                    </div>
+                                                    <div className='col-md-4 zoom' onClick={()=>setSelectedTemplateId(3)}>
+                                                        <img src={img6} className='tempalteImage '/>
+                                                    </div>  
+                                                    <div className='col-md-4 zoom' onClick={()=>setSelectedTemplateId(4)}>
+                                                        <img src={img7} className='tempalteImage '/>
+                                                    </div> 
+                                                </div>
+
                                             </div>
                                         </div>
                                         <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
