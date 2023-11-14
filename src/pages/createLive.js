@@ -436,14 +436,41 @@ export default function CreateLiveContinue() {
     };
 
     const updateEmploymentField = (index, field, value) => {
+
+        // var updatedEmploymentHistory = {...personalData.employmentHistory[index], writable: true};
+        //     updatedEmploymentHistory[field] = value;
+
+        var updatedEmploymentHistory =[];
+
+        personalData.employmentHistory.map((item,idx2)=>{
+            var temp;
+            if(idx2 === index){
+                temp = {...item, writable: true};
+                temp[field] = value;
+                delete temp.writable;
+            }else{
+                temp = item;
+            }
+            updatedEmploymentHistory = [...updatedEmploymentHistory, temp]
+        })
+        
+        // console.log(updatedEmploymentHistory)
+
         setPersonalData((prevData) => {
-            const updatedEmploymentHistory = [...prevData.employmentHistory];
-            updatedEmploymentHistory[index][field] = value;
             return {
                 ...prevData,
                 employmentHistory: updatedEmploymentHistory,
             };
         });
+
+        // setPersonalData((prevData) => {
+        //     const updatedEmploymentHistory = [...prevData.employmentHistory];
+        //     updatedEmploymentHistory[index][field] = value;
+        //     return {
+        //         ...prevData,
+        //         employmentHistory: updatedEmploymentHistory,
+        //     };
+        // });
     };
 
     const handleLogDetails = async (e) => {
@@ -525,6 +552,103 @@ export default function CreateLiveContinue() {
         navigate("/")
     };
 
+    const getAiSkills = async()=>{
+        console.log("started")
+        var title = "Ai Consultant"
+        var res = await fetch('https://server.reverr.io/skill', {
+        method: 'POST',
+        body: JSON.stringify({
+        title,
+        employmentHistory:personalData.employmentHistory
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8"
+        }
+      })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        console.log(responseJson)
+        return responseJson;
+      })
+      if(Array.isArray(res)){
+
+          console.log(res)
+          setSelectedOptions([...selectedOptions, ...res])
+      }
+      else{
+          
+          console.log("Error")
+      }
+        console.log("ended")
+    }
+    const getJD = async(idx)=>{
+        console.log("started")
+        var title = "Ai Consultant";
+        var description = `Design and develop AI algorithms, models, and systems using tools like PyTorch and TensorFlow for real-world applications.
+        Keep up with the latest advancements in AI technologies, including generative AI and the latest features of popular tools.
+        Collaborate with cross-functional teams to understand requirements and develop AI solutions.
+        Collect, clean, and preprocess data using appropriate tools and libraries, ensuring compatibility with AI algorithms and frameworks.
+        Train, test, and evaluate AI models employing appropriate evaluation metrics.
+        Optimize and fine-tune models for performance, scalability and efficiency.
+        Implement and deploy AI solutions in production environments under different frameworks.
+        Ability to build applications and use appropriate prompting on generative AI models.
+        Stay abreast of emerging AI trends and technologies.`
+        var res = await fetch('https://server.reverr.io/jobdes', {
+        method: 'POST',
+        body: JSON.stringify({
+        title,
+        description,
+        job:personalData.employmentHistory[idx]
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8"
+        }
+      })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        // console.log(responseJson)
+        return responseJson;
+      })
+        // console.log(res)
+        updateEmploymentField(idx, 'description', res)
+        console.log("ended")
+    }
+
+    const getSummary = async()=>{
+        console.log("started")
+        var title = "Ai Consultant";
+        var description = `Design and develop AI algorithms, models, and systems using tools like PyTorch and TensorFlow for real-world applications.
+        Keep up with the latest advancements in AI technologies, including generative AI and the latest features of popular tools.
+        Collaborate with cross-functional teams to understand requirements and develop AI solutions.
+        Collect, clean, and preprocess data using appropriate tools and libraries, ensuring compatibility with AI algorithms and frameworks.
+        Train, test, and evaluate AI models employing appropriate evaluation metrics.
+        Optimize and fine-tune models for performance, scalability and efficiency.
+        Implement and deploy AI solutions in production environments under different frameworks.
+        Ability to build applications and use appropriate prompting on generative AI models.
+        Stay abreast of emerging AI trends and technologies.`
+        var res = await fetch('https://server.reverr.io/summary', {
+        method: 'POST',
+        body: JSON.stringify({
+        title,
+        description,
+        details:personalData.professionalSummary
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8"
+        }
+      })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        // console.log(responseJson)
+        return responseJson;
+      })
+        console.log(res.professionalSummary)
+        setPersonalData({
+            ...personalData,
+            professionalSummary: res.professionalSummary,
+        });
+        console.log("ended")
+    }
     return (
         <>
         {gettingUser? <img style={{ position: "absolute",top: "50%",left: "50%",transform: "translate(-50%, -50%)"}} width="240" height="240" alt='loading...' src='https://media2.giphy.com/media/MDrmyLuEV8XFOe7lU6/200w.webp?cid=ecf05e47k6onrtqddz8d98s4j5lhtutlnnegeus1pwcdwkxt&ep=v1_gifs_search&rid=200w.webp&ct=g' /> :
@@ -775,8 +899,8 @@ export default function CreateLiveContinue() {
                                         </div>
                                     )}
                                     <br />
-
                                     <h5 className='formSection'><PenFill color="#35b276" size={24} /> &nbsp;Professional Summary<span style={{color:'red'}}>*</span></h5>
+                                    <button type='button' onClick={()=>getSummary()}>Ai it</button>
                                     <p className='detailsSubText'>Compose a professional summary to showcase your expertise. For instance: 'Results driven marketing professional with 8 years of experience,excelling in digital strategy and campaign optimization.'</p>
                                     <textarea
                                         name="professionalSummary"
@@ -873,7 +997,7 @@ export default function CreateLiveContinue() {
                                                             <label className='detailsInfoLabel'>
                                                                 Description:
                                                             </label>
-
+                                                            <button type='button' onClick={()=>getJD(index)}> AI it</button>
                                                             <p className='detailsSubText'>Provide an overview of your job duties and responsibilities in your previous position.This would help us gain a deeper understanding of your professional experience.</p>
                                                             <textarea
                                                                 value={employment.description}
@@ -1081,6 +1205,7 @@ export default function CreateLiveContinue() {
             <p className='detailsSubText'>
                 Highlight your core strengths and expertise. Create and add skills that best suit your position and represent your capabilities, enhancing your resume.
             </p>
+            <button type='button' onClick={()=>getAiSkills()}>Ai it</button>
             <div>
                 <input
                     className='detailsInfoInput createLiveSearchDetailsInfoInput'
