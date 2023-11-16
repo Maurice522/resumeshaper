@@ -3,6 +3,7 @@ import { Document, Page, Text, View, StyleSheet, Image } from '@react-pdf/render
 import img1 from '../images/14.png'
 import '../styleSheet/temp4.css'
 import { PersonFill, BagDashFill, AwardFill, PeopleFill, MegaphoneFill, JournalBookmarkFill, TrophyFill, TropicalStorm } from "react-bootstrap-icons";
+import img8 from '../images/profileicon.png'
 
 
 const styles = StyleSheet.create({
@@ -31,7 +32,12 @@ export default function MyPdfViewer4({ personalData, live, courses, activities, 
             <View>
               <div className='temp4ImageDiv'>
                 <div className='imageBg'>
-                  <img src={firebaseImageUrl} className="temp4DisplayImage" /> 
+                  {/* <img src={firebaseImageUrl} className="temp4DisplayImage" />  */}
+                  {personalData.uploadedPhotoURL ?
+                    <img src={firebaseImageUrl} className="temp4DisplayImage" />
+                    :
+                    <img src={img8} className="temp4DisplayImage" />
+                  }
                 </div>
               </div>
             </View>
@@ -128,20 +134,20 @@ export default function MyPdfViewer4({ personalData, live, courses, activities, 
         <div className='col-md-8 temp4RightCol'>
           <Document>
             <Page size="A4" style={styles.page}>
-            
-                <div className='temp4GreyBigDiv'>
+
+              <div className='temp4GreyBigDiv'>
                 <div className='nameDiv temp4NameDiv'>
-                <p className='resumeTtile temp4ResumeTitle'>{personalData.jobTitle.toUpperCase()}</p>
+                  <p className='resumeTtile temp4ResumeTitle'>{personalData.jobTitle.toUpperCase()}</p>
                   <h6 className='resumeName temp4ResumeName'>{personalData.firstName.toUpperCase()} {personalData.middleName.toUpperCase()} {personalData.lastName.toUpperCase()}</h6>
                   <hr className='temp4Hr2'></hr>
                   <p className='profileText temp4ProfessionalSummary'>{personalData.professionalSummary}</p>
                 </div>
-                </div>
-               
-            
+              </div>
+
+
 
               <View >
-                <div className='temp4LeftContent'>              
+                <div className='temp4LeftContent'>
 
                   {personalData.employmentHistory && personalData.employmentHistory.length > 0 && personalData.employmentHistory[0].jobTitle !== '' && <>
                     <div className='liveEmployment'>
@@ -242,8 +248,8 @@ export default function MyPdfViewer4({ personalData, live, courses, activities, 
                     {customSections.map((item, index) => {
                       return (<>
                         <div className='liveEducation'>
-                        <p className='profileName employmentHistName template4RightHeadings'>{item.title}</p>
-                      <hr className='temp3Hr3'></hr>
+                          <p className='profileName employmentHistName template4RightHeadings'>{item.title}</p>
+                          <hr className='temp3Hr3'></hr>
                           <p className='profileName temp4CustomTitle'>{item.subTitle}</p>
                           <p className='employmentTime DOBProfileDetailsText'>{item.startDate} - {item.endDate}</p>
                           <p className='profileText employmetnProfileText'>{item.description} </p>

@@ -130,10 +130,12 @@
     margin-left: 8%;
     width: 70px;
     padding: 3%;
+    height: 69px;
 }
 .temp4DisplayImage{
     width: 63px !important;
     border-radius: 100%;
+    height: 63px;
 }
 .temp3PersonalDetails{
     font-size: 10px;

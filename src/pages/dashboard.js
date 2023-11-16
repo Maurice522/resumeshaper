@@ -13,6 +13,7 @@ import img2 from '../images/template2.PNG'
 import img3 from '../images/template3.PNG'
 import img4 from '../images/template4.PNG'
 import Templates from '../components/templates';
+import JobPopup from '../components/jobPopup';
 
 export default function Dashboard() {
     const navigate =useNavigate()
@@ -217,6 +218,13 @@ export default function Dashboard() {
             navigate(`/createcontinue/${idx}`, )
         }
     };
+    const togglePopup = () => {
+        setIsPopupOpen(!isPopupOpen);
+    };
+    const handleSignup = () => {
+        togglePopup();
+    };
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
 
     return (
         <>
@@ -233,6 +241,7 @@ export default function Dashboard() {
                     <button className='createDoc zoom' onClick={()=>navigate("/create")}><PlusLg size={20} /> &nbsp;Create New</button>
                 </div>
                 <hr className='dashHrLine' />
+                {isPopupOpen && <JobPopup onClose={togglePopup} onSignup={handleSignup} />}
                 <div className='dashContent row'>
                     {savedResumes.map((savedResume) => (
                         <div key={savedResume.id} className='resume1Div col-md-6'>
@@ -242,7 +251,7 @@ export default function Dashboard() {
                                     <h6 className='resumeTitle'>{savedResume.title}</h6>
                                 </div>
                                 <div className='col-md-8 editResumeOptions'>
-                                    <button className='editResumeBtns ' onClick={() => console.log("tailor")}><Bullseye size={23} />&nbsp;&nbsp;&nbsp;&nbsp;Tailor To Your Job</button><br />
+                                    <button className='editResumeBtns ' onClick={togglePopup}><Bullseye size={23} />&nbsp;&nbsp;&nbsp;&nbsp;Tailor To Your Job</button><br />
                                     <button className='editResumeBtns ' onClick={() => openSelectedResume(savedResume.idx)}><PencilFill size={23} />&nbsp;&nbsp;&nbsp;&nbsp;Edit</button><br />
                                     <button className='editResumeBtns ' onClick={() => console.log("download")}><FileEarmarkArrowDownFill size={23} />&nbsp;&nbsp;&nbsp;&nbsp;Download</button><br />
                                     <button className='editResumeBtns ' onClick={() => delSavedResume(savedResume.id)}><Trash3Fill size={23} />{deleting?<>&nbsp;&nbsp;&nbsp;&nbsp;Deleting ...</>:<>&nbsp;&nbsp;&nbsp;&nbsp;Delete</>}</button><br />

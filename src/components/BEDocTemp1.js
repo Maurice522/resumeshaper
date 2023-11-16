@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: 30, // Add padding here
     color:'#3E3F4E',
-    
+    height:'100%'
   },
   leftColumn: {
     width: '70%',
@@ -119,6 +119,9 @@ const styles = StyleSheet.create({
   extraSideHeadingStyle:{
     fontSize:18,
     // marginTop:15
+  },
+  myDoc:{
+    height:1200,
   }
 });
 
@@ -128,8 +131,8 @@ export default function BEDocTemp1({ personalData,courses, activities,internship
   console.log("picturerw",personalData.uploadedPhotoURL)
   
   return (
-    <Document>
-    <Page size="A4" style={styles.page}>
+    <Document style={styles.myDoc}>
+    <Page  style={styles.page}>
       <View style={styles.leftColumn}>
         <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 30 }}>
          <Image style={styles.image} src={img1}/>

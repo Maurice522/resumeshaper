@@ -324,6 +324,7 @@ font-family: 'Roboto', sans-serif; */
     text-align: center;
     position: absolute;
     top: 0%;
+    height: 100vh;
 }
 .realBdfGoBackBtn{
     width: 120px;
@@ -375,13 +376,12 @@ font-family: 'Roboto', sans-serif; */
     font-weight: 800;
   }
   .dashboardBtn:hover{
-
     position: absolute;
     z-index: 20;
     background-color: #ecf8e5;
-    right: 16%;
+    right: 28%;
     border: none;
-    color: #5ec57e;
+    color: #346571;
     top: 34%;
     font-weight: 900;
   }
@@ -443,5 +443,44 @@ margin-top: 2%;
     width: 26px;
     background-color:#5ec57e;
 }
+.tailorDivImg{
+    width: 100%;
+}
+.createLiveHrLine{
+    margin-bottom: 5%;
+}
+.liveInfoOuterDiv{
+    background-color: red;
+    background-color: transparent;
+    position: relative;
+    margin-top: 3%;
+    
+}
 
+.aiItAnimationDiv{
+    position: absolute;
+    right: 3%;
+    top: -5% !important;
+    /* background-color: #346571; */
+    background-color: transparent;
+    /* background-color: blue; */
+    height: 60px;
+    cursor: pointer;
+    z-index: 1;
+}
 
+.aiItAnimationDivDesc{
+    position: absolute;
+    right: 3%;
+    top: -35% !important;
+    /* background-color: #346571; */
+    background-color: transparent;
+    height: 60px;
+    cursor: pointer;
+}
+.bulbGif{
+    height: 50px;
+    width: 50px;
+    z-index: 5;
+    pointer-events: none;
+}

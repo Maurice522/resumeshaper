@@ -6,7 +6,7 @@ import BEDocTemp2 from './BEDocTemp2';
 import Nav from './nav';
 import BEDocTemp1 from './BEDocTemp1';
 import BEDocTemp3 from './BEDocTemp3';
-import BEDocTemp4 from './BEDocTemp3';
+import BEDocTemp4 from './BEDocTemp4';
 
 
 const styles = StyleSheet.create({
@@ -46,6 +46,8 @@ const styles = StyleSheet.create({
   },
   pDFViewerStyle:{
     // backgroundColor:"#ffffff" ,
+    height:'100%',
+    width:'65%'
   }
 });
 
@@ -57,7 +59,7 @@ export default function PdfDisplayBE({ personalData,courses, activities,internsh
     <>
       <div className='downloadPdfMainDiv'>
         <button className='realBdfGoBackBtn zoom' onClick={()=>setDownloadPdf(false)}>Edit Pdf</button>
-        <PDFViewer width={530} height={550} style={styles.pDFViewerStyle}>
+        <PDFViewer  style={styles.pDFViewerStyle}>
         {selectedTemplateId == 1 &&  <BEDocTemp1 personalData={personalData} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={skills}/>}
         {selectedTemplateId == 2 &&  <BEDocTemp2 personalData={personalData} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={skills}/>}
         {selectedTemplateId == 3 &&  <BEDocTemp3 personalData={personalData} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={skills}/>}

@@ -10,7 +10,7 @@ import MyPdfViewer1 from '../components/pdfDisplayFeTemp1';
 import MyPdfViewer2 from '../components/pdfDisplayFeTemp2';
 import MyPdfViewer3 from '../components/pdfDisplayFeTemp3';
 import MyPdfViewer4 from '../components/pdfDisplayFeTemp4';
-import { PlusCircleFill, FileEarmarkArrowDownFill, Check2Circle, Check2All, Check, PersonCheck, PersonSquare, CaretDownSquare, JournalBookmarkFill, PenFill, Trash3Fill, PlusLg, JournalCheck, Link45deg, TrophyFill } from "react-bootstrap-icons";
+import { PlusCircleFill, Clipboard2Fill,Crop, Clipboard2, FileEarmarkArrowDownFill, Check2Circle, Check2All, Check, PersonCheck, PersonSquare, CaretDownSquare, JournalBookmarkFill, PenFill, Trash3Fill, PlusLg, JournalCheck, Link45deg, TrophyFill } from "react-bootstrap-icons";
 import CustomSection from '../components/formComponents/customSection';
 import { updateUserProfileInDatabase, updateUserPhotoInDatabase, uploadMedia } from '../fireabse';
 import { updatePhoto, updateProfile } from '../redux/slices/user';
@@ -24,7 +24,7 @@ import img4 from '../images/template1.PNG'
 import img5 from '../images/template2.PNG'
 import img6 from '../images/template3.PNG'
 import img7 from '../images/template4.PNG'
-
+import JobPopup from '../components/jobPopup';
 
 
 // import skills from '../components/formComponents/skills';    
@@ -106,6 +106,7 @@ export default function CreateLive() {
     });
 
     const [gettingUser, SetGettingUser] = useState(false);
+    const [isJobPopupOpen, setIsJobPopupOpen] = useState(false);
 
     const user = useSelector(state => state.user.user);
     const dispatch = useDispatch();
@@ -285,6 +286,10 @@ export default function CreateLive() {
     }, [selectedOptions]);
 
 
+    const openJobModal = () => {
+        setIsJobPopupOpen(!isJobPopupOpen);
+    };
+
     const handleSearchTextChange = (e) => {
         setSearchText(e.target.value);
     };
@@ -363,6 +368,26 @@ export default function CreateLive() {
         });
     };
 
+    // const updateWebsiteLinkField = (index, field, value) => {
+    //     var updatedWebsitesLinks = [];
+    //     personalData.websitesLinks.map((item, idx2) => {
+    //         var temp;
+    //         if (idx2 === index) {
+    //             temp = { ...item, writable: true };
+    //             temp[field] = value;
+    //             delete temp.writable;
+    //         } else {
+    //             temp = item;
+    //         }
+    //         updatedWebsitesLinks = [...updatedWebsitesLinks, temp]
+    //     })
+    //     setPersonalData((prevData) => {
+    //         return {
+    //             ...prevData,
+    //             websitesLinks: updatedWebsitesLinks,
+    //         };
+    //     });
+    // }
 
 
 
@@ -405,6 +430,27 @@ export default function CreateLive() {
         });
     };
 
+    // const updateEducationField = (index, field, value) => {
+    //     var updateEducationFieldHistory = [];
+    //     personalData.educationHistory.map((item, idx2) => {
+    //         var temp;
+    //         if (idx2 === index) {
+    //             temp = { ...item, writable: true };
+    //             temp[field] = value;
+    //             delete temp.writable;
+    //         } else {
+    //             temp = item;
+    //         }
+    //         updateEducationFieldHistory = [...updateEducationFieldHistory, temp]
+    //     })
+    //     setPersonalData((prevData) => {
+    //         return {
+    //             ...prevData,
+    //             educationHistory: updateEducationFieldHistory,
+    //         };
+    //     });
+    // }
+
     const addEmploymentHistory = () => {
         setPersonalData({
             ...personalData,
@@ -444,6 +490,28 @@ export default function CreateLive() {
             };
         });
     };
+
+    // const updateEmploymentField = (index, field, value) => {
+    //     var updatedEmploymentHistory = [];
+    //     personalData.employmentHistory.map((item, idx2) => {
+    //         var temp;
+    //         if (idx2 === index) {
+    //             temp = { ...item, writable: true };
+    //             temp[field] = value;
+    //             delete temp.writable;
+    //         } else {
+    //             temp = item;
+    //         }
+    //         updatedEmploymentHistory = [...updatedEmploymentHistory, temp]
+    //     })
+    //     setPersonalData((prevData) => {
+    //         return {
+    //             ...prevData,
+    //             employmentHistory: updatedEmploymentHistory,
+    //         };
+    //     });
+    // };
+
 
     const handleLogDetails = async (e) => {
         e.preventDefault();
@@ -544,14 +612,17 @@ export default function CreateLive() {
                                 <button onClick={() => handleDashboard()} className=" dashboardBtn zoom" disabled={photoLoader}><h6>Dashboard</h6></button>
                                 <button onClick={() => handler()} className=" btn btn-success signoutBtn createLiveSignOut"> <Power color="#35b276" size={22} /> &nbsp;Signout</button>
                             </nav>
-                        </div>
+                           </div>
+                           {/* <button onClick={openJobModal}>Click Here</button>
+                        {isJobPopupOpen && <JobPopup onClose={openJobModal} />} */}
+                      
                         <div style={{ display: "flex", flexDirection: "row", width: "50%", left: "0%", marginTop: "5%" }}>
                             <div style={{ flex: 1 }}>
                                 <div className='createLeftFormDiv'>
                                     <h3 className='formTitle'>Personalize your Profile</h3>
                                     <p className='formSubText'>"Tell us more about yourself and the position you're targeting, and we'll create a personlized resume just for you."</p>
                                     <hr className='hrLine' />
-                                    <h5 className='formSection createFormSection'><PersonCheck color="#35b276" size={29} /> &nbsp;Select Template</h5>
+                                    <h5 className='formSection createFormSection'><Crop color="#35b276" size={25} /> &nbsp;Select Template</h5>
                                     <div className='templateDiv'>
                                     <div id="carouselExampleIndicators" className="carousel slide">
                                         <div className="carousel-inner">
@@ -575,12 +646,18 @@ export default function CreateLive() {
                                                     <div className='col-md-4 zoom' onClick={()=>setSelectedTemplateId(4)}>
                                                         <img src={img7} className='tempalteImage'/>
                                                     </div>
-                                                    <div className='col-md-4 zoom' onClick={()=>setSelectedTemplateId(1)}>
+                                                    <div className='col-md-4 zoom' >
+                                                    
+                                                    </div>
+                                                    <div className='col-md-4 zoom' >
+                                                       
+                                                    </div>
+                                                    {/* <div className='col-md-4 zoom' onClick={()=>setSelectedTemplateId(1)}>
                                                         <img src={img4} className='tempalteImage'/>
                                                     </div>  
                                                     <div className='col-md-4 zoom'>
                                                         <img src={img5} className='tempalteImage' onClick={()=>setSelectedTemplateId(1)}/>
-                                                    </div> 
+                                                    </div>  */}
                                                 </div>
                                             </div>
                                         </div>
