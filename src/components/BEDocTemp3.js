@@ -141,14 +141,14 @@ const styles = StyleSheet.create({
 });
 
 
-export default function BEDocTemp3({ personalData,courses, activities,internships,hobbies,languages,references ,customSections ,skills }) {
+export default function BEDocTemp3({imgFile, personalData,courses, activities,internships,hobbies,languages,references ,customSections ,skills }) {
   console.log(personalData)
   return (
     <Document>
     <Page size="A4" style={styles.page}>
       <View style={styles.leftColumn}>
       <View style={{ alignItems: 'center' }}>
-          <Image style={styles.image} src={img1} />
+          <Image style={styles.image} src={imgFile===null? img1:imgFile} />
         </View>
         <View style={{alignItems: 'center', marginTop:8,width:"100%",paddingRight:'4%' }}>
             <Text style={styles.name}>{personalData.firstName} {personalData.middleName} {personalData.lastName}</Text>

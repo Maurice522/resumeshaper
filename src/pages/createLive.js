@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { onAuthStateChanged, signOut } from 'firebase/auth'
 import { addUserResume, auth, getUserFromDatabase } from '../fireabse'
 import { useDispatch, useSelector } from 'react-redux';
-import { saveResume, signOutUser, updateUser } from '../redux/slices/user';
+import { saveResume, setResume, signOutUser, updateUser } from '../redux/slices/user';
 import Nav from '../components/nav';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Power } from "react-bootstrap-icons";
@@ -15,7 +15,7 @@ import CustomSection from '../components/formComponents/customSection';
 import { updateUserProfileInDatabase, updateUserPhotoInDatabase, uploadMedia } from '../fireabse';
 import { updatePhoto, updateProfile } from '../redux/slices/user';
 import '../styleSheet/createLive.css'
-import { PDFViewer } from '@react-pdf/renderer';
+import { PDFDownloadLink, PDFViewer } from '@react-pdf/renderer';
 import PdfDisplayBE from '../components/pdfDisplayBE';
 import Test from './test';
 import '../styleSheet/Nav.css'
@@ -29,12 +29,15 @@ import vid1 from '../images/tailorVid2.mp4'
 import vid2 from '../images/bulbAnimation.mp4'
 import ReactPlayer from 'react-player'
 import JobPopup from '../components/jobPopup';
+import { toast } from 'react-toastify';
+import MyPdfViewerTest from '../components/pdfDisplayFeTest';
 
 
 // import skills from '../components/formComponents/skills';    
 
 export default function CreateLiveContinue() {
     const { idx } = useParams()
+    const location = useLocation()
 
     const [showAdditionalDetails, setShowAdditionalDetails] = useState(false);
     const [courses, setCourses] = useState([]);
@@ -61,7 +64,7 @@ export default function CreateLiveContinue() {
         customSections: [],
     });
     const [selectedTemplateId, setSelectedTemplateId] = useState(1);
-    const [aiLoading, setAiLoading] = useState('false');
+    const [aiLoading, setAiLoading] = useState(false);
     const [personalData, setPersonalData] = useState({
         jobTitle: '',
         firstName: '',
@@ -109,6 +112,10 @@ export default function CreateLiveContinue() {
 
     const [gettingUser, SetGettingUser] = useState(false);
     const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const [imgFile, setImgFile] = useState(null);
+    const [jobTitle, setJobTitle] = useState('');
+    const [jobDescription, setJobDescription] = useState('');
+    const [currId, setCurrId] = useState(null)
 
     const user = useSelector(state => state.user.user);
     const dispatch = useDispatch();
@@ -178,12 +185,23 @@ export default function CreateLiveContinue() {
                     },
                 ],
             };
+            console.log(location)
+            if(location.state !== null){
+                if(location.state.popon)
+                setIsPopupOpen(location.state.popon)
+                
+                if(location.state.download)
+                setDownloadPdf(location.state.download)
+                
+            }
             console.log("started")
             Object.entries(temp).map(([key, value]) => {
                 temp[key] = user.resumes[idx][key]
             }
             );
             console.log(user.resumes[idx])
+            setCurrId(user.resumes[idx].id)
+            setSelectedOptions(user.resumes[idx].skills)
             setSelectedTemplateId(user.resumes[idx].resumeId)
             setPersonalData(temp)
         }
@@ -527,19 +545,26 @@ export default function CreateLiveContinue() {
             skills: selectedOptions,
             customDetails,
             resumeId: selectedTemplateId,
-            id: 'id' + (new Date()).getTime()
+            id: currId!== null ? currId :'id' + (new Date()).getTime()
         }
         console.log(resume)
         console.log(user.resumes)
-        var resumes = [...user.resumes, resume]
+
+        var resumes = [...user.resumes]
+
+        resumes.filter((item)=> item.id !==currId)
+
+        resumes = [...resumes, resume]
+
         console.log("Login email  " + user.email)
         await addUserResume(user.email, resumes);
         console.log(user)
-        dispatch(saveResume(resume));
+        dispatch(setResume(resumes));
         console.log(user)
+        toast.success("Saved Resume!")
 
         // dispatch(updateUser(resume));
-        // navigate("/dashboard")
+        navigate("/dashboard")
 
         // console.log(personalData)
         // console.log(customDetails)
@@ -565,7 +590,7 @@ export default function CreateLiveContinue() {
         if (name === 'photo') {
             setPhotoLoader(true);
             const photoFile = files[0];
-
+            setImgFile(URL.createObjectURL(e.target.files[0]))
             //To  Display the uploaded photo
             if (photoFile) {
                 const reader = new FileReader();
@@ -600,12 +625,16 @@ export default function CreateLiveContinue() {
 
     const getAiSkills = async () => {
         console.log("started")
+        if(jobTitle === '' || jobDescription === ''){
+            setIsPopupOpen(true)
+            return toast.info("Fill Job Title and Description")
+        }
         setAiLoading(true)
-        var title = "Ai Consultant"
+        
         var res = await fetch('https://server.reverr.io/skill', {
             method: 'POST',
             body: JSON.stringify({
-                title,
+                title: jobTitle,
                 employmentHistory: personalData.employmentHistory
             }),
             headers: {
@@ -631,22 +660,17 @@ export default function CreateLiveContinue() {
     }
     const getJD = async (idx) => {
         console.log("started")
+        if(jobTitle === '' || jobDescription === ''){
+            setIsPopupOpen(true)
+            return toast.info("Fill Job Title and Description")
+        }
         setAiLoading(true)
-        var title = "Ai Consultant";
-        var description = `Design and develop AI algorithms, models, and systems using tools like PyTorch and TensorFlow for real-world applications.
-        Keep up with the latest advancements in AI technologies, including generative AI and the latest features of popular tools.
-        Collaborate with cross-functional teams to understand requirements and develop AI solutions.
-        Collect, clean, and preprocess data using appropriate tools and libraries, ensuring compatibility with AI algorithms and frameworks.
-        Train, test, and evaluate AI models employing appropriate evaluation metrics.
-        Optimize and fine-tune models for performance, scalability and efficiency.
-        Implement and deploy AI solutions in production environments under different frameworks.
-        Ability to build applications and use appropriate prompting on generative AI models.
-        Stay abreast of emerging AI trends and technologies.`
+        
         var res = await fetch('https://server.reverr.io/jobdes', {
             method: 'POST',
             body: JSON.stringify({
-                title,
-                description,
+                title: jobTitle,
+                description: jobDescription,
                 job: personalData.employmentHistory[idx]
             }),
             headers: {
@@ -666,22 +690,26 @@ export default function CreateLiveContinue() {
 
     const getSummary = async () => {
         console.log("started")
+        if(jobTitle === '' || jobDescription === ''){
+            setIsPopupOpen(true)
+            return toast.info("Fill Job Title and Description")
+        }
         setAiLoading(true)
-        var title = "Ai Consultant";
-        var description = `Design and develop AI algorithms, models, and systems using tools like PyTorch and TensorFlow for real-world applications.
-        Keep up with the latest advancements in AI technologies, including generative AI and the latest features of popular tools.
-        Collaborate with cross-functional teams to understand requirements and develop AI solutions.
-        Collect, clean, and preprocess data using appropriate tools and libraries, ensuring compatibility with AI algorithms and frameworks.
-        Train, test, and evaluate AI models employing appropriate evaluation metrics.
-        Optimize and fine-tune models for performance, scalability and efficiency.
-        Implement and deploy AI solutions in production environments under different frameworks.
-        Ability to build applications and use appropriate prompting on generative AI models.
-        Stay abreast of emerging AI trends and technologies.`
+        // var title = "Ai Consultant";
+        // var description = `Design and develop AI algorithms, models, and systems using tools like PyTorch and TensorFlow for real-world applications.
+        // Keep up with the latest advancements in AI technologies, including generative AI and the latest features of popular tools.
+        // Collaborate with cross-functional teams to understand requirements and develop AI solutions.
+        // Collect, clean, and preprocess data using appropriate tools and libraries, ensuring compatibility with AI algorithms and frameworks.
+        // Train, test, and evaluate AI models employing appropriate evaluation metrics.
+        // Optimize and fine-tune models for performance, scalability and efficiency.
+        // Implement and deploy AI solutions in production environments under different frameworks.
+        // Ability to build applications and use appropriate prompting on generative AI models.
+        // Stay abreast of emerging AI trends and technologies.`
         var res = await fetch('https://server.reverr.io/summary', {
             method: 'POST',
             body: JSON.stringify({
-                title,
-                description,
+                title: jobTitle,
+                description: jobDescription,
                 details: personalData.professionalSummary
             }),
             headers: {
@@ -713,7 +741,7 @@ export default function CreateLiveContinue() {
             {gettingUser ? <img style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }} width="240" height="240" alt='loading...' src='https://media2.giphy.com/media/MDrmyLuEV8XFOe7lU6/200w.webp?cid=ecf05e47k6onrtqddz8d98s4j5lhtutlnnegeus1pwcdwkxt&ep=v1_gifs_search&rid=200w.webp&ct=g' /> :
                 <>
                     {/* <Nav /> */}
-                    {downloadPdf ? <PdfDisplayBE personalData={personalData} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={selectedOptions} downloadPdf={downloadPdf} setDownloadPdf={setDownloadPdf} selectedTemplateId={selectedTemplateId} /> : <>
+                    {downloadPdf ? <PdfDisplayBE imgFile={imgFile} personalData={personalData} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={selectedOptions} downloadPdf={downloadPdf} setDownloadPdf={setDownloadPdf} selectedTemplateId={selectedTemplateId} /> : <>
                         <div>
                             <nav class="navbar bg-body-tertiary myNav createLiveNav">
                                 <div class="container-fluid">
@@ -738,6 +766,7 @@ export default function CreateLiveContinue() {
                                     <div className='tailorDiv zoom' onClick={togglePopup} >
                                         {/* <img src={img8} className='tailorDivImg' ></img> */}
                                         <ReactPlayer
+                                            style={{cursor:"pointer"}}
                                             className="player"
                                             url={vid1}
                                             width="95%"
@@ -749,7 +778,7 @@ export default function CreateLiveContinue() {
                                             ref={playerRef}
                                         />
                                     </div>
-                                    {isPopupOpen && <JobPopup onClose={togglePopup} onSignup={handleSignup} />}
+                                    {isPopupOpen && <JobPopup onClose={togglePopup} onSignup={handleSignup} jobTitle={jobTitle} setJobTitle={setJobTitle} jobDescription={jobDescription} setJobDescription={setJobDescription} />}
                                     <h5 className='formSection createFormSection'><Crop color="#35b276" size={29} /> &nbsp;Select Template</h5>
                                     <div className='templateDiv'>
                                         <div id="carouselExampleIndicators" className="carousel slide">
@@ -1413,7 +1442,7 @@ export default function CreateLiveContinue() {
                                             <CustomSection courses={courses} setCourses={setCourses} activities={activities} setActivities={setActivities} internships={internships} setInternships={setInternships} hobbies={hobbies} setHobbies={setHobbies} languages={languages} setLanguages={setLanguages} references={references} setReferences={setReferences} customSections={customSections} setCustomSections={setCustomSections} liveForm={"true"} />
                                             <div className='createSaveProfileDiv'>
                                                 <button type="submit" className="saveProfileBtn createLiveSaveProfileBtn">
-                                                    <Check2Circle size={26} />&nbsp;&nbsp;&nbsp;Create My Resume
+                                                    <Check2Circle size={26} />&nbsp;&nbsp;&nbsp;Save Resume
                                                 </button>
                                             </div>
                                         </form>
@@ -1432,6 +1461,9 @@ export default function CreateLiveContinue() {
                                     </div>
                                 </div>
                             </div>
+                            {/* <PDFDownloadLink document={<MyPdfViewerTest name={"NAMES"} photo={imgFile} />} fileName='Resume'>
+                                    {({loading})=>(loading? <button type='button'>loading Document...</button>: <button type='button'>Download</button>)}
+                            </PDFDownloadLink> */}
                             {/* <button onClick={() => handleDownload()} className="downloadPdfBtn zoom" disabled={photoLoader}><FileEarmarkArrowDownFill className="downloadPDFIcon" size={26} style={{zIndex:18}}/>Download PDF</button> */}
                         </div>
                     </>}
@@ -1439,6 +1471,8 @@ export default function CreateLiveContinue() {
             }
         </>
     )
+    
+    
 }
 
 // Helper function to generate a large list of options for testing

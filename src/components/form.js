@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Check2Circle, Check2All, Check, PersonCheck, PersonSquare, CaretDownSquare, JournalBookmarkFill, PenFill, Trash3Fill, PlusLg, JournalCheck, Link45deg, TrophyFill } from "react-bootstrap-icons";
 import CustomSection from './formComponents/customSection';
-import { updateUserProfileInDatabase, updateUserPhotoInDatabase, uploadMedia } from '../fireabse';
+import { updateUserProfileInDatabase, updateUserPhotoInDatabase, uploadMedia, addUserResume } from '../fireabse';
 import { useDispatch, useSelector } from 'react-redux';
-import { updatePhoto, updateProfile, updateUser } from '../redux/slices/user';
+import { saveResume, updatePhoto, updateProfile, updateUser } from '../redux/slices/user';
 import skills from '../components/formComponents/skills';
 import { useNavigate } from 'react-router-dom'
 import SkillsForm from './skillsForm';
@@ -353,6 +353,18 @@ const updateWebsiteLinkField = (index, field, value) => {
     }
     console.log("Login email  " + user.email)
     await updateUserProfileInDatabase(user.email, profile)
+    var resume = {
+      ...personalData,
+      skills: selectedOptions,
+      customDetails,
+      resumeId: 1,
+      id: 'id' + (new Date()).getTime()
+  }
+
+  var resumes = [resume]
+
+  dispatch(saveResume(resume));
+  await addUserResume(user.email, resumes);
     dispatch(updateUser(profile));
     navigate("/dashboard")
 

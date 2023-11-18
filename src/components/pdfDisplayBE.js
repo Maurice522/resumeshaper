@@ -53,17 +53,17 @@ const styles = StyleSheet.create({
 
 
 
-export default function PdfDisplayBE({ personalData,courses, activities,internships,hobbies,languages,references ,customSections ,skills,downloadPdf,setDownloadPdf,selectedTemplateId }) {
+export default function PdfDisplayBE({imgFile, personalData,courses, activities,internships,hobbies,languages,references ,customSections ,skills,downloadPdf,setDownloadPdf,selectedTemplateId }) {
   console.log(personalData)
   return (
     <>
       <div className='downloadPdfMainDiv'>
         <button className='realBdfGoBackBtn zoom' onClick={()=>setDownloadPdf(false)}>Edit Pdf</button>
         <PDFViewer  style={styles.pDFViewerStyle}>
-        {selectedTemplateId == 1 &&  <BEDocTemp1 personalData={personalData} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={skills}/>}
-        {selectedTemplateId == 2 &&  <BEDocTemp2 personalData={personalData} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={skills}/>}
-        {selectedTemplateId == 3 &&  <BEDocTemp3 personalData={personalData} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={skills}/>}
-        {selectedTemplateId == 4 &&  <BEDocTemp4 personalData={personalData} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={skills}/>}         
+        {selectedTemplateId == 1 &&  <BEDocTemp1 imgFile={imgFile} personalData={personalData} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={skills}/>}
+        {selectedTemplateId == 2 &&  <BEDocTemp2 imgFile={imgFile} personalData={personalData} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={skills}/>}
+        {selectedTemplateId == 3 &&  <BEDocTemp3 imgFile={imgFile} personalData={personalData} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={skills}/>}
+        {selectedTemplateId == 4 &&  <BEDocTemp4 imgFile={imgFile} personalData={personalData} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={skills}/>}         
         </PDFViewer>
       </div>
     </>

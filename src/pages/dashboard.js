@@ -221,6 +221,14 @@ export default function Dashboard() {
     const togglePopup = () => {
         setIsPopupOpen(!isPopupOpen);
     };
+    const tailor = (idx) => {
+        // setIsPopupOpen(!isPopupOpen);
+        navigate(`/createcontinue/${idx}`,{state:{popon:true}} );
+    };
+    const download = (idx) => {
+        // setIsPopupOpen(!isPopupOpen);
+        navigate(`/createcontinue/${idx}`,{state:{download:true}} );
+    };
     const handleSignup = () => {
         togglePopup();
     };
@@ -251,11 +259,11 @@ export default function Dashboard() {
                                     <h6 className='resumeTitle'>{savedResume.title}</h6>
                                 </div>
                                 <div className='col-md-8 editResumeOptions'>
-                                    <button className='editResumeBtns ' onClick={togglePopup}><Bullseye size={23} />&nbsp;&nbsp;&nbsp;&nbsp;Tailor To Your Job</button><br />
+                                    <button className='editResumeBtns ' onClick={()=>tailor(savedResume.idx)}><Bullseye size={23} />&nbsp;&nbsp;&nbsp;&nbsp;Tailor To Your Job</button><br />
                                     <button className='editResumeBtns ' onClick={() => openSelectedResume(savedResume.idx)}><PencilFill size={23} />&nbsp;&nbsp;&nbsp;&nbsp;Edit</button><br />
-                                    <button className='editResumeBtns ' onClick={() => console.log("download")}><FileEarmarkArrowDownFill size={23} />&nbsp;&nbsp;&nbsp;&nbsp;Download</button><br />
+                                    <button className='editResumeBtns ' onClick={() => download(savedResume.idx)}><FileEarmarkArrowDownFill size={23} />&nbsp;&nbsp;&nbsp;&nbsp;Download</button><br />
                                     <button className='editResumeBtns ' onClick={() => delSavedResume(savedResume.id)}><Trash3Fill size={23} />{deleting?<>&nbsp;&nbsp;&nbsp;&nbsp;Deleting ...</>:<>&nbsp;&nbsp;&nbsp;&nbsp;Delete</>}</button><br />
-                                    <button className='editResumeBtns ' onClick={() => console.log("more")}><ThreeDots size={23} />&nbsp;&nbsp;&nbsp;&nbsp;More</button><br />
+                                    {/* <button className='editResumeBtns ' onClick={() => console.log("more")}><ThreeDots size={23} />&nbsp;&nbsp;&nbsp;&nbsp;More</button><br /> */}
                                 </div>
                                 <p className='resumeDesc'><strong>Description: </strong>{savedResume.description}</p>
                             </div>

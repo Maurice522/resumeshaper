@@ -4,12 +4,11 @@ import '../styleSheet/LoginPopup.css'
 
 
 
-export default function JobPopup({ onClose, onSignup }) {
-    const [jobTitle, setJobTitle] = useState('');
-    const [jobDescription, setJobDescription] = useState('');
+export default function JobPopup({ onClose, onSignup , jobTitle, setJobTitle, jobDescription, setJobDescription }) {
 
-    const submitLoginHandler = () => {
-        alert('hello')
+    const submitLoginHandler = (e) => {
+        e.preventDefault();
+        onClose();
     }
     return (
         <div className="popup">
@@ -44,7 +43,7 @@ export default function JobPopup({ onClose, onSignup }) {
                     </div>
 
                     <div className="form-actions">
-                        <button type="submit" className='loginNow'>Generate</button>
+                        <button type="submit" className='loginNow'>SUBMIT</button>
                     </div>
 
 

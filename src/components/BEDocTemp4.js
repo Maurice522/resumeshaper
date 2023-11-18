@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
 });
 
 
-export default function BEDocTemp3({ personalData,courses, activities,internships,hobbies,languages,references ,customSections ,skills }) {
+export default function BEDocTemp3({ imgFile, personalData,courses, activities,internships,hobbies,languages,references ,customSections ,skills }) {
   console.log(personalData)
   return (
     <Document>
@@ -206,7 +206,7 @@ export default function BEDocTemp3({ personalData,courses, activities,internship
       <View style={styles.leftColumn}>
       <View style={{ alignItems: 'center' ,padding:'4%',marginBottom:'5%'}}>
       <View style={{ alignItems: 'center' , backgroundColor:'#a9c9d7',padding:'4%',borderRadius:'100%'}}>
-          <Image style={styles.image} src={img1} />
+          <Image style={styles.image} src={imgFile===null? img1:imgFile} />
         </View>
         </View>
         <View style={styles.leftContactContent}>

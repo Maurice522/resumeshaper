@@ -108,9 +108,13 @@ export const userSlice = createSlice({
         },
         saveResume:(state, action)=>{
           state.user.resumes = [...state.user.resumes, action.payload]
+          console.log(state.user.resumes)
         },
+        setResume:(state,action)=>{
+          state.user.resume = [...action.payload]
+        }
     }
 })
 
-export const {loginUser, signOutUser, updateResume,updatePhoto,updateProfile,updateUser,saveResume} = userSlice.actions; 
+export const {loginUser, signOutUser, updateResume,updatePhoto,updateProfile,updateUser,saveResume,setResume} = userSlice.actions; 
 export default userSlice.reducer;

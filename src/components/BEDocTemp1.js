@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
 });
 
 
-export default function BEDocTemp1({ personalData,courses, activities,internships,hobbies,languages,references ,customSections ,skills }) {
+export default function BEDocTemp1({imgFile, personalData,courses, activities,internships,hobbies,languages,references ,customSections ,skills }) {
   console.log(personalData,"Courses",courses,"Courses", activities,"Courses",internships,"Courses",hobbies,"Courses",languages,"Courses",references ,"Courses",customSections ,"Skills",skills)
   console.log("picturerw",personalData.uploadedPhotoURL)
   
@@ -135,7 +135,7 @@ export default function BEDocTemp1({ personalData,courses, activities,internship
     <Page  style={styles.page}>
       <View style={styles.leftColumn}>
         <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 30 }}>
-         <Image style={styles.image} src={img1}/>
+         <Image style={styles.image} src={imgFile===null? img1:imgFile}/>
           <View style={{ marginLeft: 10 }}>
             <Text style={styles.name}>{personalData.firstName} {personalData.middleName} {personalData.lastName}</Text>
             <Text style={styles.designation}>{personalData.jobTitle}</Text>
