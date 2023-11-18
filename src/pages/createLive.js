@@ -24,9 +24,8 @@ import img4 from '../images/template1.PNG'
 import img5 from '../images/template2.PNG'
 import img6 from '../images/template3.PNG'
 import img7 from '../images/template4.PNG'
-import img8 from '../images/Tailor.jpg'
 import vid1 from '../images/tailorVid2.mp4'
-import vid2 from '../images/bulbAnimation.mp4'
+import vid2 from '../images/tailorVid1.mp4'
 import ReactPlayer from 'react-player'
 import JobPopup from '../components/jobPopup';
 import { toast } from 'react-toastify';
@@ -763,6 +762,19 @@ export default function CreateLiveContinue() {
     const handleSignup = () => {
         togglePopup();
     };
+    const deleteUploadedPicOfForm=(e)=>{
+        e.preventDefault();
+      if  (personalData.uploadedPhotoURL != '' && !photoLoader)
+      {
+        setPersonalData({
+            ...personalData, 
+            uploadedPhotoURL: '',
+        });
+      } 
+      else if(personalData.uploadedPhotoURL === ''){
+        alert("no picture uploaded")
+      }
+    }
     return (
         <>
         {console.log(customDetails)}
@@ -796,7 +808,7 @@ export default function CreateLiveContinue() {
                                         <ReactPlayer
                                             style={{cursor:"pointer"}}
                                             className="player"
-                                            url={vid1}
+                                            url={vid2}
                                             width="95%"
                                             height="100%"
                                             playing={true}
@@ -806,7 +818,7 @@ export default function CreateLiveContinue() {
                                             ref={playerRef}
                                         />
                                     </div>
-                                    {isPopupOpen && <JobPopup onClose={togglePopup} onSignup={handleSignup} jobTitle={jobTitle} setJobTitle={setJobTitle} jobDescription={jobDescription} setJobDescription={setJobDescription} getSummary={getSummary}/>}
+                                    {isPopupOpen && <JobPopup onClose={togglePopup} onSignup={handleSignup} jobTitle={jobTitle} setJobTitle={setJobTitle} jobDescription={jobDescription} setJobDescription={setJobDescription} getSummary={getSummary} getAiSkills={getAiSkills}/>}
                                     <h5 className='formSection createFormSection'><Crop color="#35b276" size={29} /> &nbsp;Select Template</h5>
                                     <div className='templateDiv'>
                                         <div id="carouselExampleIndicators" className="carousel slide">
@@ -914,6 +926,9 @@ export default function CreateLiveContinue() {
                                                             <iframe src="https://giphy.com/embed/3oEjI6SIIHBdRxXI40" class="giphy-embed uploadedPicture uplouploadPhotoDivGif createUplouploadPhotoDivGif"></iframe><p><a className='uplouploadPhotoDivGif' href="https://giphy.com/gifs/mashable-3oEjI6SIIHBdRxXI40"></a></p>
                                                         </div>
                                                     )}
+                                                     <button onClick={deleteUploadedPicOfForm} className="DeleteEmp deleteUploadedPhotoIcon">
+                                                    <Trash3Fill size={20} />
+                                                    </button>
                                                 </div>
 
                                                 <div className='col-md-6 col-sm-6'>

@@ -1,16 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react'
+import ReactPlayer from 'react-player'
 import img3 from '../images/28.png'
 import '../styleSheet/LoginPopup.css'
+// import vid1 from '../images/loadingVid2.mp4'
+import vid1 from '../images/loadingVid1.mp4'
 
+export default function JobPopup({ onClose, onSignup, jobTitle, setJobTitle, jobDescription, setJobDescription, getSummary, getAiSkills }) {
 
+    const [isLoading, setIsLoading] = useState(false);
+    const [showConfirmation, setShowConfirmation] = useState(false);
 
-export default function JobPopup({ onClose, onSignup , jobTitle, setJobTitle, jobDescription, setJobDescription ,getSummary}) {
-
-    const submitLoginHandler = (e) => {
+    const submitLoginHandler = async (e) => {
         e.preventDefault();
-        getSummary()
+        setIsLoading(true);
+        try {
+            await getSummary();
+            await getAiSkills();
+            setShowConfirmation(true);
+        } catch (error) {
+            console.log(error);
+            alert("An error occured while processing your document. Please try again later");
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const handleConfirmClose = () => {
         onClose();
-    }
+    };
+    const playerRef = useRef(null);
+
+    const handleEnded = () => {
+        // Restart the video when it ends
+        playerRef.current.seekTo(0);
+    };
+
     return (
         <div className="popup">
             <div className="popup-content">
@@ -18,37 +42,60 @@ export default function JobPopup({ onClose, onSignup , jobTitle, setJobTitle, jo
                     <img src={img3} className='popupImg' />
                     <span className="close" onClick={onClose}>&times;</span>
                     Resume Shaper</h2>
-                <form className="loginForm" onSubmit={submitLoginHandler}>
-                    <div className="form-group">
-                        <label className='loginLabel'>Job Title:</label>
-                        <input
-                            type='text'
-                            className='loginInput'
-
-                            placeholder='Enter the Job Title'
-                            value={jobTitle}
-                            onChange={(e) => setJobTitle(e.target.value)}
-                        />
+                {isLoading ? (
+                    <div className="loading-message">
+                          <ReactPlayer
+                                            style={{cursor:"pointer"}}
+                                            className="player"
+                                            url={vid1}
+                                            width="100%"
+                                            height="100%"
+                                            playing={true}
+                                            muted={true}
+                                            autoplay={true}
+                                            onEnded={handleEnded}
+                                            ref={playerRef}
+                                        />
                     </div>
-
-                    <div className="form-group">
-                        <label className='loginLabel'>Job Description:</label>
-                        <textarea
-                            value={jobDescription}
-                            onChange={(e) =>  setJobDescription(e.target.value)}
-                            rows="4 "
-                            cols="26"
-                            placeholder='Eg: I was provided with a range of responsibilities to levarage the digital landscape for brand promotion and lead generation.'
-                            className='detailsTextarea'
-                        />
+                ) : showConfirmation ? (
+                    <div>
+                        <p className='jobInstructionPopup'>Document successfully processed! </p>
+                        <p className='jobInstructionLowerPopup'>Your professional summary and skills have been optimized to match the provided job title and description. Feel free to edit them, along with other fields, to suit your preferences.</p>
+                        <button onClick={handleConfirmClose} className='loginNow'>Understood</button>
                     </div>
+                ) : (
 
-                    <div className="form-actions">
-                        <button type="submit" className='loginNow'>SUBMIT</button>
-                    </div>
+                    <form className="loginForm" onSubmit={submitLoginHandler}>
+                        <div className="form-group">
+                            <label className='loginLabel'>Job Title:</label>
+                            <input
+                                type='text'
+                                className='loginInput jobTitleInput'
 
+                                placeholder='Enter the Job Title - Eg: Prompt Engineer'
+                                value={jobTitle}
+                                onChange={(e) => setJobTitle(e.target.value)}
+                            />
+                        </div>
 
-                </form>
+                        <div className="form-group">
+                            <label className='loginLabel'>Job Description:</label>
+                            <p className='jobPopupDescriptionP'>Include or replicate the job description as mentioned  on the employer's website within the specified field.</p>
+                            <textarea
+                                value={jobDescription}
+                                onChange={(e) => setJobDescription(e.target.value)}
+                                rows="4 "
+                                cols="26"
+                                placeholder='Eg: We are looking for a Prompt Engineer to join our team and ensure the creation of effective and engaging prompts for our AI-generated content solutions. Responsibilities include : Design, develop and refine AI-generated text prompts for various applications
+                            Collaborate with content creators, product teams and data scientists to ensure prompt alignment with company goals and user needs'
+                                className='detailsTextarea jobPopupDescription'
+                            />
+                        </div>
+                        <div className="form-actions">
+                            <button type="submit" className='loginNow'>SUBMIT</button>
+                        </div>
+                    </form>
+                )}
             </div>
         </div>
     );

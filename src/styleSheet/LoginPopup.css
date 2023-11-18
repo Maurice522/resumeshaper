@@ -112,3 +112,25 @@
     margin-bottom: 1.5%;
     margin-top: 2%;
 }
+.jobPopupDescriptionP{
+    font-size: 13px;
+color: rgb(134, 140, 159);
+color: #6b6b6b;
+margin: 0;
+padding: 0;
+}
+.jobPopupDescription::placeholder{
+    font-size: 10px;
+}
+.jobTitleInput::placeholder{
+    font-size: 14px;
+}
+.jobInstructionPopup{
+    font-size: 16px;
+    margin-top: 7% !important;
+}
+.jobInstructionLowerPopup{
+    font-size: 14px;
+    margin-bottom: 8%;
+    font-style: italic;
+}

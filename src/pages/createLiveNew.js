@@ -592,6 +592,20 @@ export default function CreateLive() {
         navigate("/")
     };
 
+    const deleteUploadedPicOfForm=(e)=>{
+        e.preventDefault();
+      if  (personalData.uploadedPhotoURL != '' && !photoLoader)
+      {
+        setPersonalData({
+            ...personalData, 
+            uploadedPhotoURL: '',
+        });
+      } 
+      else if(personalData.uploadedPhotoURL === ''){
+        alert("no picture uploaded")
+      }
+    }
+
     return (
         <>
             {gettingUser ? <img style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }} width="240" height="240" alt='loading...' src='https://media2.giphy.com/media/MDrmyLuEV8XFOe7lU6/200w.webp?cid=ecf05e47k6onrtqddz8d98s4j5lhtutlnnegeus1pwcdwkxt&ep=v1_gifs_search&rid=200w.webp&ct=g' /> :
@@ -702,6 +716,9 @@ export default function CreateLive() {
                                                             <iframe src="https://giphy.com/embed/3oEjI6SIIHBdRxXI40" class="giphy-embed uploadedPicture uplouploadPhotoDivGif createUplouploadPhotoDivGif"></iframe><p><a className='uplouploadPhotoDivGif' href="https://giphy.com/gifs/mashable-3oEjI6SIIHBdRxXI40"></a></p>
                                                         </div>
                                                     )}
+                                                    <button onClick={deleteUploadedPicOfForm} className="DeleteEmp deleteUploadedPhotoIcon">
+                                                    <Trash3Fill size={20} />
+                                                    </button>
                                                 </div>
 
                                                 <div className='col-md-6 col-sm-6'>

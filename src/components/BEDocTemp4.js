@@ -205,9 +205,12 @@ export default function BEDocTemp3({ imgFile, personalData,courses, activities,i
     <Page size="A4" style={styles.page}>
       <View style={styles.leftColumn}>
       <View style={{ alignItems: 'center' ,padding:'4%',marginBottom:'5%'}}>
+      {imgFile &&  
       <View style={{ alignItems: 'center' , backgroundColor:'#a9c9d7',padding:'4%',borderRadius:'100%'}}>
-          <Image style={styles.image} src={imgFile===null? img1:imgFile} />
+          {/* <Image style={styles.image} src={imgFile===null? img1:imgFile} /> */}
+         <Image style={styles.image} src={imgFile}/> 
         </View>
+        }
         </View>
         <View style={styles.leftContactContent}>
       <Text style={[styles.rightHeading,styles.colorThisBlack]}>CONTACT</Text>

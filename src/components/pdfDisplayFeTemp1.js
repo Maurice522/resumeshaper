@@ -193,8 +193,11 @@ export default function MyPdfViewer1({ personalData, live, courses, activities, 
                   <p className='profileDetailsText'>{personalData.drivingLicense}</p>
                 </>}
 
-                {personalData.websitesLinks && personalData.websitesLinks.length > 0 && <>
+                {personalData.websitesLinks[0]!='' && personalData.websitesLinks.length > 0  && <>
                   <p className='profileDetails otherProfileDetails'>Links</p>
+                </>}
+                {personalData.websitesLinks && personalData.websitesLinks.length > 0 && <>
+                  {/* <p className='profileDetails otherProfileDetails'>Links</p> */}
                   {personalData.websitesLinks.map((item, index) => {
                     return (<>
                       <p className='profileDetailsText emailProfileDetailsText'>{item.url}</p>

@@ -148,7 +148,8 @@ export default function BEDocTemp3({imgFile, personalData,courses, activities,in
     <Page size="A4" style={styles.page}>
       <View style={styles.leftColumn}>
       <View style={{ alignItems: 'center' }}>
-          <Image style={styles.image} src={imgFile===null? img1:imgFile} />
+          {/* <Image style={styles.image} src={imgFile===null? img1:imgFile} /> */}
+          {imgFile &&  <Image style={styles.image} src={imgFile}/> }
         </View>
         <View style={{alignItems: 'center', marginTop:8,width:"100%",paddingRight:'4%' }}>
             <Text style={styles.name}>{personalData.firstName} {personalData.middleName} {personalData.lastName}</Text>

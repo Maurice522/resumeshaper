@@ -135,7 +135,7 @@ export default function BEDocTemp1({imgFile, personalData,courses, activities,in
     <Page  style={styles.page}>
       <View style={styles.leftColumn}>
         <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 30 }}>
-         <Image style={styles.image} src={imgFile===null? img1:imgFile}/>
+         {imgFile &&  <Image style={styles.image} src={imgFile}/> }
           <View style={{ marginLeft: 10 }}>
             <Text style={styles.name}>{personalData.firstName} {personalData.middleName} {personalData.lastName}</Text>
             <Text style={styles.designation}>{personalData.jobTitle}</Text>
