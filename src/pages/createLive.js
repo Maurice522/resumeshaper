@@ -550,11 +550,29 @@ export default function CreateLiveContinue() {
         console.log(resume)
         console.log(user.resumes)
 
-        var resumes = [...user.resumes]
+      
 
-        resumes.filter((item)=> item.id !==currId)
+        var tempResume = [];
 
-        resumes = [...resumes, resume]
+        user.resumes.map((item,idx)=>{
+            if(item.id !== currId){
+                tempResume = [...tempResume, item]
+            }
+        })
+
+        var resumes = [...tempResume, resume]
+
+        // var tempids = []
+
+        // tempResume.map((item)=>{
+        //     tempids = [...tempids, item.id]
+        // })
+
+        // console.log(tempids.includes(currId))
+
+        // resumes = [...resumes, resume]
+
+        console.log(resumes)
 
         console.log("Login email  " + user.email)
         await addUserResume(user.email, resumes);
@@ -564,6 +582,7 @@ export default function CreateLiveContinue() {
         toast.success("Saved Resume!")
 
         // dispatch(updateUser(resume));
+
         navigate("/dashboard")
 
         // console.log(personalData)
