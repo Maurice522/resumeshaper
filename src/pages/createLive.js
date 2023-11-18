@@ -200,6 +200,14 @@ export default function CreateLiveContinue() {
             }
             );
             console.log(user.resumes[idx])
+            setCustomDetails(user.resumes[idx].customDetails)
+            setActivities(user.resumes[idx].customDetails.activities)
+            setCourses(user.resumes[idx].customDetails.courses)
+            setInternships(user.resumes[idx].customDetails.internships)
+            setReferences(user.resumes[idx].customDetails.references)
+            setCustomSections(user.resumes[idx].customDetails.customSections)
+            setLanguages(user.resumes[idx].customDetails.languages)
+            setHobbies(user.resumes[idx].customDetails.hobbies)
             setCurrId(user.resumes[idx].id)
             setSelectedOptions(user.resumes[idx].skills)
             setSelectedTemplateId(user.resumes[idx].resumeId)
@@ -757,6 +765,7 @@ export default function CreateLiveContinue() {
     };
     return (
         <>
+        {console.log(customDetails)}
             {gettingUser ? <img style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }} width="240" height="240" alt='loading...' src='https://media2.giphy.com/media/MDrmyLuEV8XFOe7lU6/200w.webp?cid=ecf05e47k6onrtqddz8d98s4j5lhtutlnnegeus1pwcdwkxt&ep=v1_gifs_search&rid=200w.webp&ct=g' /> :
                 <>
                     {/* <Nav /> */}
@@ -797,7 +806,7 @@ export default function CreateLiveContinue() {
                                             ref={playerRef}
                                         />
                                     </div>
-                                    {isPopupOpen && <JobPopup onClose={togglePopup} onSignup={handleSignup} jobTitle={jobTitle} setJobTitle={setJobTitle} jobDescription={jobDescription} setJobDescription={setJobDescription} />}
+                                    {isPopupOpen && <JobPopup onClose={togglePopup} onSignup={handleSignup} jobTitle={jobTitle} setJobTitle={setJobTitle} jobDescription={jobDescription} setJobDescription={setJobDescription} getSummary={getSummary}/>}
                                     <h5 className='formSection createFormSection'><Crop color="#35b276" size={29} /> &nbsp;Select Template</h5>
                                     <div className='templateDiv'>
                                         <div id="carouselExampleIndicators" className="carousel slide">

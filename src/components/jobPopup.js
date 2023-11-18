@@ -4,10 +4,11 @@ import '../styleSheet/LoginPopup.css'
 
 
 
-export default function JobPopup({ onClose, onSignup , jobTitle, setJobTitle, jobDescription, setJobDescription }) {
+export default function JobPopup({ onClose, onSignup , jobTitle, setJobTitle, jobDescription, setJobDescription ,getSummary}) {
 
     const submitLoginHandler = (e) => {
         e.preventDefault();
+        getSummary()
         onClose();
     }
     return (
