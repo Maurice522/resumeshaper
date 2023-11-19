@@ -590,7 +590,7 @@ export default function CreateLiveContinue() {
 
         // dispatch(updateUser(resume));
 
-        navigate("/dashboard")
+        // navigate("/dashboard")
 
         // console.log(personalData)
         // console.log(customDetails)
@@ -818,7 +818,7 @@ export default function CreateLiveContinue() {
                                             ref={playerRef}
                                         />
                                     </div>
-                                    {isPopupOpen && <JobPopup onClose={togglePopup} onSignup={handleSignup} jobTitle={jobTitle} setJobTitle={setJobTitle} jobDescription={jobDescription} setJobDescription={setJobDescription} getSummary={getSummary} getAiSkills={getAiSkills}/>}
+                                    {isPopupOpen && <JobPopup onClose={togglePopup} onSignup={handleSignup} personalData={personalData} setPersonalData={setPersonalData} jobTitle={jobTitle} setJobTitle={setJobTitle} jobDescription={jobDescription} setJobDescription={setJobDescription} getSummary={getSummary} getAiSkills={getAiSkills}/>}
                                     <h5 className='formSection createFormSection'><Crop color="#35b276" size={29} /> &nbsp;Select Template</h5>
                                     <div className='templateDiv'>
                                         <div id="carouselExampleIndicators" className="carousel slide">
@@ -1092,7 +1092,7 @@ export default function CreateLiveContinue() {
                                                     <div id="collapseTwo" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
 
                                                         <div class="accordion-body">
-                                                            {personalData.employmentHistory.map((employment, index) => (
+                                                            {personalData.employmentHistory!==undefined && personalData.employmentHistory.length>0 &&personalData.employmentHistory.map((employment, index) => (
                                                                 <div key={index} className="employmentHistoryDiv">
                                                                     <h5 className='personalSubSubHeading'>Snapshot {index + 1} :</h5>
                                                                     <div className='row'>
@@ -1228,7 +1228,7 @@ export default function CreateLiveContinue() {
                                                     <div id="collapseThree" class="accordion-collapse collapse show" data-bs-parent="#accordionExample3">
                                                         <div class="accordion-body">
 
-                                                            {personalData.educationHistory.map((education, index) => (
+                                                            {personalData.educationHistory !==undefined && personalData.educationHistory.length>0 &&personalData.educationHistory.map((education, index) => (
                                                                 <div key={index} className="employmentHistoryDiv">
                                                                     <h5 className='personalSubSubHeading'>Formal Education {index + 1} :</h5>
                                                                     <div className='row'>
@@ -1335,7 +1335,7 @@ export default function CreateLiveContinue() {
                                                     <div id="collapseFour" class="accordion-collapse collapse show" data-bs-parent="#accordionExample4">
                                                         <div class="accordion-body">
 
-                                                            {personalData.websitesLinks.map((websiteLink, index) => (
+                                                            {personalData.websiteLinks!==undefined && personalData.websiteLinks.length >0 &&personalData.websitesLinks.map((websiteLink, index) => (
                                                                 <div key={index} className="websitesLinksDiv">
                                                                     <h5 className='personalSubSubHeading'>Link {index + 1} :</h5>
                                                                     <div className='row'>
