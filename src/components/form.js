@@ -588,7 +588,7 @@ const updateWebsiteLinkField = (index, field, value) => {
             <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
 
               <div class="accordion-body">
-                {personalData.employmentHistory.map((employment, index) => (
+                {personalData.employmentHistory!==undefined && personalData.employmentHistory.length>0 && personalData.employmentHistory.map((employment, index) => (
                   <div key={index} className="employmentHistoryDiv">
                     <h5 className='personalSubSubHeading'>Role {index + 1} :</h5>
                     <div className='row'>
@@ -698,7 +698,7 @@ const updateWebsiteLinkField = (index, field, value) => {
             <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample3">
               <div class="accordion-body">
 
-                {personalData.educationHistory.map((education, index) => (
+                {personalData.educationHistory !==undefined && personalData.educationHistory.length>0 && personalData.educationHistory.map((education, index) => (
                   <div key={index} className="employmentHistoryDiv">
                     <h5 className='personalSubSubHeading'>Institute {index + 1} :</h5>
                     <div className='row'>
@@ -805,7 +805,7 @@ const updateWebsiteLinkField = (index, field, value) => {
                                             <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample4">
                                                 <div class="accordion-body">
 
-                                                    {personalData.websitesLinks.map((websiteLink, index) => (
+                                                    {personalData.websiteLinks!==undefined && personalData.websiteLinks.length >0 && personalData.websitesLinks.map((websiteLink, index) => (
                                                         <div key={index} className="websitesLinksDiv">
                                                             <h5 className='personalSubSubHeading'>Link {index + 1} :</h5>
                                                             <div className='row'>
@@ -933,7 +933,7 @@ const updateWebsiteLinkField = (index, field, value) => {
                 <h6 className='formSection SkillsadditionalDetails'>
                     Selected Skills:
                 </h6>
-                {selectedOptions.map((skill, index) => (
+                { selectedOptions.map((skill, index) => (
                     <div key={index} className="selected-option selectedOption">
                         {skill}
                         <button type="button" onClick={() => handleRemoveSkill(skill)} className="DeleteSkill">
