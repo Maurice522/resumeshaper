@@ -424,7 +424,7 @@ const updateWebsiteLinkField = (index, field, value) => {
             <input className='detailsInfoInput'  type="text" name="jobTitle" value={personalData.jobTitle} onChange={handleChange} required='true'  />
           </div>
 
-          <div className='col-md-8 uplouploadPictureBigDiv'>
+          {/* <div className='col-md-8 uplouploadPictureBigDiv'>
 
             <label className='detailsInfoLabel uplouploadPictureDivLabel'>
               Upload Photo
@@ -442,7 +442,7 @@ const updateWebsiteLinkField = (index, field, value) => {
                 <iframe src="https://giphy.com/embed/y1ZBcOGOOtlpC" class="giphy-embed uploadedPicture uplouploadPhotoDivGif" ></iframe><p><a className='uplouploadPhotoDivGif' href="https://giphy.com/gifs/foosball-y1ZBcOGOOtlpC"></a></p>
               </div>
             )}
-          </div>
+          </div> */}
 
           <div className='col-md-4 col-sm-6'>
             <label className='detailsInfoLabel'>
