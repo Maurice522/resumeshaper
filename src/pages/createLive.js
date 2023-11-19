@@ -655,7 +655,8 @@ export default function CreateLiveContinue() {
             setIsPopupOpen(true)
             return toast.info("Fill Job Title and Description")
         }
-        setAiLoading(true)
+        try{
+            setAiLoading(true)
         
         var res = await fetch('https://server.reverr.io/skill', {
             method: 'POST',
@@ -681,6 +682,11 @@ export default function CreateLiveContinue() {
 
             console.log("Error")
         }
+        }
+        catch (err){
+            console.log(err)
+        }
+        
         console.log("ended")
         setAiLoading(false)
     }
@@ -690,9 +696,9 @@ export default function CreateLiveContinue() {
             setIsPopupOpen(true)
             return toast.info("Fill Job Title and Description")
         }
-        setAiLoading(true)
-        
-        var res = await fetch('https://server.reverr.io/jobdes', {
+        try{
+            setAiLoading(true)
+            var res = await fetch('https://server.reverr.io/jobdes', {
             method: 'POST',
             body: JSON.stringify({
                 title: jobTitle,
@@ -710,6 +716,11 @@ export default function CreateLiveContinue() {
             })
         // console.log(res)
         updateEmploymentField(idx, 'description', res)
+        
+        }
+        catch (err){
+            console.log(err)
+        }
         console.log("ended")
         setAiLoading(false)
     }
@@ -720,17 +731,9 @@ export default function CreateLiveContinue() {
             setIsPopupOpen(true)
             return toast.info("Fill Job Title and Description")
         }
-        setAiLoading(true)
-        // var title = "Ai Consultant";
-        // var description = `Design and develop AI algorithms, models, and systems using tools like PyTorch and TensorFlow for real-world applications.
-        // Keep up with the latest advancements in AI technologies, including generative AI and the latest features of popular tools.
-        // Collaborate with cross-functional teams to understand requirements and develop AI solutions.
-        // Collect, clean, and preprocess data using appropriate tools and libraries, ensuring compatibility with AI algorithms and frameworks.
-        // Train, test, and evaluate AI models employing appropriate evaluation metrics.
-        // Optimize and fine-tune models for performance, scalability and efficiency.
-        // Implement and deploy AI solutions in production environments under different frameworks.
-        // Ability to build applications and use appropriate prompting on generative AI models.
-        // Stay abreast of emerging AI trends and technologies.`
+        try{
+            setAiLoading(true)
+       
         var res = await fetch('https://server.reverr.io/summary', {
             method: 'POST',
             body: JSON.stringify({
@@ -752,6 +755,11 @@ export default function CreateLiveContinue() {
             ...personalData,
             professionalSummary: res.professionalSummary,
         });
+        
+        }
+        catch (err){
+            console.log(err)
+        }
         console.log("ended")
         setAiLoading(false);
     }
