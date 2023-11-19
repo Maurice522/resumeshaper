@@ -546,7 +546,7 @@ export default function CreateLiveContinue() {
 
     const handleLogDetails = async (e) => {
         e.preventDefault();
-
+        
         var resume = {
             ...personalData,
             skills: selectedOptions,
@@ -554,6 +554,13 @@ export default function CreateLiveContinue() {
             resumeId: selectedTemplateId,
             id: currId!== null ? currId :'id' + (new Date()).getTime()
         }
+
+        
+        Object.entries(resume).map(([key, value]) => {
+            if(value == undefined){
+                value = '';
+            }
+          })
         console.log(resume)
         console.log(user.resumes)
 

@@ -16,9 +16,21 @@ export default function JobPopup({ onClose, onSignup, jobTitle, setJobTitle, job
         setIsLoading(true);
         if(jobTitle!=='' && jobDescription!==''){
         try {
+            console.log(personalData)
+
+           
             var temp = personalData;
+            Object.entries(temp).map(([key, value]) => {
+                if(value == undefined){
+                    console.log(true)
+                    temp[key] = '';
+                }
+              })
+
+            console.log(temp)
             temp.jobTitle = jobTitle;
-            setPersonalData(temp)
+            console.log(temp)
+            setPersonalData(temp);
             await getSummary();
             await getAiSkills();
             setShowConfirmation(true);

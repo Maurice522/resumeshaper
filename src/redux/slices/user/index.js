@@ -112,6 +112,7 @@ export const userSlice = createSlice({
           console.log(state.user.resumes)
         },
         setResume:(state,action)=>{
+          console.log(action.payload)
           state.user.resume = [...action.payload]
         }
     }
