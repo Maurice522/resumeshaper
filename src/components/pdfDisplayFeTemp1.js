@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function MyPdfViewer1({ personalData, live, courses, activities, internships, hobbies, languages, references, customSections, skills }) {
+export default function MyPdfViewer1({ personalData, live, courses, activities, internships, hobbies, languages, references, customSections, skills,jobTitle}) {
   const firebaseImageUrl = personalData.uploadedPhotoURL;
   return (
 
@@ -40,7 +40,7 @@ export default function MyPdfViewer1({ personalData, live, courses, activities, 
               </div>
               <div className='nameDiv'>
                 <h6 className='resumeName'>{personalData.firstName} {personalData.middleName} {personalData.lastName}</h6>
-                <p className='resumeTtile'>{personalData.jobTitle}</p>
+                <p className='resumeTtile'>{jobTitle!==''? jobTitle: personalData.jobTitle}</p>
               </div>
             </div>
           </View>
@@ -49,13 +49,14 @@ export default function MyPdfViewer1({ personalData, live, courses, activities, 
             <div className='row liveProfileDiv'>
               <div className='col-md-8 liveProfileDivLeft'>
                 <p className='profileName'>< PersonFill size={8} className="profileIcon" /> &nbsp;Profile</p>
-                <p className='profileText'>{personalData.professionalSummary}</p>
+                <p className='profileText'>{personalData.professionalSummary.charAt(0).toUpperCase() + personalData.professionalSummary.slice(1)}</p>
 
                 {personalData.employmentHistory && personalData.employmentHistory.length > 0 && personalData.employmentHistory[0].jobTitle !== '' && <>
                   <div className='liveEmployment'>
                     <p className='profileName employmentHistName'>< BagDashFill size={8} className="profileIcon" /> &nbsp;Employment History</p>
                     {personalData.employmentHistory.map((item, index) => {
                       return (<>
+                      {/* {personalData.professionalSummary.charAt(0).toUpperCase() + personalData.professionalSummary.slice(1)} */}
                         <p className='profileEmploymentName'>{item.jobTitle} at {item.employer} , {item.city}</p>
                         <p className='employmentTime DOBProfileDetailsText'> {item.startDate} - {item.endDate}</p>
                         <p className='profileText employmetnProfileText'>{item.description}</p>
@@ -70,6 +71,7 @@ export default function MyPdfViewer1({ personalData, live, courses, activities, 
                     <p className='profileName employmentHistName'>< AwardFill size={8} className="profileIcon" /> &nbsp;Education</p>
                     {personalData.educationHistory.map((item, index) => {
                       return (<>
+                      
                         <p className='profileEmploymentName'>{item.school}, {item.city}</p>
                         <p className='employmentTime DOBProfileDetailsText'>{item.degree}, {item.startDate} - {item.endDate}</p>
                         <p className='profileText employmetnProfileText'>{item.description}</p>
@@ -210,7 +212,7 @@ export default function MyPdfViewer1({ personalData, live, courses, activities, 
                   <p className='profileDetails otherProfileDetails'>Skills</p>
                   {skills.map((item, index) => {
                     return (
-                      <p className='profileDetailsText liveSkills'>{item}</p>)
+                      <p className='profileDetailsText liveSkills'>{item.charAt(0).toUpperCase() + item.slice(1)}</p>)
                   })
                   }</>}
 

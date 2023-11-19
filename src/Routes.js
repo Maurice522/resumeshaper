@@ -9,6 +9,9 @@ import Dashboard from './pages/dashboard';
 import CreateLive from './pages/createLiveNew';
 import Test from './pages/test';
 import CreateLiveContinue from './pages/createLive';
+import AboutUs from './pages/aboutUs';
+import Terms from './pages/termsOfService';
+import PrivacyPolicy from './pages/privacyPolicy';
 
 const router = createBrowserRouter([
   {
@@ -34,6 +37,18 @@ const router = createBrowserRouter([
   {
     path: "/test",
     element: <Test/>,
+  },
+  {
+    path: "/aboutUs",
+    element: <AboutUs/>,
+  },
+  {
+    path: "/termsandconditions",
+    element: <Terms/>
+  },
+  {
+    path: "/privacyPolicy",
+    element: <PrivacyPolicy/>,
   },
 ]);
 

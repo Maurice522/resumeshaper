@@ -196,7 +196,7 @@ export default function CustomSection({ courses, setCourses, activities, setActi
                             }}
                             rows="6 "
                             cols="80"
-                            placeholder='Eg: I was provided with a range of responsibilities to levarage the digital landscape for brand promotion and lead generation.'
+                            placeholder='Eg: Successfully completed a Prompt Engineering course, gaining valuable insights into crafting impactful prompts for AI-generated content. Acquired skills in prompt design, refinement, and collaboration with cross-functional teams..'
                             className='detailsTextarea'
                         />
                         <br />
@@ -302,7 +302,7 @@ export default function CustomSection({ courses, setCourses, activities, setActi
                             }}
                             rows="6 "
                             cols="80"
-                            placeholder='Eg: I was provided with a range of responsibilities to levarage the digital landscape for brand promotion and lead generation.'
+                            placeholder='Eg: Engaged in impactful community service initiatives, contributing time and effort to support local causes. Developed a strong sense of social responsibility and teamwork while actively participating in various service projects. Learned to apply leadership and organizational skills to create positive change within the community.'
                             className='detailsTextarea '
                         />
                         <br />
@@ -405,7 +405,7 @@ export default function CustomSection({ courses, setCourses, activities, setActi
                             }}
                             rows="6 "
                             cols="80"
-                            placeholder='Eg: I was provided with a range of responsibilities to levarage the digital landscape for brand promotion and lead generation.'
+                            placeholder='Eg: Interned in Prompt Engineering, where I leveraged technologies such as Python, Natural Language Processing (NLP), and machine learning to design and refine prompts for AI-generated content. Collaborated on projects involving innovative tools and frameworks, gaining hands-on experience in the intersection of technology and content creation.'
                             className='detailsTextarea '
                         />
                         <br />
@@ -430,7 +430,7 @@ export default function CustomSection({ courses, setCourses, activities, setActi
                             }}
                             rows="6 "
                             cols="80"
-                            placeholder='Eg: I was provided with a range of responsibilities to levarage the digital landscape for brand promotion and lead generation.'
+                            placeholder='Eg: Travelling, Hiking, Swimming,Cricket'
                             className='detailsTextarea '
                         />
                         <br />
@@ -578,6 +578,7 @@ export default function CustomSection({ courses, setCourses, activities, setActi
                                     className='detailsInfoInput'
                                     type="text"
                                     value={section.title}
+                                    placeholder='Eg: Projects'
                                     onChange={(e) => {
                                         const updatedCustomSections = [...customSections];
                                         updatedCustomSections[index].title = e.target.value;
@@ -592,6 +593,7 @@ export default function CustomSection({ courses, setCourses, activities, setActi
                                     className='detailsInfoInput'
                                     type="text"
                                     value={section.subTitle}
+                                    placeholder='Eg: PromptOptiGen'
                                     onChange={(e) => {
                                         const updatedCustomSections = [...customSections];
                                         updatedCustomSections[index].subTitle = e.target.value;
@@ -643,7 +645,7 @@ export default function CustomSection({ courses, setCourses, activities, setActi
                             }}
                             rows="6 "
                             cols="80"
-                            placeholder='Eg: I was provided with a range of responsibilities to levarage the digital landscape for brand promotion and lead generation.'
+                            placeholder='Eg: Developed an innovative Prompt Engineering project using Python, NLP, and machine learning to optimize AI-generated content prompts. Implemented advanced algorithms for prompt design and refinement, showcasing expertise in enhancing content creation processes and boosting user engagement.'
                             className='detailsTextarea '
                         />
                         <br />

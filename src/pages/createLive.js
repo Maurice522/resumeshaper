@@ -823,7 +823,7 @@ export default function CreateLiveContinue() {
                                     <div className='templateDiv'>
                                         <div id="carouselExampleIndicators" className="carousel slide">
                                             <div className="carousel-inner">
-                                                <div className="carousel-item active">
+                                                <div className="carousel-item live-carousel-item active">
 
                                                     <div className='row'>
                                                         <div className='col-md-4 zoom' onClick={() => setSelectedTemplateId(1)}>
@@ -838,7 +838,7 @@ export default function CreateLiveContinue() {
                                                     </div>
 
                                                 </div>
-                                                <div className="carousel-item">
+                                                <div className="carousel-item live-carousel-item">
                                                     <div className='row'>
                                                         <div className='col-md-4 zoom' onClick={() => setSelectedTemplateId(4)}>
                                                             <img src={img7} className='tempalteImage ' />
@@ -854,7 +854,7 @@ export default function CreateLiveContinue() {
                                                         </div> */}
                                                     </div>
                                                 </div>
-                                                <div className="carousel-item ">
+                                                <div className="carousel-item live-carousel-item ">
 
                                                     <div className='row'>
                                                         <div className='col-md-4 zoom' onClick={() => setSelectedTemplateId(3)}>
@@ -869,7 +869,7 @@ export default function CreateLiveContinue() {
                                                     </div>
 
                                                 </div>
-                                                <div className="carousel-item ">
+                                                <div className="carousel-item live-carousel-item ">
 
                                                     <div className='row'>
                                                         <div className='col-md-4 zoom' onClick={() => setSelectedTemplateId(2)}>
@@ -885,11 +885,11 @@ export default function CreateLiveContinue() {
 
                                                 </div>
                                             </div>
-                                            <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                            <button className="carousel-control-prev live-carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                                                 <span className="carousel-control-prev-icon" aria-hidden="true"></span>
                                                 <span className="visually-hidden">Previous</span>
                                             </button>
-                                            <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                            <button className="carousel-control-next live-carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
                                                 <span className="carousel-control-next-icon" aria-hidden="true"></span>
                                                 <span className="visually-hidden">Next</span>
                                             </button>
@@ -905,7 +905,10 @@ export default function CreateLiveContinue() {
                                                         Target Position <span style={{ color: 'red' }}>*</span>
                                                     </label>
                                                     <br />
-                                                    <input className='detailsInfoInput' type="text" name="jobTitle" value={personalData.jobTitle} onChange={handleChange} required='true' />
+                                                 
+                                                
+                                                <input className='detailsInfoInput' type="text" name="jobTitle" value={personalData.jobTitle} onChange={handleChange} required='true' />
+                                                
                                                 </div>
 
                                                 <div className='col-md-6 uplouploadPictureBigDiv'>
@@ -1057,8 +1060,11 @@ export default function CreateLiveContinue() {
                                                         //    <iframe src="https://giphy.com/embed/gJ3mEToTDJn3LT6kCT" className="bulbGif"></iframe>
 
                                                     ) : (
-                                                        <iframe src="https://giphy.com/embed/pylpD8AoQCf3CQ1oO2" className="bulbGif"></iframe>
-                                                    )}
+                                                        // <iframe src="https://giphy.com/embed/2uIlejpr8ZxenICZSN" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/JoyPixels-light-emoji-lightbulb-2uIlejpr8ZxenICZSN">via GIPHY</a></p>
+                                                        // <iframe src="https://giphy.com/embed/pylpD8AoQCf3CQ1oO2" className="bulbGif"></iframe>
+                                                        <iframe src="https://giphy.com/embed/2uIlejpr8ZxenICZSN" className="bulbGif"></iframe>
+                                                   
+                                                   )}
                                                     {/* <button type='button' onClick={() => getSummary()} className='AIItBtn'>Ai it</button> */}
                                                 </div>
                                                 <p className='detailsSubText'>Compose a professional summary to showcase your expertise. For instance: 'Results driven marketing professional with 8 years of experience,excelling in digital strategy and campaign optimization.'</p>
@@ -1083,12 +1089,12 @@ export default function CreateLiveContinue() {
                                                             Add Employment
                                                         </button>
                                                     </h2>
-                                                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                                    <div id="collapseTwo" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
 
                                                         <div class="accordion-body">
                                                             {personalData.employmentHistory.map((employment, index) => (
                                                                 <div key={index} className="employmentHistoryDiv">
-                                                                    <h5 className='personalSubSubHeading'>Role {index + 1} :</h5>
+                                                                    <h5 className='personalSubSubHeading'>Snapshot {index + 1} :</h5>
                                                                     <div className='row'>
 
                                                                         <div className="col-md-6">
@@ -1175,7 +1181,9 @@ export default function CreateLiveContinue() {
                                                                                 //    <iframe src="https://giphy.com/embed/gJ3mEToTDJn3LT6kCT" className="bulbGif"></iframe>
 
                                                                             ) : (
-                                                                                <iframe src="https://giphy.com/embed/pylpD8AoQCf3CQ1oO2" className="bulbGif"></iframe>
+                                                                                // <iframe src="https://giphy.com/embed/pylpD8AoQCf3CQ1oO2" className="bulbGif"></iframe>
+                                                        <iframe src="https://giphy.com/embed/2uIlejpr8ZxenICZSN" className="bulbGif"></iframe>
+
                                                                             )}
                                                                             {/* <iframe src="https://giphy.com/embed/pylpD8AoQCf3CQ1oO2" class="giphy-embed bulbGif "></iframe><p><a href="https://giphy.com/embed/pylpD8AoQCf3CQ1oO2"></a></p> */}
                                                                         </div>
@@ -1217,12 +1225,12 @@ export default function CreateLiveContinue() {
                                                             Add Education
                                                         </button>
                                                     </h2>
-                                                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample3">
+                                                    <div id="collapseThree" class="accordion-collapse collapse show" data-bs-parent="#accordionExample3">
                                                         <div class="accordion-body">
 
                                                             {personalData.educationHistory.map((education, index) => (
                                                                 <div key={index} className="employmentHistoryDiv">
-                                                                    <h5 className='personalSubSubHeading'>Institute {index + 1} :</h5>
+                                                                    <h5 className='personalSubSubHeading'>Formal Education {index + 1} :</h5>
                                                                     <div className='row'>
 
                                                                         <div className="col-md-6">
@@ -1294,7 +1302,7 @@ export default function CreateLiveContinue() {
                                                                         onChange={(e) => updateEducationField(index, 'description', e.target.value)}
                                                                         rows="6 "
                                                                         cols="76"
-                                                                        placeholder='Eg: I was provided with a range of responsibilities to levarage the digital landscape for brand promotion and lead generation.'
+                                                                        placeholder='Eg: Achieved excellence in academics by consistently maintaining a top-ranking position throughout high school. Actively participated in various academic competitions and excelled in subject-specific contests. Received recognition for outstanding performance in science fairs and mathematics Olympiads.'
                                                                         className='detailsTextarea'
                                                                     />
                                                                     <br />
@@ -1324,7 +1332,7 @@ export default function CreateLiveContinue() {
                                                             Add Website or Link
                                                         </button>
                                                     </h2>
-                                                    <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample4">
+                                                    <div id="collapseFour" class="accordion-collapse collapse show" data-bs-parent="#accordionExample4">
                                                         <div class="accordion-body">
 
                                                             {personalData.websitesLinks.map((websiteLink, index) => (
@@ -1407,7 +1415,9 @@ export default function CreateLiveContinue() {
                                                             //    <iframe src="https://giphy.com/embed/gJ3mEToTDJn3LT6kCT" className="bulbGif"></iframe>
 
                                                         ) : (
-                                                            <iframe src="https://giphy.com/embed/pylpD8AoQCf3CQ1oO2" className="bulbGif"></iframe>
+                                                            // <iframe src="https://giphy.com/embed/pylpD8AoQCf3CQ1oO2" className="bulbGif"></iframe>
+                                                        <iframe src="https://giphy.com/embed/2uIlejpr8ZxenICZSN" className="bulbGif"></iframe>
+
                                                         )}
                                                         {/* <iframe src="https://giphy.com/embed/pylpD8AoQCf3CQ1oO2" class="giphy-embed bulbGif "></iframe><p><a href="https://giphy.com/embed/pylpD8AoQCf3CQ1oO2"></a></p> */}
 
@@ -1432,7 +1442,8 @@ export default function CreateLiveContinue() {
                                                     </h6>
                                                     {selectedOptions.map((skill, index) => (
                                                         <div key={index} className="selected-option selectedOption">
-                                                            {skill}
+                                                            {/* {skill} */}
+                                                            {skill.charAt(0).toUpperCase() + skill.slice(1)}
                                                             <button type="button" onClick={() => handleRemoveSkill(skill)} className="DeleteSkill">
                                                                 <Trash3Fill size={16} />
                                                             </button>
@@ -1496,10 +1507,10 @@ export default function CreateLiveContinue() {
                             <div className='rightDivCreateLive' style={{ flex: 1, position: "fixed", width: "50%", right: "0%", top: "0%", paddingTop: "5%" }}>
                                 <div className='  createRightDiv'>
                                     <div className='pdfDisplayDiv' >
-                                        {selectedTemplateId == 1 && <MyPdfViewer1 personalData={personalData} live={true} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={selectedOptions} />}
-                                        {selectedTemplateId == 2 && <MyPdfViewer2 personalData={personalData} live={true} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={selectedOptions} />}
-                                        {selectedTemplateId == 3 && <MyPdfViewer3 personalData={personalData} live={true} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={selectedOptions} />}
-                                        {selectedTemplateId == 4 && <MyPdfViewer4 personalData={personalData} live={true} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={selectedOptions} />}
+                                        {selectedTemplateId == 1 && <MyPdfViewer1 personalData={personalData} live={true} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={selectedOptions} jobTitle={jobTitle} />}
+                                        {selectedTemplateId == 2 && <MyPdfViewer2 personalData={personalData} live={true} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={selectedOptions} jobTitle={jobTitle}/>}
+                                        {selectedTemplateId == 3 && <MyPdfViewer3 personalData={personalData} live={true} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={selectedOptions} jobTitle={jobTitle}/>}
+                                        {selectedTemplateId == 4 && <MyPdfViewer4 personalData={personalData} live={true} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={selectedOptions} jobTitle={jobTitle}/>}
 
                                     </div>
                                 </div>

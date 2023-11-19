@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function MyPdfViewer4({ personalData, live, courses, activities, internships, hobbies, languages, references, customSections, skills }) {
+export default function MyPdfViewer4({ personalData, live, courses, activities, internships, hobbies, languages, references, customSections, skills,jobTitle }) {
   const firebaseImageUrl = personalData.uploadedPhotoURL;
   return (
     <>
@@ -101,7 +101,7 @@ export default function MyPdfViewer4({ personalData, live, courses, activities, 
                 <hr className='temp4Hr'></hr>
                 {skills.map((item, index) => {
                   return (
-                    <p className='profileDetailsText liveSkills'>{item}</p>)
+                    <p className='profileDetailsText liveSkills'>{item.charAt(0).toUpperCase() + item.slice(1)}</p>)
                 })
                 }</>}
 
@@ -139,7 +139,9 @@ export default function MyPdfViewer4({ personalData, live, courses, activities, 
 
               <div className='temp4GreyBigDiv'>
                 <div className='nameDiv temp4NameDiv'>
-                  <p className='resumeTtile temp4ResumeTitle'>{personalData.jobTitle.toUpperCase()}</p>
+                  {/* <p className='resumeTtile temp4ResumeTitle'>{personalData.jobTitle.toUpperCase()}</p> */}
+                   <p className='resumeTtile temp4ResumeTitle'>{jobTitle!==''? jobTitle.toUpperCase(): personalData.jobTitle.toUpperCase()}</p>
+
                   <h6 className='resumeName temp4ResumeName'>{personalData.firstName.toUpperCase()} {personalData.middleName.toUpperCase()} {personalData.lastName.toUpperCase()}</h6>
                   <hr className='temp4Hr2'></hr>
                   <p className='profileText temp4ProfessionalSummary'>{personalData.professionalSummary}</p>

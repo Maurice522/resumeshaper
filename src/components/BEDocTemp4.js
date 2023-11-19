@@ -271,7 +271,7 @@ export default function BEDocTemp3({ imgFile, personalData,courses, activities,i
           <Text style={[styles.rightOtherHeading,styles.colorThisBlack]}>Skills</Text>
           <View style={styles.content1Line}></View>
           {skills.map((item,index)=>{
-          return (<Text style={[styles.rightParagraph]}>{item}</Text>)
+          return (<Text style={[styles.rightParagraph]}>{item.charAt(0).toUpperCase() + item.slice(1)}</Text>)
           })
           }</>}
    

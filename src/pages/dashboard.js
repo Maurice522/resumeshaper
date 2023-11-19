@@ -65,6 +65,7 @@ export default function Dashboard() {
         };
         var arr =[];
         console.log(user.resumes.length)
+        const currentTimestamp = new Date().toLocaleString();
         for(var i = 0; i<user.resumes.length ; i++){
             var resume = user.resumes[i]
             var tempimg = img1;
@@ -79,7 +80,8 @@ export default function Dashboard() {
             srem.resumeId = resume.resumeId;
             srem.img = tempimg;
             srem.title = resume.jobTitle;
-            srem.description =  resume.professionalSummary.substring(0, 20);
+            srem.description = currentTimestamp;
+            // srem.description =  resume.professionalSummary.substring(0, 20);
             srem.id = resume.id;
             srem.idx = i;
             arr = [...arr, srem]
@@ -182,14 +184,15 @@ export default function Dashboard() {
         }
 
         var resumes = [...user.resumes, resume]
-
+        const currentTimestamp = new Date().toLocaleString();
         addUserResume(user.email, resumes);
         dispatch(saveResume(resume));
         const newDiv = {
             resumeId : resume.resumeId,
             img : img1,
             title : resume.jobTitle,
-            description :  resume.professionalSummary.substring(0, 20),
+            // description :  resume.professionalSummary.substring(0, 20),
+            description :currentTimestamp,
             id : resume.id,
             idx : user.resumes.length,
         };
@@ -265,7 +268,7 @@ export default function Dashboard() {
                                     <button className='editResumeBtns ' onClick={() => delSavedResume(savedResume.id)}><Trash3Fill size={23} />{deleting?<>&nbsp;&nbsp;&nbsp;&nbsp;Deleting ...</>:<>&nbsp;&nbsp;&nbsp;&nbsp;Delete</>}</button><br />
                                     {/* <button className='editResumeBtns ' onClick={() => console.log("more")}><ThreeDots size={23} />&nbsp;&nbsp;&nbsp;&nbsp;More</button><br /> */}
                                 </div>
-                                <p className='resumeDesc'><strong>Description: </strong>{savedResume.description}</p>
+                                <p className='resumeDesc'><strong>Created At : </strong>{savedResume.description}</p>
                             </div>
                         </div>
                     ))}

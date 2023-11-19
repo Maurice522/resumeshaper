@@ -357,37 +357,37 @@ export default function CreateLive() {
         });
     };
 
-    const updateWebsiteLinkField = (index, field, value) => {
-        setPersonalData((prevData) => {
-            const updatedWebsitesLinks = [...prevData.websitesLinks];
-            updatedWebsitesLinks[index][field] = value;
-            return {
-                ...prevData,
-                websitesLinks: updatedWebsitesLinks,
-            };
-        });
-    };
-
     // const updateWebsiteLinkField = (index, field, value) => {
-    //     var updatedWebsitesLinks = [];
-    //     personalData.websitesLinks.map((item, idx2) => {
-    //         var temp;
-    //         if (idx2 === index) {
-    //             temp = { ...item, writable: true };
-    //             temp[field] = value;
-    //             delete temp.writable;
-    //         } else {
-    //             temp = item;
-    //         }
-    //         updatedWebsitesLinks = [...updatedWebsitesLinks, temp]
-    //     })
     //     setPersonalData((prevData) => {
+    //         const updatedWebsitesLinks = [...prevData.websitesLinks];
+    //         updatedWebsitesLinks[index][field] = value;
     //         return {
     //             ...prevData,
     //             websitesLinks: updatedWebsitesLinks,
     //         };
     //     });
-    // }
+    // };
+
+    const updateWebsiteLinkField = (index, field, value) => {
+        var updatedWebsitesLinks = [];
+        personalData.websitesLinks.map((item, idx2) => {
+            var temp;
+            if (idx2 === index) {
+                temp = { ...item, writable: true };
+                temp[field] = value;
+                delete temp.writable;
+            } else {
+                temp = item;
+            }
+            updatedWebsitesLinks = [...updatedWebsitesLinks, temp]
+        })
+        setPersonalData((prevData) => {
+            return {
+                ...prevData,
+                websitesLinks: updatedWebsitesLinks,
+            };
+        });
+    }
 
 
 
@@ -419,37 +419,37 @@ export default function CreateLive() {
         });
     };
 
-    const updateEducationField = (index, field, value) => {
-        setPersonalData((prevData) => {
-            const updatedEducationHistory = [...prevData.educationHistory];
-            updatedEducationHistory[index][field] = value;
-            return {
-                ...prevData,
-                educationHistory: updatedEducationHistory,
-            };
-        });
-    };
-
     // const updateEducationField = (index, field, value) => {
-    //     var updateEducationFieldHistory = [];
-    //     personalData.educationHistory.map((item, idx2) => {
-    //         var temp;
-    //         if (idx2 === index) {
-    //             temp = { ...item, writable: true };
-    //             temp[field] = value;
-    //             delete temp.writable;
-    //         } else {
-    //             temp = item;
-    //         }
-    //         updateEducationFieldHistory = [...updateEducationFieldHistory, temp]
-    //     })
     //     setPersonalData((prevData) => {
+    //         const updatedEducationHistory = [...prevData.educationHistory];
+    //         updatedEducationHistory[index][field] = value;
     //         return {
     //             ...prevData,
-    //             educationHistory: updateEducationFieldHistory,
+    //             educationHistory: updatedEducationHistory,
     //         };
     //     });
-    // }
+    // };
+
+    const updateEducationField = (index, field, value) => {
+        var updateEducationFieldHistory = [];
+        personalData.educationHistory.map((item, idx2) => {
+            var temp;
+            if (idx2 === index) {
+                temp = { ...item, writable: true };
+                temp[field] = value;
+                delete temp.writable;
+            } else {
+                temp = item;
+            }
+            updateEducationFieldHistory = [...updateEducationFieldHistory, temp]
+        })
+        setPersonalData((prevData) => {
+            return {
+                ...prevData,
+                educationHistory: updateEducationFieldHistory,
+            };
+        });
+    }
 
     const addEmploymentHistory = () => {
         setPersonalData({
@@ -480,37 +480,37 @@ export default function CreateLive() {
         });
     };
 
-    const updateEmploymentField = (index, field, value) => {
-        setPersonalData((prevData) => {
-            const updatedEmploymentHistory = [...prevData.employmentHistory];
-            updatedEmploymentHistory[index][field] = value;
-            return {
-                ...prevData,
-                employmentHistory: updatedEmploymentHistory,
-            };
-        });
-    };
-
     // const updateEmploymentField = (index, field, value) => {
-    //     var updatedEmploymentHistory = [];
-    //     personalData.employmentHistory.map((item, idx2) => {
-    //         var temp;
-    //         if (idx2 === index) {
-    //             temp = { ...item, writable: true };
-    //             temp[field] = value;
-    //             delete temp.writable;
-    //         } else {
-    //             temp = item;
-    //         }
-    //         updatedEmploymentHistory = [...updatedEmploymentHistory, temp]
-    //     })
     //     setPersonalData((prevData) => {
+    //         const updatedEmploymentHistory = [...prevData.employmentHistory];
+    //         updatedEmploymentHistory[index][field] = value;
     //         return {
     //             ...prevData,
     //             employmentHistory: updatedEmploymentHistory,
     //         };
     //     });
     // };
+
+    const updateEmploymentField = (index, field, value) => {
+        var updatedEmploymentHistory = [];
+        personalData.employmentHistory.map((item, idx2) => {
+            var temp;
+            if (idx2 === index) {
+                temp = { ...item, writable: true };
+                temp[field] = value;
+                delete temp.writable;
+            } else {
+                temp = item;
+            }
+            updatedEmploymentHistory = [...updatedEmploymentHistory, temp]
+        })
+        setPersonalData((prevData) => {
+            return {
+                ...prevData,
+                employmentHistory: updatedEmploymentHistory,
+            };
+        });
+    };
 
 
     const handleLogDetails = async (e) => {
@@ -862,12 +862,12 @@ export default function CreateLive() {
                                                             Add Employment
                                                         </button>
                                                     </h2>
-                                                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                                    <div id="collapseTwo" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
 
                                                         <div class="accordion-body">
                                                             {personalData.employmentHistory.map((employment, index) => (
                                                                 <div key={index} className="employmentHistoryDiv">
-                                                                    <h5 className='personalSubSubHeading'>Role {index + 1} :</h5>
+                                                                    <h5 className='personalSubSubHeading'>Snapshot {index + 1} :</h5>
                                                                     <div className='row'>
 
                                                                         <div className="col-md-6">
@@ -972,12 +972,12 @@ export default function CreateLive() {
                                                             Add Education
                                                         </button>
                                                     </h2>
-                                                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample3">
+                                                    <div id="collapseThree" class="accordion-collapse collapse show" data-bs-parent="#accordionExample3">
                                                         <div class="accordion-body">
 
                                                             {personalData.educationHistory.map((education, index) => (
                                                                 <div key={index} className="employmentHistoryDiv">
-                                                                    <h5 className='personalSubSubHeading'>Institute {index + 1} :</h5>
+                                                                    <h5 className='personalSubSubHeading'>Formal Education {index + 1} :</h5>
                                                                     <div className='row'>
 
                                                                         <div className="col-md-6">
@@ -1049,7 +1049,7 @@ export default function CreateLive() {
                                                                         onChange={(e) => updateEducationField(index, 'description', e.target.value)}
                                                                         rows="6 "
                                                                         cols="76"
-                                                                        placeholder='Eg: I was provided with a range of responsibilities to levarage the digital landscape for brand promotion and lead generation.'
+                                                                        placeholder='Eg: Achieved excellence in academics by consistently maintaining a top-ranking position throughout high school. Actively participated in various academic competitions and excelled in subject-specific contests. Received recognition for outstanding performance in science fairs and mathematics Olympiads.'
                                                                         className='detailsTextarea'
                                                                     />
                                                                     <br />
@@ -1079,7 +1079,7 @@ export default function CreateLive() {
                                                             Add Website or Link
                                                         </button>
                                                     </h2>
-                                                    <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample4">
+                                                    <div id="collapseFour" class="accordion-collapse collapse show" data-bs-parent="#accordionExample4">
                                                         <div class="accordion-body">
 
                                                             {personalData.websitesLinks.map((websiteLink, index) => (

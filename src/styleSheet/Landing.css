@@ -277,7 +277,7 @@ body {
     position: relative;
     background-position: center;
     background-size: cover;
-
+    margin-top: 8%;
 }
 
 .footerContent {

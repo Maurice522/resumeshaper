@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function MyPdfViewer2({ personalData, live, courses, activities, internships, hobbies, languages, references, customSections, skills }) {
+export default function MyPdfViewer2({ personalData, live, courses, activities, internships, hobbies, languages, references, customSections, skills,jobTitle }) {
   const firebaseImageUrl = personalData.uploadedPhotoURL;
   return (
     <>
@@ -41,7 +41,8 @@ export default function MyPdfViewer2({ personalData, live, courses, activities, 
                 </div>
                 <div className='nameDiv temp2NameDiv'>
                   <h6 className='resumeName '>{personalData.firstName} {personalData.middleName} {personalData.lastName}</h6>
-                  <p className='resumeTtile '>{personalData.jobTitle}</p>
+                  {/* <p className='resumeTtile '>{personalData.jobTitle}</p> */}
+                  <p className='resumeTtile'>{jobTitle!==''? jobTitle: personalData.jobTitle}</p>
                 </div>
               </View>
 
@@ -212,7 +213,7 @@ export default function MyPdfViewer2({ personalData, live, courses, activities, 
             <p className='profileDetails otherProfileDetails'>Skills</p>
             {skills.map((item, index) => {
               return (
-                <p className='profileDetailsText liveSkills'>{item}</p>)
+                <p className='profileDetailsText liveSkills'>{item.charAt(0).toUpperCase() + item.slice(1)}</p>)
             })
             }</>}
 

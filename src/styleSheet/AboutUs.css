@@ -1,0 +1,33 @@
+.aboutUsContainer{
+    width: 85%;
+    margin: auto;
+    margin-bottom: 20%;
+}
+.aboutUsImgDiv{
+    margin: 5%;
+}
+.aboutUsImg { 
+    float: right; 
+    margin: 5px; 
+    margin-left: 5%;
+    width: 55%;
+    margin-right: 0;
+  } 
+
+  .aboutUsContent { 
+    text-align: justify; 
+    font-size: 16px; 
+  } 
+  .aboutUsHeadig{
+    color: #174f5d;
+    color: #347571;
+    text-align: center;
+    margin-top: 4%;
+    position: relative;
+  }
+ .returnBackArrow{
+    position: absolute;
+    left: 0%;
+    bottom: 0%;
+    cursor: pointer;
+ }
