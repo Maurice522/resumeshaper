@@ -558,7 +558,7 @@ export default function CreateLiveContinue() {
         
         Object.entries(resume).map(([key, value]) => {
             if(value == undefined){
-                value = '';
+                resume[key] = '';
             }
           })
         console.log(resume)
