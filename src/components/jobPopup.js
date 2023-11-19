@@ -57,7 +57,7 @@ export default function JobPopup({ onClose, onSignup, jobTitle, setJobTitle, job
                                             ref={playerRef}
                                         />
                     </div>
-                ) : showConfirmation ? (
+                ) : showConfirmation && jobTitle!=='' ? (
                     <div>
                         <p className='jobInstructionPopup'>Document successfully processed! </p>
                         <p className='jobInstructionLowerPopup'>Your professional summary and skills have been optimized to match the provided job title and description. Feel free to edit them, along with other fields, to suit your preferences.</p>
