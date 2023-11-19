@@ -64,13 +64,21 @@ export default function MyPdfViewer4({ personalData, live, courses, activities, 
                 <p className='profileDetailsText temp3Underline'>{personalData.inputEmail}</p>
               </>}
 
-              {personalData.dateOfBirth && personalData.dateOfBirth.length > 0 && personalData.placeOfBirth && personalData.placeOfBirth.length > 0 && <>
+              {/* {personalData.dateOfBirth && personalData.dateOfBirth.length > 0 && personalData.placeOfBirth && personalData.placeOfBirth.length > 0 && <>
                 <p className='profileDetailsText DOBProfileDetailsText profileDetailSubHeading'>DOB/Place</p>
                 <p className='profileDetailsText'>{personalData.dateOfBirth}</p>
               </>}
               {personalData.placeOfBirth && personalData.placeOfBirth.length > 0 && <>
                 <p className='profileDetailsText'>{personalData.placeOfBirth}</p>
-              </>}
+              </>} */}
+
+              {personalData.dateOfBirth && personalData.dateOfBirth.length > 0 && <>
+                  <p className='profileDetailsText DOBProfileDetailsText profileDetailSubHeading'>DOB</p>
+                  <p className='profileDetailsText'>{personalData.dateOfBirth}</p>
+                </>}
+                {personalData.placeOfBirth && personalData.placeOfBirth.length > 0 && <>
+                  <p className='profileDetailsText'>{personalData.placeOfBirth}</p>
+                </>}
 
 
               {personalData.nationality && personalData.nationality.length > 0 && <>

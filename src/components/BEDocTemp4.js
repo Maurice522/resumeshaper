@@ -236,7 +236,7 @@ export default function BEDocTemp3({ imgFile, personalData,courses, activities,i
           </>}
 
           {personalData.dateOfBirth && personalData.dateOfBirth.length >0 && <>
-          <Text style={[styles.rightSubHeading,styles.colorThisGrey]}>DOB/Place of Birth</Text>
+          <Text style={[styles.rightSubHeading,styles.colorThisGrey]}>DOB</Text>
           <Text style={styles.rightParagraph}>{personalData.dateOfBirth}</Text>
           </>}
 

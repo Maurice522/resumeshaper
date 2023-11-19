@@ -178,8 +178,8 @@ export default function MyPdfViewer2({ personalData, live, courses, activities, 
             <p className='profileDetailsText emailProfileDetailsText'>{personalData.inputEmail}</p>
           </>}
 
-          {personalData.dateOfBirth && personalData.dateOfBirth.length > 0 && personalData.placeOfBirth && personalData.placeOfBirth.length > 0 && <>
-            <p className='profileDetailsText DOBProfileDetailsText profileDetailSubHeading'>DOB/Place</p>
+          {personalData.dateOfBirth && personalData.dateOfBirth.length > 0  && <>
+            <p className='profileDetailsText DOBProfileDetailsText profileDetailSubHeading'>DOB</p>
             <p className='profileDetailsText'>{personalData.dateOfBirth}</p>
           </>}
           {personalData.placeOfBirth && personalData.placeOfBirth.length > 0 && <>
