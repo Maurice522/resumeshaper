@@ -49,7 +49,7 @@ export default function MyPdfViewer1({ personalData, live, courses, activities, 
             <div className='row liveProfileDiv'>
               <div className='col-md-8 liveProfileDivLeft'>
                 <p className='profileName'>< PersonFill size={8} className="profileIcon" /> &nbsp;Profile</p>
-                <p className='profileText'>{personalData.professionalSummary.charAt(0).toUpperCase() + personalData.professionalSummary.slice(1)}</p>
+                <p className='profileText'>{personalData.professionalSummary!==undefined && personalData.professionalSummary.charAt(0).toUpperCase() + personalData.professionalSummary.slice(1)}</p>
 
                 {personalData.employmentHistory && personalData.employmentHistory.length > 0 && personalData.employmentHistory[0].jobTitle !== '' && <>
                   <div className='liveEmployment'>
@@ -212,7 +212,7 @@ export default function MyPdfViewer1({ personalData, live, courses, activities, 
                   <p className='profileDetails otherProfileDetails'>Skills</p>
                   {skills.map((item, index) => {
                     return (
-                      <p className='profileDetailsText liveSkills'>{item.charAt(0).toUpperCase() + item.slice(1)}</p>)
+                      <p className='profileDetailsText liveSkills'>{item!==undefined && item.charAt(0).toUpperCase() + item.slice(1)}</p>)
                   })
                   }</>}
 

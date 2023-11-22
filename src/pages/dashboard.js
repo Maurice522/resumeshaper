@@ -250,6 +250,7 @@ export default function Dashboard() {
                 <div className='dashHeader'>
                     <h4>Documents</h4>
                     <button className='createDoc zoom' onClick={()=>navigate("/create")}><PlusLg size={20} /> &nbsp;Create New</button>
+                    <button className='createDoc zoom' onClick={()=>navigate("/create",{state:{upload:true}})}><PlusLg size={20} /> &nbsp;Upload Resume</button>
                 </div>
                 <hr className='dashHrLine' />
                 {isPopupOpen && <JobPopup onClose={togglePopup} onSignup={handleSignup} />}

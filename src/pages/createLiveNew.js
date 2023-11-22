@@ -25,12 +25,14 @@ import img5 from '../images/template2.PNG'
 import img6 from '../images/template3.PNG'
 import img7 from '../images/template4.PNG'
 import JobPopup from '../components/jobPopup';
+import CreateUploadPopup from '../components/createUploadPopup';
 
 
 // import skills from '../components/formComponents/skills';    
 
 export default function CreateLive() {
 
+    const location = useLocation()
     const [showAdditionalDetails, setShowAdditionalDetails] = useState(false);
     const [courses, setCourses] = useState([]);
     const [activities, setActivities] = useState([]);
@@ -58,7 +60,7 @@ export default function CreateLive() {
     const [selectedTemplateId, setSelectedTemplateId] = useState(1);
 
 
-
+    const [showHomePopup, setShowHomePopup] = useState(false);
 
     const [personalData, setPersonalData] = useState({
         jobTitle: '',
@@ -180,6 +182,11 @@ export default function CreateLive() {
                 temp[key] = user[key]
             }
             );
+            if(location.state !== null){
+                if(location.state.upload)
+                setShowHomePopup(location.state.upload)
+                
+            }
             setPersonalData(temp)
         }
     }, [user])
@@ -282,6 +289,7 @@ export default function CreateLive() {
 
     // Function to log the selected skills
     useEffect(() => {
+        
         console.log('Selected Skills:', selectedOptions);
     }, [selectedOptions]);
 
@@ -605,12 +613,25 @@ export default function CreateLive() {
         alert("no picture uploaded")
       }
     }
+   
+    const handleClosePopup = () => {
+        setShowHomePopup(false);
+    };
+    const handleOpenPopup = () => {
+        setShowHomePopup(true);
+    };
+
+    const handleUpload = (file) => {
+        // upload file code
+        console.log('File uploaded:', file.name);
+    };
 
     return (
         <>
             {gettingUser ? <img style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }} width="240" height="240" alt='loading...' src='https://media2.giphy.com/media/MDrmyLuEV8XFOe7lU6/200w.webp?cid=ecf05e47k6onrtqddz8d98s4j5lhtutlnnegeus1pwcdwkxt&ep=v1_gifs_search&rid=200w.webp&ct=g' /> :
                 <>
                     {/* <Nav /> */}
+                    {showHomePopup && <CreateUploadPopup personalData={personalData} setPersonalData={setPersonalData} onClose={handleClosePopup} onUpload={handleUpload} />}
                     {downloadPdf ? <PdfDisplayBE personalData={personalData} courses={courses} activities={activities} internships={internships} hobbies={hobbies} languages={languages} references={references} customSections={customSections} skills={selectedOptions} downloadPdf={downloadPdf} setDownloadPdf={setDownloadPdf} selectedTemplateId={selectedTemplateId}  /> : <>
                         <div>
                             <nav class="navbar bg-body-tertiary myNav createLiveNav">
@@ -865,7 +886,7 @@ export default function CreateLive() {
                                                     <div id="collapseTwo" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
 
                                                         <div class="accordion-body">
-                                                            {personalData.employmentHistory.map((employment, index) => (
+                                                            {personalData.employmentHistory!==undefined && personalData.employmentHistory.length>0 &&personalData.employmentHistory.map((employment, index) => (
                                                                 <div key={index} className="employmentHistoryDiv">
                                                                     <h5 className='personalSubSubHeading'>Snapshot {index + 1} :</h5>
                                                                     <div className='row'>
@@ -975,7 +996,7 @@ export default function CreateLive() {
                                                     <div id="collapseThree" class="accordion-collapse collapse show" data-bs-parent="#accordionExample3">
                                                         <div class="accordion-body">
 
-                                                            {personalData.educationHistory.map((education, index) => (
+                                                            {personalData.educationHistory !==undefined && personalData.educationHistory.length>0 &&personalData.educationHistory.map((education, index) => (
                                                                 <div key={index} className="employmentHistoryDiv">
                                                                     <h5 className='personalSubSubHeading'>Formal Education {index + 1} :</h5>
                                                                     <div className='row'>
@@ -1082,7 +1103,7 @@ export default function CreateLive() {
                                                     <div id="collapseFour" class="accordion-collapse collapse show" data-bs-parent="#accordionExample4">
                                                         <div class="accordion-body">
 
-                                                            {personalData.websitesLinks.map((websiteLink, index) => (
+                                                            {personalData.websiteLinks!==undefined && personalData.websiteLinks.length >0 &&personalData.websitesLinks.map((websiteLink, index) => (
                                                                 <div key={index} className="websitesLinksDiv">
                                                                     <h5 className='personalSubSubHeading'>Link {index + 1} :</h5>
                                                                     <div className='row'>

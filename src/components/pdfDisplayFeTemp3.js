@@ -42,7 +42,7 @@ export default function MyPdfViewer3({ personalData, live, courses, activities, 
               <h6 className='resumeName temp3ResumeName'>{personalData.firstName} {personalData.middleName} {personalData.lastName}</h6>
               <hr className='temp3Hr'></hr>
               {/* <p className='resumeTtile temp3ResumeTitle'>{personalData.jobTitle.toUpperCase()}</p> */}
-              <p className='resumeTtile'>{jobTitle!==''? jobTitle.toUpperCase(): personalData.jobTitle.toUpperCase()}</p>
+              <p className='resumeTtile'>{jobTitle!==undefined && jobTitle!==''? jobTitle.toUpperCase(): personalData.jobTitle.toUpperCase()}</p>
             </div>
           </View>
           <div className='temp3ProfileDetails'>
@@ -110,7 +110,7 @@ export default function MyPdfViewer3({ personalData, live, courses, activities, 
               <p className='profileDetails otherProfileDetails temp2GreyFont'>SKILLS</p>
               {skills.map((item, index) => {
                 return (
-                  <p className='profileDetailsText liveSkills'>{item.charAt(0).toUpperCase() + item.slice(1)}</p>)
+                  <p className='profileDetailsText liveSkills'>{item}</p>)
               })
               }</>}
 
