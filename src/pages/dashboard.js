@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import Nav from '../components/nav';
-import { Power } from "react-bootstrap-icons";
+import { Power, Upload } from "react-bootstrap-icons";
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { onAuthStateChanged, signOut } from 'firebase/auth'
 import { addUserResume, auth, getUserFromDatabase, updateUserResumes } from '../fireabse'
 import { saveResume, signOutUser, updateResume, updateUser } from '../redux/slices/user';
 import '../styleSheet/Dashboard.css';
-import { Share, ThreeDots, Check2Circle, PencilSquare, FileEarmarkArrowDownFill, Bullseye, PlusLg, PencilFill, Trash3Fill, ColumnsGap, Book, JournalRichtext, BagFill, GraphUpArrow, MegaphoneFill, Alipay, Bicycle, CheckSquare } from "react-bootstrap-icons";
+import {upload, Share, ThreeDots, Check2Circle, PencilSquare, FileEarmarkArrowDownFill, Bullseye, PlusLg, PencilFill, Trash3Fill, ColumnsGap, Book, JournalRichtext, BagFill, GraphUpArrow, MegaphoneFill, Alipay, Bicycle, CheckSquare } from "react-bootstrap-icons";
 import img1 from '../images/template1.PNG'
 import img2 from '../images/template2.PNG'
 import img3 from '../images/template3.PNG'
@@ -250,7 +250,7 @@ export default function Dashboard() {
                 <div className='dashHeader'>
                     <h4>Documents</h4>
                     <button className='createDoc zoom' onClick={()=>navigate("/create")}><PlusLg size={20} /> &nbsp;Create New</button>
-                    <button className='createDoc zoom' onClick={()=>navigate("/create",{state:{upload:true}})}><PlusLg size={20} /> &nbsp;Upload Resume</button>
+                    <button className='uploadDoc zoom' onClick={()=>navigate("/create",{state:{upload:true}})}><Upload size={20} /> &nbsp;Upload Resume</button>
                 </div>
                 <hr className='dashHrLine' />
                 {isPopupOpen && <JobPopup onClose={togglePopup} onSignup={handleSignup} />}
