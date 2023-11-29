@@ -24,7 +24,7 @@ import Footer from '../components/footer'
 import LoginPopup from './loginPopup'
 import { Check2Circle, BookmarkStarFill } from "react-bootstrap-icons";
 import { onAuthStateChanged } from 'firebase/auth'
-import { auth } from '../fireabse'
+import { auth, getUserFromDatabase } from '../fireabse'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify';
 
@@ -33,6 +33,8 @@ export default function Landing() {
 
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [userData, setUserData] = useState();
+    const [gettingUser, SetGettingUser] = useState(false);
 
 
     const togglePopup = () => {
@@ -45,18 +47,24 @@ export default function Landing() {
     const navigate = useNavigate()
     
     useEffect(()=>{
-        const listen = onAuthStateChanged(auth, (user)=>{
+        const listen = onAuthStateChanged(auth, async(user)=>{
             if (user) {
+                SetGettingUser(true)
                 setIsLoggedIn(true);
+                const userFirebase = await getUserFromDatabase(user.email);
+                setUserData(userFirebase)
+                SetGettingUser(false)
             }
         })
     },[])
 
     return (
+        <>
+        {gettingUser? <img style={{ position: "absolute",top: "50%",left: "50%",transform: "translate(-50%, -50%)"}} width="240" height="240" alt='loading...' src='https://media2.giphy.com/media/MDrmyLuEV8XFOe7lU6/200w.webp?cid=ecf05e47k6onrtqddz8d98s4j5lhtutlnnegeus1pwcdwkxt&ep=v1_gifs_search&rid=200w.webp&ct=g' /> :
         <div>
             <Nav />
             {isLoggedIn==true?
-            <button class=" continueToDahboardBtn signoutBtn zoom" onClick={()=>navigate('/dashboard')}>Dashboard</button>:
+            <button class=" continueToDahboardBtn signoutBtn zoom" onClick={()=> userData?.profile===true? navigate('/dashboard'):navigate('/auth')}>Dashboard</button>:
             <button class="loginBtn signoutBtn" onClick={togglePopup}>Login</button>}
             {isPopupOpen && <LoginPopup onClose={togglePopup} onSignup={handleSignup}/>}
 
@@ -251,5 +259,7 @@ export default function Landing() {
             </div>
             <Footer />
         </div>
+            }
+            </>
     )
 }
