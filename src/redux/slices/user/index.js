@@ -83,6 +83,7 @@ export const userSlice = createSlice({
 
         },
         updateResume: (state, action)=>{
+          console.log(action.payload)
             state.user.resumes = action.payload;
             // console.log("updatedUser")   
         },
@@ -93,6 +94,7 @@ export const userSlice = createSlice({
             state.user={...state.user,...action.payload}
         },
         updateUser:(state, action)=>{
+          console.log(action.payload)
           Object.entries(action.payload).map(([key, value]) => {
             if(value !== "" && value !==null )
               if(Array.isArray(value)){
@@ -105,14 +107,16 @@ export const userSlice = createSlice({
               }
           }
           );
-          console.log("updatedUser")
+          console.log("updatedUser",state.user)
         },
         saveResume:(state, action)=>{
+          console.log(action.payload)
           state.user.resumes = [...state.user.resumes, action.payload]
           console.log(state.user.resumes)
         },
         setResume:(state,action)=>{
-          state.user.resume = [...action.payload]
+          console.log(action.payload)
+          // state.user.resume = [...action.payload]
         }
     }
 })

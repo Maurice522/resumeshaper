@@ -46,6 +46,17 @@
     border: none;
     height: 42px; 
 }
+.uploadDoc {
+    width: 18%;
+    right:  16%;
+    top: -15%;
+    position: absolute;
+    border-radius: 26px;
+    background-color: #35b276;
+    color: white;
+    border: none;
+    height: 42px; 
+}
 .createDoc:hover {
     width: 15%;
     right:  0%;

@@ -200,6 +200,9 @@ const styles = StyleSheet.create({
 
 export default function BEDocTemp3({ imgFile, personalData,courses, activities,internships,hobbies,languages,references ,customSections ,skills }) {
   console.log(personalData)
+  const uppercasedFirstName = personalData.firstName.toUpperCase();
+  const uppercasedMiddleName = personalData.middleName.toUpperCase();
+  const uppercasedLastName = personalData.lastName.toUpperCase();
   return (
     <Document>
     <Page size="A4" style={styles.page}>
@@ -236,7 +239,7 @@ export default function BEDocTemp3({ imgFile, personalData,courses, activities,i
           </>}
 
           {personalData.dateOfBirth && personalData.dateOfBirth.length >0 && <>
-          <Text style={[styles.rightSubHeading,styles.colorThisGrey]}>DOB/Place of Birth</Text>
+          <Text style={[styles.rightSubHeading,styles.colorThisGrey]}>DOB</Text>
           <Text style={styles.rightParagraph}>{personalData.dateOfBirth}</Text>
           </>}
 
@@ -303,7 +306,7 @@ export default function BEDocTemp3({ imgFile, personalData,courses, activities,i
       <View style={{alignItems: 'left',width:"100%" , backgroundColor:"#f5f5f5",paddingRight:'10%',paddingLeft:'5%',paddingTop:'5%',paddingBottom:'2%',marginTop:'-2%'}}>
       <View style={{alignItems: 'left', marginTop:8,width:"100%" }}>
       <Text style={styles.designation}>{personalData.jobTitle}</Text>
-            <Text style={styles.name}>{personalData.firstName} {personalData.middleName} {personalData.lastName}</Text>
+            <Text style={styles.name}>{uppercasedFirstName} {uppercasedMiddleName} {uppercasedLastName}</Text>
             <View style={styles.line}></View>
           
        </View>

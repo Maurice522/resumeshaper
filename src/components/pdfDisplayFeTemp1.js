@@ -23,6 +23,8 @@ const styles = StyleSheet.create({
 
 export default function MyPdfViewer1({ personalData, live, courses, activities, internships, hobbies, languages, references, customSections, skills,jobTitle}) {
   const firebaseImageUrl = personalData.uploadedPhotoURL;
+  // console.log(personalData.professionalSummary)
+  // console.log(personalData.professionalSummary !== undefined)
   return (
 
     <div className='scrollableDiv'>
@@ -49,9 +51,10 @@ export default function MyPdfViewer1({ personalData, live, courses, activities, 
             <div className='row liveProfileDiv'>
               <div className='col-md-8 liveProfileDivLeft'>
                 <p className='profileName'>< PersonFill size={8} className="profileIcon" /> &nbsp;Profile</p>
-                <p className='profileText'>{personalData.professionalSummary.charAt(0).toUpperCase() + personalData.professionalSummary.slice(1)}</p>
-
-                {personalData.employmentHistory && personalData.employmentHistory.length > 0 && personalData.employmentHistory[0].jobTitle !== '' && <>
+                {
+                <p className='profileText'>{personalData?.professionalSummary!==undefined &&personalData.professionalSummary!==""&& personalData?.professionalSummary}</p>
+                }
+                {personalData.employmentHistory && personalData?.employmentHistory?.length > 0 && personalData?.employmentHistory[0]?.jobTitle !== '' && <>
                   <div className='liveEmployment'>
                     <p className='profileName employmentHistName'>< BagDashFill size={8} className="profileIcon" /> &nbsp;Employment History</p>
                     {personalData.employmentHistory.map((item, index) => {
@@ -66,10 +69,10 @@ export default function MyPdfViewer1({ personalData, live, courses, activities, 
                   </div>
                 </>}
 
-                {personalData.educationHistory && personalData.educationHistory.length > 0 && personalData.educationHistory[0].school !== '' && <>
+                {personalData?.educationHistory && personalData?.educationHistory?.length > 0 && personalData.educationHistory[0]?.school !== '' && <>
                   <div className='liveEducation'>
                     <p className='profileName employmentHistName'>< AwardFill size={8} className="profileIcon" /> &nbsp;Education</p>
-                    {personalData.educationHistory.map((item, index) => {
+                    {personalData?.educationHistory.map((item, index) => {
                       return (<>
                       
                         <p className='profileEmploymentName'>{item.school}, {item.city}</p>
@@ -81,7 +84,7 @@ export default function MyPdfViewer1({ personalData, live, courses, activities, 
                   </div>
                 </>}
 
-                {internships && internships.length > 0 && internships[0].jobTitle !== '' && <>
+                {internships && internships?.length > 0 && internships[0]?.jobTitle !== '' && <>
                   <div className='liveEducation'>
                     <p className='profileName employmentHistName'>< PeopleFill size={8} className="profileIcon" /> &nbsp;Internships</p>
                     {internships.map((item, index) => {
@@ -95,7 +98,7 @@ export default function MyPdfViewer1({ personalData, live, courses, activities, 
                   </div>
                 </>}
 
-                {references && references.length > 0 && references[0].fullName !== '' && <>
+                {references && references?.length > 0 && references[0]?.fullName !== '' && <>
                   <div className='liveEducation'>
                     <p className='profileName employmentHistName'>< MegaphoneFill size={8} className="profileIcon" /> &nbsp;References</p>
                     {references.map((item, index) => {
@@ -110,7 +113,7 @@ export default function MyPdfViewer1({ personalData, live, courses, activities, 
                 </>}
 
 
-                {courses && courses.length > 0 && courses[0].course !== '' && <>
+                {courses && courses?.length > 0 && courses[0]?.course !== '' && <>
                   <div className='liveEducation'>
                     <p className='profileName employmentHistName'>< JournalBookmarkFill size={8} className="profileIcon" /> &nbsp;Courses</p>
                     {courses.map((item, index) => {
@@ -125,7 +128,7 @@ export default function MyPdfViewer1({ personalData, live, courses, activities, 
                 </>}
 
 
-                {activities && activities.length > 0 && activities[0].function !== '' && <>
+                {activities && activities?.length > 0 && activities[0]?.function !== '' && <>
                   <div className='liveEducation'>
                     <p className='profileName employmentHistName'>< TrophyFill size={8} className="profileIcon" /> &nbsp;Extra-Curricular Activities</p>
                     {activities.map((item, index) => {
@@ -139,7 +142,7 @@ export default function MyPdfViewer1({ personalData, live, courses, activities, 
                   </div>
                 </>}
 
-                {customSections && customSections.length > 0 && customSections[0].subTitle !== '' && <>
+                {customSections && customSections?.length > 0 && customSections[0]?.subTitle !== '' && <>
                   {customSections.map((item, index) => {
                     return (<>
                       <div className='liveEducation'>
@@ -176,8 +179,8 @@ export default function MyPdfViewer1({ personalData, live, courses, activities, 
                   <p className='profileDetailsText emailProfileDetailsText'>{personalData.inputEmail}</p>
                 </>}
 
-                {personalData.dateOfBirth && personalData.dateOfBirth.length > 0 && personalData.placeOfBirth && personalData.placeOfBirth.length > 0 && <>
-                  <p className='profileDetailsText DOBProfileDetailsText profileDetailSubHeading'>DOB/Place</p>
+                {personalData.dateOfBirth && personalData.dateOfBirth.length > 0 && <>
+                  <p className='profileDetailsText DOBProfileDetailsText profileDetailSubHeading'>DOB</p>
                   <p className='profileDetailsText'>{personalData.dateOfBirth}</p>
                 </>}
                 {personalData.placeOfBirth && personalData.placeOfBirth.length > 0 && <>
@@ -198,7 +201,7 @@ export default function MyPdfViewer1({ personalData, live, courses, activities, 
                 {personalData.websitesLinks[0]!='' && personalData.websitesLinks.length > 0  && <>
                   <p className='profileDetails otherProfileDetails'>Links</p>
                 </>}
-                {personalData.websitesLinks && personalData.websitesLinks.length > 0 && <>
+                {personalData.websitesLinks && personalData?.websitesLinks?.length > 0 && <>
                   {/* <p className='profileDetails otherProfileDetails'>Links</p> */}
                   {personalData.websitesLinks.map((item, index) => {
                     return (<>
@@ -212,7 +215,7 @@ export default function MyPdfViewer1({ personalData, live, courses, activities, 
                   <p className='profileDetails otherProfileDetails'>Skills</p>
                   {skills.map((item, index) => {
                     return (
-                      <p className='profileDetailsText liveSkills'>{item.charAt(0).toUpperCase() + item.slice(1)}</p>)
+                      <p className='profileDetailsText liveSkills'>{item!==undefined && item.charAt(0).toUpperCase() + item.slice(1)}</p>)
                   })
                   }</>}
 

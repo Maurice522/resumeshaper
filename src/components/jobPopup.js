@@ -4,8 +4,9 @@ import img3 from '../images/28.png'
 import '../styleSheet/LoginPopup.css'
 // import vid1 from '../images/loadingVid2.mp4'
 import vid1 from '../images/loadingVid1.mp4'
+import { toast } from 'react-toastify'
 
-export default function JobPopup({ onClose, onSignup, jobTitle, setJobTitle, jobDescription, setJobDescription, getSummary, getAiSkills }) {
+export default function JobPopup({ onClose, onSignup, jobTitle, setJobTitle, jobDescription, setJobDescription, getSummary, getAiSkills, setPersonalData, personalData }) {
 
     const [isLoading, setIsLoading] = useState(false);
     const [showConfirmation, setShowConfirmation] = useState(false);
@@ -13,7 +14,23 @@ export default function JobPopup({ onClose, onSignup, jobTitle, setJobTitle, job
     const submitLoginHandler = async (e) => {
         e.preventDefault();
         setIsLoading(true);
+        if(jobTitle!=='' && jobDescription!==''){
         try {
+            console.log(personalData)
+
+           
+            var temp = personalData;
+            Object.entries(temp).map(([key, value]) => {
+                if(value == undefined){
+                    console.log(true)
+                    temp[key] = '';
+                }
+              })
+
+            console.log(temp)
+            temp.jobTitle = jobTitle;
+            console.log(temp)
+            setPersonalData(temp);
             await getSummary();
             await getAiSkills();
             setShowConfirmation(true);
@@ -22,6 +39,9 @@ export default function JobPopup({ onClose, onSignup, jobTitle, setJobTitle, job
             alert("An error occured while processing your document. Please try again later");
         } finally {
             setIsLoading(false);
+        }
+        }else{
+            toast.info("Fields can not be empty!")
         }
     };
 

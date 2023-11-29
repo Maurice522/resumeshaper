@@ -39,7 +39,7 @@ export default function CreateUploadPopup({ onClose, personalData, setPersonalDa
       setLoading(true)
       const fileLink = await uploadMedia(file, "resume");
       await updateUserInDatabase(user.email, fileLink)
-      dispatch(updateResume(fileLink))
+      // dispatch(updateResume(fileLink))
       var res = await fetch('https://server.reverr.io/extract', {
         method: 'POST',
         body: JSON.stringify({
@@ -54,6 +54,7 @@ export default function CreateUploadPopup({ onClose, personalData, setPersonalDa
         console.log(responseJson)
         return responseJson;
       })
+      // delete res.professionalSummary;
       delete res.websitesAndLinks;
       res.websitesAndLinks = [
         {

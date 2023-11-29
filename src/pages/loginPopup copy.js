@@ -72,7 +72,9 @@ const LoginPopup1 = ({ onClose, onSignup }) => {
                     setErrorr(userFriendlyErrorMessage);
                 })
         } else {
-            createUserWithEmailAndPassword(auth, email, password)
+            var founduser = getUserFromDatabase(email)
+            if(founduser===undefined){
+                createUserWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
                     addUserInDatabase({ email, password, name })
                     signInUser(auth, email, password)
@@ -84,6 +86,8 @@ const LoginPopup1 = ({ onClose, onSignup }) => {
                     const userFriendlyErrorMessage = mapFirebaseErrorToMessage(err.code);
                     setErrorr(userFriendlyErrorMessage);
                 })
+            }
+            
         }
 
     };

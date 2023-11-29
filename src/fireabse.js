@@ -66,10 +66,16 @@ export const addUserInDatabase = async (user)=>{
 
 export const getUserFromDatabase = async (email) => {
   //let User;
-  const docRef = doc(db, "users", email);
-  const docSnap = await getDoc(docRef);
+  try{
+    const docRef = doc(db, "users", email);
+    const docSnap = await getDoc(docRef);
+
+    return docSnap.data();
+  }catch (error){
+    console.log(error)
+    return undefined;
+  }
   //console.log(docSnap.data(), "docSnap");
-  return docSnap.data();
 };
 
 export const updateUserInDatabase = async (email,data)=>{
