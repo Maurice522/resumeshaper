@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { onAuthStateChanged, signOut } from 'firebase/auth'
 import { addUserResume, auth, getUserFromDatabase } from '../fireabse'
 import { useDispatch, useSelector } from 'react-redux';
-import { saveResume, signOutUser, updateUser } from '../redux/slices/user';
+import { saveResume, signOutUser, updateResume, updateUser } from '../redux/slices/user';
 import Nav from '../components/nav';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Power } from "react-bootstrap-icons";
@@ -534,10 +534,11 @@ export default function CreateLive() {
         console.log(resume)
         console.log(user.resumes)
         var resumes = [...user.resumes, resume]
+        console.log(resumes)
         console.log("Login email  " + user.email)
         await addUserResume(user.email, resumes);
         console.log(user)
-        dispatch(saveResume(resume));
+        dispatch(updateResume(resumes));
         console.log(user)
 
         // dispatch(updateUser(resume));
