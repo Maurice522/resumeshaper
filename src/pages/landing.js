@@ -69,22 +69,28 @@ export default function Landing() {
             {isPopupOpen && <LoginPopup onClose={togglePopup} onSignup={handleSignup}/>}
 
             <div className='topDivLanding'>
-            <div class='jumbotron'>
-                <div className='jumboText'>
+            <div class='jumbotron '>
+                <div className='jumboText '>
                     <h1 class='jumboMainText'>Welcome to Your Personalized Resume Solution!</h1>
                     <p></p>
                     <h5>Elevate Your Resume for Every Job Application. Tailored Resume for Your Dream Job - Get Noticed, Get Hired!! </h5>
                 </div>
 
-                <div className='jumboImgDiv'>
+                <div className='jumboImgDiv '>
                     {/* <img src={img17} className='jumboImg' /> */}
                     <img src={img15} className='jumboImg' />
                     {/* <img src={img16} className='jumboImg' /> */}
                 </div>
             </div>
-            <button type="button" class="btn btn-success signoutBtn ctaBtn zoom " onClick={togglePopup} >Start Now</button>
+            <button type="button" class="btn btn-success  ctaBtn zoom " onClick={togglePopup} >Start Now</button>
+         
             </div>
-            
+            <div className=' smallScreenDiv '>
+                    {/* <img src={img17} className='jumboImg' /> */}
+                    <img src={img15} className='jumboImg' />
+                    {/* <img src={img16} className='jumboImg' /> */}
+                </div>
+         
 
             <div className='introText'>
                 <p>" In the competitive world of Job Hunting, a one-size-fits-all resume dosen't cut it anymore.Your dream job deserves a tailored resume that speaks directly to the Hiring Manager.
@@ -92,12 +98,13 @@ export default function Landing() {
             </div>
 
 
-            <div className='section1'>
-                <h3 className='section1Heading'> How Can We Help You?</h3>
-                <div className='sec1Left'>
+            <div className='section1 '>
+                <h3 className='section1Heading '> How Can We Help You?</h3>
+                
+                <div className='sec1Left  '>
                     <img src={img2} className='sec1Img'></img>
                 </div>
-                <div className='sec1Right'>
+                <div className='sec1Right '>
                     <div className='sec1Text'>
                         <h5 className='sec1RightText '><Check2Circle color="#35b276" size={36} /> &nbsp; Resume Customization</h5>
                         <p className='sec1PText'>Craft tailored resumes for each job,showcasing your unique skills and qualifications to stand out.</p>
@@ -108,6 +115,7 @@ export default function Landing() {
                         <h5 className='sec1RightText'><Check2Circle color="#35b276" size={36} /> &nbsp; Saves Time</h5>
                         <p className='sec1PText'>Streamline the resume customization process,saving you valuable time compared to manaul adjustments so you can foucs on your job search.</p>
                     </div>
+              
                 </div>
             </div>
 

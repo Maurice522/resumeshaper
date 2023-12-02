@@ -196,18 +196,16 @@ export default function MyPdfViewer2({ personalData, live, courses, activities, 
             <p className='profileDetailsText profileDetailSubHeading DOBProfileDetailsText'>Driving Liscence</p>
             <p className='profileDetailsText'>{personalData.drivingLicense}</p>
           </>}
-          {personalData.websitesLinks[0]!='' && personalData.websitesLinks.length > 0  && <>
-                  {/* <p className='profileDetails otherProfileDetails'>Links</p> */}
+
+          {personalData?.websitesAndLinks && personalData?.websitesAndLinks?.length > 0 && personalData.websitesAndLinks[0]?.name !== '' && <>
+                    <p className='profileDetails otherProfileDetails'>Links</p>
+                    {personalData?.websitesAndLinks.map((item, index) => {
+                      return (<>
+                        <p className='profileDetailsText emailProfileDetailsText'>{item.url}</p>
+                      </>)
+                    })
+                    }
                 </>}
-          {personalData.websitesLinks && personalData.websitesLinks.length > 0 && <>
-            <p className='profileDetails otherProfileDetails'>Links</p>
-            {personalData.websitesLinks.map((item, index) => {
-              return (<>
-                <p className='profileDetailsText emailProfileDetailsText'>{item.url}</p>
-              </>)
-            })
-            }
-          </>}
 
           {skills && skills.length > 0 && <>
             <p className='profileDetails otherProfileDetails'>Skills</p>

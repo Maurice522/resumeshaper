@@ -38,6 +38,15 @@ body {
     right: 2%;
     padding-left: 5%;
 }
+.smallScreenDiv{
+    width: 75%;
+    display: inline-block;
+    position: relative;
+    left:14%;
+    margin-bottom: 4%;
+    margin-top: -150%;
+    display: none;
+}
 
 .jumboImg {
     height: 100%;
@@ -53,13 +62,15 @@ body {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 } */
 .ctaBtn {
-    width: 12%;
+    width: 150px;
     left: 5%;
-    margin-top: 23%;
     border-radius: 26px;
     background-color: #35b276;
+    border: none;
     color: white;
     height: 37px;
+    position: absolute;
+    bottom: 45%;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
@@ -69,7 +80,9 @@ body {
     margin: auto;
     padding-bottom: 5%;
 }
-
+.section1{
+    width: 100%;
+}
 .section1Heading {
     font-family: 'Open Sans', sans-serif;
     color: #347571;
@@ -351,12 +364,12 @@ body {
     background-color: #174f5d !important;
     background-image: url("../images/bg.png") !important;
     color: #174f5d !important;
-    width: 8%;
+    width: 100px;
     padding: 4px;
     font-weight: 500;
     font-size: 18px;
     position: absolute;
-    top: 2.5%;
+    top: 15px;
     right: 3%;
     border: none !important;
 }
@@ -365,12 +378,12 @@ body {
     background-image: none;
     background-color: #35b276;
     color: white;
-    width: 8%;
+    width: 100px;
     padding: 4px;
     font-weight: 500;
     font-size: 18px;
     position: absolute;
-    top: 3%;
+    top: 22px;
     right: 3%;
 }
 .topDivLanding{
@@ -409,6 +422,172 @@ body {
 .landingCaraousel{
     height: 627px !important;
 }
+@media only screen and (min-width: 1024px) and (max-width: 1187px) {
+    .jumboImgDiv {
+        height: 68%;
+        width: 53%;
+        display: inline-block;
+        position: absolute;
+        top: 25%;
+        right: 2%;
+        padding-left: 5%;
+    }
+    .ctaBtn {
+        bottom: 39%;
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    .jumboImgDiv {
+        height: 68%;
+        width: 53%;
+        display: inline-block;
+        position: absolute;
+        top: 25%;
+        right: 2%;
+        padding-left: 5%;
+    }
+    .loginBtn {
+        width: 12%;
+        font-size: 16px;
+        right: 2%;
+    }
+    .sec1Left {
+        display: inline-block;
+        width: 90%;
+        height: 230px;
+        position: relative;
+        padding: 3%;
+        margin-left: 5%;
+    }
+    .sec1Img {
+        width: 40%;
+        height: 100%;
+        position: absolute;
+        top: 5%;
+        left: 30%;
+    }
+    
+    .sec1Right {
+        display: inline-block;
+        width: 95%;
+        padding: 3%;
+        padding-left: 8%;
+    }
+    .ctaBtn {
+        bottom: 40%;
+    }
+}
+@media only screen and (min-width: 480px) and (max-width: 768px) {
+    .jumboImgDiv {
+       display: none;
+    }
+    .smallScreenDiv{
+        width: 75%;
+        display: inline-block;
+        position: relative;
+        left:14%;
+        margin-bottom: 4%;
+        margin-top: -150%;
+    }
+    .jumboText {
+        height: 53%;
+        width: 90%;
+        display: inline-block;
+        position: absolute;
+        top: 22%;
+        left: 5%;
+        color: #174f5d;
+    }
+    .sec1Left {
+        display: inline-block;
+        width: 90%;
+        height: 180px;
+        position: relative;
+        padding: 3%;
+        margin-left: 5%;
+        margin-bottom: 4%;
+    }
+    .sec1Img {
+        width: 40%;
+        height: 100%;
+        position: absolute;
+        top: 5%;
+        left: 30%;
+    }
+    
+    .sec1Right {
+        display: inline-block;
+        width: 95%;
+        padding: 3%;
+        padding-left: 8%;
+    }
+    .ctaBtn {
+        bottom: 50%;
+    }
+
+}
 
 
+
+@media only screen and (max-width: 480px) {
+     .loginBtn {
+        width: 20%;
+        font-size: 14px;
+        right: 1%;
+        background-color: #174f5d;
+    }
+    .jumboImgDiv {
+        display: none;
+     }
+     .jumboText {
+        height: 53%;
+        width: 90%;
+        display: inline-block;
+        position: absolute;
+        top: 25%;
+        left: 8%;
+        color: #174f5d;
+    }
+    .sec1Left {
+        display: inline-block;
+        width: 90%;
+        height: 170px;
+        position: relative;
+        padding: 3%;
+        margin-left: 7%;
+        margin-bottom: 4%;
+    }
+    .sec1Img {
+        width: 40%;
+        height: 100%;
+        position: absolute;
+        top: 5%;
+        left: 30%;
+    }
+    
+    .sec1Right {
+        display: inline-block;
+        width: 95%;
+        padding: 3%;
+        padding-left: 8%;
+    }
+    .ctaBtn {
+        bottom: 42%;
+        left: 6%;
+    }
+    .smallScreenDiv{
+        width: 75%;
+        display: inline-block;
+        position: relative;
+        left:14%;
+        margin-bottom: 8%;
+        margin-top: -150%;
+    }
+    .jumbotron {
+        height: 78vh;
+    }
+    .sec1RightText{
+font-size: 16px;
+    }
+  }
   

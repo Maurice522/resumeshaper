@@ -62,7 +62,7 @@ export default function Home() {
             description: '',
           },
         ],
-        websitesLinks: [
+        websitesAndLinks: [
             {
                 name: '',
                 url: '',

@@ -220,7 +220,7 @@
     padding: 0;
     text-align: justify;
     text-align: left !important;
-
+    overflow-wrap: break-word;
 }
 
 .profileIcon {
@@ -512,4 +512,7 @@ margin-top: 22%;
     width: 50px;
     z-index: 5;
     pointer-events: none;
+}
+.cityLabelForm{
+    margin-bottom: 4% !important;
 }

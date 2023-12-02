@@ -230,39 +230,49 @@ export default function Form({personalData, setPersonalData}) {
 
   const addWebsiteLink = () => {
     setPersonalData((prevData) => ({
-        ...prevData,
-        websitesLinks: [
-            ...prevData.websitesLinks,
-            {
-                name: '',
-                url: '',
-            },
-        ],
-    }));
-};
-
-const removeWebsiteLink = (index) => {
-    setPersonalData((prevData) => {
-        const updatedWebsitesLinks = [...prevData.websitesLinks];
-        updatedWebsitesLinks.splice(index, 1);
-        return {
-            ...prevData,
-            websitesLinks: updatedWebsitesLinks,
+                ...prevData,
+                websitesAndLinks: [
+                    ...prevData.websitesAndLinks,
+                    {
+                        name: '',
+                        url: '',
+                    },
+                ],
+            }));        
         };
-    });
-};
-
-const updateWebsiteLinkField = (index, field, value) => {
-    setPersonalData((prevData) => {
-        const updatedWebsitesLinks = [...prevData.websitesLinks];
-        updatedWebsitesLinks[index][field] = value;
-        return {
-            ...prevData,
-            websitesLinks: updatedWebsitesLinks,
+    
+        const removeWebsiteLink = (index) => {
+            setPersonalData((prevData) => {
+                const updatedWebsitesLinks = [...prevData.websitesAndLinks];
+                updatedWebsitesLinks.splice(index, 1);
+                return {
+                    ...prevData,
+                    websitesAndLinks: updatedWebsitesLinks,
+                };
+            });
         };
-    });
-};
-
+    
+        const updateWebsiteLinkField = (index, field, value) => {
+            var updatedWebsitesLinks = [];
+            personalData.websitesAndLinks.map((item, idx2) => {
+                var temp;
+                if (idx2 === index) {
+                    temp = { ...item, writable: true };
+                    temp[field] = value;
+                    delete temp.writable;
+                } else {
+                    temp = item;
+                }
+                updatedWebsitesLinks = [...updatedWebsitesLinks, temp]
+            })
+            setPersonalData((prevData) => {
+                return {
+                    ...prevData,
+                    websitesAndLinks: updatedWebsitesLinks,
+                };
+            });
+        }
+    
   const addEducationHistory = () => {
     setPersonalData((prevData) => ({
       ...prevData,
@@ -418,7 +428,7 @@ const updateWebsiteLinkField = (index, field, value) => {
 
           <div className='col-md-4'>
             <label className='detailsInfoLabel'>
-              Target Position <span style={{color:'red'}}>*</span>
+              Current Position <span style={{color:'red'}}>*</span>
             </label>
             <br />
             <input className='detailsInfoInput'  type="text" name="jobTitle" value={personalData.jobTitle} onChange={handleChange} required='true'  />
@@ -581,11 +591,11 @@ const updateWebsiteLinkField = (index, field, value) => {
         <div class="accordion myAccordian" id="accordionExample">
           <div class="accordion-item">
             <h2 class="accordion-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              <button class="accordion-button collapsed" type="button"  data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                 Add Employment
               </button>
             </h2>
-            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+            <div id="collapseTwo" class="accordion-collapse " data-bs-parent="#accordionExample">
 
               <div class="accordion-body">
                 {personalData.employmentHistory!==undefined && personalData.employmentHistory.length>0 && personalData.employmentHistory.map((employment, index) => (
@@ -691,11 +701,11 @@ const updateWebsiteLinkField = (index, field, value) => {
         <div class="accordion myAccordian" id="accordionExample3">
           <div class="accordion-item">
             <h2 class="accordion-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+              <button class="accordion-button collapsed" type="button"  data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                 Add Education
               </button>
             </h2>
-            <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample3">
+            <div id="collapseThree" class="accordion-collapse " data-bs-parent="#accordionExample3">
               <div class="accordion-body">
 
                 {personalData.educationHistory !==undefined && personalData.educationHistory.length>0 && personalData.educationHistory.map((education, index) => (
@@ -798,14 +808,14 @@ const updateWebsiteLinkField = (index, field, value) => {
                                     <div class="accordion myAccordian" id="accordionExample4">
                                         <div class="accordion-item">
                                             <h2 class="accordion-header">
-                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                                <button class="accordion-button " type="button"  data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                                                     Add Website or Link
                                                 </button>
                                             </h2>
-                                            <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample4">
+                                            <div id="collapseFour" class="accordion-collapse " data-bs-parent="#accordionExample4">
                                                 <div class="accordion-body">
 
-                                                    {personalData.websiteLinks!==undefined && personalData.websiteLinks.length >0 && personalData.websitesLinks.map((websiteLink, index) => (
+                                                    {personalData.websitesAndLinks!==undefined && personalData.websitesAndLinks.length >0 && personalData.websitesAndLinks.map((websiteLink, index) => (
                                                         <div key={index} className="websitesLinksDiv">
                                                             <h5 className='personalSubSubHeading'>Link {index + 1} :</h5>
                                                             <div className='row'>

@@ -917,7 +917,7 @@ export default function CreateLiveContinue() {
 
                                                 <div className='col-md-6'>
                                                     <label className='detailsInfoLabel'>
-                                                        Target Position <span style={{ color: 'red' }}>*</span>
+                                                        Current Position <span style={{ color: 'red' }}>*</span>
                                                     </label>
                                                     <br />
                                                  
