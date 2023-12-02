@@ -1,4 +1,4 @@
-import react, { useEffect, useState } from 'react'
+import react, { useEffect, useState,useRef } from 'react'
 import Nav from '../components/nav'
 import '../styleSheet/Landing.css'
 import img1 from '../images/resume.png'
@@ -35,8 +35,19 @@ export default function Landing() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [userData, setUserData] = useState();
     const [gettingUser, SetGettingUser] = useState(false);
+    const playerRefSampleVid = useRef(null);
+    
+    const handleSampleVidEnded = () => {
+        // Restart the video when it ends
+        // playerRefSampleVid.current.seekTo(0);
+        playerRefSampleVid.current?.seekTo(0);
+    };
+    // const playerRef = useRef(null);
 
-
+    // const handleEnded = () => {
+    //     // Restart the video when it ends
+    //     playerRef.current.seekTo(0);
+    // };
     const togglePopup = () => {
         setIsPopupOpen(!isPopupOpen);
     };
@@ -160,6 +171,8 @@ export default function Landing() {
                             muted={true}
                             autoplay={true}
                             repeat={true}
+                            onEnded={handleSampleVidEnded}
+                            ref={playerRefSampleVid}
                         />
                     </div>
                     <div className='col-md-6 sec4MidDiv2'>
