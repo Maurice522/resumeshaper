@@ -62,7 +62,7 @@ body {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 } */
 .ctaBtn {
-    width: 150px;
+    width: 180px;
     left: 5%;
     border-radius: 26px;
     background-color: #35b276;
@@ -70,7 +70,7 @@ body {
     color: white;
     height: 37px;
     position: absolute;
-    bottom: 45%;
+    bottom: 39%;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
@@ -333,11 +333,15 @@ body {
     font-size: 14px;
 
 }
+.section2{
+    width: 100%;
+    overflow: hidden;
+}
 
 /* CSS */
 .ctaBtnSec2 {
     margin-left: 37%;
-    width: 25%;
+    width: 300px;
     margin-top: 4%;
     background-color: #c2fbd7;
     border-radius: 100px;
@@ -422,6 +426,12 @@ body {
 .landingCaraousel{
     height: 627px !important;
 }
+.landing-carousel-control-next {
+    margin-top: 22% !important;
+}
+.landing-carousel-control-prev {
+    margin-top: 22% !important;
+}
 @media only screen and (min-width: 1024px) and (max-width: 1187px) {
     .jumboImgDiv {
         height: 68%;
@@ -476,6 +486,10 @@ body {
     .ctaBtn {
         bottom: 40%;
     }
+    .sec2Col {
+        height: 53vh;
+       
+    }
 }
 @media only screen and (min-width: 480px) and (max-width: 768px) {
     .jumboImgDiv {
@@ -524,7 +538,41 @@ body {
     .ctaBtn {
         bottom: 50%;
     }
-
+    .sec2Img {
+        width: 22%;
+    }
+    .sec2Col h5 {
+        margin-top: 8%;
+    }
+    .sec2Col {
+        height: 67vh;
+       
+    }
+    .sec4MidDiv2 {
+        width: 90%;
+        align-items: center;
+        padding-left: 6%;
+        text-align: center !important;
+        display: block;
+        margin: auto;
+    }
+    .sec4MidDiv2 h4{
+        margin-left: 0%;
+        margin-top: 15%;
+    }
+    .reviewHeading{
+        margin-top: 7%;
+        margin-bottom: 10%;
+    }
+    .testimonialImg{
+        display: none;
+    }
+    .landing-carousel-control-next {
+        margin-top: 56% !important;
+    }
+    .landing-carousel-control-prev {
+        margin-top: 56% !important;
+    }
 }
 
 
@@ -572,7 +620,7 @@ body {
         padding-left: 8%;
     }
     .ctaBtn {
-        bottom: 42%;
+        bottom: 37%;
         left: 6%;
     }
     .smallScreenDiv{
@@ -588,6 +636,45 @@ body {
     }
     .sec1RightText{
 font-size: 16px;
+    }
+    .sec2Img {
+        width: 30%;
+    }
+    .sec2Col {
+        height: 50vh;
+       
+    }
+    .ctaBtnSec2{
+        font-size: 14px;
+        width: 270px;
+        display: block;
+        margin: auto;
+        margin-top: 12%;
+    }
+    .sec4MidDiv2 {
+        width: 90%;
+        align-items: center;
+        padding-left: 6%;
+        text-align: center !important;
+        display: block;
+        margin: auto;
+    }
+    .sec4MidDiv2 h4{
+        margin-left: 0%;
+        margin-top: 15%;
+    }
+    .reviewHeading{
+        margin-top: 7%;
+        margin-bottom: 10%;
+    }
+    .testimonialImg{
+        display: none;
+    }
+    .landing-carousel-control-next {
+        margin-top: 56% !important;
+    }
+    .landing-carousel-control-prev {
+        margin-top: 56% !important;
     }
   }
   

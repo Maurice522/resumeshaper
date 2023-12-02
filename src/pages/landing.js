@@ -154,7 +154,7 @@ export default function Landing() {
                         <ReactPlayer
                             className="player"
                             url={vid}
-                            width="90%"
+                            width="100%"
                             height="100%"
                             playing={true}
                             muted={true}
@@ -177,7 +177,7 @@ export default function Landing() {
 
 
             <div className='section3'>
-                <h3 className='section1Heading'>Rave Reviews Form Our Users</h3>
+                <h3 className='section1Heading reviewHeading'>Rave Reviews Form Our Users</h3>
                 <div id="carouselExampleRide" class="carousel slide" data-bs-ride="true">
                     <div class="carousel-inner">
                         <div class="carousel-item landingCaraousel active">
