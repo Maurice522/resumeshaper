@@ -18,26 +18,26 @@ const router = createBrowserRouter([
     path: "/",
     element: <Landing/>,
   },
-  {
-    path: "/dashboard",
-    element: <Dashboard/>,
-  },  
-  {
-    path: "/create",
-    element: <CreateLive/>,
-  },
-  {
-    path:"/createcontinue/:idx",
-    element: <CreateLiveContinue/>
-  },
-  {
-    path: "/auth",
-    element: <Authdetails/>,
-  },
-  {
-    path: "/test",
-    element: <Test/>,
-  },
+  // {
+  //   path: "/dashboard",
+  //   element: <Dashboard/>,
+  // },  
+  // {
+  //   path: "/create",
+  //   element: <CreateLive/>,
+  // },
+  // {
+  //   path:"/createcontinue/:idx",
+  //   element: <CreateLiveContinue/>
+  // },
+  // {
+  //   path: "/auth",
+  //   element: <Authdetails/>,
+  // },
+  // {
+  //   path: "/test",
+  //   element: <Test/>,
+  // },
   {
     path: "/aboutUs",
     element: <AboutUs/>,
