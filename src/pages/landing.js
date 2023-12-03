@@ -76,7 +76,7 @@ export default function Landing() {
             <Nav />
             {isLoggedIn==true?
             <button class=" continueToDahboardBtn signoutBtn zoom" onClick={()=> userData?.profile===true? navigate('/dashboard'):navigate('/auth')}>Dashboard</button>:
-            <button class="loginBtn signoutBtn" onClick={togglePopup}>Login</button>}
+            <button class="loginBtn signoutBtn" onClick={togglePopup}>Join</button>}
             {isPopupOpen && <LoginPopup onClose={togglePopup} onSignup={handleSignup}/>}
 
             <div className='topDivLanding'>
@@ -93,7 +93,7 @@ export default function Landing() {
                     {/* <img src={img16} className='jumboImg' /> */}
                 </div>
             </div>
-            <button type="button" class="btn btn-success  ctaBtn zoom " onClick={togglePopup} >Start Now</button>
+            <button type="button" class="btn btn-success  ctaBtn zoom " onClick={togglePopup} >Join Waitlist</button>
          
             </div>
             <div className=' smallScreenDiv '>
@@ -155,7 +155,7 @@ export default function Landing() {
 
 
 
-            <button type="button" onClick={togglePopup} class="btn btn-success ctaBtnSec2 zoom">Customize your Resume Now</button>
+            <button type="button" onClick={togglePopup} class="btn btn-success ctaBtnSec2 zoom">Join the waiting list</button>
 
 
 
