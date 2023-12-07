@@ -9,14 +9,31 @@ import { addUserInDatabase } from '../fireabse';
 import img3 from '../images/28.png'
 import '../styleSheet/LoginPopup.css';
 import { limitToLast } from 'firebase/firestore';
+import emailjs from "@emailjs/browser";
 
+function generate(n) {
+    var add = 1,
+      max = 12 - add;
+    if (n > max) {
+      return generate(max) + generate(n - max);
+    }
+    max = Math.pow(10, n + add);
+    var min = max / 10;
+    var number = Math.floor(Math.random() * (max - min + 1)) + min;
+
+    return ("" + number).substring(add);
+  }
 
 const LoginPopup = ({ onClose, onSignup }) => {
     const [showSuccessToast, setShowSuccessToast] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [name, setName] = useState("");
+    const [getOtp, setGetOtp] = useState(false);
+    const [otp, setOtp] = useState("");
+    const [originalOTP, setOriginalOTP] = useState("");
     const [errorr, setErrorr] = useState("");
+    const [msg, setMsg] = useState("");
     const [isLogin, setIsLogin] = useState(true);
     const localuser = useSelector(state=> state.user)
 
@@ -66,6 +83,33 @@ const LoginPopup = ({ onClose, onSignup }) => {
             })
     }
 
+    const OTPHandler = async (e)=>{
+        e.preventDefault();
+        setMsg("")
+        if(otp!==""){
+        
+            if(otp == originalOTP){
+                createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    addUserInDatabase({ email, password, name })
+                    signInUser(auth, email, password)
+                    dispatch(loginUser({ email, password, name }))
+                    console.log(userCredential);
+                    onClose();
+                }).catch(err => {
+                    console.log(err);
+                    const userFriendlyErrorMessage = mapFirebaseErrorToMessage(err.code);
+                    setErrorr(userFriendlyErrorMessage);
+                })
+            }else{
+                setErrorr("Wrong OTP entered!")
+            }
+
+        }else{
+            setErrorr("Enter your OTP!")
+        }
+    }
+
     const submitHandler = async (e) => {
         e.preventDefault();
         if (isLogin) {
@@ -87,24 +131,77 @@ const LoginPopup = ({ onClose, onSignup }) => {
                     setErrorr(userFriendlyErrorMessage);
                 })
         } else {
-            createUserWithEmailAndPassword(auth, email, password)
-                .then((userCredential) => {
-                    addUserInDatabase({ email, password, name })
-                    signInUser(auth, email, password)
-                    dispatch(loginUser({ email, password, name }))
-                    console.log(userCredential);
-                    onClose();
-                }).catch(err => {
-                    console.log(err);
-                    const userFriendlyErrorMessage = mapFirebaseErrorToMessage(err.code);
-                    setErrorr(userFriendlyErrorMessage);
-                })
+            const getUser =  await getUserFromDatabase(email);
+            if(!getUser){
+                const tempotp = generate(6);
+                console.log(tempotp)
+                const message = `Your OTP for Resume Shapers is ${tempotp}.`
+                var templateParams = {
+                    to_name: name,
+                    to_email: email,
+                    message,
+                };
+
+                let emailSuccess = false;
+                
+                try {
+                    const emailResponse = await emailjs.send(
+                    "service_rocqjs7",
+                    "template_9dl3nmp",
+                    templateParams,
+                    "PHWyWAESlH91-bEju"
+                    );
+                    emailSuccess = emailResponse?.status === 200;
+                    if(emailSuccess){
+                        setOriginalOTP(tempotp);
+                        setMsg("We have send OTP to your email!")
+                        setGetOtp(true);
+                    }
+                } catch (error) {
+                    console.log(error.message);
+                    setErrorr(error.message);
+                }
+            }else{
+                setErrorr("User already exists with that email!")
+            }
         }
 
     };
 
     return (
+        <>
+        { getOtp?
         <div className="popup">
+        <div className="popup-content">
+            <h2 className='loginHeader'>
+                <img src={img3} className='popupImg' />
+                <span className="close" onClick={onClose}>&times;</span>
+            OTP</h2>
+
+            <form onSubmit={OTPHandler} className="loginForm">
+                <div className="form-group">
+                    <label className='loginLabel'>OTP:</label>
+                    <input
+                        type='text'
+                        className='loginInput'
+
+                        placeholder='Enter OTP'
+                        value={otp}
+                        onChange={(e) => setOtp(e.target.value)}
+                    />
+                </div>
+               
+                {errorr && <p className="errorMsg">{errorr}</p>}
+                {msg && <p className="msg">{msg}</p>}
+                <div className="form-actions">
+                    <button type="submit" className='loginNow'>Submit</button>
+                    
+                </div>
+            </form>
+        </div>
+    </div> 
+    :
+    <div className="popup">
             <div className="popup-content">
                 <h2 className='loginHeader'>
                     <img src={img3} className='popupImg' />
@@ -146,6 +243,7 @@ const LoginPopup = ({ onClose, onSignup }) => {
                         />
                     </div>
                     {errorr && <p className="errorMsg">{errorr}</p>}
+                    {msg && <p className="msg">{msg}</p>}
                     <div className="form-actions">
                         <button type="submit" className='loginNow'>{isLogin ? 'Login' : 'Sign Up'}</button>
                         <button type="button" class='selectLoginBtn' onClick={handleToggleMode}>
@@ -154,7 +252,8 @@ const LoginPopup = ({ onClose, onSignup }) => {
                     </div>
                 </form>
             </div>
-        </div>
+        </div>}
+        </>
     );
 };
 
