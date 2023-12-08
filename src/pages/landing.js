@@ -42,12 +42,7 @@ export default function Landing() {
         // playerRefSampleVid.current.seekTo(0);
         playerRefSampleVid.current?.seekTo(0);
     };
-    // const playerRef = useRef(null);
-
-    // const handleEnded = () => {
-    //     // Restart the video when it ends
-    //     playerRef.current.seekTo(0);
-    // };
+   
     const togglePopup = () => {
         setIsPopupOpen(!isPopupOpen);
     };

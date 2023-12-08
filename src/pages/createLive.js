@@ -10,7 +10,7 @@ import MyPdfViewer2 from '../components/pdfDisplayFeTemp2';
 import MyPdfViewer3 from '../components/pdfDisplayFeTemp3';
 import MyPdfViewer4 from '../components/pdfDisplayFeTemp4';
 import MyPdfViewer1 from '../components/pdfDisplayFeTemp1';
-import { PlusCircleFill, Crop, FileEarmarkArrowDownFill, Check2Circle, Check2All, Check, PersonCheck, PersonSquare, CaretDownSquare, JournalBookmarkFill, PenFill, Trash3Fill, PlusLg, JournalCheck, Link45deg, TrophyFill } from "react-bootstrap-icons";
+import {CaretDownSquareFill,CaretUpSquareFill,PlusCircleFill, Crop, FileEarmarkArrowDownFill, Check2Circle, Check2All, Check, PersonCheck, PersonSquare, CaretDownSquare, JournalBookmarkFill, PenFill, Trash3Fill, PlusLg, JournalCheck, Link45deg, TrophyFill } from "react-bootstrap-icons";
 import CustomSection from '../components/formComponents/customSection';
 import { updateUserProfileInDatabase, updateUserPhotoInDatabase, uploadMedia } from '../fireabse';
 import { updatePhoto, updateProfile } from '../redux/slices/user';
@@ -437,7 +437,19 @@ setPersonalData((prevData) => ({
         });
     }
 
-
+    const moveWebsiteLink = (currentIndex, targetIndex) => {
+        setPersonalData((prevData) => {
+          const updatedWebsitesAndLinks = [...prevData.websitesAndLinks];
+          const [movedItem] = updatedWebsitesAndLinks.splice(currentIndex, 1);
+          updatedWebsitesAndLinks.splice(targetIndex, 0, movedItem);
+      
+          return {
+            ...prevData,
+            websitesAndLinks: updatedWebsitesAndLinks,
+          };
+        });
+      };
+    
     const addEducationHistory = () => {
         setPersonalData((prevData) => ({
             ...prevData,
@@ -487,6 +499,31 @@ setPersonalData((prevData) => ({
         });
     }
 
+    // const moveEducation = (currentIndex, targetIndex) => {
+    //     setPersonalData((prevData) => {
+    //       const updateEducationFieldHistory = [...prevData.educationHistory];
+    //       const [movedItem] = updateEducationFieldHistory.splice(currentIndex, 1);
+    //       updateEducationFieldHistory.splice(targetIndex, 0, movedItem);    
+    //       return {
+    //         ...prevData,
+    //         educationHistory: updateEducationFieldHistory,
+    //       };
+    //     });
+    //   };
+
+    const moveEducation = (currentIndex, targetIndex) => {
+        setPersonalData((prevData) => {
+          const updatedEducationHistory = [...prevData.educationHistory];
+          const [movedItem] = updatedEducationHistory.splice(currentIndex, 1);
+          updatedEducationHistory.splice(targetIndex, 0, movedItem);
+      
+          return {
+            ...prevData,
+            educationHistory: updatedEducationHistory,
+          };
+        });
+      };
+
     const addEmploymentHistory = () => {
         setPersonalData({
             ...personalData,
@@ -503,6 +540,8 @@ setPersonalData((prevData) => ({
             ],
         });
     };
+
+    
 
     const removeEmploymentHistory = (index) => {
         setPersonalData((prevData) => {
@@ -545,6 +584,18 @@ setPersonalData((prevData) => ({
         //     };
         // });
     };
+
+    const moveEmployment = (currentIndex, targetIndex) => {
+        setPersonalData((prevData) => {
+          const updatedEmploymentHistory = [...prevData.employmentHistory];
+          const [movedItem] = updatedEmploymentHistory.splice(currentIndex, 1);
+          updatedEmploymentHistory.splice(targetIndex, 0, movedItem);    
+          return {
+            ...prevData,
+            employmentHistory: updatedEmploymentHistory,
+          };
+        });
+      };
 
     const handleLogDetails = async (e) => {
         e.preventDefault();
@@ -1113,6 +1164,24 @@ setPersonalData((prevData) => ({
                                                                 <div key={index} className="employmentHistoryDiv">
                                                                     <h5 className='personalSubSubHeading'>Snapshot {index + 1} :</h5>
                                                                     <div className='row'>
+                                                                        {index > 0 && (
+                                                                            <button
+                                                                                type="button"
+                                                                                onClick={() => moveEmployment(index, index - 1)}
+                                                                                className="moveBtnCreateUp"
+                                                                            >
+                                                                               <CaretUpSquareFill color="#35b276" size={16} /> 
+                                                                            </button>
+                                                                        )}
+                                                                        {index < personalData.employmentHistory.length - 1 && (
+                                                                            <button
+                                                                                type="button"
+                                                                                onClick={() => moveEmployment(index, index + 1)}
+                                                                                className="moveBtnCreateDown"
+                                                                            >
+                                                                                 <CaretDownSquareFill color="#35b276" size={16} />
+                                                                            </button>
+                                                                        )}
 
                                                                         <div className="col-md-6">
                                                                             <label className='detailsInfoLabel'>
@@ -1249,6 +1318,24 @@ setPersonalData((prevData) => ({
                                                                 <div key={index} className="employmentHistoryDiv">
                                                                     <h5 className='personalSubSubHeading'>Formal Education {index + 1} :</h5>
                                                                     <div className='row'>
+                                                                        {index > 0 && (
+                                                                            <button
+                                                                                type="button"
+                                                                                onClick={() => moveEducation(index, index - 1)}
+                                                                                className="moveBtnCreateUp"
+                                                                                >
+                                                                                   <CaretUpSquareFill color="#35b276" size={16} /> 
+                                                                            </button>
+                                                                        )}
+                                                                        {index < personalData.educationHistory.length - 1 && (
+                                                                            <button
+                                                                                type="button"
+                                                                                onClick={() => moveEducation(index, index + 1)}
+                                                                                className="moveBtnCreateDown"
+                                                                                >
+                                                                                     <CaretDownSquareFill color="#35b276" size={16} />
+                                                                            </button>
+                                                                        )}
 
                                                                         <div className="col-md-6">
                                                                             <label className='detailsInfoLabel'>
@@ -1353,9 +1440,27 @@ setPersonalData((prevData) => ({
                                                         <div class="accordion-body">
 
                                                             {personalData.websitesAndLinks !==undefined && personalData.websitesAndLinks.length>0 &&personalData.websitesAndLinks.map((websites, index) => (
-                                                                <div key={index} className="employmentHistoryDiv">
+                                                                <div key={index} className="employmentHistoryDiv" >
                                                                     <h5 className='personalSubSubHeading'>Site {index + 1} :</h5>
-                                                                    <div className='row'>
+                                                                    <div className='row' style={{"position":"relative"}}>
+                                                                        {index > 0 && (
+                                                                            <button
+                                                                                type="button"
+                                                                                onClick={() => moveWebsiteLink(index, index - 1)}
+                                                                                className="moveBtnCreateUp moveBtnCreateWebsiteUp"
+                                                                            >
+                                                                                <CaretUpSquareFill color="#35b276" size={14} />
+                                                                            </button>
+                                                                        )}
+                                                                        {index < personalData.websitesAndLinks.length - 1 && (
+                                                                            <button
+                                                                                type="button"
+                                                                                onClick={() => moveWebsiteLink(index, index + 1)}
+                                                                                className="moveBtnCreateDown moveBtnCreateWebsiteDown"
+                                                                            >
+                                                                                <CaretDownSquareFill color="#35b276" size={14} />
+                                                                            </button>
+                                                                        )}
 
                                                                         <div className="col-md-6">
                                                                             <label className='detailsInfoLabel'>

@@ -516,3 +516,54 @@ margin-top: 22%;
 .cityLabelForm{
     margin-bottom: 4% !important;
 }
+.moveBtnCreateUp{
+    background-color: transparent;
+    /* background-color: #346571; */
+    border: none;
+    text-align: right;
+    position: absolute;
+    top: -2%;
+    width: 10%;
+    right: -2%;
+
+}
+.moveBtnCreateDown{
+    background-color: transparent;
+    /* background-color: #346571; */
+    border: none;
+    text-align: right;
+    position: absolute;
+    top: 1.7%;
+    width: 10%;
+    right: -2%;
+}
+.moveBtnCreateWebsiteUp {
+    background-color: transparent;
+    /* background-color: #346571; */
+    border: none;
+    text-align: right;
+    position: absolute;
+    top: -43%;
+    width: 10%;
+    right: 0%;
+}
+.moveBtnCreateWebsiteDown {
+    background-color: transparent;
+    /* background-color: #346571; */
+    border: none;
+    text-align: right;
+    position: absolute;
+    top: -16.5%;
+    width: 10%;
+    right: 0%;
+}
+.moveBtnCreateNotLiveDown {
+    background-color: transparent;
+    /* background-color: #346571; */
+    border: none;
+    text-align: right;
+    position: absolute;
+    top: 8.5%;
+    width: 10%;
+    right: -2%;
+}
