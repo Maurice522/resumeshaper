@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { auth, getUserFromDatabase } from '../fireabse';
 import { loginUser, updateUser } from '../redux/slices/user';
 import { useDispatch, useSelector } from 'react-redux';
@@ -31,11 +31,14 @@ const LoginPopup = ({ onClose, onSignup }) => {
     const [name, setName] = useState("");
     const [getOtp, setGetOtp] = useState(false);
     const [otp, setOtp] = useState("");
+    // const [otpCreated, setOtpCreated] = useState();
     const [originalOTP, setOriginalOTP] = useState("");
     const [errorr, setErrorr] = useState("");
     const [msg, setMsg] = useState("");
     const [isLogin, setIsLogin] = useState(true);
     const localuser = useSelector(state=> state.user)
+    const [minutes, setMinutes] = useState(1);
+    const [seconds, setSeconds] = useState(30);
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -81,6 +84,42 @@ const LoginPopup = ({ onClose, onSignup }) => {
                 const userFriendlyErrorMessage = mapFirebaseErrorToMessage(err.code);
                 setErrorr(userFriendlyErrorMessage);
             })
+    }
+
+    const resendOTP = async (e)=>{
+        e.preventDefault();
+        const tempotp = generate(6);
+        console.log(tempotp)
+        const message = `Your OTP for Resume Shapers is ${tempotp}.`
+        var templateParams = {
+            to_name: name,
+            to_email: email,
+            message,
+        };
+
+        let emailSuccess = false;
+        
+        try {
+            const emailResponse = await emailjs.send(
+            "service_rocqjs7",
+            "template_9dl3nmp",
+            templateParams,
+            "PHWyWAESlH91-bEju"
+            );
+            emailSuccess = emailResponse?.status === 200;
+            if(emailSuccess){
+                // setOtpCreated(Date.now())
+                setErrorr("");
+                setOriginalOTP(tempotp);
+                setMsg("We have send OTP to your email!")
+                setGetOtp(true);
+                setMinutes(1);
+                setSeconds(30);
+            }
+        } catch (error) {
+            console.log(error.message);
+            setErrorr(error.message);
+        }
     }
 
     const OTPHandler = async (e)=>{
@@ -153,6 +192,7 @@ const LoginPopup = ({ onClose, onSignup }) => {
                     );
                     emailSuccess = emailResponse?.status === 200;
                     if(emailSuccess){
+                        // setOtpCreated(Date.now())
                         setOriginalOTP(tempotp);
                         setMsg("We have send OTP to your email!")
                         setGetOtp(true);
@@ -167,6 +207,27 @@ const LoginPopup = ({ onClose, onSignup }) => {
         }
 
     };
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+          if (seconds > 0) {
+            setSeconds(seconds - 1);
+          }
+      
+          if (seconds === 0) {
+            if (minutes === 0) {
+              clearInterval(interval);
+            } else {
+              setSeconds(59);
+              setMinutes(minutes - 1);
+            }
+          }
+        }, 1000);
+      
+        return () => {
+          clearInterval(interval);
+        };
+      }, [seconds]);
 
     return (
         <>
@@ -193,6 +254,27 @@ const LoginPopup = ({ onClose, onSignup }) => {
                
                 {errorr && <p className="errorMsg">{errorr}</p>}
                 {msg && <p className="msg">{msg}</p>}
+                <div className="countdown-text">
+                    {seconds > 0 || minutes > 0 ? (
+                        <p>
+                        Time Remaining: {minutes < 10 ? `0${minutes}` : minutes}:
+                        {seconds < 10 ? `0${seconds}` : seconds}
+                        </p>
+                    ) : (
+                        <p>Didn't recieve code?</p>
+                    )}
+
+                    <button
+                        type='button'
+                        disabled={seconds > 0 || minutes > 0}
+                        style={{
+                        color: seconds > 0 || minutes > 0 ? "#DFE3E8" : "#FF5630",
+                        }}
+                        onClick={resendOTP}
+                    >
+                        Resend OTP
+                    </button>
+                </div>
                 <div className="form-actions">
                     <button type="submit" className='loginNow'>Submit</button>
                     
