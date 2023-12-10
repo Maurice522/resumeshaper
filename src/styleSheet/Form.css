@@ -267,3 +267,54 @@
 .createCustomAdditons:hover{
   color: #5ec57e;
 }
+.moveBtnCreateUp{
+  background-color: transparent;
+  /* background-color: #346571; */
+  border: none;
+  text-align: right;
+  position: absolute;
+  top: -3% !important;
+  width: 10%;
+  right: 1% !important;
+
+}
+.moveBtnCreateDown{
+  background-color: transparent;
+  /* background-color: #346571; */
+  border: none;
+  text-align: right;
+  position: absolute;
+  top: 1.7%;
+  width: 10%;
+  right: 1% !important;
+}
+.moveBtnCreateWebsiteUp {
+  background-color: transparent;
+  /* background-color: #346571; */
+  border: none;
+  text-align: right;
+  position: absolute;
+  top: -46% !important;
+  width: 10%;
+  right: 2.5% !important;
+}
+.moveBtnCreateWebsiteDown {
+  background-color: transparent;
+  /* background-color: #346571; */
+  border: none;
+  text-align: right;
+  position: absolute;
+  top: -15.5%;
+  width: 10%;
+  right: 2.5% !important;
+}
+.moveBtnCreateNotLiveDown {
+  background-color: transparent;
+  /* background-color: #346571; */
+  border: none;
+  text-align: right;
+  position: absolute;
+  top: 8.5%;
+  width: 10%;
+  right: -2%;
+}

@@ -111,7 +111,7 @@ const LoginPopup = ({ onClose, onSignup }) => {
                 // setOtpCreated(Date.now())
                 setErrorr("");
                 setOriginalOTP(tempotp);
-                setMsg("We have send OTP to your email!")
+                setMsg("An OTP has been sent to you email. Please confirm.")
                 setGetOtp(true);
                 setMinutes(1);
                 setSeconds(30);
@@ -141,7 +141,7 @@ const LoginPopup = ({ onClose, onSignup }) => {
                     setErrorr(userFriendlyErrorMessage);
                 })
             }else{
-                setErrorr("Wrong OTP entered!")
+                setErrorr("Incorrect OTP!")
             }
 
         }else{
@@ -194,7 +194,7 @@ const LoginPopup = ({ onClose, onSignup }) => {
                     if(emailSuccess){
                         // setOtpCreated(Date.now())
                         setOriginalOTP(tempotp);
-                        setMsg("We have send OTP to your email!")
+                        setMsg("An OTP has been sent to you email. Please confirm!")
                         setGetOtp(true);
                     }
                 } catch (error) {
@@ -202,7 +202,7 @@ const LoginPopup = ({ onClose, onSignup }) => {
                     setErrorr(error.message);
                 }
             }else{
-                setErrorr("User already exists with that email!")
+                setErrorr("It seems we already have a user with that email!")
             }
         }
 
@@ -251,33 +251,35 @@ const LoginPopup = ({ onClose, onSignup }) => {
                         onChange={(e) => setOtp(e.target.value)}
                     />
                 </div>
-               
+                <div className="form-actions">
+                    <button type="submit" className='loginNow'>Submit</button>  
+                </div>
+                <div className='otpCenterResend'>
                 {errorr && <p className="errorMsg">{errorr}</p>}
                 {msg && <p className="msg">{msg}</p>}
                 <div className="countdown-text">
                     {seconds > 0 || minutes > 0 ? (
-                        <p>
-                        Time Remaining: {minutes < 10 ? `0${minutes}` : minutes}:
+                        <p className='nocodeText'>
+                        Time Remaining: <span style={{"color":"red"}}>{minutes < 10 ? `0${minutes}` : minutes}:
                         {seconds < 10 ? `0${seconds}` : seconds}
-                        </p>
+                        </span></p>
                     ) : (
-                        <p>Didn't recieve code?</p>
+                        <p className='nocodeText'>Didn't recieve code?</p>
                     )}
 
                     <button
                         type='button'
                         disabled={seconds > 0 || minutes > 0}
                         style={{
-                        color: seconds > 0 || minutes > 0 ? "#DFE3E8" : "#FF5630",
+                        color: seconds > 0 || minutes > 0 ? "#c3c6c9" : "#FF5630",
                         }}
                         onClick={resendOTP}
+                        className='resendOtpBtn'
                     >
-                        Resend OTP
+                        Resend.
                     </button>
                 </div>
-                <div className="form-actions">
-                    <button type="submit" className='loginNow'>Submit</button>
-                    
+
                 </div>
             </form>
         </div>
