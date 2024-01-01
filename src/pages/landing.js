@@ -22,7 +22,7 @@ import vid from '../images/video1.mp4'
 import ReactPlayer from 'react-player'
 import Footer from '../components/footer'
 import LoginPopup from './loginPopup'
-import { Check2Circle, BookmarkStarFill } from "react-bootstrap-icons";
+import { Check2Circle, BookmarkStarFill, Coin } from "react-bootstrap-icons";
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth, getUserFromDatabase } from '../fireabse'
 import { useNavigate } from 'react-router-dom'
@@ -72,6 +72,7 @@ export default function Landing() {
             {isLoggedIn==true?
             <button class=" continueToDahboardBtn signoutBtn zoom" onClick={()=> userData?.profile===true? navigate('/dashboard'):navigate('/auth')}>Dashboard</button>:
             <button class="loginBtn signoutBtn" onClick={togglePopup}>Login</button>}
+            <button  className="tokensBtn"> <Coin color="#35b276" size={22} /> 50 &nbsp;Tokens</button>
             {isPopupOpen && <LoginPopup onClose={togglePopup} onSignup={handleSignup}/>}
 
             <div className='topDivLanding'>

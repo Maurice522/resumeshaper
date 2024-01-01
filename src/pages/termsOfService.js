@@ -3,7 +3,7 @@ import Nav from '../components/nav';
 import '../styleSheet/AboutUs.css'
 import img1 from '../images/aboutUs.png'
 import Footer from '../components/footer'
-import { Power, ArrowLeft } from "react-bootstrap-icons";
+import { Power, ArrowLeft, Coin } from "react-bootstrap-icons";
 import { signOut } from 'firebase/auth'
 import { auth } from '../fireabse'
 import { useDispatch } from 'react-redux';
@@ -31,6 +31,7 @@ export default function Terms() {
   return (
     <div>
       <button onClick={() => handler()} className=" btn btn-success signoutBtn aboutUsSignOutBtn"> <Power color="#35b276" size={22} /> &nbsp;Signout</button>
+      <button  className="tokensBtn"> <Coin color="#35b276" size={22} /> 50 &nbsp;Tokens</button>
       <Nav />
       <div className="aboutUsContainer">
         <h1 className='aboutUsHeadig'><ArrowLeft color="#35b276" size={30} className='returnBackArrow' onClick={() => returnBack()} />Terms And Conditions</h1>

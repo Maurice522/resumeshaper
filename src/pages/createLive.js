@@ -10,7 +10,7 @@ import MyPdfViewer2 from '../components/pdfDisplayFeTemp2';
 import MyPdfViewer3 from '../components/pdfDisplayFeTemp3';
 import MyPdfViewer4 from '../components/pdfDisplayFeTemp4';
 import MyPdfViewer1 from '../components/pdfDisplayFeTemp1';
-import {CaretDownSquareFill,CaretUpSquareFill,PlusCircleFill, Crop, FileEarmarkArrowDownFill, Check2Circle, Check2All, Check, PersonCheck, PersonSquare, CaretDownSquare, JournalBookmarkFill, PenFill, Trash3Fill, PlusLg, JournalCheck, Link45deg, TrophyFill } from "react-bootstrap-icons";
+import {Coin,CaretDownSquareFill,CaretUpSquareFill,PlusCircleFill, Crop, FileEarmarkArrowDownFill, Check2Circle, Check2All, Check, PersonCheck, PersonSquare, CaretDownSquare, JournalBookmarkFill, PenFill, Trash3Fill, PlusLg, JournalCheck, Link45deg, TrophyFill } from "react-bootstrap-icons";
 import CustomSection from '../components/formComponents/customSection';
 import { updateUserProfileInDatabase, updateUserPhotoInDatabase, uploadMedia } from '../fireabse';
 import { updatePhoto, updateProfile } from '../redux/slices/user';
@@ -30,7 +30,7 @@ import ReactPlayer from 'react-player'
 import JobPopup from '../components/jobPopup';
 import { toast } from 'react-toastify';
 import MyPdfViewerTest from '../components/pdfDisplayFeTest';
-
+import { Tooltip } from 'react-tooltip'
 
 // import skills from '../components/formComponents/skills';    
 
@@ -116,7 +116,7 @@ export default function CreateLiveContinue() {
     const [jobTitle, setJobTitle] = useState('');
     const [jobDescription, setJobDescription] = useState('');
     const [currId, setCurrId] = useState(null)
-
+    const [displayInfo,setDisplayInfo]=useState(true)
     const user = useSelector(state => state.user.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -862,6 +862,8 @@ setPersonalData((prevData) => ({
                                 </div>
                                 <button onClick={() => handleDownload()} className=" downloadPdfBtn zoom" disabled={photoLoader}>Download PDF</button>
                                 <button onClick={() => handleDashboard()} className=" dashboardBtn zoom" disabled={photoLoader}><h6>Dashboard</h6></button>
+                                  <button  className="tokensBtn" style={{top: "29%",right:"37%"}}> <Coin color="#35b276" size={22} /> 50 &nbsp;&nbsp;Tokens</button>
+
                                 <button onClick={() => handler()} className=" btn btn-success signoutBtn createLiveSignOut"> <Power color="#35b276" size={22} /> &nbsp;Signout</button>
                             </nav>
                         </div>
@@ -1121,15 +1123,12 @@ setPersonalData((prevData) => ({
                                             <br />
                                             <div className='liveInfoOuterDiv'>
                                                 <h5 className='formSection'><PenFill color="#35b276" size={24} /> &nbsp;Professional Summary<span style={{ color: 'red' }}>*</span></h5>
-                                                <div className='aiItAnimationDiv' onClick={() => getSummary()}>
+                                                <div className='aiItAnimationDiv' onClick={() => getSummary()} data-tooltip-id="profInfo" data-tooltip-content="Hello world!">
+                                                    <Tooltip id="profInfo" />
                                                     {aiLoading ? (
 
-                                                        <iframe src="https://giphy.com/embed/wvtt4mtViPOSrLYNFh" className="bulbGif"></iframe>
-                                                        //    <iframe src="https://giphy.com/embed/gJ3mEToTDJn3LT6kCT" className="bulbGif"></iframe>
-
+                                                        <iframe src="https://giphy.com/embed/wvtt4mtViPOSrLYNFh" className="bulbGif" ></iframe>
                                                     ) : (
-                                                        // <iframe src="https://giphy.com/embed/2uIlejpr8ZxenICZSN" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/JoyPixels-light-emoji-lightbulb-2uIlejpr8ZxenICZSN">via GIPHY</a></p>
-                                                        // <iframe src="https://giphy.com/embed/pylpD8AoQCf3CQ1oO2" className="bulbGif"></iframe>
                                                         <iframe src="https://giphy.com/embed/2uIlejpr8ZxenICZSN" className="bulbGif"></iframe>
                                                    
                                                    )}
@@ -1249,29 +1248,18 @@ setPersonalData((prevData) => ({
                                                                         <label className='detailsInfoLabel'>
                                                                             Description:
                                                                         </label>
-                                                                        <div className=' aiItAnimationDivDesc' onClick={() => getJD(index)}>
-                                                                            {/* <ReactPlayer
-                                            className="player"
-                                            url={vid2}
-                                            width="100%"
-                                            height="100%"
-                                            playing={true}
-                                            muted={true}
-                                            autoplay={true}
-                                            onEnded={handleEnded2}
-                                            ref={playerRef2}
-                                        /> */}
+                                                                        <div className=' aiItAnimationDivDesc' onClick={() => getJD(index)} data-tooltip-id="descriptionInfo" data-tooltip-content="Hello world!">
+                                                                        <Tooltip id="descriptionInfo" />
                                                                             {aiLoading ? (
 
                                                                                 <iframe src="https://giphy.com/embed/wvtt4mtViPOSrLYNFh" className="bulbGif"></iframe>
-                                                                                //    <iframe src="https://giphy.com/embed/gJ3mEToTDJn3LT6kCT" className="bulbGif"></iframe>
+ 
 
                                                                             ) : (
-                                                                                // <iframe src="https://giphy.com/embed/pylpD8AoQCf3CQ1oO2" className="bulbGif"></iframe>
                                                         <iframe src="https://giphy.com/embed/2uIlejpr8ZxenICZSN" className="bulbGif"></iframe>
 
                                                                             )}
-                                                                            {/* <iframe src="https://giphy.com/embed/pylpD8AoQCf3CQ1oO2" class="giphy-embed bulbGif "></iframe><p><a href="https://giphy.com/embed/pylpD8AoQCf3CQ1oO2"></a></p> */}
+                                                                           
                                                                         </div>
                                                                         {/* <button type='button' onClick={() => getSummary()} className='AIItBtn'>Ai it</button> */}
                                                                     </div>
@@ -1512,18 +1500,9 @@ setPersonalData((prevData) => ({
                                                     <p className='detailsSubText'>
                                                         Highlight your core strengths and expertise. Create and add skills that best suit your position and represent your capabilities, enhancing your resume.
                                                     </p>
-                                                    <div className='aiItAnimationDiv' onClick={() => getAiSkills()}>
-                                                        {/* <ReactPlayer
-                                            className="player"
-                                            url={vid2}
-                                            width="100%"
-                                            height="100%"
-                                            playing={true}
-                                            muted={true}
-                                            autoplay={true}
-                                            onEnded={handleEnded3}
-                                            ref={playerRef3}
-                                        /> */}
+                                                    <div className='aiItAnimationDiv' onClick={() => getAiSkills()} data-tooltip-id="skillsInfo" data-tooltip-content="Hellooo world!" >
+                                                    <Tooltip id="skillsInfo" />
+                                                      
                                                         {aiLoading ? (
 
                                                             <iframe src="https://giphy.com/embed/wvtt4mtViPOSrLYNFh" className="bulbGif"></iframe>

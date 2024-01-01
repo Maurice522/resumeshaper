@@ -11,7 +11,7 @@ import '../styleSheet/Landing.css'
 import vid from '../images/video1.mp4'
 import ReactPlayer from 'react-player'
 import { useNavigate } from 'react-router-dom';
-import { Check2Circle } from "react-bootstrap-icons";
+import { Check2Circle, Coin } from "react-bootstrap-icons";
 import img13 from '../images/19.png'
 import Form from '../components/form';
 // import Form from '../components/formcopy';
@@ -107,6 +107,7 @@ export default function Home() {
     return (
         <>
             <Nav />
+            <button  className="tokensBtn"> <Coin color="#35b276" size={22} /> 50 &nbsp;Tokens</button>
             {showHomePopup && <CreateUploadPopup personalData={personalData} setPersonalData={setPersonalData} onClose={handleClosePopup} onUpload={handleUpload} />}
             <button onClick={() => handler()} className=" btn btn-success signoutBtn"> <Power color="#35b276" size={22} /> &nbsp;Signout</button>
             <div className='row homeDiv'>
