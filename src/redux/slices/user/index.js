@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { updateUserCreditsInDatabase } from "../../../fireabse";
 
 export const userSlice = createSlice({
     name:'user',
@@ -61,7 +62,8 @@ export const userSlice = createSlice({
         },
         skills:[],
         profile:false,
-        resumes:[]
+        resumes:[],
+        credits:0
        }
     },
     reducers:{
@@ -117,9 +119,13 @@ export const userSlice = createSlice({
         setResume:(state,action)=>{
           console.log(action.payload)
           // state.user.resume = [...action.payload]
+        },
+        updateCredits:(state,action)=>{
+          state.user.credits = action.payload;
+          console.log(state.user.credits)
         }
     }
 })
 
-export const {loginUser, signOutUser, updateResume,updatePhoto,updateProfile,updateUser,saveResume,setResume} = userSlice.actions; 
+export const {loginUser, signOutUser, updateResume,updatePhoto,updateProfile,updateUser,saveResume,setResume, updateCredits} = userSlice.actions; 
 export default userSlice.reducer;

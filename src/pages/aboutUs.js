@@ -6,7 +6,7 @@ import Footer from '../components/footer'
 import { Power, ArrowLeft, Coin} from "react-bootstrap-icons";
 import { signOut } from 'firebase/auth'
 import { auth } from '../fireabse'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { signOutUser } from '../redux/slices/user';
 import {  useNavigate } from 'react-router-dom';
 
@@ -28,9 +28,10 @@ export default function AboutUs() {
 const returnBack = (e) => {
       navigate("/")
 }
+const user = useSelector(state=>state.user.user);
   return (
     <div>
-            <button  className="tokensBtn"> <Coin color="#35b276" size={22} /> 50 &nbsp;Tokens</button>
+          {user&&user.credits&&<button  className="tokensBtn"> <Coin color="#35b276" size={22} /> {user.credits} &nbsp;Tokens</button>}  
         <button onClick={() => handler()} className=" btn btn-success signoutBtn aboutUsSignOutBtn"> <Power color="#35b276" size={22} /> &nbsp;Signout</button>
         <Nav/>
         <div className="aboutUsContainer">

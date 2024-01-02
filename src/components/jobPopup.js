@@ -5,14 +5,24 @@ import '../styleSheet/LoginPopup.css'
 // import vid1 from '../images/loadingVid2.mp4'
 import vid1 from '../images/loadingVid1.mp4'
 import { toast } from 'react-toastify'
+import { updateCredits } from '../redux/slices/user'
+import { useDispatch,useSelector } from 'react-redux'
+import { updateUserCreditsInDatabase } from '../fireabse'
 
-export default function JobPopup({ onClose, onSignup, jobTitle, setJobTitle, jobDescription, setJobDescription, getSummary, getAiSkills, setPersonalData, personalData }) {
+export default function JobPopup({ onClose, onSignup, jobTitle, setJobTitle, jobDescription, setJobDescription, getSummary, getAiSkills, setPersonalData, personalData, getJD }) {
 
     const [isLoading, setIsLoading] = useState(false);
     const [showConfirmation, setShowConfirmation] = useState(false);
+    const dispatch = useDispatch()
+
+    const user = useSelector(state=>state.user.user)
 
     const submitLoginHandler = async (e) => {
+        const cost = 10;
         e.preventDefault();
+        if(user.credits<cost){
+            return toast.error("Not Enough Credits!")
+        }
         setIsLoading(true);
         if(jobTitle!=='' && jobDescription!==''){
         try {
@@ -31,8 +41,16 @@ export default function JobPopup({ onClose, onSignup, jobTitle, setJobTitle, job
             temp.jobTitle = jobTitle;
             console.log(temp)
             setPersonalData(temp);
-            await getSummary();
-            await getAiSkills();
+
+            
+            personalData.employmentHistory.map(async(item,idx)=>{
+                await getJD(idx,0)
+            })
+           
+            await getSummary(0); // 3 credits
+            await getAiSkills(0); // 3 credits
+            dispatch(updateCredits(user.credits-cost)) //add 3 credits then removing 5 credits)
+            await updateUserCreditsInDatabase(user.email,user.credits-cost )
             setShowConfirmation(true);
         } catch (error) {
             console.log(error);

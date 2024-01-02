@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import '../styleSheet/createUpload.css'
 import img3 from '../images/28.png'
-import { updateUserInDatabase, uploadMedia } from '../fireabse';
+import { updateUserCreditsInDatabase, updateUserInDatabase, uploadMedia } from '../fireabse';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateResume } from '../redux/slices/user';
+import { updateCredits, updateResume } from '../redux/slices/user';
 
 export default function CreateUploadPopup({ onClose, personalData, setPersonalData}) {
  
@@ -36,6 +36,10 @@ export default function CreateUploadPopup({ onClose, personalData, setPersonalDa
 
   const handleUploadResume = async() => {
     if (file) {
+      const cost = 4;
+      if(user.credits >= cost){
+
+      
       setLoading(true)
       const fileLink = await uploadMedia(file, "resume");
       await updateUserInDatabase(user.email, fileLink)
@@ -54,6 +58,8 @@ export default function CreateUploadPopup({ onClose, personalData, setPersonalDa
         console.log(responseJson)
         return responseJson;
       })
+      await updateUserCreditsInDatabase(user.email, user.credits-cost)
+      dispatch(updateCredits(user.credits-cost));
       // delete res.professionalSummary;
       delete res.websitesAndLinks;
       res.websitesAndLinks = [
@@ -67,6 +73,11 @@ export default function CreateUploadPopup({ onClose, personalData, setPersonalDa
       setLoading(false)
       
       onClose();
+    }else{
+      console.log("Not enough credits");
+      setLoading(false)
+      onClose();
+    }
     }
   };
 

@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { onAuthStateChanged, signOut } from 'firebase/auth'
-import { addUserResume, auth, getUserFromDatabase } from '../fireabse'
+import { addUserResume, auth, getUserFromDatabase, updateUserCreditsInDatabase } from '../fireabse'
 import { useDispatch, useSelector } from 'react-redux';
-import { saveResume, setResume, signOutUser, updateUser } from '../redux/slices/user';
+import { saveResume, setResume, signOutUser, updateCredits, updateUser } from '../redux/slices/user';
 import Nav from '../components/nav';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Power } from "react-bootstrap-icons";
@@ -115,7 +115,8 @@ export default function CreateLiveContinue() {
     const [imgFile, setImgFile] = useState(null);
     const [jobTitle, setJobTitle] = useState('');
     const [jobDescription, setJobDescription] = useState('');
-    const [currId, setCurrId] = useState(null)
+    const [currId, setCurrId] = useState(null);
+    const [count, setCount] = useState(0);
     const [displayInfo,setDisplayInfo]=useState(true)
     const user = useSelector(state => state.user.user);
     const dispatch = useDispatch();
@@ -138,7 +139,8 @@ export default function CreateLiveContinue() {
     }, [])
 
     useEffect(() => {
-        if (user.email !== null) {
+        
+        if (user.email !== null && count<1) {
 
 
             var temp = {
@@ -213,6 +215,7 @@ export default function CreateLiveContinue() {
             setSelectedOptions(user.resumes[idx].skills)
             setSelectedTemplateId(user.resumes[idx].resumeId)
             setPersonalData(temp)
+            setCount(1)
         }
     }, [user])
 
@@ -709,11 +712,14 @@ setPersonalData((prevData) => ({
         navigate("/")
     };
 
-    const getAiSkills = async () => {
+    const getAiSkills = async (price) => {
+        const cost = price?price:3;
         console.log("started")
-        if(jobTitle === '' || jobDescription === ''){
-            setIsPopupOpen(true)
-            return toast.info("Fill Job Title and Description")
+        if(user.credits<cost){
+            return toast.error("Not Enough Credits!")
+        }
+        if(personalData.jobTitle === ''){
+            return toast.info("Fill Job Title")
         }
         try{
             setAiLoading(true)
@@ -721,7 +727,7 @@ setPersonalData((prevData) => ({
         var res = await fetch('https://server.reverr.io/skill', {
             method: 'POST',
             body: JSON.stringify({
-                title: jobTitle,
+                title: jobTitle ===''?personalData.jobTitle:jobTitle,
                 employmentHistory: personalData.employmentHistory
             }),
             headers: {
@@ -737,6 +743,8 @@ setPersonalData((prevData) => ({
 
             console.log(res)
             setSelectedOptions([...selectedOptions, ...res])
+            await updateUserCreditsInDatabase(user.email, user.credits-cost)
+            dispatch(updateCredits(user.credits-cost))
         }
         else {
 
@@ -750,8 +758,12 @@ setPersonalData((prevData) => ({
         console.log("ended")
         setAiLoading(false)
     }
-    const getJD = async (idx) => {
-        console.log("started")
+    const getJD = async (idx,price) => {
+        const cost = price?price:3;
+        console.log("started JD")
+        if(user.credits<cost){
+            return toast.error("Not Enough Credits!")
+        }
         if(jobTitle === '' || jobDescription === ''){
             setIsPopupOpen(true)
             return toast.info("Fill Job Title and Description")
@@ -774,19 +786,25 @@ setPersonalData((prevData) => ({
                 // console.log(responseJson)
                 return responseJson;
             })
-        // console.log(res)
+        console.log(res)
         updateEmploymentField(idx, 'description', res)
+        await updateUserCreditsInDatabase(user.email, user.credits-cost)
+        dispatch(updateCredits(user.credits-cost))
         
         }
         catch (err){
             console.log(err)
         }
-        console.log("ended")
+        console.log("ended JD")
         setAiLoading(false)
     }
 
-    const getSummary = async () => {
+    const getSummary = async (price) => {
+        const cost =price?price:3;
         console.log("started")
+        if(user.credits<cost){
+            return toast.error("Not Enough Credits!")
+        }
         if(jobTitle === '' || jobDescription === ''){
             setIsPopupOpen(true)
             return toast.info("Fill Job Title and Description")
@@ -815,7 +833,8 @@ setPersonalData((prevData) => ({
             ...personalData,
             professionalSummary: res.professionalSummary,
         });
-        
+        await updateUserCreditsInDatabase(user.email, user.credits-cost)
+        dispatch(updateCredits(user.credits-cost))
         }
         catch (err){
             console.log(err)
@@ -845,7 +864,6 @@ setPersonalData((prevData) => ({
     }
     return (
         <>
-        {console.log(customDetails)}
             {gettingUser ? <img style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }} width="240" height="240" alt='loading...' src='https://media2.giphy.com/media/MDrmyLuEV8XFOe7lU6/200w.webp?cid=ecf05e47k6onrtqddz8d98s4j5lhtutlnnegeus1pwcdwkxt&ep=v1_gifs_search&rid=200w.webp&ct=g' /> :
                 <>
                     {/* <Nav /> */}
@@ -862,7 +880,7 @@ setPersonalData((prevData) => ({
                                 </div>
                                 <button onClick={() => handleDownload()} className=" downloadPdfBtn zoom" disabled={photoLoader}>Download PDF</button>
                                 <button onClick={() => handleDashboard()} className=" dashboardBtn zoom" disabled={photoLoader}><h6>Dashboard</h6></button>
-                                  <button  className="tokensBtn" style={{top: "29%",right:"37%"}}> <Coin color="#35b276" size={22} /> 50 &nbsp;&nbsp;Tokens</button>
+                                  <button  className="tokensBtn" style={{top: "29%",right:"37%"}}> <Coin color="#35b276" size={22} /> {user.credits} &nbsp;&nbsp;Tokens</button>
 
                                 <button onClick={() => handler()} className=" btn btn-success signoutBtn createLiveSignOut"> <Power color="#35b276" size={22} /> &nbsp;Signout</button>
                             </nav>
@@ -888,7 +906,7 @@ setPersonalData((prevData) => ({
                                             ref={playerRef}
                                         />
                                     </div>
-                                    {isPopupOpen && <JobPopup onClose={togglePopup} onSignup={handleSignup} personalData={personalData} setPersonalData={setPersonalData} jobTitle={jobTitle} setJobTitle={setJobTitle} jobDescription={jobDescription} setJobDescription={setJobDescription} getSummary={getSummary} getAiSkills={getAiSkills}/>}
+                                    {isPopupOpen && <JobPopup onClose={togglePopup} onSignup={handleSignup} personalData={personalData} setPersonalData={setPersonalData} jobTitle={jobTitle} setJobTitle={setJobTitle} jobDescription={jobDescription} setJobDescription={setJobDescription} getSummary={getSummary} getAiSkills={getAiSkills} getJD={getJD}/>}
                                     <h5 className='formSection createFormSection'><Crop color="#35b276" size={29} /> &nbsp;Select Template</h5>
                                     <div className='templateDiv'>
                                         <div id="carouselExampleIndicators" className="carousel slide">
@@ -1123,7 +1141,7 @@ setPersonalData((prevData) => ({
                                             <br />
                                             <div className='liveInfoOuterDiv'>
                                                 <h5 className='formSection'><PenFill color="#35b276" size={24} /> &nbsp;Professional Summary<span style={{ color: 'red' }}>*</span></h5>
-                                                <div className='aiItAnimationDiv' onClick={() => getSummary()} data-tooltip-id="profInfo" data-tooltip-content="Hello world!">
+                                                <div className='aiItAnimationDiv' onClick={() => getSummary()} data-tooltip-id="profInfo" data-tooltip-content="This will cost 3 credits">
                                                     <Tooltip id="profInfo" />
                                                     {aiLoading ? (
 
@@ -1248,7 +1266,7 @@ setPersonalData((prevData) => ({
                                                                         <label className='detailsInfoLabel'>
                                                                             Description:
                                                                         </label>
-                                                                        <div className=' aiItAnimationDivDesc' onClick={() => getJD(index)} data-tooltip-id="descriptionInfo" data-tooltip-content="Hello world!">
+                                                                        <div className=' aiItAnimationDivDesc' onClick={() => getJD(index)} data-tooltip-id="descriptionInfo" data-tooltip-content="This will cost 3 credits">
                                                                         <Tooltip id="descriptionInfo" />
                                                                             {aiLoading ? (
 
@@ -1500,7 +1518,7 @@ setPersonalData((prevData) => ({
                                                     <p className='detailsSubText'>
                                                         Highlight your core strengths and expertise. Create and add skills that best suit your position and represent your capabilities, enhancing your resume.
                                                     </p>
-                                                    <div className='aiItAnimationDiv' onClick={() => getAiSkills()} data-tooltip-id="skillsInfo" data-tooltip-content="Hellooo world!" >
+                                                    <div className='aiItAnimationDiv' onClick={() => getAiSkills()} data-tooltip-id="skillsInfo" data-tooltip-content="This will cost you 3 credits" >
                                                     <Tooltip id="skillsInfo" />
                                                       
                                                         {aiLoading ? (

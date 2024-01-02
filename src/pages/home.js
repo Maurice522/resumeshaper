@@ -104,10 +104,11 @@ export default function Home() {
             console.log(err)
         })
     }
+    const user = useSelector(state=>state.user.user);
     return (
         <>
             <Nav />
-            <button  className="tokensBtn"> <Coin color="#35b276" size={22} /> 50 &nbsp;Tokens</button>
+            {user&&user.credits&&<button  className="tokensBtn"> <Coin color="#35b276" size={22} /> {user.credits} &nbsp;Tokens</button>}  
             {showHomePopup && <CreateUploadPopup personalData={personalData} setPersonalData={setPersonalData} onClose={handleClosePopup} onUpload={handleUpload} />}
             <button onClick={() => handler()} className=" btn btn-success signoutBtn"> <Power color="#35b276" size={22} /> &nbsp;Signout</button>
             <div className='row homeDiv'>

@@ -58,7 +58,7 @@ export { app, auth, db, analytics, storage };
 
 export const addUserInDatabase = async (user)=>{
   try{
-    await setDoc(doc(db, "users", user.email),{...user, profile:false})
+    await setDoc(doc(db, "users", user.email),{...user, profile:false, credits:100})
   }catch(err){
     console.log(err)
   }
@@ -97,6 +97,16 @@ export const updateUserPhotoInDatabase = async (email,data)=>{
     console.log(err)
   }
 }
+export const updateUserCreditsInDatabase = async (email,credits)=>{
+  try{
+    console.log(credits, email)
+    const docRef = doc(db, "users", email);
+    await updateDoc(docRef,{credits:credits})
+  }catch(err){
+    console.log(err)
+  }
+}
+
 
 export const updateUserProfileInDatabase = async (email,data)=>{
   try{

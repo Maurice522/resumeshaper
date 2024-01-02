@@ -27,6 +27,7 @@ import { onAuthStateChanged } from 'firebase/auth'
 import { auth, getUserFromDatabase } from '../fireabse'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify';
+import { useSelector } from 'react-redux'
 
 
 export default function Landing() {
@@ -36,6 +37,7 @@ export default function Landing() {
     const [userData, setUserData] = useState();
     const [gettingUser, SetGettingUser] = useState(false);
     const playerRefSampleVid = useRef(null);
+
     
     const handleSampleVidEnded = () => {
         // Restart the video when it ends
@@ -63,6 +65,7 @@ export default function Landing() {
             }
         })
     },[])
+    const user = useSelector(state => state.user.user);
 
     return (
         <>
@@ -72,7 +75,7 @@ export default function Landing() {
             {isLoggedIn==true?
             <button class=" continueToDahboardBtn signoutBtn zoom" onClick={()=> userData?.profile===true? navigate('/dashboard'):navigate('/auth')}>Dashboard</button>:
             <button class="loginBtn signoutBtn" onClick={togglePopup}>Login</button>}
-            <button  className="tokensBtn"> <Coin color="#35b276" size={22} /> 50 &nbsp;Tokens</button>
+            <button  className="tokensBtn"> <Coin color="#35b276" size={22} /> {user.credits} &nbsp;Tokens</button>
             {isPopupOpen && <LoginPopup onClose={togglePopup} onSignup={handleSignup}/>}
 
             <div className='topDivLanding'>
