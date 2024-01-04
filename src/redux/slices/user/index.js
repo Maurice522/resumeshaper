@@ -78,10 +78,71 @@ export const userSlice = createSlice({
             // state.user.password)
         },
         signOutUser: (state, action)=>{
-            state.user.email = null;
-            state.user.password = null;
-            state.user.name = null;
-            state.user.resume = null;
+            // state.user.email = null;
+            // state.user.password = null;
+            // state.user.name = null;
+            // state.user.resume = null;
+            state.user =  {
+        name : null,
+        email : null,
+        password : null,
+        resume : null,
+        jobTitle: '',
+        firstName: '',
+        middleName: '',
+        lastName: '',
+        inputEmail: '',
+        phone: '',
+        dateOfBirth: '',
+        city: '',
+        address: '',
+        postalCode: '',
+        drivingLicense: '',
+        nationality: '',
+        placeOfBirth: '',
+        country: '',
+        uploadedPhotoURL: '',
+        professionalSummary: '',
+        employmentHistory: [
+          {
+            jobTitle: '',
+            employer: '',
+            startDate: '',
+            endDate: '',
+            city: '',
+            description: '',
+          },
+        ],
+        educationHistory: [
+          {
+            school: '',
+            degree: '',
+            startDate: '',
+            endDate: '',
+            city: '',
+            description: '',
+          },
+        ],
+        websitesAndLinks: [
+          {
+            name: '',
+            url: '',
+          },
+        ],
+        customDetails:{
+          courses:[],
+          activities:[],
+          internships:[],
+          hobbies:[],
+          languages:[],
+          references:[],
+          customSections:[],
+        },
+        skills:[],
+        profile:false,
+        resumes:[],
+        credits:0
+       }
 
         },
         updateResume: (state, action)=>{

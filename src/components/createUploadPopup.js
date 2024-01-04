@@ -37,7 +37,7 @@ export default function CreateUploadPopup({ onClose, personalData, setPersonalDa
 
   const handleUploadResume = async() => {   
     if (file) {
-      const cost = 4;
+      const cost = 40;
       if(user.credits >= cost){
       setLoading(true)
       const fileLink = await uploadMedia(file, "resume");
@@ -71,6 +71,7 @@ export default function CreateUploadPopup({ onClose, personalData, setPersonalDa
       console.log(res)
       setLoading(false) 
       onClose();
+      
     }else{
       setLoading(false)
       console.log("Not enough credits");

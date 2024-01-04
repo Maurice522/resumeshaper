@@ -254,7 +254,7 @@ export default function Dashboard() {
                     <button className='createDoc zoom' onClick={()=>navigate("/create")}>
                     <PlusLg size={20} /> &nbsp;Create New</button>
                     
-                    <button className='uploadDoc zoom' onClick={()=>navigate("/create",{state:{upload:true}})}  data-tooltip-id="uploadNewResumeInfo" data-tooltip-content="This will cost 3 credits"><Upload size={20} /> &nbsp;Upload Resume</button>
+                    <button className='uploadDoc zoom' onClick={()=>navigate("/create",{state:{upload:true}})}  data-tooltip-id="uploadNewResumeInfo" data-tooltip-content="This will cost 4 credits"><Upload size={20} /> &nbsp;Upload Resume</button>
                     <Tooltip id="uploadNewResumeInfo" />
                 </div>
                 <hr className='dashHrLine' />

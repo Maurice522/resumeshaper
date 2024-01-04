@@ -48,6 +48,7 @@ export default function CreateLive() {
     const [showDropdown, setShowDropdown] = useState(false);
     const [downloadPdf, setDownloadPdf] = useState(false);
     const [uploadedPhotoDataURL, setUploadedPhotoDataURL] = useState('');
+    const [count , setCount] = useState(0);
     const [customDetails, setCustomDetails] = useState({
         courses: [],
         activities: [],
@@ -131,7 +132,7 @@ export default function CreateLive() {
     }, [])
 
     useEffect(() => {
-        if (user.email !== null) {
+        if (user.email !== null && count <1) {
             console.log(user)
 
             var temp = {
@@ -178,6 +179,7 @@ export default function CreateLive() {
                     },
                 ],
             };
+            setCount(1);
             Object.entries(temp).map(([key, value]) => {
                 temp[key] = user[key]
             }
@@ -642,6 +644,7 @@ export default function CreateLive() {
    
     const handleClosePopup = () => {
         setShowHomePopup(false);
+        console.log("closing")
     };
     const handleOpenPopup = () => {
         setShowHomePopup(true);
