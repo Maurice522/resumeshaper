@@ -75,7 +75,7 @@ export default function Landing() {
             {isLoggedIn==true?
             <button class=" continueToDahboardBtn signoutBtn zoom" onClick={()=> userData?.profile===true? navigate('/dashboard'):navigate('/auth')}>Dashboard</button>:
             <button class="loginBtn signoutBtn" onClick={togglePopup}>Login</button>}
-            <button  className="tokensBtn"> <Coin color="#35b276" size={22} /> {user.credits} &nbsp;Tokens</button>
+            <button  className="tokensBtn" style={{"right":"17%"}}> <Coin color="#35b276" size={22} style={{"position":"relative","top":"-2px"}}/> {user.credits} &nbsp;Credits</button>
             {isPopupOpen && <LoginPopup onClose={togglePopup} onSignup={handleSignup}/>}
 
             <div className='topDivLanding'>

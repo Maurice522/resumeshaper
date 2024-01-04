@@ -8,7 +8,7 @@ import { toast } from 'react-toastify'
 import { updateCredits } from '../redux/slices/user'
 import { useDispatch,useSelector } from 'react-redux'
 import { updateUserCreditsInDatabase } from '../fireabse'
-
+import { Tooltip } from 'react-tooltip'
 export default function JobPopup({ onClose, onSignup, jobTitle, setJobTitle, jobDescription, setJobDescription, getSummary, getAiSkills, setPersonalData, personalData, getJD }) {
 
     const [isLoading, setIsLoading] = useState(false);
@@ -130,7 +130,8 @@ export default function JobPopup({ onClose, onSignup, jobTitle, setJobTitle, job
                             />
                         </div>
                         <div className="form-actions">
-                            <button type="submit" className='loginNow'>SUBMIT</button>
+                            <button type="submit" className='loginNow' data-tooltip-id="submitJobInfo" data-tooltip-content="This will use 10 credits">
+                            Tailor It!</button> <Tooltip id="submitJobInfo" />
                         </div>
                     </form>
                 )}

@@ -32,7 +32,7 @@ export default function Terms() {
   return (
     <div>
       <button onClick={() => handler()} className=" btn btn-success signoutBtn aboutUsSignOutBtn"> <Power color="#35b276" size={22} /> &nbsp;Signout</button>
-      {user&&user.credits&&<button  className="tokensBtn"> <Coin color="#35b276" size={22} /> {user.credits} &nbsp;Tokens</button>}  
+      {user&&user.credits&&<button  className="tokensBtn"> <Coin color="#35b276" size={22} style={{"position":"relative","top":"-2px"}}/> {user.credits} &nbsp;Credits</button>}  
       <Nav />
       <div className="aboutUsContainer">
         <h1 className='aboutUsHeadig'><ArrowLeft color="#35b276" size={30} className='returnBackArrow' onClick={() => returnBack()} />Terms And Conditions</h1>

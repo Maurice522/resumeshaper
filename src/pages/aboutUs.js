@@ -31,7 +31,7 @@ const returnBack = (e) => {
 const user = useSelector(state=>state.user.user);
   return (
     <div>
-          {user&&user.credits&&<button  className="tokensBtn"> <Coin color="#35b276" size={22} /> {user.credits} &nbsp;Tokens</button>}  
+          {user&&user.credits&&<button  className="tokensBtn"> <Coin color="#35b276" size={22}  style={{"position":"relative","top":"-2px"}}/> {user.credits} &nbsp;Credits</button>}  
         <button onClick={() => handler()} className=" btn btn-success signoutBtn aboutUsSignOutBtn"> <Power color="#35b276" size={22} /> &nbsp;Signout</button>
         <Nav/>
         <div className="aboutUsContainer">

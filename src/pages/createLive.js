@@ -10,7 +10,7 @@ import MyPdfViewer2 from '../components/pdfDisplayFeTemp2';
 import MyPdfViewer3 from '../components/pdfDisplayFeTemp3';
 import MyPdfViewer4 from '../components/pdfDisplayFeTemp4';
 import MyPdfViewer1 from '../components/pdfDisplayFeTemp1';
-import {Coin,CaretDownSquareFill,CaretUpSquareFill,PlusCircleFill, Crop, FileEarmarkArrowDownFill, Check2Circle, Check2All, Check, PersonCheck, PersonSquare, CaretDownSquare, JournalBookmarkFill, PenFill, Trash3Fill, PlusLg, JournalCheck, Link45deg, TrophyFill } from "react-bootstrap-icons";
+import {DatabaseFill,Coin,CaretDownSquareFill,CaretUpSquareFill,PlusCircleFill, Crop, FileEarmarkArrowDownFill, Check2Circle, Check2All, Check, PersonCheck, PersonSquare, CaretDownSquare, JournalBookmarkFill, PenFill, Trash3Fill, PlusLg, JournalCheck, Link45deg, TrophyFill } from "react-bootstrap-icons";
 import CustomSection from '../components/formComponents/customSection';
 import { updateUserProfileInDatabase, updateUserPhotoInDatabase, uploadMedia } from '../fireabse';
 import { updatePhoto, updateProfile } from '../redux/slices/user';
@@ -601,8 +601,7 @@ setPersonalData((prevData) => ({
       };
 
     const handleLogDetails = async (e) => {
-        e.preventDefault();
-        
+        e.preventDefault(); 
         var resume = {
             ...personalData,
             skills: selectedOptions,
@@ -880,8 +879,8 @@ setPersonalData((prevData) => ({
                                 </div>
                                 <button onClick={() => handleDownload()} className=" downloadPdfBtn zoom" disabled={photoLoader}>Download PDF</button>
                                 <button onClick={() => handleDashboard()} className=" dashboardBtn zoom" disabled={photoLoader}><h6>Dashboard</h6></button>
-                                  <button  className="tokensBtn" style={{top: "29%",right:"37%"}}> <Coin color="#35b276" size={22} /> {user.credits} &nbsp;&nbsp;Tokens</button>
-
+                                <button onClick={ (e)=>handleLogDetails(e)} className=" SaveBtn zoom" disabled={photoLoader}><h6>Save</h6></button>
+                                  <button  className="tokensBtn" style={{'top': "29%","right":"14.5%"}}> <DatabaseFill color="#35b276" size={22} style={{"position":"relative","top":"-2px"}} /> &nbsp;{user.credits} &nbsp;Credits</button>
                                 <button onClick={() => handler()} className=" btn btn-success signoutBtn createLiveSignOut"> <Power color="#35b276" size={22} /> &nbsp;Signout</button>
                             </nav>
                         </div>
@@ -1518,8 +1517,7 @@ setPersonalData((prevData) => ({
                                                     <p className='detailsSubText'>
                                                         Highlight your core strengths and expertise. Create and add skills that best suit your position and represent your capabilities, enhancing your resume.
                                                     </p>
-                                                    <div className='aiItAnimationDiv' onClick={() => getAiSkills()} data-tooltip-id="skillsInfo" data-tooltip-content="This will cost you 3 credits" >
-                                                    <Tooltip id="skillsInfo" />
+                                                    <div className='aiItAnimationDiv' onClick={() => getAiSkills()} data-tooltip-id="skillsInfo" data-tooltip-content="This will cost you 3 credits" >                                                    <Tooltip id="skillsInfo" />
                                                       
                                                         {aiLoading ? (
 

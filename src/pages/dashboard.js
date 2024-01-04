@@ -14,7 +14,7 @@ import img3 from '../images/template3.PNG'
 import img4 from '../images/template4.PNG'
 import Templates from '../components/templates';
 import JobPopup from '../components/jobPopup';
-
+import { Tooltip } from 'react-tooltip'
 export default function Dashboard() {
     const navigate =useNavigate()
     const [gettingUser, SetGettingUser] = useState(false);
@@ -245,14 +245,17 @@ export default function Dashboard() {
         {console.log(savedResumes)}
             <Nav />
             <button onClick={() => handler()} className=" btn btn-success signoutBtn"> <Power color="#35b276" size={22} /> &nbsp;Signout</button>
-            <button  className="tokensBtn"> <Coin color="#35b276" size={22} /> {user.credits} &nbsp;Tokens</button>
+            <button  className="tokensBtn"> <Coin color="#35b276" size={22} style={{"position":"relative","top":"-2px"}}/> &nbsp;{user.credits} &nbsp;Credits</button>
             <div className='dashboardDiv'>
                 <h2 className='formTitle'>Resume Gallery</h2>
                 <p className='formSubText'>"Welcome to your hub for organized resumes.Access, edit, or create new resumes for tailored job application."</p>
                 <div className='dashHeader'>
                     <h4>Documents</h4>
-                    <button className='createDoc zoom' onClick={()=>navigate("/create")}><PlusLg size={20} /> &nbsp;Create New</button>
-                    <button className='uploadDoc zoom' onClick={()=>navigate("/create",{state:{upload:true}})}><Upload size={20} /> &nbsp;Upload Resume</button>
+                    <button className='createDoc zoom' onClick={()=>navigate("/create")}>
+                    <PlusLg size={20} /> &nbsp;Create New</button>
+                    
+                    <button className='uploadDoc zoom' onClick={()=>navigate("/create",{state:{upload:true}})}  data-tooltip-id="uploadNewResumeInfo" data-tooltip-content="This will cost 3 credits"><Upload size={20} /> &nbsp;Upload Resume</button>
+                    <Tooltip id="uploadNewResumeInfo" />
                 </div>
                 <hr className='dashHrLine' />
                 {isPopupOpen && <JobPopup onClose={togglePopup} onSignup={handleSignup} />}

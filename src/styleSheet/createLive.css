@@ -36,7 +36,7 @@
     position: absolute;
     z-index: 20;
     background-color: #ecf8e5;
-    right: 16%;
+    right: 24%;
     border: none;
     font-weight: 550; 
     color: #346571;
@@ -383,7 +383,7 @@ font-family: 'Roboto', sans-serif; */
     position: absolute;
     z-index: 20;
     background-color: #ecf8e5;
-    right: 28%;
+    right: 34%;
     border: none;
     color: #346571;
     top: 34%;
@@ -393,7 +393,7 @@ font-family: 'Roboto', sans-serif; */
     position: absolute;
     z-index: 20;
     background-color: #ecf8e5;
-    right: 28%;
+    right: 34%;
     border: none;
     color: #346571;
     top: 34%;
@@ -596,3 +596,13 @@ margin-top: 22%;
     opacity: 0;
     transition: opacity 0.3s;
 }
+.SaveBtn{
+    position: absolute;
+    z-index: 20;
+    background-color: #ecf8e5;
+    right: 42%;
+    border: none;
+    color: #346571;
+    top: 34%;
+    font-weight: 800;
+  }

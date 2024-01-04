@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { saveResume, signOutUser, updateResume, updateUser } from '../redux/slices/user';
 import Nav from '../components/nav';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Power } from "react-bootstrap-icons";
+import { DatabaseFill, Power } from "react-bootstrap-icons";
 import MyPdfViewer1 from '../components/pdfDisplayFeTemp1';
 import MyPdfViewer2 from '../components/pdfDisplayFeTemp2';
 import MyPdfViewer3 from '../components/pdfDisplayFeTemp3';
@@ -26,7 +26,7 @@ import img6 from '../images/template3.PNG'
 import img7 from '../images/template4.PNG'
 import JobPopup from '../components/jobPopup';
 import CreateUploadPopup from '../components/createUploadPopup';
-
+import { Tooltip } from 'react-tooltip'
 
 // import skills from '../components/formComponents/skills';    
 
@@ -671,6 +671,7 @@ export default function CreateLive() {
                                 </div>
                                 <button onClick={() => handleDownload()} className=" downloadPdfBtn zoom" disabled={photoLoader}>Download PDF</button>
                                 <button onClick={() => handleDashboard()} className=" dashboardBtn zoom" disabled={photoLoader}><h6>Dashboard</h6></button>
+                                <button  className="tokensBtn" style={{'top': "29%","right":"14.5%"}}> <DatabaseFill color="#35b276" size={22} style={{"position":"relative","top":"-2px"}} /> &nbsp;{user.credits} &nbsp;Credits</button>
                                 <button onClick={() => handler()} className=" btn btn-success signoutBtn createLiveSignOut"> <Power color="#35b276" size={22} /> &nbsp;Signout</button>
                             </nav>
                            </div>
