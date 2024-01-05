@@ -673,8 +673,10 @@ export default function CreateLive() {
                                     </a>
                                 </div>
                                 <button onClick={() => handleDownload()} className=" downloadPdfBtn zoom" disabled={photoLoader}>Download PDF</button>
-                                <button onClick={() => handleDashboard()} className=" dashboardBtn zoom" disabled={photoLoader}><h6>Dashboard</h6></button>
-                                <button  className="tokensBtn" style={{'top': "29%","right":"14.5%"}}> <DatabaseFill color="#35b276" size={22} style={{"position":"relative","top":"-2px"}} /> &nbsp;{user.credits} &nbsp;Credits</button>
+                                <button onClick={() => handleDashboard()} className=" dashboardBtn zoom" disabled={photoLoader}>Dashboard</button>
+                                <button  className="tokensBtn" style={{'top': "33%","right":"13%","fontFamily": 'Open Sans',"color":"#347571","fontWeight":"550"}}> <DatabaseFill color="#347571" size={22} style={{"position":"relative","top":"-2px"}} /> &nbsp;{user.credits} Credits</button>
+
+
                                 <button onClick={() => handler()} className=" btn btn-success signoutBtn createLiveSignOut"> <Power color="#35b276" size={22} /> &nbsp;Signout</button>
                             </nav>
                            </div>

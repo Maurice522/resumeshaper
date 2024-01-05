@@ -3,7 +3,7 @@ import Nav from '../components/nav';
 import '../styleSheet/AboutUs.css'
 import img1 from '../images/aboutUs.png'
 import Footer from '../components/footer'
-import { Power, ArrowLeft, Coin} from "react-bootstrap-icons";
+import { Power, ArrowLeft, DatabaseFill} from "react-bootstrap-icons";
 import { signOut } from 'firebase/auth'
 import { auth } from '../fireabse'
 import { useDispatch, useSelector } from 'react-redux';
@@ -31,7 +31,8 @@ const returnBack = (e) => {
 const user = useSelector(state=>state.user.user);
   return (
     <div>
-          {user&&user.profile&&user.credits&&<button  className="tokensBtn"> <Coin color="#35b276" size={22}  style={{"position":"relative","top":"-2px"}}/> {user.credits} &nbsp;Credits</button>}  
+          {user&&user.profile&&user.credits&&<button  className="tokensBtn" style={{"fontFamily": 'Open Sans',"fontWeight":"550","fontSize":"16px","color":"#347571"}}><DatabaseFill color="#347571" size={24} style={{"position":"relative","top":"-2px"}}/>  &nbsp;{user.credits} Credits</button>}
+
         {user&&user.profile&&<button onClick={() => handler()} className=" btn btn-success signoutBtn aboutUsSignOutBtn"> <Power color="#35b276" size={22} /> &nbsp;Signout</button>}
         <Nav/>
         <div className="aboutUsContainer">

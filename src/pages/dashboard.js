@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Nav from '../components/nav';
-import { Coin, Power, Upload } from "react-bootstrap-icons";
+import { DatabaseFill, Power, Upload } from "react-bootstrap-icons";
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { onAuthStateChanged, signOut } from 'firebase/auth'
@@ -245,7 +245,8 @@ export default function Dashboard() {
         {console.log(savedResumes)}
             <Nav />
             <button onClick={() => handler()} className=" btn btn-success signoutBtn"> <Power color="#35b276" size={22} /> &nbsp;Signout</button>
-            <button  className="tokensBtn"> <Coin color="#35b276" size={22} style={{"position":"relative","top":"-2px"}}/> &nbsp;{user.credits} &nbsp;Credits</button>
+            <button  className="tokensBtn" style={{"fontFamily": 'Open Sans',"fontWeight":"550","fontSize":"16px","color":"#347571"}}><DatabaseFill color="#347571" size={24} style={{"position":"relative","top":"-2px"}}/>  &nbsp;{user.credits} Credits</button>
+            
             <div className='dashboardDiv'>
                 <h2 className='formTitle'>Resume Gallery</h2>
                 <p className='formSubText'>"Welcome to your hub for organized resumes.Access, edit, or create new resumes for tailored job application."</p>
