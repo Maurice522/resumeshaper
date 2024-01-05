@@ -877,11 +877,11 @@ setPersonalData((prevData) => ({
                                         <strong onClick={redirectHome}>RESUME SHAPER</strong>
                                     </a>
                                 </div>
+                                {/* <button className='downloadPdfBtn zoom'>super</button> */}
                                 <button onClick={() => handleDownload()} className=" downloadPdfBtn zoom" disabled={photoLoader}>Download PDF</button>
                                 <button onClick={() => handleDashboard()} className=" dashboardBtn zoom" disabled={photoLoader}>Dashboard</button>
                                 <button onClick={ (e)=>handleLogDetails(e)} className=" SaveBtn zoom" disabled={photoLoader}>Save</button>
-                                  <button  className="tokensBtn" style={{'top': "33%","right":"13%","fontFamily": 'Open Sans',"color":"#347571","fontWeight":"550"}}> <DatabaseFill color="#347571" size={22} style={{"position":"relative","top":"-2px"}} /> &nbsp;{user.credits} Credits</button>
-
+                                <button  className="custom-btn btn-2" style={{'z-index': '45','top': "25%","right":"13%",'cursor':'none',"fontFamily": 'Open Sans','textAlign':'left',"color":"#ecf8e5",'backgroundColor':'#347571',"fontWeight":"550", }}> <DatabaseFill color="#ecf8e5" size={22} style={{"position":"relative","top":"-2px"}} /> &nbsp;{user.credits} <button onClick={()=>toast.info("Coming Soon !")} className='custom-btn' style={{'width':'90px','z-index': '45','top': "0%","right":"0%","fontFamily": 'Open Sans','textAlign':'center',"color":"#347571",'backgroundColor':'#ecf8e5',"fontWeight":"550",'paddingLeft':'8px', 'paddingRight':'8px', 'paddingTop':'1px', 'paddingBottom':'1px', 'height':'32px', 'marginTop':'4px', 'fontSize':'12px', 'marginRight':'10px', 'border':'none'}}>Upgrade</button> </button>
                                 <button onClick={() => handler()} className=" btn btn-success signoutBtn createLiveSignOut"> <Power color="#35b276" size={22} /> &nbsp;Signout</button>
                             </nav>
                         </div>
