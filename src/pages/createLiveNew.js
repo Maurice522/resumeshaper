@@ -5,12 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { saveResume, signOutUser, updateResume, updateUser } from '../redux/slices/user';
 import Nav from '../components/nav';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Power } from "react-bootstrap-icons";
+import { DatabaseFill, Power } from "react-bootstrap-icons";
 import MyPdfViewer1 from '../components/pdfDisplayFeTemp1';
 import MyPdfViewer2 from '../components/pdfDisplayFeTemp2';
 import MyPdfViewer3 from '../components/pdfDisplayFeTemp3';
 import MyPdfViewer4 from '../components/pdfDisplayFeTemp4';
-import { PlusCircleFill, Clipboard2Fill,Crop, Clipboard2, FileEarmarkArrowDownFill, Check2Circle, Check2All, Check, PersonCheck, PersonSquare, CaretDownSquare, JournalBookmarkFill, PenFill, Trash3Fill, PlusLg, JournalCheck, Link45deg, TrophyFill } from "react-bootstrap-icons";
+import { CaretDownSquareFill,CaretUpSquareFill,PlusCircleFill, Clipboard2Fill,Crop, Clipboard2, FileEarmarkArrowDownFill, Check2Circle, Check2All, Check, PersonCheck, PersonSquare, CaretDownSquare, JournalBookmarkFill, PenFill, Trash3Fill, PlusLg, JournalCheck, Link45deg, TrophyFill } from "react-bootstrap-icons";
 import CustomSection from '../components/formComponents/customSection';
 import { updateUserProfileInDatabase, updateUserPhotoInDatabase, uploadMedia } from '../fireabse';
 import { updatePhoto, updateProfile } from '../redux/slices/user';
@@ -26,7 +26,7 @@ import img6 from '../images/template3.PNG'
 import img7 from '../images/template4.PNG'
 import JobPopup from '../components/jobPopup';
 import CreateUploadPopup from '../components/createUploadPopup';
-
+import { Tooltip } from 'react-tooltip'
 
 // import skills from '../components/formComponents/skills';    
 
@@ -48,6 +48,7 @@ export default function CreateLive() {
     const [showDropdown, setShowDropdown] = useState(false);
     const [downloadPdf, setDownloadPdf] = useState(false);
     const [uploadedPhotoDataURL, setUploadedPhotoDataURL] = useState('');
+    const [count , setCount] = useState(0);
     const [customDetails, setCustomDetails] = useState({
         courses: [],
         activities: [],
@@ -131,7 +132,7 @@ export default function CreateLive() {
     }, [])
 
     useEffect(() => {
-        if (user.email !== null) {
+        if (user.email !== null && count <1) {
             console.log(user)
 
             var temp = {
@@ -178,6 +179,7 @@ export default function CreateLive() {
                     },
                 ],
             };
+            setCount(1);
             Object.entries(temp).map(([key, value]) => {
                 temp[key] = user[key]
             }
@@ -385,6 +387,19 @@ export default function CreateLive() {
                     };
                 });
             }
+
+            const moveWebsiteLink = (currentIndex, targetIndex) => {
+                setPersonalData((prevData) => {
+                  const updatedWebsitesAndLinks = [...prevData.websitesAndLinks];
+                  const [movedItem] = updatedWebsitesAndLinks.splice(currentIndex, 1);
+                  updatedWebsitesAndLinks.splice(targetIndex, 0, movedItem);
+              
+                  return {
+                    ...prevData,
+                    websitesAndLinks: updatedWebsitesAndLinks,
+                  };
+                });
+              };
         
 
     const addEducationHistory = () => {
@@ -447,6 +462,19 @@ export default function CreateLive() {
         });
     }
 
+    const moveEducation = (currentIndex, targetIndex) => {
+        setPersonalData((prevData) => {
+          const updatedEducationHistory = [...prevData.educationHistory];
+          const [movedItem] = updatedEducationHistory.splice(currentIndex, 1);
+          updatedEducationHistory.splice(targetIndex, 0, movedItem);
+      
+          return {
+            ...prevData,
+            educationHistory: updatedEducationHistory,
+          };
+        });
+      };
+
     const addEmploymentHistory = () => {
         setPersonalData({
             ...personalData,
@@ -508,6 +536,17 @@ export default function CreateLive() {
         });
     };
 
+    const moveEmployment = (currentIndex, targetIndex) => {
+        setPersonalData((prevData) => {
+          const updatedEmploymentHistory = [...prevData.employmentHistory];
+          const [movedItem] = updatedEmploymentHistory.splice(currentIndex, 1);
+          updatedEmploymentHistory.splice(targetIndex, 0, movedItem);    
+          return {
+            ...prevData,
+            employmentHistory: updatedEmploymentHistory,
+          };
+        });
+      };
 
     const handleLogDetails = async (e) => {
         e.preventDefault();
@@ -605,6 +644,7 @@ export default function CreateLive() {
    
     const handleClosePopup = () => {
         setShowHomePopup(false);
+        console.log("closing")
     };
     const handleOpenPopup = () => {
         setShowHomePopup(true);
@@ -633,7 +673,10 @@ export default function CreateLive() {
                                     </a>
                                 </div>
                                 <button onClick={() => handleDownload()} className=" downloadPdfBtn zoom" disabled={photoLoader}>Download PDF</button>
-                                <button onClick={() => handleDashboard()} className=" dashboardBtn zoom" disabled={photoLoader}><h6>Dashboard</h6></button>
+                                <button onClick={() => handleDashboard()} className=" dashboardBtn zoom" disabled={photoLoader}>Dashboard</button>
+                                <button  className="tokensBtn" style={{'top': "33%","right":"13%","fontFamily": 'Open Sans',"color":"#347571","fontWeight":"550"}}> <DatabaseFill color="#347571" size={22} style={{"position":"relative","top":"-2px"}} /> &nbsp;{user.credits} Credits</button>
+
+
                                 <button onClick={() => handler()} className=" btn btn-success signoutBtn createLiveSignOut"> <Power color="#35b276" size={22} /> &nbsp;Signout</button>
                             </nav>
                            </div>
@@ -879,6 +922,24 @@ export default function CreateLive() {
                                                                 <div key={index} className="employmentHistoryDiv">
                                                                     <h5 className='personalSubSubHeading'>Snapshot {index + 1} :</h5>
                                                                     <div className='row'>
+                                                                    {index > 0 && (
+                                                                            <button
+                                                                                type="button"
+                                                                                onClick={() => moveEmployment(index, index - 1)}
+                                                                                className="moveBtnCreateUp"
+                                                                            >
+                                                                               <CaretUpSquareFill color="#35b276" size={16} /> 
+                                                                            </button>
+                                                                        )}
+                                                                        {index < personalData.employmentHistory.length - 1 && (
+                                                                            <button
+                                                                                type="button"
+                                                                                onClick={() => moveEmployment(index, index + 1)}
+                                                                                className="moveBtnCreateDown"
+                                                                            >
+                                                                                 <CaretDownSquareFill color="#35b276" size={16} />
+                                                                            </button>
+                                                                        )}
 
                                                                         <div className="col-md-6">
                                                                             <label className='detailsInfoLabel'>
@@ -989,7 +1050,24 @@ export default function CreateLive() {
                                                                 <div key={index} className="employmentHistoryDiv">
                                                                     <h5 className='personalSubSubHeading'>Formal Education {index + 1} :</h5>
                                                                     <div className='row'>
-
+                                                                    {index > 0 && (
+                                                                            <button
+                                                                                type="button"
+                                                                                onClick={() => moveEducation(index, index - 1)}
+                                                                                className="moveBtnCreateUp"
+                                                                                >
+                                                                                   <CaretUpSquareFill color="#35b276" size={16} /> 
+                                                                            </button>
+                                                                        )}
+                                                                        {index < personalData.educationHistory.length - 1 && (
+                                                                            <button
+                                                                                type="button"
+                                                                                onClick={() => moveEducation(index, index + 1)}
+                                                                                className="moveBtnCreateDown"
+                                                                                >
+                                                                                     <CaretDownSquareFill color="#35b276" size={16} />
+                                                                            </button>
+                                                                        )}
                                                                         <div className="col-md-6">
                                                                             <label className='detailsInfoLabel'>
                                                                                 School:
@@ -1096,7 +1174,24 @@ export default function CreateLive() {
                                                                 <div key={index} className="employmentHistoryDiv">
                                                                     <h5 className='personalSubSubHeading'>Site {index + 1} :</h5>
                                                                     <div className='row'>
-
+                                                                    {index > 0 && (
+                                                                            <button
+                                                                                type="button"
+                                                                                onClick={() => moveWebsiteLink(index, index - 1)}
+                                                                                className="moveBtnCreateUp "
+                                                                            >
+                                                                                <CaretUpSquareFill color="#35b276" size={14} />
+                                                                            </button>
+                                                                        )}
+                                                                        {index < personalData.websitesAndLinks.length - 1 && (
+                                                                            <button
+                                                                                type="button"
+                                                                                onClick={() => moveWebsiteLink(index, index + 1)}
+                                                                                className="moveBtnCreateDown moveBtnCreateNotLiveDown"
+                                                                            >
+                                                                                <CaretDownSquareFill color="#35b276" size={14} />
+                                                                            </button>
+                                                                        )}
                                                                         <div className="col-md-6">
                                                                             <label className='detailsInfoLabel'>
                                                                                 Name :

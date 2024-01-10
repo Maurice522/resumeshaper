@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { updateUserCreditsInDatabase } from "../../../fireabse";
 
 export const userSlice = createSlice({
     name:'user',
@@ -61,7 +62,8 @@ export const userSlice = createSlice({
         },
         skills:[],
         profile:false,
-        resumes:[]
+        resumes:[],
+        credits:0
        }
     },
     reducers:{
@@ -76,10 +78,71 @@ export const userSlice = createSlice({
             // state.user.password)
         },
         signOutUser: (state, action)=>{
-            state.user.email = null;
-            state.user.password = null;
-            state.user.name = null;
-            state.user.resume = null;
+            // state.user.email = null;
+            // state.user.password = null;
+            // state.user.name = null;
+            // state.user.resume = null;
+            state.user =  {
+        name : null,
+        email : null,
+        password : null,
+        resume : null,
+        jobTitle: '',
+        firstName: '',
+        middleName: '',
+        lastName: '',
+        inputEmail: '',
+        phone: '',
+        dateOfBirth: '',
+        city: '',
+        address: '',
+        postalCode: '',
+        drivingLicense: '',
+        nationality: '',
+        placeOfBirth: '',
+        country: '',
+        uploadedPhotoURL: '',
+        professionalSummary: '',
+        employmentHistory: [
+          {
+            jobTitle: '',
+            employer: '',
+            startDate: '',
+            endDate: '',
+            city: '',
+            description: '',
+          },
+        ],
+        educationHistory: [
+          {
+            school: '',
+            degree: '',
+            startDate: '',
+            endDate: '',
+            city: '',
+            description: '',
+          },
+        ],
+        websitesAndLinks: [
+          {
+            name: '',
+            url: '',
+          },
+        ],
+        customDetails:{
+          courses:[],
+          activities:[],
+          internships:[],
+          hobbies:[],
+          languages:[],
+          references:[],
+          customSections:[],
+        },
+        skills:[],
+        profile:false,
+        resumes:[],
+        credits:0
+       }
 
         },
         updateResume: (state, action)=>{
@@ -117,9 +180,13 @@ export const userSlice = createSlice({
         setResume:(state,action)=>{
           console.log(action.payload)
           // state.user.resume = [...action.payload]
+        },
+        updateCredits:(state,action)=>{
+          state.user.credits = action.payload;
+          console.log(state.user.credits)
         }
     }
 })
 
-export const {loginUser, signOutUser, updateResume,updatePhoto,updateProfile,updateUser,saveResume,setResume} = userSlice.actions; 
+export const {loginUser, signOutUser, updateResume,updatePhoto,updateProfile,updateUser,saveResume,setResume, updateCredits} = userSlice.actions; 
 export default userSlice.reducer;

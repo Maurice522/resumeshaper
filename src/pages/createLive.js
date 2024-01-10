@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { onAuthStateChanged, signOut } from 'firebase/auth'
-import { addUserResume, auth, getUserFromDatabase } from '../fireabse'
+import { addUserResume, auth, getUserFromDatabase, updateUserCreditsInDatabase } from '../fireabse'
 import { useDispatch, useSelector } from 'react-redux';
-import { saveResume, setResume, signOutUser, updateUser } from '../redux/slices/user';
+import { saveResume, setResume, signOutUser, updateCredits, updateUser } from '../redux/slices/user';
 import Nav from '../components/nav';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Power } from "react-bootstrap-icons";
@@ -10,7 +10,7 @@ import MyPdfViewer2 from '../components/pdfDisplayFeTemp2';
 import MyPdfViewer3 from '../components/pdfDisplayFeTemp3';
 import MyPdfViewer4 from '../components/pdfDisplayFeTemp4';
 import MyPdfViewer1 from '../components/pdfDisplayFeTemp1';
-import { PlusCircleFill, Crop, FileEarmarkArrowDownFill, Check2Circle, Check2All, Check, PersonCheck, PersonSquare, CaretDownSquare, JournalBookmarkFill, PenFill, Trash3Fill, PlusLg, JournalCheck, Link45deg, TrophyFill } from "react-bootstrap-icons";
+import {DatabaseFill,Coin,CaretDownSquareFill,CaretUpSquareFill,PlusCircleFill, Crop, FileEarmarkArrowDownFill, Check2Circle, Check2All, Check, PersonCheck, PersonSquare, CaretDownSquare, JournalBookmarkFill, PenFill, Trash3Fill, PlusLg, JournalCheck, Link45deg, TrophyFill } from "react-bootstrap-icons";
 import CustomSection from '../components/formComponents/customSection';
 import { updateUserProfileInDatabase, updateUserPhotoInDatabase, uploadMedia } from '../fireabse';
 import { updatePhoto, updateProfile } from '../redux/slices/user';
@@ -30,7 +30,7 @@ import ReactPlayer from 'react-player'
 import JobPopup from '../components/jobPopup';
 import { toast } from 'react-toastify';
 import MyPdfViewerTest from '../components/pdfDisplayFeTest';
-
+import { Tooltip } from 'react-tooltip'
 
 // import skills from '../components/formComponents/skills';    
 
@@ -115,8 +115,9 @@ export default function CreateLiveContinue() {
     const [imgFile, setImgFile] = useState(null);
     const [jobTitle, setJobTitle] = useState('');
     const [jobDescription, setJobDescription] = useState('');
-    const [currId, setCurrId] = useState(null)
-
+    const [currId, setCurrId] = useState(null);
+    const [count, setCount] = useState(0);
+    const [displayInfo,setDisplayInfo]=useState(true)
     const user = useSelector(state => state.user.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -138,7 +139,8 @@ export default function CreateLiveContinue() {
     }, [])
 
     useEffect(() => {
-        if (user.email !== null) {
+        
+        if (user.email !== null && count<1) {
 
 
             var temp = {
@@ -213,6 +215,7 @@ export default function CreateLiveContinue() {
             setSelectedOptions(user.resumes[idx].skills)
             setSelectedTemplateId(user.resumes[idx].resumeId)
             setPersonalData(temp)
+            setCount(1)
         }
     }, [user])
 
@@ -437,7 +440,19 @@ setPersonalData((prevData) => ({
         });
     }
 
-
+    const moveWebsiteLink = (currentIndex, targetIndex) => {
+        setPersonalData((prevData) => {
+          const updatedWebsitesAndLinks = [...prevData.websitesAndLinks];
+          const [movedItem] = updatedWebsitesAndLinks.splice(currentIndex, 1);
+          updatedWebsitesAndLinks.splice(targetIndex, 0, movedItem);
+      
+          return {
+            ...prevData,
+            websitesAndLinks: updatedWebsitesAndLinks,
+          };
+        });
+      };
+    
     const addEducationHistory = () => {
         setPersonalData((prevData) => ({
             ...prevData,
@@ -487,6 +502,31 @@ setPersonalData((prevData) => ({
         });
     }
 
+    // const moveEducation = (currentIndex, targetIndex) => {
+    //     setPersonalData((prevData) => {
+    //       const updateEducationFieldHistory = [...prevData.educationHistory];
+    //       const [movedItem] = updateEducationFieldHistory.splice(currentIndex, 1);
+    //       updateEducationFieldHistory.splice(targetIndex, 0, movedItem);    
+    //       return {
+    //         ...prevData,
+    //         educationHistory: updateEducationFieldHistory,
+    //       };
+    //     });
+    //   };
+
+    const moveEducation = (currentIndex, targetIndex) => {
+        setPersonalData((prevData) => {
+          const updatedEducationHistory = [...prevData.educationHistory];
+          const [movedItem] = updatedEducationHistory.splice(currentIndex, 1);
+          updatedEducationHistory.splice(targetIndex, 0, movedItem);
+      
+          return {
+            ...prevData,
+            educationHistory: updatedEducationHistory,
+          };
+        });
+      };
+
     const addEmploymentHistory = () => {
         setPersonalData({
             ...personalData,
@@ -503,6 +543,8 @@ setPersonalData((prevData) => ({
             ],
         });
     };
+
+    
 
     const removeEmploymentHistory = (index) => {
         setPersonalData((prevData) => {
@@ -546,9 +588,20 @@ setPersonalData((prevData) => ({
         // });
     };
 
+    const moveEmployment = (currentIndex, targetIndex) => {
+        setPersonalData((prevData) => {
+          const updatedEmploymentHistory = [...prevData.employmentHistory];
+          const [movedItem] = updatedEmploymentHistory.splice(currentIndex, 1);
+          updatedEmploymentHistory.splice(targetIndex, 0, movedItem);    
+          return {
+            ...prevData,
+            employmentHistory: updatedEmploymentHistory,
+          };
+        });
+      };
+
     const handleLogDetails = async (e) => {
-        e.preventDefault();
-        
+        e.preventDefault(); 
         var resume = {
             ...personalData,
             skills: selectedOptions,
@@ -658,11 +711,14 @@ setPersonalData((prevData) => ({
         navigate("/")
     };
 
-    const getAiSkills = async () => {
+    const getAiSkills = async (price) => {
+        const cost = price?price:3;
         console.log("started")
-        if(jobTitle === '' || jobDescription === ''){
-            setIsPopupOpen(true)
-            return toast.info("Fill Job Title and Description")
+        if(user.credits<cost){
+            return toast.error("Not Enough Credits!")
+        }
+        if(personalData.jobTitle === ''){
+            return toast.info("Fill Job Title")
         }
         try{
             setAiLoading(true)
@@ -670,7 +726,7 @@ setPersonalData((prevData) => ({
         var res = await fetch('https://server.reverr.io/skill', {
             method: 'POST',
             body: JSON.stringify({
-                title: jobTitle,
+                title: jobTitle ===''?personalData.jobTitle:jobTitle,
                 employmentHistory: personalData.employmentHistory
             }),
             headers: {
@@ -686,6 +742,8 @@ setPersonalData((prevData) => ({
 
             console.log(res)
             setSelectedOptions([...selectedOptions, ...res])
+            await updateUserCreditsInDatabase(user.email, user.credits-cost)
+            dispatch(updateCredits(user.credits-cost))
         }
         else {
 
@@ -699,8 +757,12 @@ setPersonalData((prevData) => ({
         console.log("ended")
         setAiLoading(false)
     }
-    const getJD = async (idx) => {
-        console.log("started")
+    const getJD = async (idx,price) => {
+        const cost = price?price:3;
+        console.log("started JD")
+        if(user.credits<cost){
+            return toast.error("Not Enough Credits!")
+        }
         if(jobTitle === '' || jobDescription === ''){
             setIsPopupOpen(true)
             return toast.info("Fill Job Title and Description")
@@ -723,19 +785,25 @@ setPersonalData((prevData) => ({
                 // console.log(responseJson)
                 return responseJson;
             })
-        // console.log(res)
+        console.log(res)
         updateEmploymentField(idx, 'description', res)
+        await updateUserCreditsInDatabase(user.email, user.credits-cost)
+        dispatch(updateCredits(user.credits-cost))
         
         }
         catch (err){
             console.log(err)
         }
-        console.log("ended")
+        console.log("ended JD")
         setAiLoading(false)
     }
 
-    const getSummary = async () => {
+    const getSummary = async (price) => {
+        const cost =price?price:3;
         console.log("started")
+        if(user.credits<cost){
+            return toast.error("Not Enough Credits!")
+        }
         if(jobTitle === '' || jobDescription === ''){
             setIsPopupOpen(true)
             return toast.info("Fill Job Title and Description")
@@ -764,7 +832,8 @@ setPersonalData((prevData) => ({
             ...personalData,
             professionalSummary: res.professionalSummary,
         });
-        
+        await updateUserCreditsInDatabase(user.email, user.credits-cost)
+        dispatch(updateCredits(user.credits-cost))
         }
         catch (err){
             console.log(err)
@@ -794,7 +863,6 @@ setPersonalData((prevData) => ({
     }
     return (
         <>
-        {console.log(customDetails)}
             {gettingUser ? <img style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }} width="240" height="240" alt='loading...' src='https://media2.giphy.com/media/MDrmyLuEV8XFOe7lU6/200w.webp?cid=ecf05e47k6onrtqddz8d98s4j5lhtutlnnegeus1pwcdwkxt&ep=v1_gifs_search&rid=200w.webp&ct=g' /> :
                 <>
                     {/* <Nav /> */}
@@ -809,8 +877,11 @@ setPersonalData((prevData) => ({
                                         <strong onClick={redirectHome}>RESUME SHAPER</strong>
                                     </a>
                                 </div>
+                                {/* <button className='downloadPdfBtn zoom'>super</button> */}
                                 <button onClick={() => handleDownload()} className=" downloadPdfBtn zoom" disabled={photoLoader}>Download PDF</button>
-                                <button onClick={() => handleDashboard()} className=" dashboardBtn zoom" disabled={photoLoader}><h6>Dashboard</h6></button>
+                                <button onClick={() => handleDashboard()} className=" dashboardBtn zoom" disabled={photoLoader}>Dashboard</button>
+                                <button onClick={ (e)=>handleLogDetails(e)} className=" SaveBtn zoom" disabled={photoLoader}>Save</button>
+                                <button  className="custom-btn btn-2" style={{'z-index': '45','top': "25%","right":"13%",'cursor':'none',"fontFamily": 'Open Sans','textAlign':'left',"color":"#ecf8e5",'backgroundColor':'#347571',"fontWeight":"550", }}> <DatabaseFill color="#ecf8e5" size={22} style={{"position":"relative","top":"-2px"}} /> &nbsp;{user.credits} <button onClick={()=>toast.info("Coming Soon !")} className='custom-btn' style={{'width':'90px','z-index': '45','top': "0%","right":"0%","fontFamily": 'Open Sans','textAlign':'center',"color":"#347571",'backgroundColor':'#ecf8e5',"fontWeight":"550",'paddingLeft':'8px', 'paddingRight':'8px', 'paddingTop':'1px', 'paddingBottom':'1px', 'height':'32px', 'marginTop':'4px', 'fontSize':'12px', 'marginRight':'10px', 'border':'none'}}>Upgrade</button> </button>
                                 <button onClick={() => handler()} className=" btn btn-success signoutBtn createLiveSignOut"> <Power color="#35b276" size={22} /> &nbsp;Signout</button>
                             </nav>
                         </div>
@@ -835,7 +906,7 @@ setPersonalData((prevData) => ({
                                             ref={playerRef}
                                         />
                                     </div>
-                                    {isPopupOpen && <JobPopup onClose={togglePopup} onSignup={handleSignup} personalData={personalData} setPersonalData={setPersonalData} jobTitle={jobTitle} setJobTitle={setJobTitle} jobDescription={jobDescription} setJobDescription={setJobDescription} getSummary={getSummary} getAiSkills={getAiSkills}/>}
+                                    {isPopupOpen && <JobPopup onClose={togglePopup} onSignup={handleSignup} personalData={personalData} setPersonalData={setPersonalData} jobTitle={jobTitle} setJobTitle={setJobTitle} jobDescription={jobDescription} setJobDescription={setJobDescription} getSummary={getSummary} getAiSkills={getAiSkills} getJD={getJD}/>}
                                     <h5 className='formSection createFormSection'><Crop color="#35b276" size={29} /> &nbsp;Select Template</h5>
                                     <div className='templateDiv'>
                                         <div id="carouselExampleIndicators" className="carousel slide">
@@ -1070,15 +1141,12 @@ setPersonalData((prevData) => ({
                                             <br />
                                             <div className='liveInfoOuterDiv'>
                                                 <h5 className='formSection'><PenFill color="#35b276" size={24} /> &nbsp;Professional Summary<span style={{ color: 'red' }}>*</span></h5>
-                                                <div className='aiItAnimationDiv' onClick={() => getSummary()}>
+                                                <div className='aiItAnimationDiv' onClick={() => getSummary()} data-tooltip-id="profInfo" data-tooltip-content="This will cost 3 credits">
+                                                    <Tooltip id="profInfo" />
                                                     {aiLoading ? (
 
-                                                        <iframe src="https://giphy.com/embed/wvtt4mtViPOSrLYNFh" className="bulbGif"></iframe>
-                                                        //    <iframe src="https://giphy.com/embed/gJ3mEToTDJn3LT6kCT" className="bulbGif"></iframe>
-
+                                                        <iframe src="https://giphy.com/embed/wvtt4mtViPOSrLYNFh" className="bulbGif" ></iframe>
                                                     ) : (
-                                                        // <iframe src="https://giphy.com/embed/2uIlejpr8ZxenICZSN" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/JoyPixels-light-emoji-lightbulb-2uIlejpr8ZxenICZSN">via GIPHY</a></p>
-                                                        // <iframe src="https://giphy.com/embed/pylpD8AoQCf3CQ1oO2" className="bulbGif"></iframe>
                                                         <iframe src="https://giphy.com/embed/2uIlejpr8ZxenICZSN" className="bulbGif"></iframe>
                                                    
                                                    )}
@@ -1113,6 +1181,24 @@ setPersonalData((prevData) => ({
                                                                 <div key={index} className="employmentHistoryDiv">
                                                                     <h5 className='personalSubSubHeading'>Snapshot {index + 1} :</h5>
                                                                     <div className='row'>
+                                                                        {index > 0 && (
+                                                                            <button
+                                                                                type="button"
+                                                                                onClick={() => moveEmployment(index, index - 1)}
+                                                                                className="moveBtnCreateUp"
+                                                                            >
+                                                                               <CaretUpSquareFill color="#35b276" size={16} /> 
+                                                                            </button>
+                                                                        )}
+                                                                        {index < personalData.employmentHistory.length - 1 && (
+                                                                            <button
+                                                                                type="button"
+                                                                                onClick={() => moveEmployment(index, index + 1)}
+                                                                                className="moveBtnCreateDown"
+                                                                            >
+                                                                                 <CaretDownSquareFill color="#35b276" size={16} />
+                                                                            </button>
+                                                                        )}
 
                                                                         <div className="col-md-6">
                                                                             <label className='detailsInfoLabel'>
@@ -1180,29 +1266,18 @@ setPersonalData((prevData) => ({
                                                                         <label className='detailsInfoLabel'>
                                                                             Description:
                                                                         </label>
-                                                                        <div className=' aiItAnimationDivDesc' onClick={() => getJD(index)}>
-                                                                            {/* <ReactPlayer
-                                            className="player"
-                                            url={vid2}
-                                            width="100%"
-                                            height="100%"
-                                            playing={true}
-                                            muted={true}
-                                            autoplay={true}
-                                            onEnded={handleEnded2}
-                                            ref={playerRef2}
-                                        /> */}
+                                                                        <div className=' aiItAnimationDivDesc' onClick={() => getJD(index)} data-tooltip-id="descriptionInfo" data-tooltip-content="This will cost 3 credits">
+                                                                        <Tooltip id="descriptionInfo" />
                                                                             {aiLoading ? (
 
                                                                                 <iframe src="https://giphy.com/embed/wvtt4mtViPOSrLYNFh" className="bulbGif"></iframe>
-                                                                                //    <iframe src="https://giphy.com/embed/gJ3mEToTDJn3LT6kCT" className="bulbGif"></iframe>
+ 
 
                                                                             ) : (
-                                                                                // <iframe src="https://giphy.com/embed/pylpD8AoQCf3CQ1oO2" className="bulbGif"></iframe>
                                                         <iframe src="https://giphy.com/embed/2uIlejpr8ZxenICZSN" className="bulbGif"></iframe>
 
                                                                             )}
-                                                                            {/* <iframe src="https://giphy.com/embed/pylpD8AoQCf3CQ1oO2" class="giphy-embed bulbGif "></iframe><p><a href="https://giphy.com/embed/pylpD8AoQCf3CQ1oO2"></a></p> */}
+                                                                           
                                                                         </div>
                                                                         {/* <button type='button' onClick={() => getSummary()} className='AIItBtn'>Ai it</button> */}
                                                                     </div>
@@ -1249,6 +1324,24 @@ setPersonalData((prevData) => ({
                                                                 <div key={index} className="employmentHistoryDiv">
                                                                     <h5 className='personalSubSubHeading'>Formal Education {index + 1} :</h5>
                                                                     <div className='row'>
+                                                                        {index > 0 && (
+                                                                            <button
+                                                                                type="button"
+                                                                                onClick={() => moveEducation(index, index - 1)}
+                                                                                className="moveBtnCreateUp"
+                                                                                >
+                                                                                   <CaretUpSquareFill color="#35b276" size={16} /> 
+                                                                            </button>
+                                                                        )}
+                                                                        {index < personalData.educationHistory.length - 1 && (
+                                                                            <button
+                                                                                type="button"
+                                                                                onClick={() => moveEducation(index, index + 1)}
+                                                                                className="moveBtnCreateDown"
+                                                                                >
+                                                                                     <CaretDownSquareFill color="#35b276" size={16} />
+                                                                            </button>
+                                                                        )}
 
                                                                         <div className="col-md-6">
                                                                             <label className='detailsInfoLabel'>
@@ -1353,9 +1446,27 @@ setPersonalData((prevData) => ({
                                                         <div class="accordion-body">
 
                                                             {personalData.websitesAndLinks !==undefined && personalData.websitesAndLinks.length>0 &&personalData.websitesAndLinks.map((websites, index) => (
-                                                                <div key={index} className="employmentHistoryDiv">
+                                                                <div key={index} className="employmentHistoryDiv" >
                                                                     <h5 className='personalSubSubHeading'>Site {index + 1} :</h5>
-                                                                    <div className='row'>
+                                                                    <div className='row' style={{"position":"relative"}}>
+                                                                        {index > 0 && (
+                                                                            <button
+                                                                                type="button"
+                                                                                onClick={() => moveWebsiteLink(index, index - 1)}
+                                                                                className="moveBtnCreateUp moveBtnCreateWebsiteUp"
+                                                                            >
+                                                                                <CaretUpSquareFill color="#35b276" size={14} />
+                                                                            </button>
+                                                                        )}
+                                                                        {index < personalData.websitesAndLinks.length - 1 && (
+                                                                            <button
+                                                                                type="button"
+                                                                                onClick={() => moveWebsiteLink(index, index + 1)}
+                                                                                className="moveBtnCreateDown moveBtnCreateWebsiteDown"
+                                                                            >
+                                                                                <CaretDownSquareFill color="#35b276" size={14} />
+                                                                            </button>
+                                                                        )}
 
                                                                         <div className="col-md-6">
                                                                             <label className='detailsInfoLabel'>
@@ -1407,18 +1518,8 @@ setPersonalData((prevData) => ({
                                                     <p className='detailsSubText'>
                                                         Highlight your core strengths and expertise. Create and add skills that best suit your position and represent your capabilities, enhancing your resume.
                                                     </p>
-                                                    <div className='aiItAnimationDiv' onClick={() => getAiSkills()}>
-                                                        {/* <ReactPlayer
-                                            className="player"
-                                            url={vid2}
-                                            width="100%"
-                                            height="100%"
-                                            playing={true}
-                                            muted={true}
-                                            autoplay={true}
-                                            onEnded={handleEnded3}
-                                            ref={playerRef3}
-                                        /> */}
+                                                    <div className='aiItAnimationDiv' onClick={() => getAiSkills()} data-tooltip-id="skillsInfo" data-tooltip-content="This will cost you 3 credits" >                                                    <Tooltip id="skillsInfo" />
+                                                      
                                                         {aiLoading ? (
 
                                                             <iframe src="https://giphy.com/embed/wvtt4mtViPOSrLYNFh" className="bulbGif"></iframe>

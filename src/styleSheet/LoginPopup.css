@@ -111,7 +111,11 @@
 .msg {
     margin: 0;
     margin-top: 3%;
+<<<<<<< HEAD
     color: green;
+=======
+    color:#35b276;
+>>>>>>> 9283bed21a1f8738dc43be797b138c3ab30a0eab
     font-size: 16px;
 }
 .loginLabel{
@@ -139,4 +143,15 @@ padding: 0;
     font-size: 14px;
     margin-bottom: 8%;
     font-style: italic;
+}
+/* .otpCenterResend{
+    text-align: center;
+    align-items: center;
+} */
+.resendOtpBtn{
+    background-color: white;
+    border: none;
+}
+.nocodeText{
+    display: inline;
 }

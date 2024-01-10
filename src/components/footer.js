@@ -47,7 +47,8 @@ export default function Footer() {
                     </div>
                     <div className='col-md-4'>
                         <h6>Connect with us</h6>
-                        <p>contact@resumeshaper.com</p>
+                        <p>Email: contact@resumeshaper.com</p>
+                        {/* <p>Phone : 456-345-2345</p> */}
                     </div>
                 </div>
             </div>

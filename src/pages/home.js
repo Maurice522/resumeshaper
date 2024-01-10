@@ -11,7 +11,7 @@ import '../styleSheet/Landing.css'
 import vid from '../images/video1.mp4'
 import ReactPlayer from 'react-player'
 import { useNavigate } from 'react-router-dom';
-import { Check2Circle } from "react-bootstrap-icons";
+import { Check2Circle, DatabaseFill } from "react-bootstrap-icons";
 import img13 from '../images/19.png'
 import Form from '../components/form';
 // import Form from '../components/formcopy';
@@ -104,9 +104,13 @@ export default function Home() {
             console.log(err)
         })
     }
+    const user = useSelector(state=>state.user.user);
     return (
         <>
             <Nav />
+            {/* {user&&user.credits&&<button  className="tokensBtn"> <DatabaseFill color="#35b276" size={22} style={{"position":"relative","top":"-2px"}}/> {user.credits} &nbsp;Credits</button>}   */}
+          {user&&user.credits&&<button  className="tokensBtn" style={{"fontFamily": 'Open Sans',"fontWeight":"550","fontSize":"16px","color":"#347571"}}><DatabaseFill color="#347571" size={24} style={{"position":"relative","top":"-2px"}}/>  &nbsp;{user.credits} Credits</button>}
+
             {showHomePopup && <CreateUploadPopup personalData={personalData} setPersonalData={setPersonalData} onClose={handleClosePopup} onUpload={handleUpload} />}
             <button onClick={() => handler()} className=" btn btn-success signoutBtn"> <Power color="#35b276" size={22} /> &nbsp;Signout</button>
             <div className='row homeDiv'>

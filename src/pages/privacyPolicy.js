@@ -6,7 +6,7 @@ import Footer from '../components/footer'
 import { Power, ArrowLeft } from "react-bootstrap-icons";
 import { signOut } from 'firebase/auth'
 import { auth } from '../fireabse'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { signOutUser } from '../redux/slices/user';
 import { useNavigate } from 'react-router-dom';
 
@@ -25,12 +25,18 @@ export default function PrivacyPolicy() {
       console.log(err)
     })
   }
+  const user = useSelector(state => state.user.user);
+
   const returnBack = (e) => {
     navigate("/")
   }
   return (
     <div>
+<<<<<<< HEAD
      
+=======
+      {user&&user.profile&&<button onClick={() => handler()} className=" btn btn-success signoutBtn aboutUsSignOutBtn"> <Power color="#35b276" size={22} /> &nbsp;Signout</button>}
+>>>>>>> 9283bed21a1f8738dc43be797b138c3ab30a0eab
       <Nav />
       <div className="aboutUsContainer">
         <h1 className='aboutUsHeadig'><ArrowLeft color="#35b276" size={30} className='returnBackArrow' onClick={() => returnBack()} />Privacy Policy</h1>

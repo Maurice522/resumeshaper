@@ -3,10 +3,10 @@ import Nav from '../components/nav';
 import '../styleSheet/AboutUs.css'
 import img1 from '../images/aboutUs.png'
 import Footer from '../components/footer'
-import { Power, ArrowLeft } from "react-bootstrap-icons";
+import { Power, ArrowLeft, DatabaseFill } from "react-bootstrap-icons";
 import { signOut } from 'firebase/auth'
 import { auth } from '../fireabse'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { signOutUser } from '../redux/slices/user';
 import { useNavigate } from 'react-router-dom';
 
@@ -28,8 +28,15 @@ export default function Terms() {
   const returnBack = (e) => {
     navigate("/")
   }
+  const user = useSelector(state=>state.user.user);
   return (
     <div>
+<<<<<<< HEAD
+=======
+      {user&&user.profile&&<button onClick={() => handler()} className=" btn btn-success signoutBtn aboutUsSignOutBtn"> <Power color="#35b276" size={22} /> &nbsp;Signout</button>}
+      {/* {user&&user.profile&&user.credits&&<button  className="tokensBtn"> <Coin color="#35b276" size={22} style={{"position":"relative","top":"-2px"}}/> {user.credits} &nbsp;Credits</button>}   */}
+      {user&&user.profile&&user.credits&&<button  className="tokensBtn" style={{"right":"17%","fontFamily": 'Open Sans',"fontWeight":"550","fontSize":"16px","color":"#347571"}}><DatabaseFill color="#347571" size={24} style={{"position":"relative","top":"-2px"}}/>  &nbsp;{user.credits} Credits</button>}
+>>>>>>> 9283bed21a1f8738dc43be797b138c3ab30a0eab
       
       <Nav />
       <div className="aboutUsContainer">

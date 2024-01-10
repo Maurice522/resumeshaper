@@ -22,11 +22,12 @@ import vid from '../images/video1.mp4'
 import ReactPlayer from 'react-player'
 import Footer from '../components/footer'
 import LoginPopup from './loginPopup'
-import { Check2Circle, BookmarkStarFill } from "react-bootstrap-icons";
+import { Check2Circle, BookmarkStarFill, DatabaseFill } from "react-bootstrap-icons";
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth, getUserFromDatabase } from '../fireabse'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify';
+import { useSelector } from 'react-redux'
 
 
 export default function Landing() {
@@ -36,19 +37,18 @@ export default function Landing() {
     const [userData, setUserData] = useState();
     const [gettingUser, SetGettingUser] = useState(false);
     const playerRefSampleVid = useRef(null);
+
     
     const handleSampleVidEnded = () => {
         // Restart the video when it ends
         // playerRefSampleVid.current.seekTo(0);
         playerRefSampleVid.current?.seekTo(0);
     };
-    // const playerRef = useRef(null);
-
-    // const handleEnded = () => {
-    //     // Restart the video when it ends
-    //     playerRef.current.seekTo(0);
-    // };
+   
     const togglePopup = () => {
+        if(userData?.profile===true){
+          return  navigate('/dashboard');
+        }
         setIsPopupOpen(!isPopupOpen);
     };
 
@@ -68,6 +68,7 @@ export default function Landing() {
             }
         })
     },[])
+    const user = useSelector(state => state.user.user);
 
     return (
         <>
@@ -76,7 +77,9 @@ export default function Landing() {
             <Nav />
             {isLoggedIn==true?
             <button class=" continueToDahboardBtn signoutBtn zoom" onClick={()=> userData?.profile===true? navigate('/dashboard'):navigate('/auth')}>Dashboard</button>:
-            <button class="loginBtn signoutBtn" onClick={togglePopup}>Join</button>}
+            <button class="loginBtn signoutBtn" onClick={togglePopup}>Login</button>}
+            {userData?.profile===true&&<button  className="tokensBtn" style={{"right":"17%","fontFamily": 'Open Sans',"fontWeight":"550","fontSize":"16px","color":"#347571"}}><DatabaseFill color="#347571" size={24} style={{"position":"relative","top":"-2px"}}/>  &nbsp;{user.credits} Credits</button>}
+            
             {isPopupOpen && <LoginPopup onClose={togglePopup} onSignup={handleSignup}/>}
 
             <div className='topDivLanding'>
@@ -162,7 +165,7 @@ export default function Landing() {
             <div className='section4'>
                 <div className='videoSection row'>
                     <div className='col-md-6 sec4MidDiv1 '>
-                        <ReactPlayer
+                        {/* <ReactPlayer
                             className="player"
                             url={vid}
                             width="100%"
@@ -173,7 +176,20 @@ export default function Landing() {
                             repeat={true}
                             onEnded={handleSampleVidEnded}
                             ref={playerRefSampleVid}
-                        />
+                        /> */}
+                        <ReactPlayer
+    className="player"
+    url="https://www.youtube.com/watch?v=Kn5M2Cg_DFM&t=8s"
+    width="100%"
+    height="142%"
+    playing={true}
+    muted={true}  // Set to false for not muted by default
+    autoplay={true}
+    repeat={true}
+    controls={true}  // Add controls for user interaction
+    onEnded={handleSampleVidEnded}
+    ref={playerRefSampleVid}
+/>
                     </div>
                     <div className='col-md-6 sec4MidDiv2'>
                         <h4>Our Features</h4>

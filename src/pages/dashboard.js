@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Nav from '../components/nav';
-import { Power, Upload } from "react-bootstrap-icons";
+import { DatabaseFill, Power, Upload } from "react-bootstrap-icons";
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { onAuthStateChanged, signOut } from 'firebase/auth'
@@ -14,11 +14,12 @@ import img3 from '../images/template3.PNG'
 import img4 from '../images/template4.PNG'
 import Templates from '../components/templates';
 import JobPopup from '../components/jobPopup';
-
+import { Tooltip } from 'react-tooltip'
 export default function Dashboard() {
     const navigate =useNavigate()
     const [gettingUser, SetGettingUser] = useState(false);
     const [deleting, setDeleting] = useState(false);
+
     useEffect(()=>{
        
         const listen = onAuthStateChanged(auth, async(user)=>{
@@ -244,13 +245,18 @@ export default function Dashboard() {
         {console.log(savedResumes)}
             <Nav />
             <button onClick={() => handler()} className=" btn btn-success signoutBtn"> <Power color="#35b276" size={22} /> &nbsp;Signout</button>
+            <button  className="tokensBtn" style={{"fontFamily": 'Open Sans',"fontWeight":"550","fontSize":"16px","color":"#347571"}}><DatabaseFill color="#347571" size={24} style={{"position":"relative","top":"-2px"}}/>  &nbsp;{user.credits} Credits</button>
+            
             <div className='dashboardDiv'>
                 <h2 className='formTitle'>Resume Gallery</h2>
                 <p className='formSubText'>"Welcome to your hub for organized resumes.Access, edit, or create new resumes for tailored job application."</p>
                 <div className='dashHeader'>
                     <h4>Documents</h4>
-                    <button className='createDoc zoom' onClick={()=>navigate("/create")}><PlusLg size={20} /> &nbsp;Create New</button>
-                    <button className='uploadDoc zoom' onClick={()=>navigate("/create",{state:{upload:true}})}><Upload size={20} /> &nbsp;Upload Resume</button>
+                    <button className='createDoc zoom' onClick={()=>navigate("/create")}>
+                    <PlusLg size={20} /> &nbsp;Create New</button>
+                    
+                    <button className='uploadDoc zoom' onClick={()=>navigate("/create",{state:{upload:true}})}  data-tooltip-id="uploadNewResumeInfo" data-tooltip-content="This will cost 4 credits"><Upload size={20} /> &nbsp;Upload Resume</button>
+                    <Tooltip id="uploadNewResumeInfo" />
                 </div>
                 <hr className='dashHrLine' />
                 {isPopupOpen && <JobPopup onClose={togglePopup} onSignup={handleSignup} />}

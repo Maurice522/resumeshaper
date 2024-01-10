@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import '../styleSheet/createUpload.css'
 import img3 from '../images/28.png'
-import { updateUserInDatabase, uploadMedia } from '../fireabse';
+import { updateUserCreditsInDatabase, updateUserInDatabase, uploadMedia } from '../fireabse';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateResume } from '../redux/slices/user';
+import { updateCredits, updateResume } from '../redux/slices/user';
+import { Tooltip } from 'react-tooltip'
+import { toast } from 'react-toastify';
+import { DatabaseFill} from "react-bootstrap-icons";
 
 export default function CreateUploadPopup({ onClose, personalData, setPersonalData}) {
- 
+  
+
   const [numPages, setNumPages] = useState(null);
   const [pdfText, setPdfText] = useState('');
 
@@ -34,8 +38,10 @@ export default function CreateUploadPopup({ onClose, personalData, setPersonalDa
 
   };
 
-  const handleUploadResume = async() => {
+  const handleUploadResume = async() => {   
     if (file) {
+      const cost = 40;
+      if(user.credits >= cost){
       setLoading(true)
       const fileLink = await uploadMedia(file, "resume");
       await updateUserInDatabase(user.email, fileLink)
@@ -54,6 +60,8 @@ export default function CreateUploadPopup({ onClose, personalData, setPersonalDa
         console.log(responseJson)
         return responseJson;
       })
+      await updateUserCreditsInDatabase(user.email, user.credits-cost)
+      dispatch(updateCredits(user.credits-cost));
       // delete res.professionalSummary;
       delete res.websitesAndLinks;
       res.websitesAndLinks = [
@@ -64,9 +72,16 @@ export default function CreateUploadPopup({ onClose, personalData, setPersonalDa
       ];
       setPersonalData(res)
       console.log(res)
-      setLoading(false)
-      
+      setLoading(false) 
       onClose();
+      
+    }else{
+      setLoading(false)
+      console.log("Not enough credits");
+      onClose();
+      return toast.error("Not Enough Credits!")
+     
+    }
     }
   };
 
@@ -84,6 +99,7 @@ export default function CreateUploadPopup({ onClose, personalData, setPersonalDa
         <h2 className='homeHeader'>
           <img src={img3} className='popupImg' />
           Welcome to Resume Builder</h2>
+          <p><i>Thank you for signing up with us. You have received 100 Credits as a bonus! Let's get ready to build your dream resume!</i></p>
           { !upload && <p className='homeSelectOption'>Select an Approach:</p>}
         { !upload && <button onClick={onClose} className="newResumeBtn ">Create a Fresh Resume</button>}
         { upload &&<> 
@@ -93,11 +109,11 @@ export default function CreateUploadPopup({ onClose, personalData, setPersonalDa
           </div>
           </>
         }
-        { !upload &&<button className='homePopupBtn  ' onClick={handleUpload}>Upload your Resume</button>}
+        { !upload &&<button className='homePopupBtn  ' style={{'position':'relative'}} onClick={handleUpload} data-tooltip-id="uploadNewUserResumeInfo" data-tooltip-content="This will cost 4 credits">Upload your Resume <span style={{'position':"absolute",'right':'6%'}}> 4 <DatabaseFill  color="white" size={16} style={{"position":"relative","top":"-2px"}} /></span></button>}
+        <Tooltip id="uploadNewUserResumeInfo" />
         { upload && <button className='homePopupBtnShort  ' onClick={handleBack}>Back</button>}
         { upload && <button className='homePopupBtnShort  ' onClick={handleUploadResume}>Upload</button>}
         </>}
-        
       </div>
     </div>
   );

@@ -432,6 +432,15 @@ body {
 .landing-carousel-control-prev {
     margin-top: 22% !important;
 }
+.tokensBtn{
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    right: 12%;
+    top: 3.5%;
+    z-index: 45;
+    font-size: 16px;
+}
 @media only screen and (min-width: 1024px) and (max-width: 1187px) {
     .jumboImgDiv {
         height: 68%;
@@ -489,6 +498,15 @@ body {
     .sec2Col {
         height: 53vh;
        
+    }
+    .tokensBtn{
+        background-color: transparent;
+        border: none;
+        position: absolute;
+        right: 12%;
+        top: 3.5%;
+        z-index: 45;
+        font-size: 16px;
     }
 }
 @media only screen and (min-width: 480px) and (max-width: 768px) {
@@ -572,6 +590,15 @@ body {
     }
     .landing-carousel-control-prev {
         margin-top: 56% !important;
+    }
+    .tokensBtn{
+        background-color: transparent;
+        border: none;
+        position: absolute;
+        right: 12%;
+        top: 3.5%;
+        z-index: 45;
+        font-size: 16px;
     }
 }
 
@@ -675,6 +702,15 @@ font-size: 16px;
     }
     .landing-carousel-control-prev {
         margin-top: 56% !important;
+    }
+    .tokensBtn{
+        background-color: transparent;
+        border: none;
+        position: absolute;
+        right: 12%;
+        top: 3.5%;
+        z-index: 45;
+        font-size: 16px;
     }
   }
   

@@ -101,12 +101,13 @@ export default function CreateLiveContinue() {
                 description: '',
             },
         ],
-        websitesLinks: [
+        websitesAndLinks: [
             {
                 name: '',
                 url: '',
             },
         ],
+      
     });
 
     const [gettingUser, SetGettingUser] = useState(false);
@@ -177,12 +178,13 @@ export default function CreateLiveContinue() {
                         description: '',
                     },
                 ],
-                websitesLinks: [
+                websitesAndLinks: [
                     {
                         name: '',
                         url: '',
                     },
                 ],
+             
             };
             console.log(location)
             if(location.state !== null){
@@ -391,32 +393,32 @@ export default function CreateLiveContinue() {
     );
 
     const addWebsiteLink = () => {
-        setPersonalData((prevData) => ({
+setPersonalData((prevData) => ({
             ...prevData,
-            websitesLinks: [
-                ...prevData.websitesLinks,
+            websitesAndLinks: [
+                ...prevData.websitesAndLinks,
                 {
                     name: '',
                     url: '',
                 },
             ],
-        }));
+        }));        
     };
 
     const removeWebsiteLink = (index) => {
         setPersonalData((prevData) => {
-            const updatedWebsitesLinks = [...prevData.websitesLinks];
+            const updatedWebsitesLinks = [...prevData.websitesAndLinks];
             updatedWebsitesLinks.splice(index, 1);
             return {
                 ...prevData,
-                websitesLinks: updatedWebsitesLinks,
+                websitesAndLinks: updatedWebsitesLinks,
             };
         });
     };
 
     const updateWebsiteLinkField = (index, field, value) => {
         var updatedWebsitesLinks = [];
-        personalData.websitesLinks.map((item, idx2) => {
+        personalData.websitesAndLinks.map((item, idx2) => {
             var temp;
             if (idx2 === index) {
                 temp = { ...item, writable: true };
@@ -430,7 +432,7 @@ export default function CreateLiveContinue() {
         setPersonalData((prevData) => {
             return {
                 ...prevData,
-                websitesLinks: updatedWebsitesLinks,
+                websitesAndLinks: updatedWebsitesLinks,
             };
         });
     }
@@ -998,7 +1000,7 @@ export default function CreateLiveContinue() {
                                                 </div>
 
                                                 <div className='col-md-6 col-sm-6'>
-                                                    <label className='detailsInfoLabel'>
+                                                    <label className='detailsInfoLabel cityLabelForm'>
                                                         City: <span style={{ color: 'red' }}>*</span>
                                                     </label>
                                                     <br />
@@ -1163,7 +1165,7 @@ export default function CreateLiveContinue() {
                                                                         </div>
 
                                                                         <div className="col-md-6">
-                                                                            <label className='detailsInfoLabel'>
+                                                                            <label className='detailsInfoLabel cityLabelForm'>
                                                                                 City
                                                                             </label>
                                                                             <br />
@@ -1297,7 +1299,7 @@ export default function CreateLiveContinue() {
                                                                         </div>
 
                                                                         <div className="col-md-6">
-                                                                            <label className='detailsInfoLabel'>
+                                                                            <label className='detailsInfoLabel cityLabelForm'>
                                                                                 City:
                                                                             </label>
                                                                             <input
@@ -1335,73 +1337,66 @@ export default function CreateLiveContinue() {
                                                     </div>
                                                 </div>
                                             </div>
-                                            {/* ************************************************************** */}
+                                            {/* *******************************New******************************* */}
 
                                             <h5 className='formSection'><Link45deg color="#35b276" size={26} /> &nbsp;Websites and Links</h5>
-                                            <p className='detailsSubText'>Elevate your resume with real-world examples of your work. You can include Personal-websites, portfolios,and project repositories to demonstrate your skills and experience.  </p>
+                                            <p className='detailsSubText'>Elevate your resume with real-world examples of your work. You can include Personal-websites, portfolios,and project repositories to demonstrate your skills and experience. </p>
 
-                                            <div class="accordion myAccordian" id="accordionExample4">
+                                            <div class="accordion myAccordian" id="accordionExample3">
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header">
-                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                                            Add Website or Link
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                            Add Websites
                                                         </button>
                                                     </h2>
-                                                    <div id="collapseFour" class="accordion-collapse collapse show" data-bs-parent="#accordionExample4">
+                                                    <div id="collapseThree" class="accordion-collapse collapse show" data-bs-parent="#accordionExample3">
                                                         <div class="accordion-body">
 
-                                                            {personalData.websiteLinks!==undefined && personalData.websiteLinks.length >0 &&personalData.websitesLinks.map((websiteLink, index) => (
-                                                                <div key={index} className="websitesLinksDiv">
-                                                                    <h5 className='personalSubSubHeading'>Link {index + 1} :</h5>
+                                                            {personalData.websitesAndLinks !==undefined && personalData.websitesAndLinks.length>0 &&personalData.websitesAndLinks.map((websites, index) => (
+                                                                <div key={index} className="employmentHistoryDiv">
+                                                                    <h5 className='personalSubSubHeading'>Site {index + 1} :</h5>
                                                                     <div className='row'>
+
                                                                         <div className="col-md-6">
                                                                             <label className='detailsInfoLabel'>
-                                                                                Name:
+                                                                                Name :
                                                                             </label>
                                                                             <br />
                                                                             <input
                                                                                 className='detailsInfoInput'
                                                                                 type="text"
-                                                                                value={websiteLink.name}
+                                                                                value={websites.name}
                                                                                 onChange={(e) => updateWebsiteLinkField(index, 'name', e.target.value)}
                                                                             />
                                                                         </div>
 
                                                                         <div className="col-md-6">
                                                                             <label className='detailsInfoLabel'>
-                                                                                URL:
+                                                                                Url:
                                                                             </label>
                                                                             <br />
                                                                             <input
                                                                                 className='detailsInfoInput'
                                                                                 type="text"
-                                                                                value={websiteLink.url}
+                                                                                value={websites.url}
                                                                                 onChange={(e) => updateWebsiteLinkField(index, 'url', e.target.value)}
                                                                             />
                                                                         </div>
-                                                                    </div>
-
-                                                                    <button
-                                                                        type="button"
-                                                                        onClick={() => removeWebsiteLink(index)}
-                                                                        className="DeleteEmp"
-                                                                    >
+</div>
+                                                                    <button type="button" onClick={() => removeWebsiteLink(index)} className="DeleteEmp">
                                                                         <Trash3Fill size={20} />
                                                                     </button>
                                                                 </div>
                                                             ))}
 
-                                                            <button
-                                                                type="button"
-                                                                onClick={addWebsiteLink}
-                                                                className="Sec1additionalDetails"
-                                                            >
-                                                                <PlusLg size={20} /> Add One More Website/Link
+                                                            <button type="button" onClick={addWebsiteLink} className="Sec1additionalDetails">
+                                                                <PlusLg size={20} /> Add Website
                                                             </button>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
+                         {/* ************************************************************************************** */}
 
                                             <div className='liveInfoOuterDiv'>
                                                 <div className='skillsSection'>

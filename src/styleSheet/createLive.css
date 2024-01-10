@@ -5,7 +5,7 @@
 }
 
 .createLiveSignOut {
-    top: 18%;
+    top: 22%;
     right: 3%;
 }
 
@@ -36,11 +36,11 @@
     position: absolute;
     z-index: 20;
     background-color: #ecf8e5;
-    right: 16%;
+    right: 29.3%;
     border: none;
     font-weight: 550; 
     color: #346571;
-    top: 30%;
+    top: 33%;
 }
 
 .downloadPDFIcon {
@@ -383,21 +383,21 @@ font-family: 'Roboto', sans-serif; */
     position: absolute;
     z-index: 20;
     background-color: #ecf8e5;
-    right: 28%;
+    right: 39%;
     border: none;
     color: #346571;
     top: 34%;
-    font-weight: 800;
+    font-weight: 550;
   }
   .dashboardBtn:hover{
     position: absolute;
     z-index: 20;
     background-color: #ecf8e5;
-    right: 28%;
+    right: 39%;
     border: none;
     color: #346571;
     top: 34%;
-    font-weight: 900;
+    font-weight: 550;
   }
   .templateDiv{
     /* background-color: #c2fbd7; */
@@ -507,7 +507,6 @@ margin-top: 22%;
     cursor: pointer;
 }
 .bulbGif{
-    background-color: yellow;
     height: 50px;
     width: 50px;
     z-index: 5;
@@ -516,3 +515,133 @@ margin-top: 22%;
 .cityLabelForm{
     margin-bottom: 4% !important;
 }
+.moveBtnCreateUp{
+    background-color: transparent;
+    /* background-color: #346571; */
+    border: none;
+    text-align: right;
+    position: absolute;
+    top: -2%;
+    width: 10%;
+    right: -2%;
+
+}
+.moveBtnCreateDown{
+    background-color: transparent;
+    /* background-color: #346571; */
+    border: none;
+    text-align: right;
+    position: absolute;
+    top: 1.7%;
+    width: 10%;
+    right: -2%;
+}
+.moveBtnCreateWebsiteUp {
+    background-color: transparent;
+    /* background-color: #346571; */
+    border: none;
+    text-align: right;
+    position: absolute;
+    top: -43%;
+    width: 10%;
+    right: 0%;
+}
+.moveBtnCreateWebsiteDown {
+    background-color: transparent;
+    /* background-color: #346571; */
+    border: none;
+    text-align: right;
+    position: absolute;
+    top: -16.5%;
+    width: 10%;
+    right: 0%;
+}
+.moveBtnCreateNotLiveDown {
+    background-color: transparent;
+    /* background-color: #346571; */
+    border: none;
+    text-align: right;
+    position: absolute;
+    top: 8.5%;
+    width: 10%;
+    right: -2%;
+}
+.infoTextDiv{
+    position: absolute;
+    /* visibility: hidden; */
+    width: 200px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 10px;
+    z-index: 1;
+    top: -50px; /* Adjust this value to position the tooltip */
+    left: 50%;
+    margin-left: -100px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.SaveBtn{
+    position: absolute;
+    z-index: 20;
+    background-color: #ecf8e5;
+    right: 46.3%;
+    border: none;
+    color: #346571;
+    top: 34%;
+    font-weight: 550;
+  }
+  /* .checkTokenClass{
+    box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
+              -4px -4px 6px 0 rgba(116, 125, 136, .5), 
+    inset -4px -4px 6px 0 rgba(255,255,255,.2),
+    inset 4px 4px 6px 0 rgba(0, 0, 0, .4);
+  } */
+ 
+/* 2 */
+/* .btn-2 {
+    background: rgb(96,9,240);
+    background: linear-gradient(0deg, rgba(96,9,240,1) 0%, rgba(129,5,240,1) 100%);
+    border: none;
+    
+  } */
+  .btn-2:before {
+    height: 0%;
+    width: 2px;
+  }
+  .btn-2 {
+    border: none;
+    box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
+                -4px -4px 6px 0 rgba(116, 125, 136, .5), 
+      inset -2px -2px 6px 0 rgba(255,255,255,.2),
+      inset 2px 2px 6px 0 rgba(0, 0, 0, .2);
+  }
+
+  
+.custom-btn {
+    width: 180px;
+    height: 40px;
+    color: #fff;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: absolute;
+    display: inline-block;
+     box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+     5px 5px 15px 0px rgba(0,0,0,.1),
+     4px 4px 5px 0px rgba(0,0,0,.1);
+    outline: none;
+  }
+
+  .btn-2 {
+    border: none;
+    box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
+                -4px -4px 6px 0 rgba(116, 125, 136, .5), 
+      inset -2px -2px 6px 0 rgba(255,255,255,.2),
+      inset 2px 2px 6px 0 rgba(0, 0, 0, .2);
+  }
