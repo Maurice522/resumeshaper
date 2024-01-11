@@ -1,0 +1,68 @@
+.upgrade-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow-y: scroll;
+    background-color: #ecf8e5;
+    padding: 40px 80px;
+}
+
+.upgrade-container>p {
+    font-size: 18px;
+    color: #000;
+    font-weight: 600;
+}
+
+.upgrade-Upper {
+    text-align: center;
+}
+
+.upgradeCards {
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+@media screen and (max-width: 480px) {
+    .upgrade-container {
+        padding: 40px 40px;
+    }
+
+    .upgradeCards {
+        flex-direction: column;
+    }
+}
+
+.card {
+    background-color: #5ec57e;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+.card {
+    width: 400px;
+    height: 450px;
+}
+
+.cardUpper {
+    height: 35%;
+    text-align: center;
+}
+
+.cardBottom {
+    height: 60%;
+    padding: 20px;
+}
+
+.glasss {
+    background: rgba(236, 248, 229, 0.042);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(3.9px);
+    -webkit-backdrop-filter: blur(3.9px);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+}

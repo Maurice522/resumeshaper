@@ -38,11 +38,12 @@ body {
     right: 2%;
     padding-left: 5%;
 }
-.smallScreenDiv{
+
+.smallScreenDiv {
     width: 75%;
     display: inline-block;
     position: relative;
-    left:14%;
+    left: 14%;
     margin-bottom: 4%;
     margin-top: -150%;
     display: none;
@@ -80,9 +81,11 @@ body {
     margin: auto;
     padding-bottom: 5%;
 }
-.section1{
+
+.section1 {
     width: 100%;
 }
+
 .section1Heading {
     font-family: 'Open Sans', sans-serif;
     color: #347571;
@@ -333,7 +336,8 @@ body {
     font-size: 14px;
 
 }
-.section2{
+
+.section2 {
     width: 100%;
     overflow: hidden;
 }
@@ -390,17 +394,22 @@ body {
     top: 22px;
     right: 3%;
 }
-.topDivLanding{
+
+.topDivLanding {
     position: relative;
 }
+
 .zoom {
-    transition: transform .2s; /* Animation */
-  }
-  
-  .zoom:hover {
-    transform: scale(1.1); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
-  }
-  .continueToDahboardBtn{
+    transition: transform .2s;
+    /* Animation */
+}
+
+.zoom:hover {
+    transform: scale(1.1);
+    /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+.continueToDahboardBtn {
     background-color: #174f5d !important;
     background-image: url("../images/bg.png") !important;
     color: #174f5d !important;
@@ -412,8 +421,9 @@ body {
     top: 3.5%;
     right: 3%;
     border: none !important;
-  }
-  .continueToDahboardBtn:hover {
+}
+
+.continueToDahboardBtn:hover {
     background-image: none;
     background-color: #35b276;
     color: white;
@@ -423,16 +433,20 @@ body {
     top: 3.5%;
     right: 3%;
 }
-.landingCaraousel{
+
+.landingCaraousel {
     height: 627px !important;
 }
+
 .landing-carousel-control-next {
     margin-top: 22% !important;
 }
+
 .landing-carousel-control-prev {
     margin-top: 22% !important;
 }
-.tokensBtn{
+
+.tokensBtn {
     background-color: transparent;
     border: none;
     position: absolute;
@@ -441,6 +455,7 @@ body {
     z-index: 45;
     font-size: 16px;
 }
+
 @media only screen and (min-width: 1024px) and (max-width: 1187px) {
     .jumboImgDiv {
         height: 68%;
@@ -451,10 +466,12 @@ body {
         right: 2%;
         padding-left: 5%;
     }
+
     .ctaBtn {
         bottom: 39%;
     }
 }
+
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
     .jumboImgDiv {
         height: 68%;
@@ -465,11 +482,13 @@ body {
         right: 2%;
         padding-left: 5%;
     }
+
     .loginBtn {
         width: 12%;
         font-size: 16px;
         right: 2%;
     }
+
     .sec1Left {
         display: inline-block;
         width: 90%;
@@ -478,6 +497,7 @@ body {
         padding: 3%;
         margin-left: 5%;
     }
+
     .sec1Img {
         width: 40%;
         height: 100%;
@@ -485,21 +505,24 @@ body {
         top: 5%;
         left: 30%;
     }
-    
+
     .sec1Right {
         display: inline-block;
         width: 95%;
         padding: 3%;
         padding-left: 8%;
     }
+
     .ctaBtn {
         bottom: 40%;
     }
+
     .sec2Col {
         height: 53vh;
-       
+
     }
-    .tokensBtn{
+
+    .tokensBtn {
         background-color: transparent;
         border: none;
         position: absolute;
@@ -509,18 +532,21 @@ body {
         font-size: 16px;
     }
 }
+
 @media only screen and (min-width: 480px) and (max-width: 768px) {
     .jumboImgDiv {
-       display: none;
+        display: none;
     }
-    .smallScreenDiv{
+
+    .smallScreenDiv {
         width: 75%;
         display: inline-block;
         position: relative;
-        left:14%;
+        left: 14%;
         margin-bottom: 4%;
         margin-top: -150%;
     }
+
     .jumboText {
         height: 53%;
         width: 90%;
@@ -530,6 +556,7 @@ body {
         left: 5%;
         color: #174f5d;
     }
+
     .sec1Left {
         display: inline-block;
         width: 90%;
@@ -539,6 +566,7 @@ body {
         margin-left: 5%;
         margin-bottom: 4%;
     }
+
     .sec1Img {
         width: 40%;
         height: 100%;
@@ -546,26 +574,31 @@ body {
         top: 5%;
         left: 30%;
     }
-    
+
     .sec1Right {
         display: inline-block;
         width: 95%;
         padding: 3%;
         padding-left: 8%;
     }
+
     .ctaBtn {
         bottom: 50%;
     }
+
     .sec2Img {
         width: 22%;
     }
+
     .sec2Col h5 {
         margin-top: 8%;
     }
+
     .sec2Col {
         height: 67vh;
-       
+
     }
+
     .sec4MidDiv2 {
         width: 90%;
         align-items: center;
@@ -574,24 +607,30 @@ body {
         display: block;
         margin: auto;
     }
-    .sec4MidDiv2 h4{
+
+    .sec4MidDiv2 h4 {
         margin-left: 0%;
         margin-top: 15%;
     }
-    .reviewHeading{
+
+    .reviewHeading {
         margin-top: 7%;
         margin-bottom: 10%;
     }
-    .testimonialImg{
+
+    .testimonialImg {
         display: none;
     }
+
     .landing-carousel-control-next {
         margin-top: 56% !important;
     }
+
     .landing-carousel-control-prev {
         margin-top: 56% !important;
     }
-    .tokensBtn{
+
+    .tokensBtn {
         background-color: transparent;
         border: none;
         position: absolute;
@@ -605,16 +644,18 @@ body {
 
 
 @media only screen and (max-width: 480px) {
-     .loginBtn {
+    .loginBtn {
         width: 20%;
         font-size: 14px;
         right: 1%;
         background-color: #174f5d;
     }
+
     .jumboImgDiv {
         display: none;
-     }
-     .jumboText {
+    }
+
+    .jumboText {
         height: 53%;
         width: 90%;
         display: inline-block;
@@ -623,6 +664,7 @@ body {
         left: 8%;
         color: #174f5d;
     }
+
     .sec1Left {
         display: inline-block;
         width: 90%;
@@ -632,6 +674,7 @@ body {
         margin-left: 7%;
         margin-bottom: 4%;
     }
+
     .sec1Img {
         width: 40%;
         height: 100%;
@@ -639,45 +682,53 @@ body {
         top: 5%;
         left: 30%;
     }
-    
+
     .sec1Right {
         display: inline-block;
         width: 95%;
         padding: 3%;
         padding-left: 8%;
     }
+
     .ctaBtn {
         bottom: 37%;
         left: 6%;
     }
-    .smallScreenDiv{
+
+    .smallScreenDiv {
         width: 75%;
         display: inline-block;
         position: relative;
-        left:14%;
+        left: 14%;
         margin-bottom: 8%;
         margin-top: -150%;
     }
+
     .jumbotron {
         height: 78vh;
     }
-    .sec1RightText{
-font-size: 16px;
+
+    .sec1RightText {
+        font-size: 16px;
     }
+
     .sec2Img {
         width: 30%;
     }
+
     .sec2Col {
         height: 50vh;
-       
+
     }
-    .ctaBtnSec2{
+
+    .ctaBtnSec2 {
         font-size: 14px;
         width: 270px;
         display: block;
         margin: auto;
         margin-top: 12%;
     }
+
     .sec4MidDiv2 {
         width: 90%;
         align-items: center;
@@ -686,24 +737,30 @@ font-size: 16px;
         display: block;
         margin: auto;
     }
-    .sec4MidDiv2 h4{
+
+    .sec4MidDiv2 h4 {
         margin-left: 0%;
         margin-top: 15%;
     }
-    .reviewHeading{
+
+    .reviewHeading {
         margin-top: 7%;
         margin-bottom: 10%;
     }
-    .testimonialImg{
+
+    .testimonialImg {
         display: none;
     }
+
     .landing-carousel-control-next {
         margin-top: 56% !important;
     }
+
     .landing-carousel-control-prev {
         margin-top: 56% !important;
     }
-    .tokensBtn{
+
+    .tokensBtn {
         background-color: transparent;
         border: none;
         position: absolute;
@@ -712,5 +769,4 @@ font-size: 16px;
         z-index: 45;
         font-size: 16px;
     }
-  }
-  
+}

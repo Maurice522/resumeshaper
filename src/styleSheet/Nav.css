@@ -6,6 +6,8 @@
     font-family: 'Open Sans', sans-serif;
     color: #346571;
     z-index: 11;
+    display: flex;
+    width: 100%;
 }
 
 .logoImg {
@@ -17,8 +19,8 @@
 }
 
 @media only screen and (max-width: 480px) {
-.navText {
-    color: #347571;
-    font-size: 16px;
-}
+    .navText {
+        color: #347571;
+        font-size: 16px;
+    }
 }
