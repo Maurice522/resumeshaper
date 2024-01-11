@@ -4,6 +4,7 @@ import "../styleSheet/Upgrade.css";
 const Upgrade = () => {
   const basicPlan = {
     planName: "Basic",
+    intialPrice: 12.99,
     price: 9.99,
     duration: "1 month",
     features: [
@@ -18,6 +19,7 @@ const Upgrade = () => {
 
   const proPlan = {
     planName: "Pro",
+    intialPrice: 25.99,
     price: 19.99,
     duration: "6 months",
     features: [
@@ -33,6 +35,7 @@ const Upgrade = () => {
 
   const premiumPlan = {
     planName: "Premium",
+    intialPrice: 35.99,
     price: 29.99,
     duration: "1 Year",
     features: [
@@ -65,14 +68,14 @@ const Upgrade = () => {
 
 export default Upgrade;
 
-const Card = ({ planName, price, features, duration }) => {
+const Card = ({ planName, price, intialPrice, features, duration }) => {
   return (
     <div className='card zoom glasss'>
       <div className='cardUpper'>
         <h4>{planName}</h4>
         <h2>
-          ${price}
-          <span>/month</span>
+          <del style={{ fontSize: "21px" }}>${intialPrice}</del> ${price}
+          <span style={{ fontSize: "21px" }}>/month</span>
         </h2>
         <h6>{duration}</h6>
         <button className='btn btn-success'>Upgrade Plan</button>

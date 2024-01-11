@@ -915,7 +915,6 @@ export default function CreateLiveContinue() {
         />
       ) : (
         <>
-          {/* <Nav /> */}
           {downloadPdf ? (
             <PdfDisplayBE
               imgFile={imgFile}
@@ -942,7 +941,7 @@ export default function CreateLiveContinue() {
                   >
                     <a class='navbar-brand mb-0 h1 navText' href='#'>
                       &nbsp; &nbsp;
-                      <img src={img3} class='logoImg' />
+                      <img src={img3} class='logoImg' alt='' />
                       &nbsp; &nbsp;
                       <strong onClick={redirectHome}>RESUME SHAPER</strong>
                     </a>
