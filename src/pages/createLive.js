@@ -883,6 +883,21 @@ export default function CreateLiveContinue() {
   const handleMenu = () => {
     setShowMenu(!showMenu);
   };
+  useEffect(() => {
+    if (window.innerWidth > 890) {
+      setShowMenu(false);
+    }
+    const handleResize = () => {
+      if (window.innerWidth > 890) {
+        setShowMenu(false);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <>
       {gettingUser ? (
