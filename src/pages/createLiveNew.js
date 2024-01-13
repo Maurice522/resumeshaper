@@ -10,7 +10,7 @@ import {
 } from "../redux/slices/user";
 import Nav from "../components/nav";
 import { useLocation, useNavigate } from "react-router-dom";
-import { DatabaseFill, Power } from "react-bootstrap-icons";
+import { DatabaseFill, List, Power } from "react-bootstrap-icons";
 import MyPdfViewer1 from "../components/pdfDisplayFeTemp1";
 import MyPdfViewer2 from "../components/pdfDisplayFeTemp2";
 import MyPdfViewer3 from "../components/pdfDisplayFeTemp3";
@@ -57,6 +57,7 @@ import img7 from "../images/template4.PNG";
 import JobPopup from "../components/jobPopup";
 import CreateUploadPopup from "../components/createUploadPopup";
 import { Tooltip } from "react-tooltip";
+import { toast } from "react-toastify";
 
 // import skills from '../components/formComponents/skills';
 
@@ -678,6 +679,24 @@ export default function CreateLive() {
     // upload file code
     console.log("File uploaded:", file.name);
   };
+  const [showMenu, setShowMenu] = useState(false);
+  const handleMenu = () => {
+    setShowMenu(!showMenu);
+  };
+  useEffect(() => {
+    if (window.innerWidth > 890) {
+      setShowMenu(false);
+    }
+    const handleResize = () => {
+      if (window.innerWidth > 890) {
+        setShowMenu(false);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <>
@@ -722,7 +741,7 @@ export default function CreateLive() {
             />
           ) : (
             <>
-              <div>
+              {/* <div>
                 <nav class='navbar bg-body-tertiary myNav createLiveNav'>
                   <div class='container-fluid'>
                     <a class='navbar-brand mb-0 h1 navText' href='#'>
@@ -773,9 +792,190 @@ export default function CreateLive() {
                     <Power color='#35b276' size={22} /> &nbsp;Signout
                   </button>
                 </nav>
-              </div>
+              </div> */}
               {/* <button onClick={openJobModal}>Click Here</button>
                         {isJobPopupOpen && <JobPopup onClose={openJobModal} />} */}
+              <div>
+                <nav class='navbar bg-body-tertiary myNav createLiveNav'>
+                  <div
+                    class='container-fluid'
+                    style={{ width: "auto", padding: 0, margin: 0 }}
+                  >
+                    <a class='navbar-brand mb-0 h1 navText' href='#'>
+                      &nbsp; &nbsp;
+                      <img src={img3} class='logoImg' alt='' />
+                      &nbsp; &nbsp;
+                      <strong onClick={redirectHome}>RESUME SHAPER</strong>
+                    </a>
+                  </div>
+                  {/* <button className='downloadPdfBtn zoom'>super</button> */}
+                  <div className='menuoptions2'>
+                    <button
+                      onClick={(e) => handleLogDetails(e)}
+                      className=' SaveBtn zoom'
+                      disabled={photoLoader}
+                    >
+                      Save
+                    </button>
+                    <button
+                      onClick={() => handleDashboard()}
+                      className=' dashboardBtn zoom'
+                      disabled={photoLoader}
+                    >
+                      Dashboard
+                    </button>
+                    <button
+                      onClick={() => handleDownload()}
+                      className=' downloadPdfBtn zoom'
+                      disabled={photoLoader}
+                    >
+                      Download PDF
+                    </button>
+                    <button
+                      className='custom-btn btn-2'
+                      style={{
+                        // "z-index": "45",
+                        // top: "25%",
+                        // right: "13%",
+                        cursor: "none",
+                        fontFamily: "Open Sans",
+                        textAlign: "left",
+                        color: "#ecf8e5",
+                        backgroundColor: "#347571",
+                        fontWeight: "550",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "5px",
+                      }}
+                    >
+                      {" "}
+                      <DatabaseFill
+                        color='#ecf8e5'
+                        size={22}
+                        style={{ position: "relative", top: "-2px" }}
+                      />{" "}
+                      &nbsp;{user.credits}{" "}
+                      <button
+                        onClick={() => navigate("/upgrade")}
+                        className='custom-btn'
+                        style={{
+                          width: "100px",
+                          "z-index": "45",
+                          top: "0%",
+                          right: "0%",
+                          fontFamily: "Open Sans",
+                          textAlign: "center",
+                          color: "#347571",
+                          backgroundColor: "#ecf8e5",
+                          fontWeight: "550",
+                          paddingLeft: "8px",
+                          paddingRight: "8px",
+                          paddingTop: "1px",
+                          paddingBottom: "1px",
+                          height: "32px",
+                          //   marginTop: "4px",
+                          fontSize: "12px",
+                          //   marginRight: "10px",
+                          border: "none",
+                        }}
+                      >
+                        Upgrade
+                      </button>
+                    </button>
+                    <button
+                      onClick={() => handler()}
+                      className=' btn btn-success signoutBtn createLiveSignOut'
+                    >
+                      <Power color='#35b276' size={22} /> &nbsp;Signout
+                    </button>
+                  </div>
+                  {showMenu && (
+                    <div className='menuoptions'>
+                      <button
+                        onClick={(e) => handleLogDetails(e)}
+                        className=' SaveBtn zoom'
+                        disabled={photoLoader}
+                      >
+                        Save
+                      </button>
+                      <button
+                        onClick={() => handleDashboard()}
+                        className=' dashboardBtn zoom'
+                        disabled={photoLoader}
+                      >
+                        Dashboard
+                      </button>
+                      <button
+                        onClick={() => handleDownload()}
+                        className=' downloadPdfBtn zoom'
+                        disabled={photoLoader}
+                      >
+                        Download PDF
+                      </button>
+                      <button
+                        className='custom-btn btn-2'
+                        style={{
+                          // "z-index": "45",
+                          // top: "25%",
+                          // right: "13%",
+                          cursor: "none",
+                          fontFamily: "Open Sans",
+                          textAlign: "left",
+                          color: "#ecf8e5",
+                          backgroundColor: "#347571",
+                          fontWeight: "550",
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "5px",
+                        }}
+                      >
+                        {" "}
+                        <DatabaseFill
+                          color='#ecf8e5'
+                          size={22}
+                          style={{ position: "relative", top: "-2px" }}
+                        />{" "}
+                        &nbsp;{user.credits}{" "}
+                        <button
+                          onClick={() => toast.info("Coming Soon !")}
+                          className='custom-btn'
+                          style={{
+                            width: "100px",
+                            "z-index": "45",
+                            top: "0%",
+                            right: "0%",
+                            fontFamily: "Open Sans",
+                            textAlign: "center",
+                            color: "#347571",
+                            backgroundColor: "#ecf8e5",
+                            fontWeight: "550",
+                            paddingLeft: "8px",
+                            paddingRight: "8px",
+                            paddingTop: "1px",
+                            paddingBottom: "1px",
+                            height: "32px",
+                            //   marginTop: "4px",
+                            fontSize: "12px",
+                            //   marginRight: "10px",
+                            border: "none",
+                          }}
+                        >
+                          Upgrade
+                        </button>{" "}
+                      </button>
+                      <button
+                        onClick={() => handler()}
+                        className=' btn btn-success signoutBtn createLiveSignOut'
+                      >
+                        <Power color='#35b276' size={22} /> &nbsp;Signout
+                      </button>
+                    </div>
+                  )}
+                  <button className='menubtn' onClick={handleMenu}>
+                    <List color='#35b276' size={22} />
+                  </button>
+                </nav>
+              </div>
 
               <div
                 style={{

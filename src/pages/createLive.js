@@ -1018,7 +1018,7 @@ export default function CreateLiveContinue() {
                         }}
                       >
                         Upgrade
-                      </button>{" "}
+                      </button>
                     </button>
                     <button
                       onClick={() => handler()}
