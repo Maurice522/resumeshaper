@@ -105,26 +105,7 @@ export default function Landing() {
               Login
             </button>
           )}
-          {userData?.profile === true && (
-            <button
-              className="tokensBtn"
-              style={{
-                right: "17%",
-                fontFamily: "Open Sans",
-                fontWeight: "550",
-                fontSize: "16px",
-                color: "#347571",
-              }}
-            >
-              <DatabaseFill
-                color="#347571"
-                size={24}
-                style={{ position: "relative", top: "-2px" }}
-              />{" "}
-              &nbsp;{user.credits} Credits
-            </button>
-          )}
-
+         
           {isPopupOpen && (
             <LoginPopup onClose={togglePopup} onSignup={handleSignup} />
           )}
