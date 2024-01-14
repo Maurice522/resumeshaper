@@ -64,6 +64,30 @@ export const addUserInDatabase = async (user)=>{
   }
 }
 
+export const addUserInWaitlist = async (email)=>{
+  try{
+    await updateDoc(doc(db, "meta", "waitlist"), {
+      users: arrayUnion(email)
+  });
+   
+  }catch(err){
+    console.log(err)
+  }
+};
+
+export const getWaitlistFromDatabase = async () => {
+  //let User;
+  try{
+    const docSnap = await getDoc(doc(db, "meta", "waitlist"));
+    var temp = docSnap.data()
+    return temp.users;
+  }catch (error){
+    console.log(error)
+    return undefined;
+  }
+  //console.log(docSnap.data(), "docSnap");
+};
+
 export const getUserFromDatabase = async (email) => {
   //let User;
   try{

@@ -60,7 +60,6 @@ export default function Terms() {
           &nbsp;{user.credits} Credits
         </button>
       )}
-
       <Nav />
       <div className='aboutUsContainer'>
         <h1 className='aboutUsHeadig'>

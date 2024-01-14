@@ -41,6 +41,7 @@ export default function PrivacyPolicy() {
           <Power color='#35b276' size={22} /> &nbsp;Signout
         </button>
       )}
+
       <Nav />
       <div className='aboutUsContainer'>
         <h1 className='aboutUsHeadig'>

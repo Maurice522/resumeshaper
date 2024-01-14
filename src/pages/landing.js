@@ -105,7 +105,8 @@ export default function Landing() {
               Login
             </button>
           )}
-         
+          
+
           {isPopupOpen && (
             <LoginPopup onClose={togglePopup} onSignup={handleSignup} />
           )}
@@ -134,7 +135,7 @@ export default function Landing() {
               class="btn btn-success  ctaBtn zoom "
               onClick={togglePopup}
             >
-              Join Waitlist
+              Start Now
             </button>
           </div>
           <div className=" smallScreenDiv ">
@@ -234,7 +235,7 @@ export default function Landing() {
             onClick={togglePopup}
             class="btn btn-success ctaBtnSec2 zoom"
           >
-            Join the waiting list
+            Start Now
           </button>
 
           <div className="section4">

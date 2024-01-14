@@ -57,6 +57,7 @@ const LoginPopup = ({ onClose, onSignup }) => {
         errorCode = errorCode.substring(5);
         errorCode = errorCode.charAt(0).toUpperCase() + errorCode.slice(1);
         return errorCode;
+
     }
   };
 
