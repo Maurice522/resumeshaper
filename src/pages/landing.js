@@ -81,17 +81,17 @@ export default function Landing() {
             left: "50%",
             transform: "translate(-50%, -50%)",
           }}
-          width='240'
-          height='240'
-          alt='loading...'
-          src='https://media2.giphy.com/media/MDrmyLuEV8XFOe7lU6/200w.webp?cid=ecf05e47k6onrtqddz8d98s4j5lhtutlnnegeus1pwcdwkxt&ep=v1_gifs_search&rid=200w.webp&ct=g'
+          width="240"
+          height="240"
+          alt="loading..."
+          src="https://media2.giphy.com/media/MDrmyLuEV8XFOe7lU6/200w.webp?cid=ecf05e47k6onrtqddz8d98s4j5lhtutlnnegeus1pwcdwkxt&ep=v1_gifs_search&rid=200w.webp&ct=g"
         />
       ) : (
         <div>
           <Nav />
           {isLoggedIn == true ? (
             <button
-              class=' continueToDahboardBtn signoutBtn zoom'
+              class=" continueToDahboardBtn signoutBtn zoom"
               onClick={() =>
                 userData?.profile === true
                   ? navigate("/dashboard")
@@ -101,91 +101,38 @@ export default function Landing() {
               Dashboard
             </button>
           ) : (
-            <button class='loginBtn signoutBtn' onClick={togglePopup}>
+            <button class="loginBtn signoutBtn" onClick={togglePopup}>
               Login
             </button>
           )}
-          {/* {userData?.profile === true && (
-            // <button
-            //   className='tokensBtn'
-            //   style={{
-            //     right: "17%",
-            //     fontFamily: "Open Sans",
-            //     fontWeight: "550",
-            //     fontSize: "16px",
-            //     color: "#347571",
-            //   }}
-            // >
-            //   <DatabaseFill
-            //     color='#347571'
-            //     size={24}
-            //     style={{ position: "relative", top: "-2px" }}
-            //   />{" "}
-            //   &nbsp;{user.credits} Credits
-            // </button>
+          {userData?.profile === true && (
             <button
-              className='custom-btnlanding btn-2'
+              className="tokensBtn"
               style={{
-                "z-index": "45",
-                top: "3%",
                 right: "17%",
-                cursor: "none",
                 fontFamily: "Open Sans",
-                textAlign: "left",
-                color: "#ecf8e5",
-                backgroundColor: "#347571",
                 fontWeight: "550",
-                display: "flex",
-                alignItems: "center",
-                gap: "5px",
+                fontSize: "16px",
+                color: "#347571",
               }}
             >
-              {" "}
               <DatabaseFill
-                color='#ecf8e5'
-                size={22}
+                color="#347571"
+                size={24}
                 style={{ position: "relative", top: "-2px" }}
-              />
-              {"  "}
-              &nbsp;{user.credits}
-              {"  "}
-              <button
-                onClick={() => navigate("/upgrade")}
-                className='custom-btnlanding'
-                style={{
-                  width: "100px",
-                  "z-index": "45",
-                  top: "0%",
-                  right: "0%",
-                  fontFamily: "Open Sans",
-                  textAlign: "center",
-                  color: "#347571",
-                  backgroundColor: "#ecf8e5",
-                  fontWeight: "550",
-                  paddingLeft: "8px",
-                  paddingRight: "8px",
-                  paddingTop: "1px",
-                  paddingBottom: "1px",
-                  height: "32px",
-                  marginTop: "4px",
-                  fontSize: "12px",
-                  marginRight: "10px",
-                  border: "none",
-                }}
-              >
-                Upgrade
-              </button>
+              />{" "}
+              &nbsp;{user.credits} Credits
             </button>
-          )} */}
+          )}
 
           {isPopupOpen && (
             <LoginPopup onClose={togglePopup} onSignup={handleSignup} />
           )}
 
-          <div className='topDivLanding'>
-            <div class='jumbotron '>
-              <div className='jumboText '>
-                <h1 class='jumboMainText'>
+          <div className="topDivLanding">
+            <div class="jumbotron ">
+              <div className="jumboText ">
+                <h1 class="jumboMainText">
                   Welcome to Your Personalized Resume Solution!
                 </h1>
                 <p></p>
@@ -195,27 +142,27 @@ export default function Landing() {
                 </h5>
               </div>
 
-              <div className='jumboImgDiv '>
+              <div className="jumboImgDiv ">
                 {/* <img src={img17} className='jumboImg' /> */}
-                <img src={img15} className='jumboImg' />
+                <img src={img15} className="jumboImg" />
                 {/* <img src={img16} className='jumboImg' /> */}
               </div>
             </div>
             <button
-              type='button'
-              class='btn btn-success  ctaBtn zoom '
+              type="button"
+              class="btn btn-success  ctaBtn zoom "
               onClick={togglePopup}
             >
-              Start Now
+              Join Waitlist
             </button>
           </div>
-          <div className=' smallScreenDiv '>
+          <div className=" smallScreenDiv ">
             {/* <img src={img17} className='jumboImg' /> */}
-            <img src={img15} className='jumboImg' />
+            <img src={img15} className="jumboImg" />
             {/* <img src={img16} className='jumboImg' /> */}
           </div>
 
-          <div className='introText'>
+          <div className="introText">
             <p>
               " In the competitive world of Job Hunting, a one-size-fits-all
               resume dosen't cut it anymore.Your dream job deserves a tailored
@@ -225,44 +172,44 @@ export default function Landing() {
             </p>
           </div>
 
-          <div className='section1 '>
-            <h3 className='section1Heading '> How Can We Help You?</h3>
+          <div className="section1 ">
+            <h3 className="section1Heading "> How Can We Help You?</h3>
 
-            <div className='sec1Left  '>
-              <img src={img2} className='sec1Img'></img>
+            <div className="sec1Left  ">
+              <img src={img2} className="sec1Img"></img>
             </div>
-            <div className='sec1Right '>
-              <div className='sec1Text'>
-                <h5 className='sec1RightText '>
-                  <Check2Circle color='#35b276' size={36} /> &nbsp; Resume
+            <div className="sec1Right ">
+              <div className="sec1Text">
+                <h5 className="sec1RightText ">
+                  <Check2Circle color="#35b276" size={36} /> &nbsp; Resume
                   Customization
                 </h5>
-                <p className='sec1PText'>
+                <p className="sec1PText">
                   Craft tailored resumes for each job,showcasing your unique
                   skills and qualifications to stand out.
                 </p>
-                <h5 className='sec1RightText'>
-                  <Check2Circle color='#35b276' size={36} /> &nbsp; ATS
+                <h5 className="sec1RightText">
+                  <Check2Circle color="#35b276" size={36} /> &nbsp; ATS
                   Compatibility
                 </h5>
-                <p className='sec1PText'>
+                <p className="sec1PText">
                   Ensure your resume seamlessly navigates through applicant
                   tracking systems,increasing your chance of getting noticed by
                   employers.{" "}
                 </p>
-                <h5 className='sec1RightText'>
-                  <Check2Circle color='#35b276' size={36} /> &nbsp; Professional
+                <h5 className="sec1RightText">
+                  <Check2Circle color="#35b276" size={36} /> &nbsp; Professional
                   Presentation
                 </h5>
-                <p className='sec1PText'>
+                <p className="sec1PText">
                   Elevate your resumes visual appeal with our expert
                   formatting,making a lasting impression on recruiters and
                   hiring managers.{" "}
                 </p>
-                <h5 className='sec1RightText'>
-                  <Check2Circle color='#35b276' size={36} /> &nbsp; Saves Time
+                <h5 className="sec1RightText">
+                  <Check2Circle color="#35b276" size={36} /> &nbsp; Saves Time
                 </h5>
-                <p className='sec1PText'>
+                <p className="sec1PText">
                   Streamline the resume customization process,saving you
                   valuable time compared to manaul adjustments so you can foucs
                   on your job search.
@@ -271,27 +218,27 @@ export default function Landing() {
             </div>
           </div>
 
-          <div className='section2'>
-            <h3 className='section1Heading'>How it Works</h3>
-            <div className='row'>
-              <div className='col-md-4  sec2Col sec2Col1'>
-                <img src={img3} className='sec2Img zoom' />
+          <div className="section2">
+            <h3 className="section1Heading">How it Works</h3>
+            <div className="row">
+              <div className="col-md-4  sec2Col sec2Col1">
+                <img src={img3} className="sec2Img zoom" />
                 <h5>Upload your Resume</h5>
                 <p>
                   Start by uploading your current resume,the foundation for your
                   tailored application.
                 </p>
               </div>
-              <div className='col-md-4  sec2Col sec2Col2 '>
-                <img src={img4} className='sec2Img zoom' />
+              <div className="col-md-4  sec2Col sec2Col2 ">
+                <img src={img4} className="sec2Img zoom" />
                 <h5>Specify Job Title & Company</h5>
                 <p>
                   Tell us the job title and company you're targeting. Critical
                   for effective customization.
                 </p>
               </div>
-              <div className='col-md-4  sec2Col sec2Col3 '>
-                <img src={img5} className='sec2Img zoom' />
+              <div className="col-md-4  sec2Col sec2Col3 ">
+                <img src={img5} className="sec2Img zoom" />
                 <h5>Tailored for Success</h5>
                 <p>
                   Watch as we transform your resume to align with your desired
@@ -302,82 +249,83 @@ export default function Landing() {
           </div>
 
           <button
-            type='button'
+            type="button"
             onClick={togglePopup}
-            class='btn btn-success ctaBtnSec2 zoom'
+            class="btn btn-success ctaBtnSec2 zoom"
           >
-            Customize your Resume Now
+            Join the waiting list
           </button>
 
-          <div className='section4'>
-            <div className='videoSection row'>
-              <div className='col-md-6 sec4MidDiv1 '>
+          <div className="section4">
+            <div className="videoSection row">
+              <div className="col-md-6 sec4MidDiv1 ">
                 <ReactPlayer
-                  className='player'
-                  url={vid}
-                  width='100%'
-                  height='100%'
+                  className="player"
+                  url="https://www.youtube.com/watch?v=Kn5M2Cg_DFM&t=8s"
+                  width="100%"
+                  height="142%"
                   playing={true}
-                  muted={true}
+                  muted={true} // Set to false for not muted by default
                   autoplay={true}
                   repeat={true}
+                  controls={true} // Add controls for user interaction
                   onEnded={handleSampleVidEnded}
                   ref={playerRefSampleVid}
                 />
               </div>
-              <div className='col-md-6 sec4MidDiv2'>
+              <div className="col-md-6 sec4MidDiv2">
                 <h4>Our Features</h4>
                 <p>
-                  <Check2Circle color='#35b276' size={20} /> &nbsp;Create
+                  <Check2Circle color="#35b276" size={20} /> &nbsp;Create
                   Tailored resumes for specific job applications.
                 </p>
                 <p>
-                  <Check2Circle color='#35b276' size={19} /> &nbsp;Ensure resume
+                  <Check2Circle color="#35b276" size={19} /> &nbsp;Ensure resume
                   pass through ATS for better visibility.{" "}
                 </p>
                 <p>
-                  <Check2Circle color='#35b276' size={19} /> &nbsp;Enhance
+                  <Check2Circle color="#35b276" size={19} /> &nbsp;Enhance
                   resumes with professional formatting.
                 </p>
                 <p>
-                  <Check2Circle color='#35b276' size={19} /> &nbsp;Receive
+                  <Check2Circle color="#35b276" size={19} /> &nbsp;Receive
                   keyword suggestions for better targeting.
                 </p>
                 <p>
-                  <Check2Circle color='#35b276' size={19} /> &nbsp;Download
+                  <Check2Circle color="#35b276" size={19} /> &nbsp;Download
                   customized resumes instanly for multiple job applications.
                 </p>
                 <p>
-                  <Check2Circle color='#35b276' size={19} /> &nbsp;Get help from
+                  <Check2Circle color="#35b276" size={19} /> &nbsp;Get help from
                   our dedicated support team when you need it.
                 </p>
               </div>
             </div>
           </div>
 
-          <div className='section3'>
-            <h3 className='section1Heading reviewHeading'>
+          <div className="section3">
+            <h3 className="section1Heading reviewHeading">
               Rave Reviews Form Our Users
             </h3>
             <div
-              id='carouselExampleRide'
-              class='carousel slide'
-              data-bs-ride='true'
+              id="carouselExampleRide"
+              class="carousel slide"
+              data-bs-ride="true"
             >
-              <div class='carousel-inner'>
-                <div class='carousel-item landingCaraousel active'>
-                  <div className='row testimonialSlider'>
-                    <div className='col-md-6'>
-                      <div class='card myCard '>
+              <div class="carousel-inner">
+                <div class="carousel-item landingCaraousel active">
+                  <div className="row testimonialSlider">
+                    <div className="col-md-6">
+                      <div class="card myCard ">
                         <img
                           src={img7}
-                          class='card-img-top testimonialImg  '
-                          alt='...'
+                          class="card-img-top testimonialImg  "
+                          alt="..."
                         />
-                        <div class='card-body '>
-                          <BookmarkStarFill size={46} className='star' />
-                          <h5 class='card-title'>Michal R.</h5>
-                          <p class='card-text'>
+                        <div class="card-body ">
+                          <BookmarkStarFill size={46} className="star" />
+                          <h5 class="card-title">Michal R.</h5>
+                          <p class="card-text">
                             <i>
                               "The ATS optimization was a game changer. I
                               received more interview calls in a month than I
@@ -387,17 +335,17 @@ export default function Landing() {
                         </div>
                       </div>
                     </div>
-                    <div className='col-md-6'>
-                      <div class='card myCard'>
+                    <div className="col-md-6">
+                      <div class="card myCard">
                         <img
                           src={img12}
-                          class='card-img-top testimonialImg'
-                          alt='...'
+                          class="card-img-top testimonialImg"
+                          alt="..."
                         />
-                        <div class='card-body'>
-                          <BookmarkStarFill size={46} className='star' />
-                          <h5 class='card-title'>David S.</h5>
-                          <p class='card-text'>
+                        <div class="card-body">
+                          <BookmarkStarFill size={46} className="star" />
+                          <h5 class="card-title">David S.</h5>
+                          <p class="card-text">
                             <i>
                               "I used to spend hours tweaking my resume for
                               different jobs.Now, I just upload and apply. Trust
@@ -409,19 +357,19 @@ export default function Landing() {
                     </div>
                   </div>
                 </div>
-                <div class='carousel-item landingCaraousel'>
-                  <div className='row testimonialSlider'>
-                    <div className='col-md-6'>
-                      <div class='card myCard'>
+                <div class="carousel-item landingCaraousel">
+                  <div className="row testimonialSlider">
+                    <div className="col-md-6">
+                      <div class="card myCard">
                         <img
                           src={img9}
-                          class='card-img-top testimonialImg'
-                          alt='...'
+                          class="card-img-top testimonialImg"
+                          alt="..."
                         />
-                        <div class='card-body'>
-                          <BookmarkStarFill size={46} className='star' />
-                          <h5 class='card-title'>Laura B.</h5>
-                          <p class='card-text'>
+                        <div class="card-body">
+                          <BookmarkStarFill size={46} className="star" />
+                          <h5 class="card-title">Laura B.</h5>
+                          <p class="card-text">
                             <i>
                               "I was skeptical at first, but Resume Shaper
                               transformed my resume beautifully. Well, I am a
@@ -432,17 +380,17 @@ export default function Landing() {
                         </div>
                       </div>
                     </div>
-                    <div className='col-md-6'>
-                      <div class='card myCard'>
+                    <div className="col-md-6">
+                      <div class="card myCard">
                         <img
                           src={img10}
-                          class='card-img-top testimonialImg'
-                          alt='...'
+                          class="card-img-top testimonialImg"
+                          alt="..."
                         />
-                        <div class='card-body'>
-                          <BookmarkStarFill size={46} className='star' />
-                          <h5 class='card-title'>Jessica R.</h5>
-                          <p class='card-text'>
+                        <div class="card-body">
+                          <BookmarkStarFill size={46} className="star" />
+                          <h5 class="card-title">Jessica R.</h5>
+                          <p class="card-text">
                             <i>
                               "Just in awe of how easy this website has made the
                               job application process.The time and effort it
@@ -455,19 +403,19 @@ export default function Landing() {
                     </div>
                   </div>
                 </div>
-                <div class='carousel-item landingCaraousel'>
-                  <div className='row testimonialSlider'>
-                    <div className='col-md-6'>
-                      <div class='card myCard'>
+                <div class="carousel-item landingCaraousel">
+                  <div className="row testimonialSlider">
+                    <div className="col-md-6">
+                      <div class="card myCard">
                         <img
                           src={img8}
-                          class='card-img-top testimonialImg'
-                          alt='...'
+                          class="card-img-top testimonialImg"
+                          alt="..."
                         />
-                        <div class='card-body'>
-                          <BookmarkStarFill size={46} className='star' />
-                          <h5 class='card-title'>Logan Robert M.</h5>
-                          <p class='card-text'>
+                        <div class="card-body">
+                          <BookmarkStarFill size={46} className="star" />
+                          <h5 class="card-title">Logan Robert M.</h5>
+                          <p class="card-text">
                             <i>
                               "I used to procrastinate applying for jobs because
                               my resume editing.Now,it's a breeze.The team of
@@ -477,17 +425,17 @@ export default function Landing() {
                         </div>
                       </div>
                     </div>
-                    <div className='col-md-6'>
-                      <div class='card myCard'>
+                    <div className="col-md-6">
+                      <div class="card myCard">
                         <img
                           src={img11}
-                          class='card-img-top testimonialImg'
-                          alt='...'
+                          class="card-img-top testimonialImg"
+                          alt="..."
                         />
-                        <div class='card-body'>
-                          <BookmarkStarFill size={46} className='star' />
-                          <h5 class='card-title'>Olivia C.</h5>
-                          <p class='card-text'>
+                        <div class="card-body">
+                          <BookmarkStarFill size={46} className="star" />
+                          <h5 class="card-title">Olivia C.</h5>
+                          <p class="card-text">
                             <i>
                               "As a recent grad, job hunting was really getting
                               me overwhelmed. I came across this tool and it
@@ -502,34 +450,34 @@ export default function Landing() {
                 </div>
               </div>
               <button
-                class='carousel-control-prev landing-carousel-control-prev'
-                type='button'
-                data-bs-target='#carouselExampleRide'
-                data-bs-slide='prev'
+                class="carousel-control-prev landing-carousel-control-prev"
+                type="button"
+                data-bs-target="#carouselExampleRide"
+                data-bs-slide="prev"
               >
                 <span
-                  class='carousel-control-prev-icon'
-                  aria-hidden='true'
+                  class="carousel-control-prev-icon"
+                  aria-hidden="true"
                 ></span>
-                <span class='visually-hidden'>Previous</span>
+                <span class="visually-hidden">Previous</span>
               </button>
               <button
-                class='carousel-control-next landing-carousel-control-next'
-                type='button'
-                data-bs-target='#carouselExampleRide'
-                data-bs-slide='next'
+                class="carousel-control-next landing-carousel-control-next"
+                type="button"
+                data-bs-target="#carouselExampleRide"
+                data-bs-slide="next"
               >
                 <span
-                  class='carousel-control-next-icon'
-                  aria-hidden='true'
+                  class="carousel-control-next-icon"
+                  aria-hidden="true"
                 ></span>
-                <span class='visually-hidden'>Next</span>
+                <span class="visually-hidden">Next</span>
               </button>
             </div>
           </div>
           <Footer />
         </div>
       )}
-    </>
-  );
+    </>
+  );
 }
