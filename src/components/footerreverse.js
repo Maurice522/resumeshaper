@@ -2,11 +2,11 @@ import React from "react";
 import "../styleSheet/Landing.css";
 import { useNavigate } from "react-router-dom";
 
-export default function Footer() {
+export default function FooterReverse() {
   const navigate = useNavigate();
   return (
-    <div className="section6">
-      <div className="footerContent">
+    <div style={{backgroundColor:"#ecf8e5", position:'relative', height:'70vh'}}>
+      <div className="footerContent" style={{backgroundColor:"#ecf8e5"}}>
         <h4>RESUME SHAPER</h4>
         <h6 className="subHeadingSec6">
           Resumes Redefined, Success Rewritten.

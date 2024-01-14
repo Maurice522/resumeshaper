@@ -105,7 +105,7 @@ export default function Landing() {
               Login
             </button>
           )}
-          {userData?.profile === true && (
+          {/* {userData?.profile === true && (
             // <button
             //   className='tokensBtn'
             //   style={{
@@ -176,7 +176,7 @@ export default function Landing() {
                 Upgrade
               </button>
             </button>
-          )}
+          )} */}
 
           {isPopupOpen && (
             <LoginPopup onClose={togglePopup} onSignup={handleSignup} />

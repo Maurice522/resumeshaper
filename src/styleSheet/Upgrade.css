@@ -1,10 +1,14 @@
 .upgrade-container {
     position: relative;
     width: 100%;
-    height: 100vh;
-    overflow-y: scroll;
+    /* height: 100vh; */
+    /* overflow-y: scroll; */
     background-color: #ecf8e5;
     padding: 40px 80px;
+    /* background-image: url('./../images/paperbg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat; 
+    background-position: center center; */
 }
 
 .upgrade-container>p {
@@ -20,8 +24,28 @@
 .upgradeCards {
     margin-top: 50px;
     display: flex;
-    justify-content: space-between;
+    justify-content:space-around;
 
+}
+
+.upgrade-btn{
+    background-color:"#347571"; 
+    color:"white";
+    padding:"6px 15px"; 
+    border:"none"; 
+    border-radius:"25px"; 
+    margin-top:"15px";
+}
+
+.upgrade-btn:hover{
+    background-color: white;
+    color: #347571 ;
+    border: 1px solid #347571 ;
+}
+
+.cards-container{
+    padding: 5% 10%;
+    padding-top: 2%;
 }
 
 @media screen and (max-width: 480px) {
@@ -34,27 +58,33 @@
     }
 }
 
+
 .card {
-    background-color: #5ec57e;
+    background-color: white;
     padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    border: 1px solid #347571 ;
+    
+
+  /* Set the background image URL */
+
 }
 
 
 .card {
-    width: 400px;
-    height: 450px;
+    width: 300px;
+    height: 220px;
 }
 
 .cardUpper {
-    height: 35%;
+    margin-top: 5%;
     text-align: center;
 }
 
 .cardBottom {
-    height: 60%;
+    /* height: 60%; */
     padding: 20px;
 }
 

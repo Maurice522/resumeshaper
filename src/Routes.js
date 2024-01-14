@@ -10,6 +10,7 @@ import AboutUs from "./pages/aboutUs";
 import Terms from "./pages/termsOfService";
 import PrivacyPolicy from "./pages/privacyPolicy";
 import Upgrade from "./pages/Upgrade";
+import PaymentMentorMeetingSchedule from "./components/payment/PaymentMentorMeetingSchedule"
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
   {
     path: "/upgrade",
     element: <Upgrade />,
+  },
+  {
+    path: "/payment",
+    element: <PaymentMentorMeetingSchedule />,
   },
 ]);
 
