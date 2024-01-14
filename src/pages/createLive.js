@@ -1064,7 +1064,8 @@ export default function CreateLiveContinue() {
                           fontWeight: "550",
                           display: "flex",
                           alignItems: "center",
-                          gap: "5px",
+                          // gap: "5px",
+                          justifyContent: "space-between",
                         }}
                       >
                         {" "}
