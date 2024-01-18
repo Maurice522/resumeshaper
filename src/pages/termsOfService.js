@@ -41,25 +41,7 @@ export default function Terms() {
         </button>
       )}
       {/* {user&&user.profile&&user.credits&&<button  className="tokensBtn"> <Coin color="#35b276" size={22} style={{"position":"relative","top":"-2px"}}/> {user.credits} &nbsp;Credits</button>}   */}
-      {user && user.profile && user.credits && (
-        <button
-          className='tokensBtn'
-          style={{
-            right: "17%",
-            fontFamily: "Open Sans",
-            fontWeight: "550",
-            fontSize: "16px",
-            color: "#347571",
-          }}
-        >
-          <DatabaseFill
-            color='#347571'
-            size={24}
-            style={{ position: "relative", top: "-2px" }}
-          />{" "}
-          &nbsp;{user.credits} Credits
-        </button>
-      )}
+      
       <Nav />
       <div className='aboutUsContainer'>
         <h1 className='aboutUsHeadig'>

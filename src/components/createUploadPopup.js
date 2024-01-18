@@ -40,8 +40,6 @@ export default function CreateUploadPopup({ onClose, personalData, setPersonalDa
 
   const handleUploadResume = async() => {   
     if (file) {
-      const cost = 4;
-      if(user.credits >= cost){
       setLoading(true)
       const fileLink = await uploadMedia(file, "resume");
       await updateUserInDatabase(user.email, fileLink)
@@ -60,8 +58,6 @@ export default function CreateUploadPopup({ onClose, personalData, setPersonalDa
         console.log(responseJson)
         return responseJson;
       })
-      await updateUserCreditsInDatabase(user.email, user.credits-cost)
-      dispatch(updateCredits(user.credits-cost));
       // delete res.professionalSummary;
       delete res.websitesAndLinks;
       res.websitesAndLinks = [
@@ -75,13 +71,6 @@ export default function CreateUploadPopup({ onClose, personalData, setPersonalDa
       setLoading(false) 
       onClose();
       
-    }else{
-      setLoading(false)
-      console.log("Not enough credits");
-      onClose();
-      return toast.error("Not Enough Credits!")
-     
-    }
     }
   };
 
@@ -109,7 +98,7 @@ export default function CreateUploadPopup({ onClose, personalData, setPersonalDa
           </div>
           </>
         }
-        { !upload &&<button className='homePopupBtn  ' style={{'position':'relative'}} onClick={handleUpload} data-tooltip-id="uploadNewUserResumeInfo" data-tooltip-content="This will cost 4 credits">Upload your Resume <span style={{'position':"absolute",'right':'6%'}}> 4 <DatabaseFill  color="white" size={16} style={{"position":"relative","top":"-2px"}} /></span></button>}
+        { !upload &&<button className='homePopupBtn  ' style={{'position':'relative'}} onClick={handleUpload} >Upload your Resume </button>}
         <Tooltip id="uploadNewUserResumeInfo" />
         { upload && <button className='homePopupBtnShort  ' onClick={handleBack}>Back</button>}
         { upload && <button className='homePopupBtnShort  ' onClick={handleUploadResume}>Upload</button>}

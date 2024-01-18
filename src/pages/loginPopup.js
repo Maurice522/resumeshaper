@@ -128,9 +128,10 @@ const LoginPopup = ({ onClose, onSignup }) => {
       if (otp == originalOTP) {
         createUserWithEmailAndPassword(auth, email, password)
           .then((userCredential) => {
+            console.log({ email, password, name })
             addUserInDatabase({ email, password, name });
-            signInUser(auth, email, password);
-            dispatch(loginUser({ email, password, name }));
+            // signInUser(auth, email, password);
+            // dispatch(loginUser({ email, password, name }));
             console.log(userCredential);
             onClose();
           })

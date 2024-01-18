@@ -20,11 +20,7 @@ export default function JobPopup({ onClose, onSignup, jobTitle, setJobTitle, job
     const user = useSelector(state=>state.user.user)
 
     const submitLoginHandler = async (e) => {
-        const cost = 10;
         e.preventDefault();
-        if(user.credits<cost){
-            return toast.error("Not Enough Credits!")
-        }
         setIsLoading(true);
         if(jobTitle!=='' && jobDescription!==''){
         try {
@@ -46,13 +42,11 @@ export default function JobPopup({ onClose, onSignup, jobTitle, setJobTitle, job
 
             
             personalData.employmentHistory.map(async(item,idx)=>{
-                await getJD(idx,0)
+                await getJD(idx)
             })
            
-            await getSummary(0); // 3 credits
-            await getAiSkills(0); // 3 credits
-            dispatch(updateCredits(user.credits-cost)) //add 3 credits then removing 5 credits)
-            await updateUserCreditsInDatabase(user.email,user.credits-cost )
+            await getSummary(); 
+            await getAiSkills(); 
             setShowConfirmation(true);
         } catch (error) {
             console.log(error);
@@ -132,8 +126,8 @@ export default function JobPopup({ onClose, onSignup, jobTitle, setJobTitle, job
                             />
                         </div>
                         <div className="form-actions">
-                            <button style={{'position':"relative"}} type="submit" className='loginNow' data-tooltip-id="submitJobInfo" data-tooltip-content="This will use 10 credits">
-                           <strong>Tailor It !</strong> <span style={{'position':"absolute",'right':'6%'}}> <DatabaseFill color="white" size={16} style={{"position":"relative","top":"-2px"}} />10 </span></button> <Tooltip id="submitJobInfo" />
+                            <button style={{'position':"relative"}} type="submit" className='loginNow' >
+                           <strong>Tailor It !</strong></button> 
                         </div>
                     </form>
                 )}

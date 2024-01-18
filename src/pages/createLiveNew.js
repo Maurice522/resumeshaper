@@ -831,57 +831,7 @@ export default function CreateLive() {
                     >
                       Download PDF
                     </button>
-                    <button
-                      className='custom-btn btn-2'
-                      style={{
-                        // "z-index": "45",
-                        // top: "25%",
-                        // right: "13%",
-                        cursor: "none",
-                        fontFamily: "Open Sans",
-                        textAlign: "left",
-                        color: "#ecf8e5",
-                        backgroundColor: "#347571",
-                        fontWeight: "550",
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "5px",
-                      }}
-                    >
-                      {" "}
-                      <DatabaseFill
-                        color='#ecf8e5'
-                        size={22}
-                        style={{ position: "relative", top: "-2px" }}
-                      />{" "}
-                      &nbsp;{user.credits}{" "}
-                      <button
-                        onClick={() => navigate("/upgrade")}
-                        className='custom-btn'
-                        style={{
-                          width: "100px",
-                          "z-index": "45",
-                          top: "0%",
-                          right: "0%",
-                          fontFamily: "Open Sans",
-                          textAlign: "center",
-                          color: "#347571",
-                          backgroundColor: "#ecf8e5",
-                          fontWeight: "550",
-                          paddingLeft: "8px",
-                          paddingRight: "8px",
-                          paddingTop: "1px",
-                          paddingBottom: "1px",
-                          height: "32px",
-                          //   marginTop: "4px",
-                          fontSize: "12px",
-                          //   marginRight: "10px",
-                          border: "none",
-                        }}
-                      >
-                        Upgrade
-                      </button>
-                    </button>
+                  
                     <button
                       onClick={() => handler()}
                       className=' btn btn-success signoutBtn createLiveSignOut'

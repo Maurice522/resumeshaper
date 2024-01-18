@@ -288,59 +288,7 @@ export default function Dashboard() {
             {" "}
             <Power color='#35b276' size={22} /> &nbsp;Signout
           </button>
-          <button
-            className='custom-btnlanding btn-2'
-            style={{
-              "z-index": "45",
-              top: "2.5%",
-              right: "10%",
-              cursor: "none",
-              fontFamily: "Open Sans",
-              textAlign: "left",
-              color: "#ecf8e5",
-              backgroundColor: "#347571",
-              fontWeight: "550",
-              display: "flex",
-              alignItems: "center",
-              gap: "5px",
-            }}
-          >
-            {" "}
-            <DatabaseFill
-              color='#ecf8e5'
-              size={22}
-              style={{ position: "relative", top: "-2px" }}
-            />
-            {"  "}
-            &nbsp;{user.credits}
-            {"  "}
-            <button
-              onClick={() => navigate("/upgrade")}
-              className='custom-btnlanding'
-              style={{
-                width: "100px",
-                "z-index": "45",
-                top: "0%",
-                right: "0%",
-                fontFamily: "Open Sans",
-                textAlign: "center",
-                color: "#347571",
-                backgroundColor: "#ecf8e5",
-                fontWeight: "550",
-                paddingLeft: "8px",
-                paddingRight: "8px",
-                paddingTop: "1px",
-                paddingBottom: "1px",
-                height: "32px",
-                marginTop: "4px",
-                fontSize: "12px",
-                marginRight: "10px",
-                border: "none",
-              }}
-            >
-              Upgrade
-            </button>
-          </button>
+
           {/* <button
             className='tokensBtn'
             style={{
@@ -376,12 +324,9 @@ export default function Dashboard() {
               <button
                 className='uploadDoc zoom'
                 onClick={() => navigate("/create", { state: { upload: true } })}
-                data-tooltip-id='uploadNewResumeInfo'
-                data-tooltip-content='This will cost 4 credits'
               >
                 <Upload size={20} /> &nbsp;Upload Resume
               </button>
-              <Tooltip id='uploadNewResumeInfo' />
             </div>
             <hr className='dashHrLine' />
             {isPopupOpen && (
