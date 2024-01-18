@@ -3,6 +3,7 @@ import "../styleSheet/Upgrade.css";
 import { Power, ArrowLeft, DatabaseFill } from "react-bootstrap-icons";
 import FooterReverse from "../components/footerreverse";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Upgrade = () => {
   const basicPlan = {
@@ -73,7 +74,7 @@ const Upgrade = () => {
   return (
     <div>
     <div className='upgrade-container'>
-      <p onClick={() => window.history.go(-1)}>{"<- Back"}</p>
+      <p style={{cursor:"pointer"}} onClick={() => window.history.go(-1)}>{"<- Back"}</p>
       <div className='upgrade-Upper'>
         <h3>Unlock the power of Resume Shaper</h3>
         <p>Choose a plan according to your needs</p>
@@ -98,6 +99,11 @@ export default Upgrade;
 
 const Card = ({ planName, price, intialPrice, features, duration }) => {
   const navigate = useNavigate();
+  
+  const clickHandler = (e)=>{
+    toast.info("Payment is not in Beta version!")
+    // navigate("/payment",{ state: { price } })
+  }
   return (
     <div className='card zoom'>
       <div className='cardUpper'>
@@ -110,7 +116,7 @@ const Card = ({ planName, price, intialPrice, features, duration }) => {
           <del style={{ fontSize: "21px", marginBottom:"100px" }}>₹{intialPrice}</del> ₹{price}
         </h2>
         <h6 style={{ color:"black"}}>{duration}</h6>
-        <button onClick={() => navigate("/payment",{ state: { price } })} style={{backgroundColor:"#347571", color:"white", padding:"6px 15px", border:"none", borderRadius:"25px", marginTop:"5px"}}>Upgrade Plan</button>
+        <button onClick={(e) => clickHandler(e)} style={{backgroundColor:"#347571", color:"white", padding:"6px 15px", border:"none", borderRadius:"25px", marginTop:"5px"}}>Upgrade Plan</button>
       </div>
       <div className='cardBottom'>
         {/* <ul className='custom-list'>

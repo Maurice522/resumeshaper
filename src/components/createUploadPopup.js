@@ -40,7 +40,7 @@ export default function CreateUploadPopup({ onClose, personalData, setPersonalDa
 
   const handleUploadResume = async() => {   
     if (file) {
-      const cost = 40;
+      const cost = 4;
       if(user.credits >= cost){
       setLoading(true)
       const fileLink = await uploadMedia(file, "resume");
