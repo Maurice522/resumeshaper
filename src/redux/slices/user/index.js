@@ -140,7 +140,6 @@ export const userSlice = createSlice({
         skills: [],
         profile: false,
         resumes: [],
-        credits: 0,
       };
     },
     updateResume: (state, action) => {
