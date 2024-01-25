@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
-import { doc, setDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { createMentorInMessagesDoc, db } from "../../fireabse";
 import axios from "axios";
 
@@ -103,41 +103,49 @@ function CashfreeDropInCont({
   }, [orderDetails]);
 
   //INITIALIZE SPLIT PAYMENT
-  const initiateSplitPayment = async (order) => {
-    const bodyData = {
-      orderId: order.orderId,
-      vendorId: "lc7g5jxgug396jgv",
-      amount: mentorDetails,
-      secrett: "2V7W@ODU6HTRS1GY$54JQ*EP0F8N%9!BI&AXKML3#ZCQ!$3U",
-    };
+  // const initiateSplitPayment = async (order) => {
+  //   const bodyData = {
+  //     orderId: order.orderId,
+  //     vendorId: "lc7g5jxgug396jgv",
+  //     amount: mentorDetails,
+  //     secrett: "2V7W@ODU6HTRS1GY$54JQ*EP0F8N%9!BI&AXKML3#ZCQ!$3U",
+  //   };
 
-    await axios
-      .post("https://server.reverr.io/webSplitPayment", bodyData)
-      .then((res) => {
-        console.log("success split", res.data.message);
-      })
-      .catch((err) => {
-        console.log("Failure Split", err.message);
-      });
-  };
+  //   await axios
+  //     .post("https://server.reverr.io/webSplitPayment", bodyData)
+  //     .then((res) => {
+  //       console.log("success split", res.data.message);
+  //     })
+  //     .catch((err) => {
+  //       console.log("Failure Split", err.message);
+  //     });
+  // };
 
   //ACTION PERFORM ON SUCESSFUL PAYMENT
 
   const onSuccessfulPayment = async (order, transaction) => {
-    initiateSplitPayment(order);
-    const newId = uuid();
-    await setDoc(doc(db, "Payments", newId), {
+    // initiateSplitPayment(order);
+    await setDoc(doc(db, "Payments", order.orderId), {
       orderAmount: transaction.transactionAmount,
       orderId: order.orderId,
       paymentMode: order.activePaymentMethod,
       transactionId: transaction.transactionId,
       txStatus: transaction.txStatus,
       user: userDoc?.email,
-      vendor: "mauricerana@gmail.com",
       referenceId: "",
       signature: "",
       txTime: "",
     })
+
+    let payments = []
+
+    if(userDoc.payments){
+      payments = [...userDoc.payments, order.orderId]
+    }else{
+      payments = [order.orderId]
+    }
+
+    await updateDoc(doc(db,"users",userDoc?.email),{payments});
       
   };
 
@@ -145,20 +153,28 @@ function CashfreeDropInCont({
 
   const onFailedPayment = async (order, transaction) => {
     setSessionIdTokken(null);
-    const newId = uuid();
-    await setDoc(doc(db, "Payments", newId), {
+    await setDoc(doc(db, "Payments", order.orderId), {
       orderAmount: transaction.transactionAmount,
       orderId: order.orderId,
       paymentMode: order.activePaymentMethod,
       transactionId: transaction.transactionId,
       txStatus: transaction.txStatus,
       user: userDoc?.email,
-      vendor: "mauricerana@gmail.com",
       referenceId: "",
       signature: "",
       txTime: "",
       time: Date.now(),
     })
+
+    let payments = []
+
+    if(userDoc.payments){
+      payments = [...userDoc.payments, order.orderId]
+    }else{
+      payments = [order.orderId]
+    }
+
+    await updateDoc(doc(db,"users",userDoc?.email),{payments});
 
   };
 

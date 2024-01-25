@@ -101,8 +101,8 @@ const Card = ({ planName, price, intialPrice, features, duration }) => {
   const navigate = useNavigate();
   
   const clickHandler = (e)=>{
-    toast.info("Payment is not in Beta version!")
-    // navigate("/payment",{ state: { price } })
+    // toast.info("Payment is not in Beta version!")
+    navigate("/payment",{ state: { price } })
   }
   return (
     <div className='card zoom'>
