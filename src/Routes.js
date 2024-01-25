@@ -11,6 +11,8 @@ import Terms from "./pages/termsOfService";
 import PrivacyPolicy from "./pages/privacyPolicy";
 import Upgrade from "./pages/Upgrade";
 import PaymentMentorMeetingSchedule from "./components/payment/PaymentMentorMeetingSchedule"
+import SuccessfulPaymentPage from "./pages/paymentSuccess";
+import PaymentFailedPage from "./pages/paymentFailed";
 
 const router = createBrowserRouter([
   {
@@ -56,6 +58,14 @@ const router = createBrowserRouter([
   {
     path: "/payment",
     element: <PaymentMentorMeetingSchedule />,
+  },
+  {
+    path: "/paymentsuccess",
+    element: <SuccessfulPaymentPage />,
+  },
+  {
+    path: "/paymentfailed",
+    element: <PaymentFailedPage />,
   },
 ]);
 

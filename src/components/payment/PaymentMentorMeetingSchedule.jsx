@@ -43,11 +43,10 @@ const PaymentMentorMeetingSchedule = () => {
     toast("Processing Your Request");
     const bodyData = {
       id: `order_${uuid()}`,
-      // amount: `${mentorPlanPrice}`,
-      amount: 1,
+      amount: `${mentorPlanPrice}`,
       currency: "INR",
-      customer_id: user?.email,
-      customer_phone: `+91${user?.phone}`,
+      customer_id: uuid(),
+      customer_phone: "+919876543210",
 
     };
     const requestOptions = {

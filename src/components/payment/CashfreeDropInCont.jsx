@@ -9,6 +9,8 @@ import { useNavigate } from "react-router-dom";
 import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { createMentorInMessagesDoc, db } from "../../fireabse";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { updateCredits } from "../../redux/slices/user";
 
 function CashfreeDropInCont({
   sessionIdTokken,
@@ -19,6 +21,7 @@ function CashfreeDropInCont({
   setPaymentMade,
 }) {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [orderToken, setOrderToken] = useState(sessionIdTokken);
   const [orderDetails, setOrderDetails] = useState(null);
   // const user=useSelector((state)=>state.user)
@@ -123,6 +126,21 @@ function CashfreeDropInCont({
 
   //ACTION PERFORM ON SUCESSFUL PAYMENT
 
+  const calculateCredits = (price)=>{
+    var credits = 0;
+    if(price == 59){
+      credits = 20;
+    }else if(price == 129){
+      credits = 50;
+    }else if(price == 249){
+      credits = 125;
+    }else if(price == 379){
+      credits = 200
+    }
+
+    return credits;
+  }
+
   const onSuccessfulPayment = async (order, transaction) => {
     // initiateSplitPayment(order);
     await setDoc(doc(db, "Payments", order.orderId), {
@@ -145,8 +163,12 @@ function CashfreeDropInCont({
       payments = [order.orderId]
     }
 
-    await updateDoc(doc(db,"users",userDoc?.email),{payments});
-      
+    let credits = userDoc.credits + calculateCredits(transaction.transactionAmount)
+    console.log(credits)
+    await updateDoc(doc(db,"users",userDoc?.email),{payments,credits});
+    dispatch(updateCredits(credits))    
+
+    navigate("/paymentsuccess")
   };
 
   //ACTION PERFORM ON FAILED PAYMENT
@@ -175,6 +197,8 @@ function CashfreeDropInCont({
     }
 
     await updateDoc(doc(db,"users",userDoc?.email),{payments});
+
+    navigate("/paymentfailed")
 
   };
 

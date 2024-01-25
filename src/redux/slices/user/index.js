@@ -182,6 +182,9 @@ export const userSlice = createSlice({
       state.user.credits = action.payload;
       console.log(state.user.credits);
     },
+    addCredits:(state, action)=>{
+      state.user.credits = state.user.credits+action.payload;
+    }
   },
 });
 
