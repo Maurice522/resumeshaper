@@ -20,6 +20,9 @@ import CreateUploadPopup from "../components/createUploadPopup";
 import EnterPositionPopup from "../components/enterPositionPopup";
 
 import { Power } from "react-bootstrap-icons";
+import logActivity from "../helper/activityLog";
+import { activity } from "../data/activity";
+import generateRandomId from "../helper/generateId";
 
 export default function Home() {
   const [showHomePopup, setShowHomePopup] = useState(true);
@@ -97,6 +100,13 @@ export default function Home() {
   const handler = (e) => {
     signOut(auth)
       .then(() => {
+        logActivity(
+          activity.signOut.type,
+          null,
+          generateRandomId(),
+          activity.signOut.description,
+          user?.email
+        );
         dispatch(signOutUser());
         console.log("signed out successfully");
         navigate("/");
@@ -110,7 +120,7 @@ export default function Home() {
     <>
       <Nav />
       {/* {user&&user.credits&&<button  className="tokensBtn"> <DatabaseFill color="#35b276" size={22} style={{"position":"relative","top":"-2px"}}/> {user.credits} &nbsp;Credits</button>}   */}
-      
+
       {showHomePopup && (
         <CreateUploadPopup
           personalData={personalData}
@@ -119,19 +129,19 @@ export default function Home() {
           onUpload={handleUpload}
         />
       )}
-      <button onClick={() => handler()} className=' btn btn-success signoutBtn'>
+      <button onClick={() => handler()} className=" btn btn-success signoutBtn">
         {" "}
-        <Power color='#35b276' size={22} /> &nbsp;Signout
+        <Power color="#35b276" size={22} /> &nbsp;Signout
       </button>
-      <div className='row homeDiv'>
-        <div className='HomeLeftDiv col-md-9 col-sm-9'>
-          <div className='formDetails'>
-            <h3 className='formTitle'>Personalize your Profile</h3>
-            <p className='formSubText'>
+      <div className="row homeDiv">
+        <div className="HomeLeftDiv col-md-9 col-sm-9">
+          <div className="formDetails">
+            <h3 className="formTitle">Personalize your Profile</h3>
+            <p className="formSubText">
               "Tell us more about yourself and the position you're targeting,
               and we'll create a personlized resume just for you."
             </p>
-            <hr className='hrLine' />
+            <hr className="hrLine" />
             <Form
               personalData={personalData}
               setPersonalData={setPersonalData}

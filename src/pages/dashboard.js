@@ -45,6 +45,9 @@ import img4 from "../images/template4.PNG";
 import Templates from "../components/templates";
 import JobPopup from "../components/jobPopup";
 import { Tooltip } from "react-tooltip";
+import logActivity from "../helper/activityLog";
+import { activity } from "../data/activity";
+import generateRandomId from "../helper/generateId";
 export default function Dashboard() {
   const navigate = useNavigate();
   const [gettingUser, SetGettingUser] = useState(false);
@@ -79,6 +82,13 @@ export default function Dashboard() {
   const handler = (e) => {
     signOut(auth)
       .then(() => {
+        logActivity(
+          activity.signOut.type,
+          null,
+          generateRandomId(),
+          activity.signOut.description,
+          user?.email
+        );
         dispatch(signOutUser());
         console.log("signed out successfully");
         navigate("/");
@@ -214,6 +224,13 @@ export default function Dashboard() {
     var resumes = [...user.resumes, resume];
     const currentTimestamp = new Date().toLocaleString();
     addUserResume(user.email, resumes);
+    logActivity(
+      activity.saveResume.type,
+      resume.id,
+      generateRandomId(),
+      activity.saveResume.description,
+      user?.email
+    );
     dispatch(saveResume(resume));
     const newDiv = {
       resumeId: resume.resumeId,
@@ -236,14 +253,28 @@ export default function Dashboard() {
 
     dispatch(updateResume(updatedUserResumes));
     await updateUserResumes(user.email, updatedUserResumes);
+    logActivity(
+      activity.deleteResume.type,
+      id,
+      generateRandomId(),
+      activity.deleteResume.description,
+      user?.email
+    );
     setDeleting(false);
     setSavedResumes(updatedResumes);
   };
 
-  const openSelectedResume = (idx) => {
+  const openSelectedResume = (idx, id) => {
     if (idx == -1) {
       navigate("/create");
     } else {
+      logActivity(
+        activity.editResume.type,
+        id,
+        generateRandomId(),
+        activity.deleteResume.description,
+        user?.email
+      );
       navigate(`/createcontinue/${idx}`);
     }
   };
@@ -254,8 +285,15 @@ export default function Dashboard() {
     // setIsPopupOpen(!isPopupOpen);
     navigate(`/createcontinue/${idx}`, { state: { popon: true } });
   };
-  const download = (idx) => {
+  const download = (idx, id) => {
     // setIsPopupOpen(!isPopupOpen);
+    logActivity(
+      activity.downloadResume.type,
+      id,
+      generateRandomId(),
+      activity.downloadResume.description,
+      user?.email
+    );
     navigate(`/createcontinue/${idx}`, { state: { download: true } });
   };
   const handleSignup = () => {
@@ -273,20 +311,20 @@ export default function Dashboard() {
             left: "50%",
             transform: "translate(-50%, -50%)",
           }}
-          width='240'
-          height='240'
-          alt='loading...'
-          src='https://media2.giphy.com/media/MDrmyLuEV8XFOe7lU6/200w.webp?cid=ecf05e47k6onrtqddz8d98s4j5lhtutlnnegeus1pwcdwkxt&ep=v1_gifs_search&rid=200w.webp&ct=g'
+          width="240"
+          height="240"
+          alt="loading..."
+          src="https://media2.giphy.com/media/MDrmyLuEV8XFOe7lU6/200w.webp?cid=ecf05e47k6onrtqddz8d98s4j5lhtutlnnegeus1pwcdwkxt&ep=v1_gifs_search&rid=200w.webp&ct=g"
         />
       ) : (
         <>
           <Nav />
           <button
             onClick={() => handler()}
-            className=' btn btn-success signoutBtn'
+            className=" btn btn-success signoutBtn"
           >
             {" "}
-            <Power color='#35b276' size={22} /> &nbsp;Signout
+            <Power color="#35b276" size={22} /> &nbsp;Signout
           </button>
 
           {/* <button
@@ -306,50 +344,68 @@ export default function Dashboard() {
             &nbsp;{user.credits} Credits
           </button> */}
 
-          <div className='dashboardDiv'>
-            <h2 className='formTitle'>Resume Gallery</h2>
-            <p className='formSubText'>
+          <div className="dashboardDiv">
+            <h2 className="formTitle">Resume Gallery</h2>
+            <p className="formSubText">
               "Welcome to your hub for organized resumes.Access, edit, or create
               new resumes for tailored job application."
             </p>
-            <div className='dashHeader'>
+            <div className="dashHeader">
               <h4>Documents</h4>
               <button
-                className='createDoc zoom'
-                onClick={() => navigate("/create")}
+                className="createDoc zoom"
+                onClick={() => {
+                  logActivity(
+                    activity.createNewResume.type,
+                    null,
+                    generateRandomId(),
+                    activity.createNewResume.description,
+                    user?.email
+                  );
+                  navigate("/create");
+                }}
               >
                 <PlusLg size={20} /> &nbsp;Create New
               </button>
 
               <button
-                className='uploadDoc zoom'
-                onClick={() => navigate("/create", { state: { upload: true } })}
+                className="uploadDoc zoom"
+                onClick={() => {
+                  logActivity(
+                    activity.uploadResume.type,
+                    null,
+                    generateRandomId(),
+                    activity.uploadResume.description,
+                    user?.email
+                  );
+                  navigate("/create", { state: { upload: true } });
+                }}
               >
                 <Upload size={20} /> &nbsp;Upload Resume
               </button>
             </div>
-            <hr className='dashHrLine' />
+            <hr className="dashHrLine" />
             {isPopupOpen && (
               <JobPopup onClose={togglePopup} onSignup={handleSignup} />
             )}
-            <div className='dashContent row'>
+            <div className="dashContent row">
               {savedResumes.map((savedResume) => (
-                <div key={savedResume.id} className='resume1Div col-md-6'>
-                  <div className='row'>
+                <div key={savedResume.id} className="resume1Div col-md-6">
+                  <div className="row">
                     <div
-                      className='col-md-4'
+                      className="col-md-4"
                       onClick={() => openSelectedResume(savedResume.idx)}
                     >
                       <img
                         src={savedResume.img}
-                        className='resumeImg zoom'
-                        alt='Profile Image'
+                        className="resumeImg zoom"
+                        alt="Profile Image"
                       />
-                      <h6 className='resumeTitle'>{savedResume.title}</h6>
+                      <h6 className="resumeTitle">{savedResume.title}</h6>
                     </div>
-                    <div className='col-md-8 editResumeOptions'>
+                    <div className="col-md-8 editResumeOptions">
                       <button
-                        className='editResumeBtns '
+                        className="editResumeBtns "
                         onClick={() => tailor(savedResume.idx)}
                       >
                         <Bullseye size={23} />
@@ -357,23 +413,27 @@ export default function Dashboard() {
                       </button>
                       <br />
                       <button
-                        className='editResumeBtns '
-                        onClick={() => openSelectedResume(savedResume.idx)}
+                        className="editResumeBtns "
+                        onClick={() =>
+                          openSelectedResume(savedResume.idx, savedResume.id)
+                        }
                       >
                         <PencilFill size={23} />
                         &nbsp;&nbsp;&nbsp;&nbsp;Edit
                       </button>
                       <br />
                       <button
-                        className='editResumeBtns '
-                        onClick={() => download(savedResume.idx)}
+                        className="editResumeBtns "
+                        onClick={() =>
+                          download(savedResume.idx, savedResume.id)
+                        }
                       >
                         <FileEarmarkArrowDownFill size={23} />
                         &nbsp;&nbsp;&nbsp;&nbsp;Download
                       </button>
                       <br />
                       <button
-                        className='editResumeBtns '
+                        className="editResumeBtns "
                         onClick={() => delSavedResume(savedResume.id)}
                       >
                         <Trash3Fill size={23} />
@@ -386,16 +446,16 @@ export default function Dashboard() {
                       <br />
                       {/* <button className='editResumeBtns ' onClick={() => console.log("more")}><ThreeDots size={23} />&nbsp;&nbsp;&nbsp;&nbsp;More</button><br /> */}
                     </div>
-                    <p className='resumeDesc'>
+                    <p className="resumeDesc">
                       <strong>Created At : </strong>
                       {savedResume.description}
                     </p>
                   </div>
                 </div>
               ))}
-              <div className='resume1Div col-md-6  '>
-                <div className='addNewResumeDiv zoom' onClick={addSavedResume}>
-                  <button className='editResumeBtns addResumePlusBtn'>
+              <div className="resume1Div col-md-6  ">
+                <div className="addNewResumeDiv zoom" onClick={addSavedResume}>
+                  <button className="editResumeBtns addResumePlusBtn">
                     <PlusLg size={35} />
                     <br />
                   </button>

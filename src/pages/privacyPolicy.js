@@ -9,6 +9,9 @@ import { auth } from "../fireabse";
 import { useDispatch, useSelector } from "react-redux";
 import { signOutUser } from "../redux/slices/user";
 import { useNavigate } from "react-router-dom";
+import logActivity from "../helper/activityLog";
+import { activity } from "../data/activity";
+import generateRandomId from "../helper/generateId";
 
 export default function PrivacyPolicy() {
   const dispatch = useDispatch();
@@ -17,6 +20,13 @@ export default function PrivacyPolicy() {
   const handler = (e) => {
     signOut(auth)
       .then(() => {
+        logActivity(
+          activity.signOut.type,
+          null,
+          generateRandomId(),
+          activity.signOut.description,
+          user?.email
+        );
         dispatch(signOutUser());
         console.log("signed out successfully");
         navigate("/");
@@ -35,27 +45,27 @@ export default function PrivacyPolicy() {
       {user && user.profile && (
         <button
           onClick={() => handler()}
-          className=' btn btn-success signoutBtn aboutUsSignOutBtn'
+          className=" btn btn-success signoutBtn aboutUsSignOutBtn"
         >
           {" "}
-          <Power color='#35b276' size={22} /> &nbsp;Signout
+          <Power color="#35b276" size={22} /> &nbsp;Signout
         </button>
       )}
 
       <Nav />
-      <div className='aboutUsContainer'>
-        <h1 className='aboutUsHeadig'>
+      <div className="aboutUsContainer">
+        <h1 className="aboutUsHeadig">
           <ArrowLeft
-            color='#35b276'
+            color="#35b276"
             size={30}
-            className='returnBackArrow'
+            className="returnBackArrow"
             onClick={() => returnBack()}
           />
           Privacy Policy
         </h1>
         <hr></hr>
 
-        <p className='aboutUsContent'>
+        <p className="aboutUsContent">
           <h6>Last updated date: [11th Nov,2023]</h6>
           <p>
             SaaSmartSolutions ("we," "our," or "us") is dedicated to
@@ -69,7 +79,7 @@ export default function PrivacyPolicy() {
           <p>
             We may collect personal information, including but not limited to:
           </p>
-          <ul itemType='disc'>
+          <ul itemType="disc">
             <li>Name</li>
             <li>Contact information (email address, phone number)</li>
             <li>Billing and payment details</li>
@@ -79,7 +89,7 @@ export default function PrivacyPolicy() {
           </ul>
           <p>Non-Personal Information</p>
           <p>We may also collect non-personal information, such as:</p>
-          <ul itemType='disc'>
+          <ul itemType="disc">
             <li>
               Device information (browser type, IP address, operating system)
             </li>
@@ -89,7 +99,7 @@ export default function PrivacyPolicy() {
 
           <h6>How We Collect Information</h6>
           <p>We collect information through various channels, including:</p>
-          <ul itemType='disc'>
+          <ul itemType="disc">
             <li>
               Directly from you when you create an account, make a purchase, or
               interact with our services.
@@ -106,7 +116,7 @@ export default function PrivacyPolicy() {
 
           <h6>Use of Information</h6>
           <p>We use your information for the following purposes:</p>
-          <ul itemType='disc'>
+          <ul itemType="disc">
             <li>
               To provide, enhance, and personalize our products and services.
             </li>
@@ -122,7 +132,7 @@ export default function PrivacyPolicy() {
 
           <h6>Sharing of Information</h6>
           <p>We may share your information with:</p>
-          <ul itemType='disc'>
+          <ul itemType="disc">
             <li>
               Service providers and partners involved in delivering our products
               and services.
@@ -135,7 +145,7 @@ export default function PrivacyPolicy() {
 
           <h6>Your Choices</h6>
           <p>You have the right to:</p>
-          <ul itemType='disc'>
+          <ul itemType="disc">
             <li>Access, correct, or delete your personal information.</li>
             <li>Opt-out of marketing communications.</li>
             <li>Adjust cookie settings through your browser.</li>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { auth, getUserFromDatabase } from "../fireabse";
+import { auth, db, getUserFromDatabase } from "../fireabse";
 import { loginUser, updateUser } from "../redux/slices/user";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -8,8 +8,17 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { addUserInDatabase } from "../fireabse";
 import img3 from "../images/28.png";
 import "../styleSheet/LoginPopup.css";
-import { limitToLast } from "firebase/firestore";
+import {
+  arrayUnion,
+  collection,
+  doc,
+  getDoc,
+  limitToLast,
+  serverTimestamp,
+  updateDoc,
+} from "firebase/firestore";
 import emailjs from "@emailjs/browser";
+import logActivity from "../helper/activityLog";
 
 function generate(n) {
   var add = 1,
@@ -28,6 +37,8 @@ const LoginPopup = ({ onClose, onSignup }) => {
   const [showSuccessToast, setShowSuccessToast] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [degree, setDegree] = useState("");
+  const [batch, setBatch] = useState("");
   const [name, setName] = useState("");
   const [getOtp, setGetOtp] = useState(false);
   const [otp, setOtp] = useState("");
@@ -57,7 +68,6 @@ const LoginPopup = ({ onClose, onSignup }) => {
         errorCode = errorCode.substring(5);
         errorCode = errorCode.charAt(0).toUpperCase() + errorCode.slice(1);
         return errorCode;
-
     }
   };
 
@@ -121,27 +131,77 @@ const LoginPopup = ({ onClose, onSignup }) => {
     }
   };
 
+  const AddToRegisteredUsers = async (email, name, batch, degree) => {
+    try {
+      const metaCollection = collection(db, "meta");
+      const registeredUsersDocRef = doc(metaCollection, "registeredUsers");
+
+      await updateDoc(registeredUsersDocRef, {
+        users: arrayUnion({
+          email: email,
+          name: name || null,
+          batch: batch || null,
+          degree: degree || null,
+          timestamp: serverTimestamp(),
+        }),
+      });
+
+      console.log("User signed up and added to Firestore successfully!");
+    } catch (error) {
+      console.error("Error signing up user and adding to Firestore:", error);
+      throw error;
+    }
+  };
+
+  async function checkEmailValidity(email) {
+    try {
+      const metaCollection = collection(db, "meta");
+      const validEmailsDocRef = doc(metaCollection, "validEmails");
+
+      const docSnapshot = await getDoc(validEmailsDocRef);
+
+      if (docSnapshot.exists()) {
+        const { emails } = docSnapshot.data();
+
+        if (Array.isArray(emails) && emails.includes(email)) {
+          console.log(`${email} is a valid email.`);
+          return true;
+        } else {
+          console.log(`${email} is not found in the valid emails array.`);
+          return false;
+        }
+      } else {
+        console.log('The "validEmails" document does not exist.');
+      }
+    } catch (error) {
+      console.error("Error checking email validity: ", error);
+    }
+  }
+
   const OTPHandler = async (e) => {
     e.preventDefault();
     setMsg("");
     if (otp !== "") {
       if (otp == originalOTP) {
-        createUserWithEmailAndPassword(auth, email, password)
-          .then((userCredential) => {
-            console.log({ email, password, name })
-            addUserInDatabase({ email, password, name });
-            // signInUser(auth, email, password);
-            // dispatch(loginUser({ email, password, name }));
-            console.log(userCredential);
-            onClose();
-          })
-          .catch((err) => {
-            console.log(err);
-            const userFriendlyErrorMessage = mapFirebaseErrorToMessage(
-              err.code
-            );
-            setErrorr(userFriendlyErrorMessage);
-          });
+        if (checkEmailValidity(email)) {
+          createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+              console.log({ email, password, name });
+              addUserInDatabase({ email, password, name });
+              // signInUser(auth, email, password);
+              // dispatch(loginUser({ email, password, name }));
+              // AddToRegisteredUsers(email, name, batch, degree);
+              console.log(userCredential);
+              onClose();
+            })
+            .catch((err) => {
+              console.log(err);
+              const userFriendlyErrorMessage = mapFirebaseErrorToMessage(
+                err.code
+              );
+              setErrorr(userFriendlyErrorMessage);
+            });
+        }
       } else {
         setErrorr("Incorrect OTP!");
       }
@@ -156,6 +216,13 @@ const LoginPopup = ({ onClose, onSignup }) => {
       signInWithEmailAndPassword(auth, email, password)
         .then(async (userCredential) => {
           const user = await getUserFromDatabase(email);
+          logActivity(
+            "LOGIN",
+            null,
+            "1",
+            "User Logged In",
+            "akaditya394@gmail.com"
+          );
           dispatch(updateUser(user));
           if (user.profile === true) {
             navigate("/dashboard");
@@ -320,6 +387,22 @@ const LoginPopup = ({ onClose, onSignup }) => {
                     placeholder="Enter your name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
+                  />
+                  <label className="loginLabel">Degree:</label>
+                  <input
+                    className="loginInput"
+                    type="name"
+                    placeholder="Eg. B.Tech"
+                    value={degree}
+                    onChange={(e) => setDegree(e.target.value)}
+                  />
+                  <label className="loginLabel">Batch:</label>
+                  <input
+                    className="loginInput"
+                    type="name"
+                    placeholder="Eg. 2020-2024"
+                    value={batch}
+                    onChange={(e) => setBatch(e.target.value)}
                   />
                 </div>
               )}
