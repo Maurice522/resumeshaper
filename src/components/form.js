@@ -38,7 +38,7 @@ import logActivity from "../helper/activityLog";
 import { activity } from "../data/activity";
 import generateRandomId from "../helper/generateId";
 
-export default function Form({ personalData, setPersonalData }) {
+export default function Form({ personalData, setPersonalData, location }) {
   const [showAdditionalDetails, setShowAdditionalDetails] = useState(false);
   const [courses, setCourses] = useState([]);
   const [activities, setActivities] = useState([]);
@@ -63,7 +63,13 @@ export default function Form({ personalData, setPersonalData }) {
 
   const [showDropdown, setShowDropdown] = useState(false);
   const [uploadedPhotoDataURL, setUploadedPhotoDataURL] = useState("");
+  const [currentUser, setCurrentUser] = useState({});
   const user = useSelector((state) => state.user.user);
+  useEffect(() => {
+    if (location.includes("/profile")) {
+      setCurrentUser(user);
+    }
+  }, []);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -257,196 +263,430 @@ export default function Form({ personalData, setPersonalData }) {
   // };
 
   const addWebsiteLink = () => {
-    setPersonalData((prevData) => ({
-      ...prevData,
-      websitesAndLinks: [
-        ...prevData.websitesAndLinks,
-        {
-          name: "",
-          url: "",
-        },
-      ],
-    }));
+    if (location.includes("/profile")) {
+      setCurrentUser((prevData) => ({
+        ...prevData,
+        websitesAndLinks: [
+          ...prevData.websitesAndLinks,
+          {
+            name: "",
+            url: "",
+          },
+        ],
+      }));
+    } else {
+      setPersonalData((prevData) => ({
+        ...prevData,
+        websitesAndLinks: [
+          ...prevData.websitesAndLinks,
+          {
+            name: "",
+            url: "",
+          },
+        ],
+      }));
+    }
   };
 
   const removeWebsiteLink = (index) => {
-    setPersonalData((prevData) => {
-      const updatedWebsitesLinks = [...prevData.websitesAndLinks];
-      updatedWebsitesLinks.splice(index, 1);
-      return {
-        ...prevData,
-        websitesAndLinks: updatedWebsitesLinks,
-      };
-    });
+    if (location.includes("/profile")) {
+      setCurrentUser((prevData) => {
+        const updatedWebsitesLinks = [...prevData.websitesAndLinks];
+        updatedWebsitesLinks.splice(index, 1);
+        return {
+          ...prevData,
+          websitesAndLinks: updatedWebsitesLinks,
+        };
+      });
+    } else {
+      setPersonalData((prevData) => {
+        const updatedWebsitesLinks = [...prevData.websitesAndLinks];
+        updatedWebsitesLinks.splice(index, 1);
+        return {
+          ...prevData,
+          websitesAndLinks: updatedWebsitesLinks,
+        };
+      });
+    }
   };
 
   const updateWebsiteLinkField = (index, field, value) => {
-    var updatedWebsitesLinks = [];
-    personalData.websitesAndLinks.map((item, idx2) => {
-      var temp;
-      if (idx2 === index) {
-        temp = { ...item, writable: true };
-        temp[field] = value;
-        delete temp.writable;
-      } else {
-        temp = item;
-      }
-      updatedWebsitesLinks = [...updatedWebsitesLinks, temp];
-    });
-    setPersonalData((prevData) => {
-      return {
-        ...prevData,
-        websitesAndLinks: updatedWebsitesLinks,
-      };
-    });
+    if (location.includes("/profile")) {
+      var updatedWebsitesLinks = [];
+      currentUser.websitesAndLinks.map((item, idx2) => {
+        var temp;
+        if (idx2 === index) {
+          temp = { ...item, writable: true };
+          temp[field] = value;
+          delete temp.writable;
+        } else {
+          temp = item;
+        }
+        updatedWebsitesLinks = [...updatedWebsitesLinks, temp];
+      });
+      setCurrentUser((prevData) => {
+        return {
+          ...prevData,
+          websitesAndLinks: updatedWebsitesLinks,
+        };
+      });
+    } else {
+      var updatedWebsitesLinks = [];
+      personalData.websitesAndLinks.map((item, idx2) => {
+        var temp;
+        if (idx2 === index) {
+          temp = { ...item, writable: true };
+          temp[field] = value;
+          delete temp.writable;
+        } else {
+          temp = item;
+        }
+        updatedWebsitesLinks = [...updatedWebsitesLinks, temp];
+      });
+      setPersonalData((prevData) => {
+        return {
+          ...prevData,
+          websitesAndLinks: updatedWebsitesLinks,
+        };
+      });
+    }
   };
 
   const moveWebsiteLink = (currentIndex, targetIndex) => {
-    setPersonalData((prevData) => {
-      const updatedWebsitesAndLinks = [...prevData.websitesAndLinks];
-      const [movedItem] = updatedWebsitesAndLinks.splice(currentIndex, 1);
-      updatedWebsitesAndLinks.splice(targetIndex, 0, movedItem);
+    if (location.includes("/profile")) {
+      setCurrentUser((prevData) => {
+        const updatedWebsitesAndLinks = [...prevData.websitesAndLinks];
+        const [movedItem] = updatedWebsitesAndLinks.splice(currentIndex, 1);
+        updatedWebsitesAndLinks.splice(targetIndex, 0, movedItem);
 
-      return {
-        ...prevData,
-        websitesAndLinks: updatedWebsitesAndLinks,
-      };
-    });
+        return {
+          ...prevData,
+          websitesAndLinks: updatedWebsitesAndLinks,
+        };
+      });
+    } else {
+      setPersonalData((prevData) => {
+        const updatedWebsitesAndLinks = [...prevData.websitesAndLinks];
+        const [movedItem] = updatedWebsitesAndLinks.splice(currentIndex, 1);
+        updatedWebsitesAndLinks.splice(targetIndex, 0, movedItem);
+
+        return {
+          ...prevData,
+          websitesAndLinks: updatedWebsitesAndLinks,
+        };
+      });
+    }
   };
 
   const addEducationHistory = () => {
-    setPersonalData((prevData) => ({
-      ...prevData,
-      educationHistory: [
-        ...prevData.educationHistory,
-        {
-          school: "",
-          degree: "",
-          startDate: "",
-          endDate: "",
-          city: "",
-          description: "",
-        },
-      ],
-    }));
+    if (location.includes("/profile")) {
+      setCurrentUser((prevData) => ({
+        ...prevData,
+        educationHistory: [
+          ...prevData.educationHistory,
+          {
+            school: "",
+            degree: "",
+            startDate: "",
+            endDate: "",
+            city: "",
+            description: "",
+          },
+        ],
+      }));
+    } else {
+      setPersonalData((prevData) => ({
+        ...prevData,
+        educationHistory: [
+          ...prevData.educationHistory,
+          {
+            school: "",
+            degree: "",
+            startDate: "",
+            endDate: "",
+            city: "",
+            description: "",
+          },
+        ],
+      }));
+    }
   };
 
   const removeEducationHistory = (index) => {
-    setPersonalData((prevData) => {
-      const updatedEducationHistory = [...prevData.educationHistory];
-      updatedEducationHistory.splice(index, 1);
-      return {
-        ...prevData,
-        educationHistory: updatedEducationHistory,
-      };
-    });
+    if (location.includes("/profile")) {
+      setCurrentUser((prevData) => {
+        const updatedEducationHistory = [...prevData.educationHistory];
+        updatedEducationHistory.splice(index, 1);
+        return {
+          ...prevData,
+          educationHistory: updatedEducationHistory,
+        };
+      });
+    } else {
+      setPersonalData((prevData) => {
+        const updatedEducationHistory = [...prevData.educationHistory];
+        updatedEducationHistory.splice(index, 1);
+        return {
+          ...prevData,
+          educationHistory: updatedEducationHistory,
+        };
+      });
+    }
   };
 
   const updateEducationField = (index, field, value) => {
-    setPersonalData((prevData) => {
-      const updatedEducationHistory = [...prevData.educationHistory];
-      updatedEducationHistory[index][field] = value;
-      return {
-        ...prevData,
-        educationHistory: updatedEducationHistory,
-      };
-    });
+    if (location.includes("/profile")) {
+      var updateEducationFieldHistory = [];
+      currentUser.educationHistory.map((item, idx2) => {
+        var temp;
+        if (idx2 === index) {
+          temp = { ...item, writable: true };
+          temp[field] = value;
+          delete temp.writable;
+        } else {
+          temp = item;
+        }
+        updateEducationFieldHistory = [...updateEducationFieldHistory, temp];
+      });
+      currentUser((prevData) => {
+        return {
+          ...prevData,
+          educationHistory: updateEducationFieldHistory,
+        };
+      });
+    } else {
+      var updateEducationFieldHistory = [];
+      personalData.educationHistory.map((item, idx2) => {
+        var temp;
+        if (idx2 === index) {
+          temp = { ...item, writable: true };
+          temp[field] = value;
+          delete temp.writable;
+        } else {
+          temp = item;
+        }
+        updateEducationFieldHistory = [...updateEducationFieldHistory, temp];
+      });
+      setPersonalData((prevData) => {
+        return {
+          ...prevData,
+          educationHistory: updateEducationFieldHistory,
+        };
+      });
+    }
   };
 
   const moveEducation = (currentIndex, targetIndex) => {
-    setPersonalData((prevData) => {
-      const updatedEducationHistory = [...prevData.educationHistory];
-      const [movedItem] = updatedEducationHistory.splice(currentIndex, 1);
-      updatedEducationHistory.splice(targetIndex, 0, movedItem);
+    if (location.includes("/profile")) {
+      setCurrentUser((prevData) => {
+        const updatedEducationHistory = [...prevData.educationHistory];
+        const [movedItem] = updatedEducationHistory.splice(currentIndex, 1);
+        updatedEducationHistory.splice(targetIndex, 0, movedItem);
 
-      return {
-        ...prevData,
-        educationHistory: updatedEducationHistory,
-      };
-    });
+        return {
+          ...prevData,
+          educationHistory: updatedEducationHistory,
+        };
+      });
+    } else {
+      setPersonalData((prevData) => {
+        const updatedEducationHistory = [...prevData.educationHistory];
+        const [movedItem] = updatedEducationHistory.splice(currentIndex, 1);
+        updatedEducationHistory.splice(targetIndex, 0, movedItem);
+
+        return {
+          ...prevData,
+          educationHistory: updatedEducationHistory,
+        };
+      });
+    }
   };
 
   const addEmploymentHistory = () => {
-    setPersonalData({
-      ...personalData,
-      employmentHistory: [
-        ...personalData.employmentHistory,
-        {
-          jobTitle: "",
-          employer: "",
-          startDate: "",
-          endDate: "",
-          city: "",
-          description: "",
-        },
-      ],
-    });
+    if (location.includes("/profile")) {
+      setCurrentUser({
+        ...personalData,
+        employmentHistory: [
+          ...personalData.employmentHistory,
+          {
+            jobTitle: "",
+            employer: "",
+            startDate: "",
+            endDate: "",
+            city: "",
+            description: "",
+          },
+        ],
+      });
+    } else {
+      setPersonalData({
+        ...personalData,
+        employmentHistory: [
+          ...personalData.employmentHistory,
+          {
+            jobTitle: "",
+            employer: "",
+            startDate: "",
+            endDate: "",
+            city: "",
+            description: "",
+          },
+        ],
+      });
+    }
   };
 
   const removeEmploymentHistory = (index) => {
-    setPersonalData((prevData) => {
-      const updatedEmploymentHistory = [...prevData.employmentHistory];
-      updatedEmploymentHistory.splice(index, 1);
-      return {
-        ...prevData,
-        employmentHistory: updatedEmploymentHistory,
-      };
-    });
+    if (location.includes("/profile")) {
+      setCurrentUser((prevData) => {
+        const updatedEmploymentHistory = [...prevData.employmentHistory];
+        updatedEmploymentHistory.splice(index, 1);
+        return {
+          ...prevData,
+          employmentHistory: updatedEmploymentHistory,
+        };
+      });
+    } else {
+      setPersonalData((prevData) => {
+        const updatedEmploymentHistory = [...prevData.employmentHistory];
+        updatedEmploymentHistory.splice(index, 1);
+        return {
+          ...prevData,
+          employmentHistory: updatedEmploymentHistory,
+        };
+      });
+    }
   };
 
   const updateEmploymentField = (index, field, value) => {
-    setPersonalData((prevData) => {
-      const updatedEmploymentHistory = [...prevData.employmentHistory];
-      updatedEmploymentHistory[index][field] = value;
-      return {
-        ...prevData,
-        employmentHistory: updatedEmploymentHistory,
-      };
-    });
+    if (location.includes("/profile")) {
+      var updatedEmploymentHistory = [];
+      currentUser.employmentHistory.map((item, idx2) => {
+        var temp;
+        if (idx2 === index) {
+          temp = { ...item, writable: true };
+          temp[field] = value;
+          delete temp.writable;
+        } else {
+          temp = item;
+        }
+        updatedEmploymentHistory = [...updatedEmploymentHistory, temp];
+      });
+      setCurrentUser((prevData) => {
+        return {
+          ...prevData,
+          employmentHistory: updatedEmploymentHistory,
+        };
+      });
+    } else {
+      var updatedEmploymentHistory = [];
+      personalData.employmentHistory.map((item, idx2) => {
+        var temp;
+        if (idx2 === index) {
+          temp = { ...item, writable: true };
+          temp[field] = value;
+          delete temp.writable;
+        } else {
+          temp = item;
+        }
+        updatedEmploymentHistory = [...updatedEmploymentHistory, temp];
+      });
+      setPersonalData((prevData) => {
+        return {
+          ...prevData,
+          employmentHistory: updatedEmploymentHistory,
+        };
+      });
+    }
   };
 
   const moveEmployment = (currentIndex, targetIndex) => {
-    setPersonalData((prevData) => {
-      const updatedEmploymentHistory = [...prevData.employmentHistory];
-      const [movedItem] = updatedEmploymentHistory.splice(currentIndex, 1);
-      updatedEmploymentHistory.splice(targetIndex, 0, movedItem);
-      return {
-        ...prevData,
-        employmentHistory: updatedEmploymentHistory,
-      };
-    });
+    if (location.includes("/profile")) {
+      setCurrentUser((prevData) => {
+        const updatedEmploymentHistory = [...prevData.employmentHistory];
+        const [movedItem] = updatedEmploymentHistory.splice(currentIndex, 1);
+        updatedEmploymentHistory.splice(targetIndex, 0, movedItem);
+        return {
+          ...prevData,
+          employmentHistory: updatedEmploymentHistory,
+        };
+      });
+    } else {
+      setPersonalData((prevData) => {
+        const updatedEmploymentHistory = [...prevData.employmentHistory];
+        const [movedItem] = updatedEmploymentHistory.splice(currentIndex, 1);
+        updatedEmploymentHistory.splice(targetIndex, 0, movedItem);
+        return {
+          ...prevData,
+          employmentHistory: updatedEmploymentHistory,
+        };
+      });
+    }
   };
 
   const handleLogDetails = async (e) => {
     e.preventDefault();
     console.log(personalData);
     console.log(customDetails);
-    var profile = {
-      ...personalData,
-      skills: selectedOptions,
-      customDetails,
-      profile: true,
-    };
+    var profile;
+    if (location.includes("/profile")) {
+      profile = {
+        ...currentUser,
+        skills: selectedOptions,
+        customDetails,
+        profile: true,
+      };
+    } else {
+      profile = {
+        ...personalData,
+        skills: selectedOptions,
+        customDetails,
+        profile: true,
+      };
+    }
     console.log("Login email  " + user.email);
     await updateUserProfileInDatabase(user.email, profile);
-    var resume = {
-      ...personalData,
-      skills: selectedOptions,
-      customDetails,
-      resumeId: 1,
-      id: "id" + new Date().getTime(),
-    };
+    var resume;
+
+    if (location.includes("/profile")) {
+      resume = {
+        ...currentUser,
+        skills: selectedOptions,
+        customDetails,
+        resumeId: 1,
+        id: "id" + new Date().getTime(),
+      };
+    } else {
+      resume = {
+        ...personalData,
+        skills: selectedOptions,
+        customDetails,
+        resumeId: 1,
+        id: "id" + new Date().getTime(),
+      };
+    }
 
     var resumes = [resume];
 
     dispatch(saveResume(resume));
-    logActivity(
-      activity.saveResume.type,
-      resume.id,
-      generateRandomId(),
-      activity.saveResume.description,
-      user?.email
-    );
+    if (location.includes("/profile")) {
+      logActivity(
+        activity.editProfile.type,
+        resume.id,
+        generateRandomId(),
+        activity.editProfile.description + " " + resume.id,
+        user?.email
+      );
+    } else {
+      logActivity(
+        activity.saveResume.type,
+        resume.id,
+        generateRandomId(),
+        activity.saveResume.description + " " + resume.id,
+        user?.email
+      );
+    }
+
     await addUserResume(user.email, resumes);
     dispatch(updateUser(profile));
     navigate("/dashboard");
@@ -458,6 +698,10 @@ export default function Form({ personalData, setPersonalData }) {
 
   const handleChange = async (e) => {
     const { name, value, files } = e.target;
+    console.log(name, value, files);
+    if (location.includes("/profile")) {
+      setCurrentUser((prevData) => ({ ...prevData, [name]: value }));
+    }
     if (name === "photo") {
       setPhotoLoader(true);
       const photoFile = files[0];
@@ -471,10 +715,17 @@ export default function Form({ personalData, setPersonalData }) {
         };
         const photoFileLink = await uploadMedia(photoFile, "profilePhoto");
         console.log(photoFileLink);
-        setPersonalData({
-          ...personalData,
-          uploadedPhotoURL: photoFileLink,
-        });
+        if (location.includes("/profile")) {
+          setCurrentUser({
+            ...currentUser,
+            uploadedPhotoURL: photoFileLink,
+          });
+        } else {
+          setPersonalData({
+            ...personalData,
+            uploadedPhotoURL: photoFileLink,
+          });
+        }
         await updateUserPhotoInDatabase(user.email, photoFileLink);
         dispatch(updatePhoto(photoFileLink));
         reader.readAsDataURL(photoFile);
@@ -488,6 +739,8 @@ export default function Form({ personalData, setPersonalData }) {
       });
     }
   };
+
+  console.log(user.jobTitle);
 
   return (
     <div>
@@ -505,7 +758,11 @@ export default function Form({ personalData, setPersonalData }) {
               className="detailsInfoInput"
               type="text"
               name="jobTitle"
-              value={personalData.jobTitle}
+              value={
+                location.includes("/profile")
+                  ? currentUser?.jobTitle
+                  : personalData.jobTitle
+              }
               onChange={handleChange}
               required="true"
             />
@@ -540,7 +797,11 @@ export default function Form({ personalData, setPersonalData }) {
               type="text"
               className="detailsInfoInput"
               name="firstName"
-              value={personalData.firstName}
+              value={
+                location.includes("/profile")
+                  ? currentUser.firstName
+                  : personalData.firstName
+              }
               onChange={handleChange}
               required="true"
             />
@@ -553,7 +814,11 @@ export default function Form({ personalData, setPersonalData }) {
               type="text"
               className="detailsInfoInput"
               name="middleName"
-              value={personalData.middleName}
+              value={
+                location.includes("/profile")
+                  ? currentUser.middleName
+                  : personalData.middleName
+              }
               onChange={handleChange}
             />
           </div>
@@ -565,7 +830,11 @@ export default function Form({ personalData, setPersonalData }) {
               className="detailsInfoInput"
               type="text"
               name="lastName"
-              value={personalData.lastName}
+              value={
+                location.includes("/profile")
+                  ? currentUser.lastName
+                  : personalData.lastName
+              }
               onChange={handleChange}
             />
           </div>
@@ -579,7 +848,11 @@ export default function Form({ personalData, setPersonalData }) {
               className="detailsInfoInput"
               type="email"
               name="inputEmail"
-              value={personalData.inputEmail}
+              value={
+                location.includes("/profile")
+                  ? currentUser.inputEmail
+                  : personalData.inputEmail
+              }
               onChange={handleChange}
               required="true"
             />
@@ -594,7 +867,11 @@ export default function Form({ personalData, setPersonalData }) {
               className="detailsInfoInput"
               type="number"
               name="phone"
-              value={personalData.phone}
+              value={
+                location.includes("/profile")
+                  ? currentUser.phone
+                  : personalData.phone
+              }
               onChange={handleChange}
               required="true"
             />
@@ -609,7 +886,11 @@ export default function Form({ personalData, setPersonalData }) {
               className="detailsInfoInput"
               type="date"
               name="dateOfBirth"
-              value={personalData.dateOfBirth}
+              value={
+                location.includes("/profile")
+                  ? currentUser.dateOfBirth
+                  : personalData.dateOfBirth
+              }
               onChange={handleChange}
               required="true"
             />
@@ -624,7 +905,11 @@ export default function Form({ personalData, setPersonalData }) {
               className="detailsInfoInput"
               type="text"
               name="city"
-              value={personalData.city}
+              value={
+                location.includes("/profile")
+                  ? currentUser.city
+                  : personalData.city
+              }
               onChange={handleChange}
               required="true"
             />
@@ -653,7 +938,11 @@ export default function Form({ personalData, setPersonalData }) {
                 className="detailsInfoInput"
                 type="text"
                 name="address"
-                value={personalData.address}
+                value={
+                  location.includes("/profile")
+                    ? currentUser.address
+                    : personalData.address
+                }
                 onChange={handleChange}
               />
             </div>
@@ -665,7 +954,11 @@ export default function Form({ personalData, setPersonalData }) {
                 className="detailsInfoInput"
                 type="number"
                 name="postalCode"
-                value={personalData.postalCode}
+                value={
+                  location.includes("/profile")
+                    ? currentUser.postalCode
+                    : personalData.postalCode
+                }
                 onChange={handleChange}
               />
             </div>
@@ -677,7 +970,11 @@ export default function Form({ personalData, setPersonalData }) {
                 className="detailsInfoInput"
                 type="text"
                 name="drivingLicense"
-                value={personalData.drivingLicense}
+                value={
+                  location.includes("/profile")
+                    ? currentUser.drivingLicense
+                    : personalData.drivingLicense
+                }
                 onChange={handleChange}
               />
             </div>
@@ -689,7 +986,11 @@ export default function Form({ personalData, setPersonalData }) {
                 className="detailsInfoInput"
                 type="text"
                 name="nationality"
-                value={personalData.nationality}
+                value={
+                  location.includes("/profile")
+                    ? currentUser.nationality
+                    : personalData.nationality
+                }
                 onChange={handleChange}
               />
             </div>
@@ -701,7 +1002,11 @@ export default function Form({ personalData, setPersonalData }) {
                 className="detailsInfoInput"
                 type="text"
                 name="placeOfBirth"
-                value={personalData.placeOfBirth}
+                value={
+                  location.includes("/profile")
+                    ? currentUser.placeOfBirth
+                    : personalData.placeOfBirth
+                }
                 onChange={handleChange}
               />
             </div>
@@ -713,7 +1018,11 @@ export default function Form({ personalData, setPersonalData }) {
                 className="detailsInfoInput"
                 type="text"
                 name="country"
-                value={personalData.country}
+                value={
+                  location.includes("/profile")
+                    ? currentUser.country
+                    : personalData.country
+                }
                 onChange={handleChange}
               />
             </div>
@@ -732,7 +1041,11 @@ export default function Form({ personalData, setPersonalData }) {
         </p>
         <textarea
           name="professionalSummary"
-          value={personalData.professionalSummary}
+          value={
+            location.includes("/profile")
+              ? currentUser.professionalSummary
+              : personalData.professionalSummary
+          }
           onChange={handleChange}
           rows="6"
           placeholder="Eg: Passionate Software Developer with 8+ years of Building High Enterprise Level Applications"
@@ -767,171 +1080,348 @@ export default function Form({ personalData, setPersonalData }) {
               class="accordion-collapse "
               data-bs-parent="#accordionExample"
             >
-              <div class="accordion-body">
-                {personalData.employmentHistory !== undefined &&
-                  personalData.employmentHistory.length > 0 &&
-                  personalData.employmentHistory.map((employment, index) => (
-                    <div key={index} className="employmentHistoryDiv">
-                      <h5 className="personalSubSubHeading">
-                        Role {index + 1} :
-                      </h5>
-                      <div className="row">
-                        {index > 0 && (
-                          <button
-                            type="button"
-                            onClick={() => moveEmployment(index, index - 1)}
-                            className="moveBtnCreateUp"
-                          >
-                            <CaretUpSquareFill color="#35b276" size={22} />
-                          </button>
-                        )}
-                        {index < personalData.employmentHistory.length - 1 && (
-                          <button
-                            type="button"
-                            onClick={() => moveEmployment(index, index + 1)}
-                            className="moveBtnCreateDown"
-                          >
-                            <CaretDownSquareFill color="#35b276" size={22} />
-                          </button>
-                        )}
+              {location.includes("/profile") ? (
+                <div class="accordion-body">
+                  {currentUser.employmentHistory !== undefined &&
+                    currentUser.employmentHistory.length > 0 &&
+                    currentUser.employmentHistory.map((employment, index) => (
+                      <div key={index} className="employmentHistoryDiv">
+                        <h5 className="personalSubSubHeading">
+                          Role {index + 1} :
+                        </h5>
+                        <div className="row">
+                          {index > 0 && (
+                            <button
+                              type="button"
+                              onClick={() => moveEmployment(index, index - 1)}
+                              className="moveBtnCreateUp"
+                            >
+                              <CaretUpSquareFill color="#35b276" size={22} />
+                            </button>
+                          )}
+                          {index < currentUser.employmentHistory.length - 1 && (
+                            <button
+                              type="button"
+                              onClick={() => moveEmployment(index, index + 1)}
+                              className="moveBtnCreateDown"
+                            >
+                              <CaretDownSquareFill color="#35b276" size={22} />
+                            </button>
+                          )}
 
-                        <div className="col-md-6">
-                          <label className="detailsInfoLabel">Job Title</label>
-                          <br />
-                          <input
-                            className="detailsInfoInput"
-                            type="text"
-                            value={employment.jobTitle}
-                            onChange={(e) =>
-                              updateEmploymentField(
-                                index,
-                                "jobTitle",
-                                e.target.value
-                              )
-                            }
-                          />
+                          <div className="col-md-6">
+                            <label className="detailsInfoLabel">
+                              Job Title
+                            </label>
+                            <br />
+                            <input
+                              className="detailsInfoInput"
+                              type="text"
+                              value={employment.jobTitle}
+                              onChange={(e) =>
+                                updateEmploymentField(
+                                  index,
+                                  "jobTitle",
+                                  e.target.value
+                                )
+                              }
+                            />
+                          </div>
+
+                          <div className="col-md-6">
+                            <label className="detailsInfoLabel">Employer</label>
+                            <br />
+                            <input
+                              className="detailsInfoInput"
+                              type="text"
+                              value={employment.employer}
+                              onChange={(e) =>
+                                updateEmploymentField(
+                                  index,
+                                  "employer",
+                                  e.target.value
+                                )
+                              }
+                            />
+                          </div>
+
+                          <div className="col-md-3">
+                            <label className="detailsInfoLabel">
+                              Start Date
+                            </label>
+                            <br />
+                            <input
+                              className="detailsInfoInput"
+                              type="date"
+                              value={employment.startDate}
+                              style={{
+                                "font-size": "12px",
+                                height: "38px",
+                                marginTop: "10px",
+                              }}
+                              onChange={(e) =>
+                                updateEmploymentField(
+                                  index,
+                                  "startDate",
+                                  e.target.value
+                                )
+                              }
+                            />
+                          </div>
+
+                          <div className="col-md-3">
+                            <label className="detailsInfoLabel">End Date</label>
+                            <br />
+                            <input
+                              className="detailsInfoInput"
+                              type="date"
+                              style={{
+                                "font-size": "12px",
+                                height: "38px",
+                                marginTop: "10px",
+                              }}
+                              value={employment.endDate}
+                              onChange={(e) =>
+                                updateEmploymentField(
+                                  index,
+                                  "endDate",
+                                  e.target.value
+                                )
+                              }
+                            />
+                          </div>
+
+                          <div className="col-md-6">
+                            <label className="detailsInfoLabel">City</label>
+                            <br />
+                            <input
+                              className="detailsInfoInput"
+                              type="text"
+                              value={employment.city}
+                              onChange={(e) =>
+                                updateEmploymentField(
+                                  index,
+                                  "city",
+                                  e.target.value
+                                )
+                              }
+                            />
+                          </div>
                         </div>
 
-                        <div className="col-md-6">
-                          <label className="detailsInfoLabel">Employer</label>
-                          <br />
-                          <input
-                            className="detailsInfoInput"
-                            type="text"
-                            value={employment.employer}
-                            onChange={(e) =>
-                              updateEmploymentField(
-                                index,
-                                "employer",
-                                e.target.value
-                              )
-                            }
-                          />
-                        </div>
+                        <label className="detailsInfoLabel">Description:</label>
 
-                        <div className="col-md-3">
-                          <label className="detailsInfoLabel">Start Date</label>
-                          <br />
-                          <input
-                            className="detailsInfoInput"
-                            type="date"
-                            value={employment.startDate}
-                            style={{
-                              "font-size": "12px",
-                              height: "38px",
-                              marginTop: "10px",
-                            }}
-                            onChange={(e) =>
-                              updateEmploymentField(
-                                index,
-                                "startDate",
-                                e.target.value
-                              )
-                            }
-                          />
-                        </div>
+                        <p className="detailsSubText">
+                          Provide an overview of your job duties and
+                          responsibilities in your previous position.This would
+                          help us gain a deeper understanding of your
+                          professional experience.
+                        </p>
+                        <textarea
+                          value={employment.description}
+                          onChange={(e) =>
+                            updateEmploymentField(
+                              index,
+                              "description",
+                              e.target.value
+                            )
+                          }
+                          rows="6 "
+                          cols="76"
+                          placeholder="Eg: I was provided with a range of responsibilities to levarage the digital landscape for brand promotion and lead generation."
+                          className="detailsTextarea"
+                        />
+                        <br />
 
-                        <div className="col-md-3">
-                          <label className="detailsInfoLabel">End Date</label>
-                          <br />
-                          <input
-                            className="detailsInfoInput"
-                            type="date"
-                            style={{
-                              "font-size": "12px",
-                              height: "38px",
-                              marginTop: "10px",
-                            }}
-                            value={employment.endDate}
-                            onChange={(e) =>
-                              updateEmploymentField(
-                                index,
-                                "endDate",
-                                e.target.value
-                              )
-                            }
-                          />
-                        </div>
-
-                        <div className="col-md-6">
-                          <label className="detailsInfoLabel">City</label>
-                          <br />
-                          <input
-                            className="detailsInfoInput"
-                            type="text"
-                            value={employment.city}
-                            onChange={(e) =>
-                              updateEmploymentField(
-                                index,
-                                "city",
-                                e.target.value
-                              )
-                            }
-                          />
-                        </div>
+                        <button
+                          type="button"
+                          onClick={() => removeEmploymentHistory(index)}
+                          className="DeleteEmp"
+                        >
+                          <Trash3Fill size={20} />
+                        </button>
                       </div>
+                    ))}
+                  <button
+                    type="button"
+                    onClick={addEmploymentHistory}
+                    className="Sec1additionalDetails"
+                  >
+                    <PlusLg size={20} /> Add One More Employment
+                  </button>
+                </div>
+              ) : (
+                <div class="accordion-body">
+                  {personalData.employmentHistory !== undefined &&
+                    personalData.employmentHistory.length > 0 &&
+                    personalData.employmentHistory.map((employment, index) => (
+                      <div key={index} className="employmentHistoryDiv">
+                        <h5 className="personalSubSubHeading">
+                          Role {index + 1} :
+                        </h5>
+                        <div className="row">
+                          {index > 0 && (
+                            <button
+                              type="button"
+                              onClick={() => moveEmployment(index, index - 1)}
+                              className="moveBtnCreateUp"
+                            >
+                              <CaretUpSquareFill color="#35b276" size={22} />
+                            </button>
+                          )}
+                          {index <
+                            personalData.employmentHistory.length - 1 && (
+                            <button
+                              type="button"
+                              onClick={() => moveEmployment(index, index + 1)}
+                              className="moveBtnCreateDown"
+                            >
+                              <CaretDownSquareFill color="#35b276" size={22} />
+                            </button>
+                          )}
 
-                      <label className="detailsInfoLabel">Description:</label>
+                          <div className="col-md-6">
+                            <label className="detailsInfoLabel">
+                              Job Title
+                            </label>
+                            <br />
+                            <input
+                              className="detailsInfoInput"
+                              type="text"
+                              value={employment.jobTitle}
+                              onChange={(e) =>
+                                updateEmploymentField(
+                                  index,
+                                  "jobTitle",
+                                  e.target.value
+                                )
+                              }
+                            />
+                          </div>
 
-                      <p className="detailsSubText">
-                        Provide an overview of your job duties and
-                        responsibilities in your previous position.This would
-                        help us gain a deeper understanding of your professional
-                        experience.
-                      </p>
-                      <textarea
-                        value={employment.description}
-                        onChange={(e) =>
-                          updateEmploymentField(
-                            index,
-                            "description",
-                            e.target.value
-                          )
-                        }
-                        rows="6 "
-                        cols="76"
-                        placeholder="Eg: I was provided with a range of responsibilities to levarage the digital landscape for brand promotion and lead generation."
-                        className="detailsTextarea"
-                      />
-                      <br />
+                          <div className="col-md-6">
+                            <label className="detailsInfoLabel">Employer</label>
+                            <br />
+                            <input
+                              className="detailsInfoInput"
+                              type="text"
+                              value={employment.employer}
+                              onChange={(e) =>
+                                updateEmploymentField(
+                                  index,
+                                  "employer",
+                                  e.target.value
+                                )
+                              }
+                            />
+                          </div>
 
-                      <button
-                        type="button"
-                        onClick={() => removeEmploymentHistory(index)}
-                        className="DeleteEmp"
-                      >
-                        <Trash3Fill size={20} />
-                      </button>
-                    </div>
-                  ))}
-                <button
-                  type="button"
-                  onClick={addEmploymentHistory}
-                  className="Sec1additionalDetails"
-                >
-                  <PlusLg size={20} /> Add One More Employment
-                </button>
-              </div>
+                          <div className="col-md-3">
+                            <label className="detailsInfoLabel">
+                              Start Date
+                            </label>
+                            <br />
+                            <input
+                              className="detailsInfoInput"
+                              type="date"
+                              value={employment.startDate}
+                              style={{
+                                "font-size": "12px",
+                                height: "38px",
+                                marginTop: "10px",
+                              }}
+                              onChange={(e) =>
+                                updateEmploymentField(
+                                  index,
+                                  "startDate",
+                                  e.target.value
+                                )
+                              }
+                            />
+                          </div>
+
+                          <div className="col-md-3">
+                            <label className="detailsInfoLabel">End Date</label>
+                            <br />
+                            <input
+                              className="detailsInfoInput"
+                              type="date"
+                              style={{
+                                "font-size": "12px",
+                                height: "38px",
+                                marginTop: "10px",
+                              }}
+                              value={employment.endDate}
+                              onChange={(e) =>
+                                updateEmploymentField(
+                                  index,
+                                  "endDate",
+                                  e.target.value
+                                )
+                              }
+                            />
+                          </div>
+
+                          <div className="col-md-6">
+                            <label className="detailsInfoLabel">City</label>
+                            <br />
+                            <input
+                              className="detailsInfoInput"
+                              type="text"
+                              value={employment.city}
+                              onChange={(e) =>
+                                updateEmploymentField(
+                                  index,
+                                  "city",
+                                  e.target.value
+                                )
+                              }
+                            />
+                          </div>
+                        </div>
+
+                        <label className="detailsInfoLabel">Description:</label>
+
+                        <p className="detailsSubText">
+                          Provide an overview of your job duties and
+                          responsibilities in your previous position.This would
+                          help us gain a deeper understanding of your
+                          professional experience.
+                        </p>
+                        <textarea
+                          value={employment.description}
+                          onChange={(e) =>
+                            updateEmploymentField(
+                              index,
+                              "description",
+                              e.target.value
+                            )
+                          }
+                          rows="6 "
+                          cols="76"
+                          placeholder="Eg: I was provided with a range of responsibilities to levarage the digital landscape for brand promotion and lead generation."
+                          className="detailsTextarea"
+                        />
+                        <br />
+
+                        <button
+                          type="button"
+                          onClick={() => removeEmploymentHistory(index)}
+                          className="DeleteEmp"
+                        >
+                          <Trash3Fill size={20} />
+                        </button>
+                      </div>
+                    ))}
+                  <button
+                    type="button"
+                    onClick={addEmploymentHistory}
+                    className="Sec1additionalDetails"
+                  >
+                    <PlusLg size={20} /> Add One More Employment
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -963,170 +1453,341 @@ export default function Form({ personalData, setPersonalData }) {
               class="accordion-collapse "
               data-bs-parent="#accordionExample3"
             >
-              <div class="accordion-body">
-                {personalData.educationHistory !== undefined &&
-                  personalData.educationHistory.length > 0 &&
-                  personalData.educationHistory.map((education, index) => (
-                    <div key={index} className="employmentHistoryDiv">
-                      <h5 className="personalSubSubHeading">
-                        Institute {index + 1} :
-                      </h5>
-                      <div className="row">
-                        {index > 0 && (
-                          <button
-                            type="button"
-                            onClick={() => moveEducation(index, index - 1)}
-                            className="moveBtnCreateUp"
-                          >
-                            <CaretUpSquareFill color="#35b276" size={22} />
-                          </button>
-                        )}
-                        {index < personalData.educationHistory.length - 1 && (
-                          <button
-                            type="button"
-                            onClick={() => moveEducation(index, index + 1)}
-                            className="moveBtnCreateDown"
-                          >
-                            <CaretDownSquareFill color="#35b276" size={22} />
-                          </button>
-                        )}
+              {location.includes("/profile") ? (
+                <div class="accordion-body">
+                  {currentUser.educationHistory !== undefined &&
+                    currentUser.educationHistory.length > 0 &&
+                    currentUser.educationHistory.map((education, index) => (
+                      <div key={index} className="employmentHistoryDiv">
+                        <h5 className="personalSubSubHeading">
+                          Institute {index + 1} :
+                        </h5>
+                        <div className="row">
+                          {index > 0 && (
+                            <button
+                              type="button"
+                              onClick={() => moveEducation(index, index - 1)}
+                              className="moveBtnCreateUp"
+                            >
+                              <CaretUpSquareFill color="#35b276" size={22} />
+                            </button>
+                          )}
+                          {index < currentUser.educationHistory.length - 1 && (
+                            <button
+                              type="button"
+                              onClick={() => moveEducation(index, index + 1)}
+                              className="moveBtnCreateDown"
+                            >
+                              <CaretDownSquareFill color="#35b276" size={22} />
+                            </button>
+                          )}
 
-                        <div className="col-md-6">
-                          <label className="detailsInfoLabel">School:</label>
-                          <br />
-                          <input
-                            className="detailsInfoInput"
-                            type="text"
-                            value={education.school}
-                            onChange={(e) =>
-                              updateEducationField(
-                                index,
-                                "school",
-                                e.target.value
-                              )
-                            }
-                          />
+                          <div className="col-md-6">
+                            <label className="detailsInfoLabel">School:</label>
+                            <br />
+                            <input
+                              className="detailsInfoInput"
+                              type="text"
+                              value={education.school}
+                              onChange={(e) =>
+                                updateEducationField(
+                                  index,
+                                  "school",
+                                  e.target.value
+                                )
+                              }
+                            />
+                          </div>
+
+                          <div className="col-md-6">
+                            <label className="detailsInfoLabel">Degree:</label>
+                            <br />
+                            <input
+                              className="detailsInfoInput"
+                              type="text"
+                              value={education.degree}
+                              onChange={(e) =>
+                                updateEducationField(
+                                  index,
+                                  "degree",
+                                  e.target.value
+                                )
+                              }
+                            />
+                          </div>
+
+                          <div className="col-md-3">
+                            <label className="detailsInfoLabel">
+                              Start Date:
+                            </label>
+                            <input
+                              className="detailsInfoInput"
+                              type="date"
+                              value={education.startDate}
+                              style={{
+                                "font-size": "12px",
+                                height: "38px",
+                                marginTop: "10px",
+                              }}
+                              onChange={(e) =>
+                                updateEducationField(
+                                  index,
+                                  "startDate",
+                                  e.target.value
+                                )
+                              }
+                            />
+                          </div>
+
+                          <div className="col-md-3">
+                            <label className="detailsInfoLabel">
+                              End Date:
+                            </label>
+                            <input
+                              className="detailsInfoInput"
+                              type="date"
+                              value={education.endDate}
+                              style={{
+                                "font-size": "12px",
+                                height: "38px",
+                                marginTop: "10px",
+                              }}
+                              onChange={(e) =>
+                                updateEducationField(
+                                  index,
+                                  "endDate",
+                                  e.target.value
+                                )
+                              }
+                            />
+                          </div>
+
+                          <div className="col-md-6">
+                            <label className="detailsInfoLabel">City:</label>
+                            <input
+                              className="detailsInfoInput"
+                              type="text"
+                              value={education.city}
+                              onChange={(e) =>
+                                updateEducationField(
+                                  index,
+                                  "city",
+                                  e.target.value
+                                )
+                              }
+                            />
+                          </div>
                         </div>
 
-                        <div className="col-md-6">
-                          <label className="detailsInfoLabel">Degree:</label>
-                          <br />
-                          <input
-                            className="detailsInfoInput"
-                            type="text"
-                            value={education.degree}
-                            onChange={(e) =>
-                              updateEducationField(
-                                index,
-                                "degree",
-                                e.target.value
-                              )
-                            }
-                          />
-                        </div>
+                        <label className="detailsInfoLabel">Description:</label>
+                        <p className="detailsSubText">
+                          Provide an overview of your job duties and
+                          responsibilities in your previous position.This would
+                          help us gain a deeper understanding of your
+                          professional experience.
+                        </p>
+                        <textarea
+                          value={education.description}
+                          onChange={(e) =>
+                            updateEducationField(
+                              index,
+                              "description",
+                              e.target.value
+                            )
+                          }
+                          rows="6 "
+                          cols="76"
+                          placeholder="Eg: I was provided with a range of responsibilities to levarage the digital landscape for brand promotion and lead generation."
+                          className="detailsTextarea"
+                        />
+                        <br />
 
-                        <div className="col-md-3">
-                          <label className="detailsInfoLabel">
-                            Start Date:
-                          </label>
-                          <input
-                            className="detailsInfoInput"
-                            type="date"
-                            value={education.startDate}
-                            style={{
-                              "font-size": "12px",
-                              height: "38px",
-                              marginTop: "10px",
-                            }}
-                            onChange={(e) =>
-                              updateEducationField(
-                                index,
-                                "startDate",
-                                e.target.value
-                              )
-                            }
-                          />
-                        </div>
-
-                        <div className="col-md-3">
-                          <label className="detailsInfoLabel">End Date:</label>
-                          <input
-                            className="detailsInfoInput"
-                            type="date"
-                            value={education.endDate}
-                            style={{
-                              "font-size": "12px",
-                              height: "38px",
-                              marginTop: "10px",
-                            }}
-                            onChange={(e) =>
-                              updateEducationField(
-                                index,
-                                "endDate",
-                                e.target.value
-                              )
-                            }
-                          />
-                        </div>
-
-                        <div className="col-md-6">
-                          <label className="detailsInfoLabel">City:</label>
-                          <input
-                            className="detailsInfoInput"
-                            type="text"
-                            value={education.city}
-                            onChange={(e) =>
-                              updateEducationField(
-                                index,
-                                "city",
-                                e.target.value
-                              )
-                            }
-                          />
-                        </div>
+                        <button
+                          type="button"
+                          onClick={() => removeEducationHistory(index)}
+                          className="DeleteEmp"
+                        >
+                          <Trash3Fill size={20} />
+                        </button>
                       </div>
+                    ))}
 
-                      <label className="detailsInfoLabel">Description:</label>
-                      <p className="detailsSubText">
-                        Provide an overview of your job duties and
-                        responsibilities in your previous position.This would
-                        help us gain a deeper understanding of your professional
-                        experience.
-                      </p>
-                      <textarea
-                        value={education.description}
-                        onChange={(e) =>
-                          updateEducationField(
-                            index,
-                            "description",
-                            e.target.value
-                          )
-                        }
-                        rows="6 "
-                        cols="76"
-                        placeholder="Eg: I was provided with a range of responsibilities to levarage the digital landscape for brand promotion and lead generation."
-                        className="detailsTextarea"
-                      />
-                      <br />
+                  <button
+                    type="button"
+                    onClick={addEducationHistory}
+                    className="Sec1additionalDetails"
+                  >
+                    <PlusLg size={20} /> Add One More Education
+                  </button>
+                </div>
+              ) : (
+                <div class="accordion-body">
+                  {personalData.educationHistory !== undefined &&
+                    personalData.educationHistory.length > 0 &&
+                    personalData.educationHistory.map((education, index) => (
+                      <div key={index} className="employmentHistoryDiv">
+                        <h5 className="personalSubSubHeading">
+                          Institute {index + 1} :
+                        </h5>
+                        <div className="row">
+                          {index > 0 && (
+                            <button
+                              type="button"
+                              onClick={() => moveEducation(index, index - 1)}
+                              className="moveBtnCreateUp"
+                            >
+                              <CaretUpSquareFill color="#35b276" size={22} />
+                            </button>
+                          )}
+                          {index < personalData.educationHistory.length - 1 && (
+                            <button
+                              type="button"
+                              onClick={() => moveEducation(index, index + 1)}
+                              className="moveBtnCreateDown"
+                            >
+                              <CaretDownSquareFill color="#35b276" size={22} />
+                            </button>
+                          )}
 
-                      <button
-                        type="button"
-                        onClick={() => removeEducationHistory(index)}
-                        className="DeleteEmp"
-                      >
-                        <Trash3Fill size={20} />
-                      </button>
-                    </div>
-                  ))}
+                          <div className="col-md-6">
+                            <label className="detailsInfoLabel">School:</label>
+                            <br />
+                            <input
+                              className="detailsInfoInput"
+                              type="text"
+                              value={education.school}
+                              onChange={(e) =>
+                                updateEducationField(
+                                  index,
+                                  "school",
+                                  e.target.value
+                                )
+                              }
+                            />
+                          </div>
 
-                <button
-                  type="button"
-                  onClick={addEducationHistory}
-                  className="Sec1additionalDetails"
-                >
-                  <PlusLg size={20} /> Add One More Education
-                </button>
-              </div>
+                          <div className="col-md-6">
+                            <label className="detailsInfoLabel">Degree:</label>
+                            <br />
+                            <input
+                              className="detailsInfoInput"
+                              type="text"
+                              value={education.degree}
+                              onChange={(e) =>
+                                updateEducationField(
+                                  index,
+                                  "degree",
+                                  e.target.value
+                                )
+                              }
+                            />
+                          </div>
+
+                          <div className="col-md-3">
+                            <label className="detailsInfoLabel">
+                              Start Date:
+                            </label>
+                            <input
+                              className="detailsInfoInput"
+                              type="date"
+                              value={education.startDate}
+                              style={{
+                                "font-size": "12px",
+                                height: "38px",
+                                marginTop: "10px",
+                              }}
+                              onChange={(e) =>
+                                updateEducationField(
+                                  index,
+                                  "startDate",
+                                  e.target.value
+                                )
+                              }
+                            />
+                          </div>
+
+                          <div className="col-md-3">
+                            <label className="detailsInfoLabel">
+                              End Date:
+                            </label>
+                            <input
+                              className="detailsInfoInput"
+                              type="date"
+                              value={education.endDate}
+                              style={{
+                                "font-size": "12px",
+                                height: "38px",
+                                marginTop: "10px",
+                              }}
+                              onChange={(e) =>
+                                updateEducationField(
+                                  index,
+                                  "endDate",
+                                  e.target.value
+                                )
+                              }
+                            />
+                          </div>
+
+                          <div className="col-md-6">
+                            <label className="detailsInfoLabel">City:</label>
+                            <input
+                              className="detailsInfoInput"
+                              type="text"
+                              value={education.city}
+                              onChange={(e) =>
+                                updateEducationField(
+                                  index,
+                                  "city",
+                                  e.target.value
+                                )
+                              }
+                            />
+                          </div>
+                        </div>
+
+                        <label className="detailsInfoLabel">Description:</label>
+                        <p className="detailsSubText">
+                          Provide an overview of your job duties and
+                          responsibilities in your previous position.This would
+                          help us gain a deeper understanding of your
+                          professional experience.
+                        </p>
+                        <textarea
+                          value={education.description}
+                          onChange={(e) =>
+                            updateEducationField(
+                              index,
+                              "description",
+                              e.target.value
+                            )
+                          }
+                          rows="6 "
+                          cols="76"
+                          placeholder="Eg: I was provided with a range of responsibilities to levarage the digital landscape for brand promotion and lead generation."
+                          className="detailsTextarea"
+                        />
+                        <br />
+
+                        <button
+                          type="button"
+                          onClick={() => removeEducationHistory(index)}
+                          className="DeleteEmp"
+                        >
+                          <Trash3Fill size={20} />
+                        </button>
+                      </div>
+                    ))}
+
+                  <button
+                    type="button"
+                    onClick={addEducationHistory}
+                    className="Sec1additionalDetails"
+                  >
+                    <PlusLg size={20} /> Add One More Education
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -1157,87 +1818,171 @@ export default function Form({ personalData, setPersonalData }) {
               class="accordion-collapse "
               data-bs-parent="#accordionExample4"
             >
-              <div class="accordion-body">
-                {personalData.websitesAndLinks !== undefined &&
-                  personalData.websitesAndLinks.length > 0 &&
-                  personalData.websitesAndLinks.map((websiteLink, index) => (
-                    <div key={index} className="websitesLinksDiv">
-                      <h5 className="personalSubSubHeading">
-                        Link {index + 1} :
-                      </h5>
-                      <div className="row" style={{ position: "relative" }}>
-                        {index > 0 && (
-                          <button
-                            type="button"
-                            onClick={() => moveWebsiteLink(index, index - 1)}
-                            className="moveBtnCreateUp moveBtnCreateWebsiteUp"
-                          >
-                            <CaretUpSquareFill color="#35b276" size={20} />
-                          </button>
-                        )}
-                        {index < personalData.websitesAndLinks.length - 1 && (
-                          <button
-                            type="button"
-                            onClick={() => moveWebsiteLink(index, index + 1)}
-                            className="moveBtnCreateDown moveBtnCreateWebsiteDown"
-                          >
-                            <CaretDownSquareFill color="#35b276" size={20} />
-                          </button>
-                        )}
+              {location.includes("/profile") ? (
+                <div class="accordion-body">
+                  {currentUser.websitesAndLinks !== undefined &&
+                    currentUser.websitesAndLinks.length > 0 &&
+                    currentUser.websitesAndLinks.map((websiteLink, index) => (
+                      <div key={index} className="websitesLinksDiv">
+                        <h5 className="personalSubSubHeading">
+                          Link {index + 1} :
+                        </h5>
+                        <div className="row" style={{ position: "relative" }}>
+                          {index > 0 && (
+                            <button
+                              type="button"
+                              onClick={() => moveWebsiteLink(index, index - 1)}
+                              className="moveBtnCreateUp moveBtnCreateWebsiteUp"
+                            >
+                              <CaretUpSquareFill color="#35b276" size={20} />
+                            </button>
+                          )}
+                          {index < currentUser.websitesAndLinks.length - 1 && (
+                            <button
+                              type="button"
+                              onClick={() => moveWebsiteLink(index, index + 1)}
+                              className="moveBtnCreateDown moveBtnCreateWebsiteDown"
+                            >
+                              <CaretDownSquareFill color="#35b276" size={20} />
+                            </button>
+                          )}
 
-                        <div className="col-md-6">
-                          <label className="detailsInfoLabel">Name:</label>
-                          <br />
-                          <input
-                            className="detailsInfoInput"
-                            type="text"
-                            value={websiteLink.name}
-                            onChange={(e) =>
-                              updateWebsiteLinkField(
-                                index,
-                                "name",
-                                e.target.value
-                              )
-                            }
-                          />
+                          <div className="col-md-6">
+                            <label className="detailsInfoLabel">Name:</label>
+                            <br />
+                            <input
+                              className="detailsInfoInput"
+                              type="text"
+                              value={websiteLink.name}
+                              onChange={(e) =>
+                                updateWebsiteLinkField(
+                                  index,
+                                  "name",
+                                  e.target.value
+                                )
+                              }
+                            />
+                          </div>
+
+                          <div className="col-md-6">
+                            <label className="detailsInfoLabel">URL:</label>
+                            <br />
+                            <input
+                              className="detailsInfoInput"
+                              type="text"
+                              value={websiteLink.url}
+                              onChange={(e) =>
+                                updateWebsiteLinkField(
+                                  index,
+                                  "url",
+                                  e.target.value
+                                )
+                              }
+                            />
+                          </div>
                         </div>
 
-                        <div className="col-md-6">
-                          <label className="detailsInfoLabel">URL:</label>
-                          <br />
-                          <input
-                            className="detailsInfoInput"
-                            type="text"
-                            value={websiteLink.url}
-                            onChange={(e) =>
-                              updateWebsiteLinkField(
-                                index,
-                                "url",
-                                e.target.value
-                              )
-                            }
-                          />
-                        </div>
+                        <button
+                          type="button"
+                          onClick={() => removeWebsiteLink(index)}
+                          className="DeleteEmp"
+                        >
+                          <Trash3Fill size={20} />
+                        </button>
                       </div>
+                    ))}
 
-                      <button
-                        type="button"
-                        onClick={() => removeWebsiteLink(index)}
-                        className="DeleteEmp"
-                      >
-                        <Trash3Fill size={20} />
-                      </button>
-                    </div>
-                  ))}
+                  <button
+                    type="button"
+                    onClick={addWebsiteLink}
+                    className="Sec1additionalDetails"
+                  >
+                    <PlusLg size={20} /> Add One More Website/Link
+                  </button>
+                </div>
+              ) : (
+                <div class="accordion-body">
+                  {personalData.websitesAndLinks !== undefined &&
+                    personalData.websitesAndLinks.length > 0 &&
+                    personalData.websitesAndLinks.map((websiteLink, index) => (
+                      <div key={index} className="websitesLinksDiv">
+                        <h5 className="personalSubSubHeading">
+                          Link {index + 1} :
+                        </h5>
+                        <div className="row" style={{ position: "relative" }}>
+                          {index > 0 && (
+                            <button
+                              type="button"
+                              onClick={() => moveWebsiteLink(index, index - 1)}
+                              className="moveBtnCreateUp moveBtnCreateWebsiteUp"
+                            >
+                              <CaretUpSquareFill color="#35b276" size={20} />
+                            </button>
+                          )}
+                          {index < personalData.websitesAndLinks.length - 1 && (
+                            <button
+                              type="button"
+                              onClick={() => moveWebsiteLink(index, index + 1)}
+                              className="moveBtnCreateDown moveBtnCreateWebsiteDown"
+                            >
+                              <CaretDownSquareFill color="#35b276" size={20} />
+                            </button>
+                          )}
 
-                <button
-                  type="button"
-                  onClick={addWebsiteLink}
-                  className="Sec1additionalDetails"
-                >
-                  <PlusLg size={20} /> Add One More Website/Link
-                </button>
-              </div>
+                          <div className="col-md-6">
+                            <label className="detailsInfoLabel">Name:</label>
+                            <br />
+                            <input
+                              className="detailsInfoInput"
+                              type="text"
+                              value={websiteLink.name}
+                              onChange={(e) =>
+                                updateWebsiteLinkField(
+                                  index,
+                                  "name",
+                                  e.target.value
+                                )
+                              }
+                            />
+                          </div>
+
+                          <div className="col-md-6">
+                            <label className="detailsInfoLabel">URL:</label>
+                            <br />
+                            <input
+                              className="detailsInfoInput"
+                              type="text"
+                              value={websiteLink.url}
+                              onChange={(e) =>
+                                updateWebsiteLinkField(
+                                  index,
+                                  "url",
+                                  e.target.value
+                                )
+                              }
+                            />
+                          </div>
+                        </div>
+
+                        <button
+                          type="button"
+                          onClick={() => removeWebsiteLink(index)}
+                          className="DeleteEmp"
+                        >
+                          <Trash3Fill size={20} />
+                        </button>
+                      </div>
+                    ))}
+
+                  <button
+                    type="button"
+                    onClick={addWebsiteLink}
+                    className="Sec1additionalDetails"
+                  >
+                    <PlusLg size={20} /> Add One More Website/Link
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>
