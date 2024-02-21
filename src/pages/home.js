@@ -1,5 +1,5 @@
 import UploadPDF from "../components/uploadpdf";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { signOut } from "firebase/auth";
 import { auth } from "../fireabse";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,8 +10,8 @@ import Footer from "../components/footer";
 import "../styleSheet/Landing.css";
 import vid from "../images/video1.mp4";
 import ReactPlayer from "react-player";
-import { useNavigate } from "react-router-dom";
-import { Check2Circle, DatabaseFill } from "react-bootstrap-icons";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Check2Circle, DatabaseFill, Person } from "react-bootstrap-icons";
 import img13 from "../images/19.png";
 import Form from "../components/form";
 // import Form from '../components/formcopy';
@@ -28,6 +28,13 @@ export default function Home() {
   const [showHomePopup, setShowHomePopup] = useState(true);
   const [showJobPopup, setShowJobPopup] = useState(false);
   const [jobData, setJobData] = useState(null);
+  const location = useLocation();
+  useEffect(() => {
+    if (location.pathname.includes("/profile")) {
+      setShowHomePopup(false);
+    }
+  }, []);
+
   const [personalData, setPersonalData] = useState({
     jobTitle: "",
     firstName: "",
@@ -130,8 +137,13 @@ export default function Home() {
         />
       )}
       <button onClick={() => handler()} className=" btn btn-success signoutBtn">
-        {" "}
         <Power color="#35b276" size={22} /> &nbsp;Signout
+      </button>
+      <button
+        onClick={() => navigate(`/profile/${user.email}`)}
+        className="btn btn-success profileBtn"
+      >
+        <Person size={22} />
       </button>
       <div className="row homeDiv">
         <div className="HomeLeftDiv col-md-9 col-sm-9">
@@ -145,6 +157,7 @@ export default function Home() {
             <Form
               personalData={personalData}
               setPersonalData={setPersonalData}
+              location={location.pathname}
             />
           </div>
           {/* <button onClick={openPopup}>Add Job</button>

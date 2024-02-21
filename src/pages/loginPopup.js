@@ -422,7 +422,7 @@ const LoginPopup = ({ onClose, onSignup }) => {
                 <button type="submit" className="loginNow">
                   {isLogin ? "Login" : "Sign Up"}
                 </button>
-                <button
+                {/* <button
                   type="button"
                   class="selectLoginBtn"
                   onClick={handleToggleMode}
@@ -430,7 +430,7 @@ const LoginPopup = ({ onClose, onSignup }) => {
                   {isLogin
                     ? "Dont have an account? Sign Up"
                     : "Have an Account? Login"}
-                </button>
+                </button> */}
               </div>
             </form>
           </div>

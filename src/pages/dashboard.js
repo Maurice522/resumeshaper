@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from "react";
 import Nav from "../components/nav";
-import { DatabaseFill, Power, Upload } from "react-bootstrap-icons";
+import {
+  DatabaseFill,
+  Person,
+  Power,
+  Upload,
+  User,
+} from "react-bootstrap-icons";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import {
   addUserResume,
   auth,
+  deleteResumeFromFirestore,
   getUserFromDatabase,
   updateUserResumes,
 } from "../fireabse";
@@ -244,13 +251,14 @@ export default function Dashboard() {
     setSavedResumes([...savedResumes, newDiv]);
   };
 
-  const delSavedResume = async (id) => {
+  const delSavedResume = async (id, idx) => {
     setDeleting(true);
     const updatedResumes = savedResumes.filter((resumes) => resumes.id !== id);
     const updatedUserResumes = user.resumes.filter(
       (resumes) => resumes.id !== id
     );
-
+    // const deleteResume = savedResumes.filter((resumes) => resumes.id === id);
+    // await deleteResumeFromFirestore(deleteResume.id);
     dispatch(updateResume(updatedUserResumes));
     await updateUserResumes(user.email, updatedUserResumes);
     logActivity(
@@ -272,7 +280,7 @@ export default function Dashboard() {
         activity.editResume.type,
         id,
         generateRandomId(),
-        activity.deleteResume.description,
+        activity.editResume.description,
         user?.email
       );
       navigate(`/createcontinue/${idx}`);
@@ -325,6 +333,12 @@ export default function Dashboard() {
           >
             {" "}
             <Power color="#35b276" size={22} /> &nbsp;Signout
+          </button>
+          <button
+            onClick={() => navigate(`/profile/${user.email}`)}
+            className="btn btn-success profileBtn"
+          >
+            <Person size={22} />
           </button>
 
           {/* <button
@@ -434,7 +448,9 @@ export default function Dashboard() {
                       <br />
                       <button
                         className="editResumeBtns "
-                        onClick={() => delSavedResume(savedResume.id)}
+                        onClick={() =>
+                          delSavedResume(savedResume.id, savedResume.idx)
+                        }
                       >
                         <Trash3Fill size={23} />
                         {deleting ? (

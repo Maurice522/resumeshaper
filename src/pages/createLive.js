@@ -689,7 +689,14 @@ export default function CreateLiveContinue() {
 
     console.log("Login email  " + user.email);
     await addUserResume(user.email, resumes);
-    await addResumeToFirestore(user.email, resume.resumeId, resume.jobTitle);
+    await addResumeToFirestore(
+      resume.id,
+      user.email,
+      resume.resumeId,
+      resume.jobTitle.toLowerCase(),
+      user.degree,
+      user.batch
+    );
     await logActivity(
       activity.saveResume.type,
       resume.id,

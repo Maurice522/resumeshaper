@@ -15,6 +15,7 @@ import {
   onSnapshot,
   serverTimestamp,
   deleteDoc,
+  arrayRemove,
 } from "firebase/firestore";
 import {
   doc,
@@ -151,18 +152,43 @@ export const addUserResume = async (email, data) => {
   }
 };
 
-export const addResumeToFirestore = async (email, index, jobTitle) => {
+export const addResumeToFirestore = async (
+  id,
+  email,
+  index,
+  jobTitle,
+  degree,
+  batch
+) => {
   try {
     const metaCollection = collection(db, "meta");
-    const createdResumesDocRef = doc(metaCollection, "createdResumes");
+    const createdResumesDocRef = doc(metaCollection, "createdResume");
 
     await updateDoc(createdResumesDocRef, {
       resumes: arrayUnion({
+        id,
         email,
         index,
         jobTitle,
-        timestamp: serverTimestamp(),
+        degree,
+        batch,
+        timestamp: new Date(),
       }),
+    });
+
+    console.log("Resume added to Firestore successfully!");
+  } catch (error) {
+    console.error("Error adding resume to Firestore:", error);
+    throw error;
+  }
+};
+export const deleteResumeFromFirestore = async (id) => {
+  try {
+    const metaCollection = collection(db, "meta");
+    const createdResumesDocRef = doc(metaCollection, "createdResume");
+
+    await updateDoc(createdResumesDocRef, {
+      resumes: arrayRemove(id),
     });
 
     console.log("Resume added to Firestore successfully!");

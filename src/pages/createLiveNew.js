@@ -611,9 +611,16 @@ export default function CreateLive() {
     console.log(user.resumes);
     var resumes = [...user.resumes, resume];
     console.log(resumes);
-    console.log("Login email  " + user.email);
+    // console.log("Login email  " + user.email);
     await addUserResume(user.email, resumes);
-    await addResumeToFirestore(user.email, 1, resume.jobTitle);
+    await addResumeToFirestore(
+      resume.id,
+      user.email,
+      resume.resumeId,
+      resume.jobTitle.toLowerCase(),
+      user.degree,
+      user.batch
+    );
     await logActivity(
       activity.saveResume.type,
       resume.id,

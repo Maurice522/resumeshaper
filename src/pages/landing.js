@@ -26,6 +26,7 @@ import {
   Check2Circle,
   BookmarkStarFill,
   DatabaseFill,
+  Person,
 } from "react-bootstrap-icons";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, getUserFromDatabase } from "../fireabse";
@@ -90,22 +91,29 @@ export default function Landing() {
         <div>
           <Nav />
           {isLoggedIn == true ? (
-            <button
-              class=" continueToDahboardBtn signoutBtn zoom"
-              onClick={() =>
-                userData?.profile === true
-                  ? navigate("/dashboard")
-                  : navigate("/auth")
-              }
-            >
-              Dashboard
-            </button>
+            <>
+              <button
+                class=" continueToDahboardBtn signoutBtn zoom"
+                onClick={() =>
+                  userData?.profile === true
+                    ? navigate("/dashboard")
+                    : navigate("/auth")
+                }
+              >
+                Dashboard
+              </button>
+              <button
+                onClick={() => navigate(`/profile/${user.email}`)}
+                className="btn btn-success profileBtn"
+              >
+                <Person size={22} />
+              </button>
+            </>
           ) : (
             <button class="loginBtn signoutBtn" onClick={togglePopup}>
               Login
             </button>
           )}
-          
 
           {isPopupOpen && (
             <LoginPopup onClose={togglePopup} onSignup={handleSignup} />
@@ -460,6 +468,7 @@ export default function Landing() {
           <Footer />
         </div>
       )}
-    </>
-  );
+          
+    </>
+  );
 }
