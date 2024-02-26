@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 export const Authdetails = () => {
   const [authUser, setAuthUser] = useState(null);
   const [loading, setLoading] = useState(false);
+ 
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
 
@@ -91,7 +92,7 @@ export const Authdetails = () => {
         <div>
           {authUser ? (
             <>
-              <Home />
+              <Home showDashboardBtn={false}/>
             </>
           ) : (
             "Signup!"

@@ -6,6 +6,7 @@ import {
   Power,
   Upload,
   User,
+  PersonCircle
 } from "react-bootstrap-icons";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -336,9 +337,9 @@ export default function Dashboard() {
           </button>
           <button
             onClick={() => navigate(`/profile/${user.email}`)}
-            className="btn btn-success profileBtn"
+            className="profileBtn"
           >
-            <Person size={22} />
+                <PersonCircle size={38} color="#35b276" className="profileIcon" />
           </button>
 
           {/* <button

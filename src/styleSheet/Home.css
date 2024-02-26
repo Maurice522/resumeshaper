@@ -42,12 +42,14 @@ body {
 }
 
 .profileBtn {
-  width: 120px;
-  border-radius: 5px;
+  /* width: 120px;
+  border-radius: 5px; */
   position: absolute;
-  right: 16%;
-  top: 2.5%;
-  background-color: #c2fbd7;
+  right: 12%;
+  top: 8.5%;
+  width: 41px;
+  padding-right: 1.5%;
+  /* background-color: #c2fbd7;
   border-radius: 25px;
   box-shadow: rgba(44, 187, 99, 0.2) 0 -25px 18px -14px inset,
     rgba(44, 187, 99, 0.15) 0 1px 2px, rgba(44, 187, 99, 0.15) 0 2px 4px,
@@ -69,16 +71,24 @@ body {
   font-size: 14px;
   font-weight: 600;
   user-select: none;
-  -webkit-user-select: none;
+  -webkit-user-select: none; */
   z-index: 15;
+  background-color: transparent !important;
+  border: #c2fbd7;
+  border-radius: 100%;
+  
+}
+.profileIcon{
+  border-radius: 100%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
-.profileBtn:hover {
+/* .profileBtn:hover {
   box-shadow: rgba(44, 187, 99, 0.35) 0 -25px 18px -14px inset,
     rgba(44, 187, 99, 0.25) 0 1px 2px, rgba(44, 187, 99, 0.25) 0 2px 4px,
     rgba(44, 187, 99, 0.25) 0 4px 8px, rgba(44, 187, 99, 0.25) 0 8px 16px,
     rgba(44, 187, 99, 0.25) 0 16px 32px;
-}
+} */
 
 .homeDiv {
   width: 100%;
@@ -146,4 +156,14 @@ body {
   margin: auto;
   margin-top: 3%;
   margin-bottom: 10%;
+}
+.homeDashboardBtn {
+  position: absolute;
+  z-index: 20;
+  background-color: #ecf8e5;
+  right: 14%;
+  border: none;
+  color: #346571;
+  top: 3.5%;
+  font-weight: 550;
 }

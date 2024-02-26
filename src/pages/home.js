@@ -11,7 +11,7 @@ import "../styleSheet/Landing.css";
 import vid from "../images/video1.mp4";
 import ReactPlayer from "react-player";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Check2Circle, DatabaseFill, Person } from "react-bootstrap-icons";
+import { Check2Circle, DatabaseFill, PersonCircle } from "react-bootstrap-icons";
 import img13 from "../images/19.png";
 import Form from "../components/form";
 // import Form from '../components/formcopy';
@@ -27,11 +27,13 @@ import generateRandomId from "../helper/generateId";
 export default function Home() {
   const [showHomePopup, setShowHomePopup] = useState(true);
   const [showJobPopup, setShowJobPopup] = useState(false);
+  const [showDashboardBtn, setShowDashboardBtn] = useState(false);
   const [jobData, setJobData] = useState(null);
   const location = useLocation();
   useEffect(() => {
     if (location.pathname.includes("/profile")) {
       setShowHomePopup(false);
+      setShowDashboardBtn(true);
     }
   }, []);
 
@@ -122,12 +124,21 @@ export default function Home() {
         console.log(err);
       });
   };
+  const handleDashboard = () => {
+    navigate("/dashboard");
+  };
   const user = useSelector((state) => state.user.user);
   return (
     <>
       <Nav />
       {/* {user&&user.credits&&<button  className="tokensBtn"> <DatabaseFill color="#35b276" size={22} style={{"position":"relative","top":"-2px"}}/> {user.credits} &nbsp;Credits</button>}   */}
-
+    
+      {showDashboardBtn && (<button
+                      onClick={() => handleDashboard()}
+                      className=" homeDashboardBtn zoom"
+                    >
+                      Dashboard
+                    </button>)}
       {showHomePopup && (
         <CreateUploadPopup
           personalData={personalData}
@@ -139,12 +150,12 @@ export default function Home() {
       <button onClick={() => handler()} className=" btn btn-success signoutBtn">
         <Power color="#35b276" size={22} /> &nbsp;Signout
       </button>
-      <button
+      {/* <button
         onClick={() => navigate(`/profile/${user.email}`)}
-        className="btn btn-success profileBtn"
+        className="profileBtn"
       >
-        <Person size={22} />
-      </button>
+        <PersonCircle size={38} color="#35b276" className="profileIcon" />
+      </button> */}
       <div className="row homeDiv">
         <div className="HomeLeftDiv col-md-9 col-sm-9">
           <div className="formDetails">

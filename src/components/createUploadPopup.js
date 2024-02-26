@@ -88,7 +88,7 @@ export default function CreateUploadPopup({ onClose, personalData, setPersonalDa
         <h2 className='homeHeader'>
           <img src={img3} className='popupImg' />
           Welcome to Resume Builder</h2>
-          <p><i>Thank you for signing up with us. You have received 100 Credits as a bonus! Let's get ready to build your dream resume!</i></p>
+          <p><i>Time to shine in the job market! Resume Builder invites you to build your resume effortlessly. Let's sculpt your success story together!</i></p>
           { !upload && <p className='homeSelectOption'>Select an Approach:</p>}
         { !upload && <button onClick={onClose} className="newResumeBtn ">Create a Fresh Resume</button>}
         { upload &&<> 

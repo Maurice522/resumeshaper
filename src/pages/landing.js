@@ -27,6 +27,7 @@ import {
   BookmarkStarFill,
   DatabaseFill,
   Person,
+  PersonCircle
 } from "react-bootstrap-icons";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, getUserFromDatabase } from "../fireabse";
@@ -104,9 +105,9 @@ export default function Landing() {
               </button>
               <button
                 onClick={() => navigate(`/profile/${user.email}`)}
-                className="btn btn-success profileBtn"
+                className=" profileBtn" style={{ right: '3%' }}
               >
-                <Person size={22} />
+                 <PersonCircle size={38} color="#35b276" className="profileIcon" />
               </button>
             </>
           ) : (
@@ -305,16 +306,16 @@ export default function Landing() {
               <div class="carousel-inner">
                 <div class="carousel-item landingCaraousel active">
                   <div className="row testimonialSlider">
-                    <div className="col-md-6">
+                    <div className="col-md-6 TestimonialLeftPadding" >
                       <div class="card myCard ">
                         <img
-                          src={img7}
+                          src={img10}
                           class="card-img-top testimonialImg  "
                           alt="..."
                         />
                         <div class="card-body ">
                           <BookmarkStarFill size={46} className="star" />
-                          <h5 class="card-title">Michal R.</h5>
+                          <h5 class="card-title">Raghav B.</h5>
                           <p class="card-text">
                             <i>
                               "The ATS optimization was a game changer. I
@@ -325,7 +326,7 @@ export default function Landing() {
                         </div>
                       </div>
                     </div>
-                    <div className="col-md-6">
+                    <div className="col-md-6 TestimonialLeftPadding"> 
                       <div class="card myCard">
                         <img
                           src={img12}
@@ -334,7 +335,7 @@ export default function Landing() {
                         />
                         <div class="card-body">
                           <BookmarkStarFill size={46} className="star" />
-                          <h5 class="card-title">David S.</h5>
+                          <h5 class="card-title">Sanskriti S.</h5>
                           <p class="card-text">
                             <i>
                               "I used to spend hours tweaking my resume for
@@ -349,7 +350,7 @@ export default function Landing() {
                 </div>
                 <div class="carousel-item landingCaraousel">
                   <div className="row testimonialSlider">
-                    <div className="col-md-6">
+                    <div className="col-md-6 TestimonialLeftPadding"> 
                       <div class="card myCard">
                         <img
                           src={img9}
@@ -358,7 +359,7 @@ export default function Landing() {
                         />
                         <div class="card-body">
                           <BookmarkStarFill size={46} className="star" />
-                          <h5 class="card-title">Laura B.</h5>
+                          <h5 class="card-title">Manushi B.</h5>
                           <p class="card-text">
                             <i>
                               "I was skeptical at first, but Resume Shaper
@@ -370,16 +371,16 @@ export default function Landing() {
                         </div>
                       </div>
                     </div>
-                    <div className="col-md-6">
+                    <div className="col-md-6 TestimonialLeftPadding"> 
                       <div class="card myCard">
                         <img
-                          src={img10}
+                          src={img7}
                           class="card-img-top testimonialImg"
                           alt="..."
                         />
                         <div class="card-body">
                           <BookmarkStarFill size={46} className="star" />
-                          <h5 class="card-title">Jessica R.</h5>
+                          <h5 class="card-title">Riddhi G.</h5>
                           <p class="card-text">
                             <i>
                               "Just in awe of how easy this website has made the
@@ -395,7 +396,7 @@ export default function Landing() {
                 </div>
                 <div class="carousel-item landingCaraousel">
                   <div className="row testimonialSlider">
-                    <div className="col-md-6">
+                    <div className="col-md-6 TestimonialLeftPadding"> 
                       <div class="card myCard">
                         <img
                           src={img8}
@@ -404,7 +405,7 @@ export default function Landing() {
                         />
                         <div class="card-body">
                           <BookmarkStarFill size={46} className="star" />
-                          <h5 class="card-title">Logan Robert M.</h5>
+                          <h5 class="card-title">Anuj M.</h5>
                           <p class="card-text">
                             <i>
                               "I used to procrastinate applying for jobs because
@@ -415,7 +416,7 @@ export default function Landing() {
                         </div>
                       </div>
                     </div>
-                    <div className="col-md-6">
+                    <div className="col-md-6 TestimonialLeftPadding " >
                       <div class="card myCard">
                         <img
                           src={img11}
@@ -424,7 +425,7 @@ export default function Landing() {
                         />
                         <div class="card-body">
                           <BookmarkStarFill size={46} className="star" />
-                          <h5 class="card-title">Olivia C.</h5>
+                          <h5 class="card-title">Shriya C.</h5>
                           <p class="card-text">
                             <i>
                               "As a recent grad, job hunting was really getting

@@ -28,6 +28,7 @@ export const Profile = () => {
       }
     });
   }, []);
+ 
   // accessToken
   // :
   // "eyJhbGciOiJSUzI1NiIsImtpZCI6IjlhNTE5MDc0NmU5M2JhZTI0OWIyYWE3YzJhYTRlMzA2M2UzNDFlYzciLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcmVzdW1lY3JlYXRvci0zZDhmZCIsImF1ZCI6InJlc3VtZWNyZWF0b3ItM2Q4ZmQiLCJhdXRoX3RpbWUiOjE2OTYzMzk0NTQsInVzZXJfaWQiOiJpQWFpZjRCR3NmYmFZMmVyemd5U3gxNHk5czUzIiwic3ViIjoiaUFhaWY0QkdzZmJhWTJlcnpneVN4MTR5OXM1MyIsImlhdCI6MTY5NjMzOTQ1NCwiZXhwIjoxNjk2MzQzMDU0LCJlbWFpbCI6Im1hdXJpY2VyYW5hQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJtYXVyaWNlcmFuYUBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.Cj0TpnZkpfel-09KSys74dHZU3BBV2PSyTzgTk5mag3aDebph9WlxONLfBbK4yjRp76HePHug8sChsduHVdm25mqw3j3E8XEhFCbnnfseXBgDk5PwQan_5778UPG4GWBmLuOCoOXDpSXhNCpjd9QNgtaNr8ISFG7jCeHHjsBY2XIWTemMARrEVde_ZhR-9MWkw3xmfmgD4Db68PdogzP61JxwiJrfx8AYqfl5DhAhWa1fte1oFNnSYsReknTQ20GprVT3WfVb3HsMZLNw_mLaBEH5xGGf66VdVIZHYAO_kVkAq8qKiKsKBby8__YV69f4gcmy8aATaLwr7K14VCFZQ"
@@ -82,7 +83,7 @@ export const Profile = () => {
   // refreshToken
   // :
   // "AMf-vBytfMfTvwMxtL8xhhipewdLmi3BEWe7PdvB7ypgo17X3BjUkQ7mYhz2fXKpzWrIutrVp2rpQmv2kPvtLf96FBJJ9Y5XhF24_-CsYbH5d_nMbjzUNKyrFup9Qy29zKYNI069-JqwV69i_JcHENwiKxzLxiNEwM6mGKxrZE_8QFrJzuL0y05KrzTEKaSFXsF-Rc0Eyz6WpiDDfio25syPx0j-3VULzZAMMR16fD38eorRcV_vUGE"
-
+ 
   return (
     <>
       {loading ? (
@@ -91,7 +92,7 @@ export const Profile = () => {
         <div>
           {authUser ? (
             <>
-              <Home />
+              <Home showDashboardBtn={true}/>
             </>
           ) : (
             "Signup!"
