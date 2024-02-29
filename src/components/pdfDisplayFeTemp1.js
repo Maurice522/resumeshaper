@@ -213,7 +213,7 @@ export default function MyPdfViewer1({ personalData, live, courses, activities, 
                   <p className='profileDetails otherProfileDetails'>Skills</p>
                   {skills.map((item, index) => {
                     return (
-                      <p className='profileDetailsText liveSkills'>{item!==undefined && item.charAt(0).toUpperCase() + item.slice(1)}</p>)
+                      <p className='profileDetailsText liveSkills'>{item}</p>)
                   })
                   }</>}
 

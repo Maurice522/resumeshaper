@@ -19,7 +19,7 @@ export default function Form({personalData, setPersonalData}) {
   const [languages, setLanguages] = useState([]);
   const [references, setReferences] = useState([]);
   const [customSections, setCustomSections] = useState([]);
-  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [selectedOptions, setSelectedOptions] = useState(personalData.skills);
   const [options, setOptions] = useState('');
   const [searchText, setSearchText] = useState('');
   const [photoLoader, setPhotoLoader] = useState(false);
@@ -150,7 +150,12 @@ export default function Form({personalData, setPersonalData}) {
     };
 
     const handleAddSkill = () => {
+      console.log("hulahual")
+      console.log(personalData)
         if (options.trim() !== '') {
+            setPersonalData((data)=>{
+              data.skills = [...data.skills, options]
+            });
             setSelectedOptions([...selectedOptions, options]);
             setOptions('');
         }
@@ -159,6 +164,9 @@ export default function Form({personalData, setPersonalData}) {
     const handleRemoveSkill = (skillToRemove) => {
         const updatedSkills = selectedOptions.filter((skill) => skill !== skillToRemove);
         setSelectedOptions(updatedSkills);
+        setPersonalData((data)=>{
+          data.skills = updatedSkills;
+        })
     };
 
 

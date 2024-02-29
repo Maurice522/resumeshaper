@@ -13,6 +13,7 @@ import { useDispatch } from "react-redux";
 import { updateCredits } from "../../redux/slices/user";
 
 function CashfreeDropInCont({
+  currency,
   sessionIdTokken,
   mentorDetails,
   setSessionIdTokken,
@@ -87,6 +88,7 @@ function CashfreeDropInCont({
 
   //MAKE PAYMENT DROP DOWN
   useEffect(() => {
+    console.log(currency)
     renderDropin();
   }, []);
 
@@ -128,15 +130,28 @@ function CashfreeDropInCont({
 
   const calculateCredits = (price)=>{
     var credits = 0;
-    if(price == 59){
-      credits = 20;
-    }else if(price == 129){
-      credits = 50;
-    }else if(price == 249){
-      credits = 125;
-    }else if(price == 379){
-      credits = 200
+    if(currency == "INR"){
+      if(price == 59){
+        credits = 20;
+      }else if(price == 129){
+        credits = 50;
+      }else if(price == 249){
+        credits = 125;
+      }else if(price == 379){
+        credits = 200
+      }
+    }else{
+      if(price == 19){
+        credits = 20;
+      }else if(price == 45){
+        credits = 50;
+      }else if(price == 89){
+        credits = 125;
+      }else if(price == 125){
+        credits = 200
+      }
     }
+    
 
     return credits;
   }
@@ -153,6 +168,8 @@ function CashfreeDropInCont({
       referenceId: "",
       signature: "",
       txTime: "",
+      currency,
+      time: Date.now(),
     })
 
     let payments = []
@@ -185,6 +202,7 @@ function CashfreeDropInCont({
       referenceId: "",
       signature: "",
       txTime: "",
+      currency,
       time: Date.now(),
     })
 

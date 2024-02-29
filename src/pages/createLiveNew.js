@@ -71,7 +71,7 @@ export default function CreateLive() {
   const [languages, setLanguages] = useState([]);
   const [references, setReferences] = useState([]);
   const [customSections, setCustomSections] = useState([]);
-  const [selectedOptions, setSelectedOptions] = useState([]);
+
   const [options, setOptions] = useState("");
   const [searchText, setSearchText] = useState("");
   const [photoLoader, setPhotoLoader] = useState(false);
@@ -135,8 +135,9 @@ export default function CreateLive() {
         url: "",
       },
     ],
+    skills:[]
   });
-
+  const [selectedOptions, setSelectedOptions] = useState([]);
   const [gettingUser, SetGettingUser] = useState(false);
   const [isJobPopupOpen, setIsJobPopupOpen] = useState(false);
 
@@ -205,6 +206,7 @@ export default function CreateLive() {
             url: "",
           },
         ],
+        skills:[]
       };
       setCount(1);
       Object.entries(temp).map(([key, value]) => {
@@ -260,6 +262,13 @@ export default function CreateLive() {
         console.log(err);
       });
   };
+
+  useEffect(() => {
+    if(personalData.skills.length>0){
+      setSelectedOptions(personalData.skills)
+    }
+  }, [personalData]);
+
 
   useEffect(() => {
     setShowDropdown(false);
@@ -329,7 +338,14 @@ export default function CreateLive() {
 
   const handleAddSkill = () => {
     if (options.trim() !== "") {
-      setSelectedOptions([...selectedOptions, options]);
+      setPersonalData((prevData) => ({
+        ...prevData,
+        skills: [
+          ...prevData.skills,
+          options
+        ],
+      }));
+      // setSelectedOptions([...selectedOptions, options]);
       setOptions("");
     }
   };
@@ -338,7 +354,16 @@ export default function CreateLive() {
     const updatedSkills = selectedOptions.filter(
       (skill) => skill !== skillToRemove
     );
-    setSelectedOptions(updatedSkills);
+
+    // setSelectedOptions(updatedSkills);
+    setPersonalData((prevData) => ({
+      ...prevData,
+      skills: updatedSkills
+    }));
+
+    if(updatedSkills.length == 0){
+      setSelectedOptions([]);
+    }
   };
 
   {
@@ -366,10 +391,9 @@ export default function CreateLive() {
   {
     /* ********************************OLD SKILLS SECTION**************************************** */
   }
-
-  const filteredOptions = selectedOptions.filter((option) =>
-    option.toLowerCase().includes(searchText.toLowerCase())
-  );
+  // const filteredOptions = selectedOptions.filter((option) =>
+  //   option.toLowerCase().includes(searchText.toLowerCase())
+  // );
 
   const addWebsiteLink = () => {
     setPersonalData((prevData) => ({

@@ -14,13 +14,25 @@ const PaymentMentorMeetingSchedule = () => {
   const [paymentMade,setPaymentMade ] = useState()
   const [mentorPlanPrice, setMentorPlanPrice] = useState();
   const [sessionIdTokken, setSessionIdTokken] = useState(null);
+  const [currency, setCurrency] = useState("USD")
+  const [symbol, setSymbol] = useState("$")
 
   const location = useLocation();
 
   useEffect(() => {
     var price;
+    var sym;
     if(location.state != null){
       price = location.state.price;
+      sym = location.state.sym;
+
+      if(sym == "$"){
+        setCurrency("USD")
+        setSymbol("$")
+      }else{
+        setCurrency("INR")
+        setSymbol("₹")
+      }
     }
     setMentorPlanPrice(price);
   }, []);
@@ -44,7 +56,7 @@ const PaymentMentorMeetingSchedule = () => {
     const bodyData = {
       id: `order_${uuid()}`,
       amount: `${mentorPlanPrice}`,
-      currency: "INR",
+      currency: currency,
       customer_id: uuid(),
       customer_phone: "+919876543210",
 
@@ -57,7 +69,7 @@ const PaymentMentorMeetingSchedule = () => {
     console.log(bodyData);
   
     axios
-      .post("https://server.reverrapp.com/webcftoken/rs", bodyData)
+      .post("https://server.reverr.io/webcftoken/rs", bodyData)
       .then((res) => {
         setSessionIdTokken(res.data.token);
       })
@@ -66,6 +78,7 @@ const PaymentMentorMeetingSchedule = () => {
       });
   };
   console.log(user)
+  console.log(currency)
 
   return (
     <>
@@ -74,6 +87,7 @@ const PaymentMentorMeetingSchedule = () => {
           <ToastContainer />
           {sessionIdTokken !== null ? (
             <CashfreeDropInCont
+              currency = {currency}
               sessionIdTokken={sessionIdTokken}
               mentorDetails={mentorPlanPrice}
               setSessionIdTokken={setSessionIdTokken}
@@ -110,7 +124,7 @@ const PaymentMentorMeetingSchedule = () => {
               <p className={styles.makePaymentContainerSubText}>
                 Amount To Be Paid :{" "}
                 <span className={styles.makePaymentContainerAmount}>
-                  ₹ {mentorPlanPrice}
+                  {symbol} {mentorPlanPrice}
                 </span>
               </p>
               <button

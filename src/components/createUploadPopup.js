@@ -46,32 +46,77 @@ export default function CreateUploadPopup({ onClose, personalData, setPersonalDa
       const fileLink = await uploadMedia(file, "resume");
       await updateUserInDatabase(user.email, fileLink)
       // dispatch(updateResume(fileLink))
-      var res = await fetch('https://server.reverr.io/extract', {
-        method: 'POST',
-        body: JSON.stringify({
-        pdf_url:fileLink
-        }),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8"
+      
+      var gotResult = false;
+
+      var attempts = 1;
+      var totalAttempts = 3;
+
+      while(gotResult == false){
+
+        var res = await fetch('https://server.reverr.io/extract', {
+          method: 'POST',
+          body: JSON.stringify({
+          pdf_url:fileLink
+          }),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8"
+          }
+        })
+        .then((response) => response.json())
+        .then((responseJson) => {
+          console.log(responseJson)
+          return responseJson;
+        })
+
+        if(res.error){
+          toast.error("Network Error")
+          toast.info(`Attempt ${attempts} of ${totalAttempts}`)
+          attempts++;
+        }else{
+          gotResult = true;
         }
-      })
-      .then((response) => response.json())
-      .then((responseJson) => {
-        console.log(responseJson)
-        return responseJson;
-      })
+
+        if(attempts==totalAttempts){
+          attempts++;
+          gotResult = true;
+        }
+      }
+      
+     if(attempts>totalAttempts){
+      toast.error("Technical Difficulties Try Again Later")
+     }else{
       await updateUserCreditsInDatabase(user.email, user.credits-cost)
       dispatch(updateCredits(user.credits-cost));
       // delete res.professionalSummary;
-      delete res.websitesAndLinks;
-      res.websitesAndLinks = [
-        {
-          name: '',
-          url: '',
-        },
-      ];
+
+      var webnlinks=[];
+      if(res.websitesLinks)
+      res.websitesLinks.map((item,index)=>{
+        if(item.url!==''&&item.url[0]=="h"){
+          webnlinks = [...webnlinks, item]
+        }
+      })
+
+      if(webnlinks.length>0 && res.websitesLinks){
+        res.websitesLinks = webnlinks;
+      }else{
+        delete res.websitesLinks;
+        res.websitesLinks = [
+          {
+            name: '',
+            url: '',
+          },
+        ];
+      }
+
+      res.websitesAndLinks = res.websitesLinks;
+
+      toast.success("Your document got processed!")
       setPersonalData(res)
       console.log(res)
+     }
+
       setLoading(false) 
       onClose();
       
