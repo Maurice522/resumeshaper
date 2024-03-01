@@ -13,6 +13,7 @@ import Upgrade from "./pages/Upgrade";
 import PaymentMentorMeetingSchedule from "./components/payment/PaymentMentorMeetingSchedule"
 import SuccessfulPaymentPage from "./pages/paymentSuccess";
 import PaymentFailedPage from "./pages/paymentFailed";
+import Paypal from "./components/payment/Paypal";
 
 const router = createBrowserRouter([
   {
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
     path: "/paymentfailed",
     element: <PaymentFailedPage />,
   },
+  {
+    path:"/paypal",
+    element: <Paypal/>
+  }
 ]);
 
 function Routes() {

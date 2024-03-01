@@ -37,6 +37,7 @@ function CashfreeDropInCont({
     "card",
     "upi",
     "netbanking",
+    "internationalwallet"
   ]);
   const cbs = (data) => {
     console.log(data, "sucess");

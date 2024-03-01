@@ -230,12 +230,26 @@ const Upgrade = () => {
 
 export default Upgrade;
 
-const Card = ({ planName, price, intialPrice, features, duration, sym }) => {
+const Card = ({ planName, price, intialPrice, features, duration, sym}) => {
   const navigate = useNavigate();
   
   const clickHandler = (e)=>{
     // toast.info("Payment is not in Beta version!")
-    navigate("/payment",{ state: { price,sym } })
+
+    const plan = {
+      planName,
+      sym,
+      intialPrice,
+      price,
+      duration,
+      features
+    }
+    if(sym == "₹"){
+
+      navigate("/payment",{ state: { price,sym } })
+    }else{
+      navigate("/paypal",{state:{plan}})
+    }
   }
   return (
     <div className='card zoom'>
