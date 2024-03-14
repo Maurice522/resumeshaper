@@ -116,8 +116,15 @@ export default function Form({ personalData, setPersonalData, location }) {
   //       url: '',
   //     },
   //   ],
+  // skills:[]
 
   // });
+
+  useEffect(() => {
+    if(personalData.skills && personalData.skills.length>0){
+      setSelectedOptions(personalData.skills)
+    }
+  }, [personalData]);
 
   useEffect(() => {
     setShowDropdown(false);
@@ -183,12 +190,43 @@ export default function Form({ personalData, setPersonalData, location }) {
 
   const handleAddSkill = () => {
     if (options.trim() !== "") {
-      setSelectedOptions([...selectedOptions, options]);
+      setPersonalData((prevData) => ({
+        ...prevData,
+        skills: [
+          ...prevData.skills,
+          options
+        ],
+      }));
+      // setSelectedOptions([...selectedOptions, options]);
       setOptions("");
     }
   };
 
   const handleRemoveSkill = (skillToRemove) => {
+    const updatedSkills = selectedOptions.filter(
+      (skill) => skill !== skillToRemove
+    );
+
+    // setSelectedOptions(updatedSkills);
+    setPersonalData((prevData) => ({
+      ...prevData,
+      skills: updatedSkills
+    }));
+
+    if(updatedSkills.length == 0){
+      setSelectedOptions([]);
+    }
+  };
+
+
+  const handleAddSkill2 = () => {
+    if (options.trim() !== "") {
+      setSelectedOptions([...selectedOptions, options]);
+      setOptions("");
+    }
+  };
+
+  const handleRemoveSkill2 = (skillToRemove) => {
     const updatedSkills = selectedOptions.filter(
       (skill) => skill !== skillToRemove
     );

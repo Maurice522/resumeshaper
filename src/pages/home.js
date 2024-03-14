@@ -80,6 +80,7 @@ export default function Home() {
         url: "",
       },
     ],
+    skills:[]
   });
 
   const openPopup = () => {
@@ -95,8 +96,13 @@ export default function Home() {
     console.log(data);
   };
 
-  const handleClosePopup = () => {
-    setShowHomePopup(false);
+  const handleClosePopup = (value) => {
+    console.log("CLOSSE", value)
+    var open = false
+    if(value != undefined)
+      open = value;
+      
+    setShowHomePopup(open);
   };
 
   const handleUpload = (file) => {

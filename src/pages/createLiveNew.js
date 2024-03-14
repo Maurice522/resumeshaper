@@ -143,6 +143,7 @@ export default function CreateLive() {
         url: "",
       },
     ],
+    skills:[]
   });
 
   const [gettingUser, SetGettingUser] = useState(false);
@@ -213,6 +214,7 @@ export default function CreateLive() {
             url: "",
           },
         ],
+        skills:[]
       };
       setCount(1);
       Object.entries(temp).map(([key, value]) => {
@@ -284,6 +286,12 @@ export default function CreateLive() {
   };
 
   useEffect(() => {
+    if(personalData.skills && personalData.skills.length>0){
+      setSelectedOptions(personalData.skills)
+    }
+  }, [personalData]);
+
+  useEffect(() => {
     setShowDropdown(false);
   }, [selectedOptions]);
 
@@ -351,12 +359,42 @@ export default function CreateLive() {
 
   const handleAddSkill = () => {
     if (options.trim() !== "") {
-      setSelectedOptions([...selectedOptions, options]);
+      setPersonalData((prevData) => ({
+        ...prevData,
+        skills: [
+          ...prevData.skills,
+          options
+        ],
+      }));
+      // setSelectedOptions([...selectedOptions, options]);
       setOptions("");
     }
   };
 
   const handleRemoveSkill = (skillToRemove) => {
+    const updatedSkills = selectedOptions.filter(
+      (skill) => skill !== skillToRemove
+    );
+
+    // setSelectedOptions(updatedSkills);
+    setPersonalData((prevData) => ({
+      ...prevData,
+      skills: updatedSkills
+    }));
+
+    if(updatedSkills.length == 0){
+      setSelectedOptions([]);
+    }
+  };
+
+  const handleAddSkill2 = () => {
+    if (options.trim() !== "") {
+      setSelectedOptions([...selectedOptions, options]);
+      setOptions("");
+    }
+  };
+
+  const handleRemoveSkill2 = (skillToRemove) => {
     const updatedSkills = selectedOptions.filter(
       (skill) => skill !== skillToRemove
     );
@@ -704,9 +742,13 @@ export default function CreateLive() {
     }
   };
 
-  const handleClosePopup = () => {
-    setShowHomePopup(false);
-    console.log("closing");
+  const handleClosePopup = (value) => {
+    console.log("CLOSSE", value)
+    var open = false
+    if(value != undefined)
+      open = value;
+      
+    setShowHomePopup(open);
   };
   const handleOpenPopup = () => {
     setShowHomePopup(true);

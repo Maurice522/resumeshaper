@@ -6,8 +6,8 @@ body {
   width: 120px;
   border-radius: 5px;
   position: absolute;
-  right: 1%;
-  top: 2.5%;
+  right: 2%;
+  top: 1.5%;
   background-color: #c2fbd7;
   border-radius: 25px;
   box-shadow: rgba(44, 187, 99, 0.2) 0 -25px 18px -14px inset,
@@ -45,8 +45,8 @@ body {
   /* width: 120px;
   border-radius: 5px; */
   position: absolute;
-  right: 12%;
-  top: 8.5%;
+  right: 10%;
+  top: 6%;
   width: 41px;
   padding-right: 1.5%;
   /* background-color: #c2fbd7;
@@ -164,6 +164,6 @@ body {
   right: 14%;
   border: none;
   color: #346571;
-  top: 3.5%;
+  top: 1.5%;
   font-weight: 550;
 }

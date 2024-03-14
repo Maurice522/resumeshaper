@@ -414,12 +414,12 @@ body {
     background-color: #174f5d !important;
     background-image: url("../images/bg.png") !important;
     color: #174f5d !important;
-    width: 12%;
+    width: 160px;
     padding: 4px;
     font-weight: 500;
     font-size: 14px;
     position: absolute;
-    top: 3.5%;
+    top: 2%;
     right: 8%;
     border: none !important;
 }
@@ -428,11 +428,10 @@ body {
     background-image: none;
     background-color: #35b276;
     color: white;
-    padding: 4px;
+    padding: 3px;
     font-weight: 500;
     position: absolute;
-    top: 3.5%;
-    right: 8%;
+
 }
 
 .landingCaraousel {
