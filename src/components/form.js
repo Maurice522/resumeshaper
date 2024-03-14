@@ -87,6 +87,12 @@ export default function Form({personalData, setPersonalData}) {
   // });
 
   useEffect(() => {
+    if(personalData.skills && personalData.skills.length>0){
+      setSelectedOptions(personalData.skills)
+    }
+  }, [personalData]);
+
+  useEffect(() => {
     setShowDropdown(false);
   }, [selectedOptions]);
 
@@ -150,24 +156,35 @@ export default function Form({personalData, setPersonalData}) {
     };
 
     const handleAddSkill = () => {
-      console.log("hulahual")
-      console.log(personalData)
-        if (options.trim() !== '') {
-            setPersonalData((data)=>{
-              data.skills = [...data.skills, options]
-            });
-            setSelectedOptions([...selectedOptions, options]);
-            setOptions('');
-        }
+      if (options.trim() !== "") {
+        setPersonalData((prevData) => ({
+          ...prevData,
+          skills: [
+            ...prevData.skills,
+            options
+          ],
+        }));
+        // setSelectedOptions([...selectedOptions, options]);
+        setOptions("");
+      }
     };
-
+  
     const handleRemoveSkill = (skillToRemove) => {
-        const updatedSkills = selectedOptions.filter((skill) => skill !== skillToRemove);
-        setSelectedOptions(updatedSkills);
-        setPersonalData((data)=>{
-          data.skills = updatedSkills;
-        })
+      const updatedSkills = selectedOptions.filter(
+        (skill) => skill !== skillToRemove
+      );
+  
+      // setSelectedOptions(updatedSkills);
+      setPersonalData((prevData) => ({
+        ...prevData,
+        skills: updatedSkills
+      }));
+  
+      if(updatedSkills.length == 0){
+        setSelectedOptions([]);
+      }
     };
+  
 
 
 

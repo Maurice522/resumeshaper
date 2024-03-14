@@ -77,7 +77,7 @@ export default function CreateUploadPopup({ onClose, personalData, setPersonalDa
           gotResult = true;
         }
 
-        if(attempts==totalAttempts){
+        if(attempts>totalAttempts){
           attempts++;
           gotResult = true;
         }
@@ -119,6 +119,10 @@ export default function CreateUploadPopup({ onClose, personalData, setPersonalDa
 
       setLoading(false) 
       onClose();
+
+      if(attempts > totalAttempts){
+        onClose(true)
+      }
       
     }else{
       setLoading(false)

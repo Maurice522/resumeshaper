@@ -749,6 +749,13 @@ export default function CreateLiveContinue() {
     try {
       setAiLoading(true);
 
+      var gotResult = false;
+
+      var attempts = 1;
+      var totalAttempts = 3;
+
+      while(gotResult == false){
+
       var res = await fetch("https://server.reverr.io/skill", {
         method: "POST",
         body: JSON.stringify({
@@ -769,13 +776,26 @@ export default function CreateLiveContinue() {
         setSelectedOptions([...selectedOptions, ...res]);
         await updateUserCreditsInDatabase(user.email, user.credits - cost);
         dispatch(updateCredits(user.credits - cost));
+        gotResult = true;
       } else {
+        toast.error("Network Error")
+        toast.info(`Attempt ${attempts} of ${totalAttempts}`)
+        attempts++;
         console.log("Error");
       }
+
+      if(attempts==totalAttempts){
+        attempts++;
+        gotResult = true;
+      }
+    }
+
     } catch (err) {
       console.log(err);
     }
-
+    if(attempts>totalAttempts){
+      toast.error("Technical Difficulties Try Again Later")
+     }
     console.log("ended");
     setAiLoading(false);
   };
@@ -791,6 +811,12 @@ export default function CreateLiveContinue() {
     }
     try {
       setAiLoading(true);
+      var gotResult = false;
+
+      var attempts = 1;
+      var totalAttempts = 3;
+
+      while(gotResult == false){
       var res = await fetch("https://server.reverr.io/jobdes", {
         method: "POST",
         body: JSON.stringify({
@@ -807,10 +833,28 @@ export default function CreateLiveContinue() {
           // console.log(responseJson)
           return responseJson;
         });
-      console.log(res);
-      updateEmploymentField(idx, "description", res);
-      await updateUserCreditsInDatabase(user.email, user.credits - cost);
-      dispatch(updateCredits(user.credits - cost));
+        if(res.error){
+          toast.error("Network Error")
+          toast.info(`Attempt ${attempts} of ${totalAttempts}`)
+          attempts++;
+        }else{
+          gotResult = true;
+        }
+
+        if(attempts==totalAttempts){
+          attempts++;
+          gotResult = true;
+        }
+      console.log(res, idx);
+     
+      }
+      if(attempts>totalAttempts){
+        toast.error("Technical Difficulties Try Again Later")
+       }else{
+        updateEmploymentField(idx, "description", res);
+        await updateUserCreditsInDatabase(user.email, user.credits - cost);
+        dispatch(updateCredits(user.credits - cost));
+       }
     } catch (err) {
       console.log(err);
     }
@@ -831,6 +875,13 @@ export default function CreateLiveContinue() {
     try {
       setAiLoading(true);
 
+      var gotResult = false;
+
+      var attempts = 1;
+      var totalAttempts = 3;
+
+      while(gotResult == false){
+
       var res = await fetch("https://server.reverr.io/summary", {
         method: "POST",
         body: JSON.stringify({
@@ -847,13 +898,33 @@ export default function CreateLiveContinue() {
           // console.log(responseJson)
           return responseJson;
         });
+
+        if(res.error){
+          toast.error("Network Error")
+          toast.info(`Attempt ${attempts} of ${totalAttempts}`)
+          attempts++;
+        }else{
+          gotResult = true;
+        }
+
+        if(attempts==totalAttempts){
+          attempts++;
+          gotResult = true;
+        }
+
       console.log(res.professionalSummary);
-      setPersonalData({
-        ...personalData,
-        professionalSummary: res.professionalSummary,
-      });
-      await updateUserCreditsInDatabase(user.email, user.credits - cost);
-      dispatch(updateCredits(user.credits - cost));
+      
+      }
+      if(attempts>totalAttempts){
+        toast.error("Technical Difficulties Try Again Later")
+       }else{
+        setPersonalData({
+          ...personalData,
+          professionalSummary: res.professionalSummary,
+        });
+        await updateUserCreditsInDatabase(user.email, user.credits - cost);
+        dispatch(updateCredits(user.credits - cost));
+       }
     } catch (err) {
       console.log(err);
     }

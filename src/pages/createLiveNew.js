@@ -264,7 +264,7 @@ export default function CreateLive() {
   };
 
   useEffect(() => {
-    if(personalData.skills.length>0){
+    if(personalData.skills && personalData.skills.length>0){
       setSelectedOptions(personalData.skills)
     }
   }, [personalData]);
@@ -691,9 +691,13 @@ export default function CreateLive() {
     }
   };
 
-  const handleClosePopup = () => {
-    setShowHomePopup(false);
-    console.log("closing");
+  const handleClosePopup = (value) => {
+    console.log("CLOSSE", value)
+    var open = false
+    if(value != undefined)
+      open = value;
+      
+    setShowHomePopup(open);
   };
   const handleOpenPopup = () => {
     setShowHomePopup(true);
