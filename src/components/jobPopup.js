@@ -44,7 +44,7 @@ export default function JobPopup({ onClose, onSignup, jobTitle, setJobTitle, job
             console.log(temp)
             setPersonalData(temp);
 
-            
+            console.log("1")
             personalData.employmentHistory.map(async(item,idx)=>{
                 await getJD(idx,0)
             })

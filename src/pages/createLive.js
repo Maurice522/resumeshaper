@@ -753,10 +753,10 @@ export default function CreateLiveContinue() {
 
       var attempts = 1;
       var totalAttempts = 3;
-
+      console.log(personalData.employmentHistory)
       while(gotResult == false){
 
-      var res = await fetch("https://server.reverr.io/skill", {
+      var res = await fetch("https://resumeapi-paem.onrender.com/skill", {
         method: "POST",
         body: JSON.stringify({
           title: jobTitle === "" ? personalData.jobTitle : jobTitle,
@@ -817,7 +817,7 @@ export default function CreateLiveContinue() {
       var totalAttempts = 3;
 
       while(gotResult == false){
-      var res = await fetch("https://server.reverr.io/jobdes", {
+      var res = await fetch("https://resumeapi-paem.onrender.com/jobdes", {
         method: "POST",
         body: JSON.stringify({
           title: jobTitle,
@@ -882,7 +882,7 @@ export default function CreateLiveContinue() {
 
       while(gotResult == false){
 
-      var res = await fetch("https://server.reverr.io/summary", {
+      var res = await fetch("https://resumeapi-paem.onrender.com/summary", {
         method: "POST",
         body: JSON.stringify({
           title: jobTitle,
@@ -1206,18 +1206,19 @@ export default function CreateLiveContinue() {
                     <hr className='hrLine createLiveHrLine' />
                     <div className='tailorDiv zoom' onClick={togglePopup}>
                       {/* <img src={img8} className='tailorDivImg' ></img> */}
-                      <ReactPlayer
+                      {/* <ReactPlayer
                         style={{ cursor: "pointer" }}
                         className='player'
                         url={vid2}
                         width='95%'
                         height='100%'
+
                         playing={true}
                         muted={true}
                         autoplay={true}
                         onEnded={handleEnded}
                         ref={playerRef}
-                      />
+                      /> */}
                     </div>
                     {isPopupOpen && (
                       <JobPopup

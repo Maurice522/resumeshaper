@@ -54,7 +54,7 @@ export default function CreateUploadPopup({ onClose, personalData, setPersonalDa
 
       while(gotResult == false){
 
-        var res = await fetch('https://server.reverr.io/extract', {
+        var res = await fetch('https://resumeapi-paem.onrender.com/extract', {
           method: 'POST',
           body: JSON.stringify({
           pdf_url:fileLink

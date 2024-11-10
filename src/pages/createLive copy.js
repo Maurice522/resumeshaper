@@ -684,7 +684,7 @@ export default function CreateLiveContinue() {
     try {
       setAiLoading(true);
 
-      var res = await fetch("https://server.reverr.io/skill", {
+      var res = await fetch("https://resumeapi-paem.onrender.com/skill", {
         method: "POST",
         body: JSON.stringify({
           title: jobTitle,
@@ -720,7 +720,7 @@ export default function CreateLiveContinue() {
     }
     try {
       setAiLoading(true);
-      var res = await fetch("https://server.reverr.io/jobdes", {
+      var res = await fetch("https://resumeapi-paem.onrender.com/jobdes", {
         method: "POST",
         body: JSON.stringify({
           title: jobTitle,
@@ -754,7 +754,7 @@ export default function CreateLiveContinue() {
     try {
       setAiLoading(true);
 
-      var res = await fetch("https://server.reverr.io/summary", {
+      var res = await fetch("https://resumeapi-paem.onrender.com/summary", {
         method: "POST",
         body: JSON.stringify({
           title: jobTitle,
